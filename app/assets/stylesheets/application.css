@@ -12,4 +12,6 @@
  *
  *= require_tree .
  *= require_self
+ *= css
+ *= landing_page
  */

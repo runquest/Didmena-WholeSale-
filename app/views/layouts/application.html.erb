@@ -3,9 +3,23 @@
 <head>
   <title>Didmena</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,900,100' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+<header>
+  <ul id='language-menu'>
+    <li>LT |</li>
+    <li>EN |</li>
+    <li>RU</li>
+  </ul>
+  <ul id='session-menu'>
+    <li>register | </li>
+    <li>log in</li>
+  </ul>
+</header>
 <body>
 
 <%= yield %>
