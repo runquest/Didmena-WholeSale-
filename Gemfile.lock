@@ -70,6 +70,8 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
+    postgresql-check (0.1.1)
+      activerecord (>= 3.2.0)
     puma (3.1.0)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -143,6 +145,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   pg
+  postgresql-check (~> 0.1.1)
   puma
   rails (= 4.2.3)
   rails_12factor
