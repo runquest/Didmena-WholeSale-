@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   # ADMIN and BUYER - XXO
   validates :role, presence: true
 
-  has_many :representatives, inverse_of: user, dependent: :destroy
+  has_many :representatives, inverse_of: :user, dependent: :destroy
 
   def full_name
     "#{fname} #{lname}"
