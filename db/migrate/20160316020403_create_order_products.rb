@@ -8,7 +8,7 @@ class CreateOrderProducts < ActiveRecord::Migration
 
       t.timestamps null: false
 
-      t.check "quantity > 0", name: 'ord_prod_quantity_chk'
+      t.check 'quantity > 0', name: 'ord_prod_quantity_chk'
     end
 
     add_index :order_products, [:order_id, :product_id], :unique => true, name: :ui_order_products

@@ -9,7 +9,7 @@ class CreatePrices < ActiveRecord::Migration
 
       t.timestamps null: false
 
-      t.check "price > 0", name: 'price_price_chk'
+      t.check 'price > 0', name: 'price_price_chk'
     end
 
     add_index :prices, [:product_id, :from, :currency], :unique => true, name: :ui_prices_product_from_curr

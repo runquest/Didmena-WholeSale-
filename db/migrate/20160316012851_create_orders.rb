@@ -13,10 +13,10 @@ class CreateOrders < ActiveRecord::Migration
 
       t.timestamps null: false
 
-      t.check "quantity > 0", name: 'order_quantity_chk'
-      t.check "price > 0", name: 'order_price_chk'
-      t.check "discount > 0", name: 'order_discount_chk'
-      t.check "price > discount", name: 'order_price_gt_discount_chk'
+      t.check 'quantity > 0', name: 'order_quantity_chk'
+      t.check 'price > 0', name: 'order_price_chk'
+      t.check 'discount > 0', name: 'order_discount_chk'
+      t.check 'price > discount', name: 'order_price_gt_discount_chk'
     end
 
     add_index :orders, [:order_number], :unique => true, name: :ui_order_number

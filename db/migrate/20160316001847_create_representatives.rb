@@ -8,7 +8,7 @@ class CreateRepresentatives < ActiveRecord::Migration
 
       t.timestamps null: false
 
-      t.check "type IN ('XO', 'OX', 'XX')", name: 'reps_type_chk'
+      # t.check 'type IN ('XO', 'OX', 'XX')', name: 'reps_type_chk'
     end
 
     add_index :representatives, [:company_id, :user_id], :unique => true, name: :ui_reps
