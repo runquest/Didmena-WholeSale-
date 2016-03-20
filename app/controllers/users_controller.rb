@@ -11,10 +11,15 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to welcome_path, notice: "Welcome aboard, #{@user.fname}!"
+      render 'users/dashboard'
+      # redirect_to welcome_path, notice: "Welcome aboard, #{@user.fname}!"
     else
       render :new
     end
+  end
+
+
+  def dashboard
   end
 
   protected
