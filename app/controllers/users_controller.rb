@@ -11,12 +11,11 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Welcome aboard, #{@user.fname}!"
+      redirect_to welcome_path, notice: "Welcome aboard, #{@user.fname}!"
     else
       render :new
     end
   end
-
 
   protected
 
