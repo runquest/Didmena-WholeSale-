@@ -1,0 +1,31 @@
+<div id="hat">
+  <ul id='language-menu'>
+    <li>LT |</li>
+    <li>EN |</li>
+    <li>RU</li>
+  </ul>
+</div>
+
+  <% if current_user %> 
+  <ul id='session-menu'>
+    <li><%= link_to "home", root_path %>
+  </ul>  
+    <div id="login">
+      You are logged in as <%= current_user.fname %><br/>
+      <%= link_to "Log out", session_path("current"), method: :delete %>
+    </div>
+  <% else %>
+  <ul id='session-menu'>
+    <li><%= link_to "register",  new_user_path %> | </li>
+    <li><%= link_to "home", root_path %>
+  </ul>
+    <div id="login">
+      <%= form_tag sessions_path do %>
+        <%= label_tag "email" %>
+        <%= text_field_tag "email" %>
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+        <%= submit_tag "Log In" %>
+      <% end %>
+    </div>
+  <% end %>
