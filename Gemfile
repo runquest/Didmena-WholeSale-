@@ -35,7 +35,7 @@ gem 'puma'
 gem 'postgresql-check', '~> 0.1.1'
 
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
-
+ 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

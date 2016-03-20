@@ -44,36 +44,47 @@ ActiveRecord::Schema.define(version: 20160316020403) do
   add_index "order_products", ["order_id"], name: "i_ord_prod_on_order_id", using: :btree
   add_index "order_products", ["product_id"], name: "i_ord_prod_on_product_id", using: :btree
 
+  add_check "order_products", "(quantity > 0)", name: "ord_prod_quantity_chk"
+
   create_table "orders", force: :cascade do |t|
-    t.string   "order_number", limit: 20, null: false
-    t.date     "order_date",              null: false
-    t.integer  "agent_id",                null: false
-    t.integer  "contact_id",              null: false
+    t.string   "order_number", limit: 20,                          null: false
+    t.date     "order_date",                                       null: false
+    t.integer  "agent_id",                                         null: false
+    t.integer  "contact_id",                                       null: false
     t.integer  "quantity"
-    t.decimal  "price"
+    t.decimal  "price",                   precision: 10, scale: 2
+    t.decimal  "decimal",                 precision: 10, scale: 2
     t.string   "currency",     limit: 3
-    t.decimal  "discount"
+    t.decimal  "discount",                precision: 10, scale: 2
     t.text     "comment"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "orders", ["agent_id"], name: "i_orders_on_agent_id", using: :btree
   add_index "orders", ["contact_id"], name: "i_orders_on_contact_id", using: :btree
   add_index "orders", ["order_number"], name: "ui_order_number", unique: true, using: :btree
 
+  add_check "orders", "(quantity > 0)", name: "order_quantity_chk"
+  add_check "orders", "(price > (0)::numeric)", name: "order_price_chk"
+  add_check "orders", "(discount > (0)::numeric)", name: "order_discount_chk"
+  add_check "orders", "(price > discount)", name: "order_price_gt_discount_chk"
+
   create_table "prices", force: :cascade do |t|
-    t.integer  "product_id",           null: false
-    t.date     "from",                 null: false
-    t.decimal  "price",                null: false
-    t.string   "currency",   limit: 3, null: false
+    t.integer  "product_id",                                    null: false
+    t.date     "from",                                          null: false
+    t.decimal  "price",                precision: 10, scale: 2, null: false
+    t.decimal  "decimal",              precision: 10, scale: 2, null: false
+    t.string   "currency",   limit: 3,                          null: false
     t.text     "comment"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "prices", ["product_id", "from", "currency"], name: "ui_prices_product_from_curr", unique: true, using: :btree
   add_index "prices", ["product_id"], name: "i_prices_on_product_id", using: :btree
+
+  add_check "prices", "(price > (0)::numeric)", name: "price_price_chk"
 
   create_table "products", force: :cascade do |t|
     t.string   "code",       limit: 10,  null: false
@@ -89,15 +100,28 @@ ActiveRecord::Schema.define(version: 20160316020403) do
   add_index "products", ["code", "size"], name: "ui_products_code_size", unique: true, using: :btree
   add_index "products", ["title", "color", "size"], name: "ui_products_tcs", unique: true, using: :btree
 
+  create_table "representatives", force: :cascade do |t|
+    t.integer  "company_id", null: false
+    t.integer  "user_id",    null: false
+    t.string   "type",       null: false
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "representatives", ["company_id", "user_id"], name: "ui_reps", unique: true, using: :btree
+  add_index "representatives", ["company_id"], name: "i_reps_on_company_id", using: :btree
+  add_index "representatives", ["user_id"], name: "i_reps_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",       limit: 100, null: false
-    t.string   "fname",       limit: 31,  null: false
-    t.string   "lname",       limit: 31,  null: false
-    t.string   "password",    limit: 100
-    t.string   "role",        limit: 10,  null: false
+    t.string   "email",           limit: 100, null: false
+    t.string   "fname",           limit: 31,  null: false
+    t.string   "lname",           limit: 31,  null: false
+    t.string   "password_digest", limit: 100
+    t.string   "role",            limit: 10,  null: false
     t.text     "description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "users", ["email"], name: "ui_users", unique: true, using: :btree
@@ -105,4 +129,6 @@ ActiveRecord::Schema.define(version: 20160316020403) do
   add_foreign_key "order_products", "orders", name: "fk_ord_prod_on_order_id", on_delete: :cascade
   add_foreign_key "order_products", "products", name: "fk_ord_prod_on_product_id", on_delete: :cascade
   add_foreign_key "prices", "products", name: "fk_prices_on_product_id", on_delete: :cascade
+  add_foreign_key "representatives", "companies", name: "fk_reps_on_company_id", on_delete: :cascade
+  add_foreign_key "representatives", "users", name: "fk_reps_on_user_id", on_delete: :cascade
 end

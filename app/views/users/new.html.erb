@@ -1,0 +1,36 @@
+<h2 class="signup">Register</h2>
+
+<%= form_for @user, html: {class: :signup } do |f| %>
+
+  <% if @user.errors.any? %>
+      <%= pluralize(@user.errors.count, "error") %> prevented the account from being created:
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <%= f.label "email" %></br>
+  <%= f.text_field "email" %></br>
+
+  <%= f.hidden_field :role, :value => 'buyer'%>
+
+  <%= f.label "fname", "First Name" %></br>
+  <%= f.text_field "fname" %></br>
+
+  <%= f.label "lname", "Last Name" %></br>
+  <%= f.text_field "lname" %></br>
+
+  <%= f.label "password" %></br>
+  <%= f.password_field "password" %></br>
+
+  <%= f.label "Re-type password" %></br>
+  <%= f.password_field "password_confirmation" %></br>
+
+  <%= f.label "description", "Profile description" %></br>
+  <%= f.text_area "description" %></br>
+  
+  <%= f.submit "Submit"%>
+
+<% end %>
