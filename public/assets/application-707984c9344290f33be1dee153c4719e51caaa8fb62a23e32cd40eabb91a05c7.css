@@ -1,0 +1,71 @@
+html {
+  background-image: url('/assets/top_bg.jpg');
+  background-repeat: repeat-x;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+div#header {
+    margin-top: 150px;
+}
+
+input.btn.waves-effect.submit {
+    width: 100%;
+}
+
+div#login {
+    padding: 2rem;
+}
+
+div#register {
+    padding: 2rem;
+}
+
+.right-top-menu{
+  text-align: right;
+}
+
+ul#language-menu {
+  list-style-type: none;
+}
+
+ul#language-menu li {
+  display: block;
+  display: inline;
+
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+}
+
+ul#session-menu {
+  list-style-type: none;
+}
+
+ul#session-menu li {
+    display: block;
+    display: inline;
+
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ *= css
+ *= landing_page
+ *= forms
+ */
+
