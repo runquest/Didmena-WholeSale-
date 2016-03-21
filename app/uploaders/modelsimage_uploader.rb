@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class ModelsimageUploader < CarrierWave::Uploader::Base
+  include CarrierWave::RMagick
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -14,6 +15,10 @@ class ModelsimageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  version :thumb do
+    process :resize_to_limit => [200, 200]
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

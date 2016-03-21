@@ -37,5 +37,5 @@ gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 
 # Image Upload
 gem "carrierwave"
- 
+gem "rmagick" 
 
