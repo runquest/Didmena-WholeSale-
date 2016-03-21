@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160320232423) do
 
   create_table "collections", force: :cascade do |t|
     t.string   "name"
-    t.binary   "image"
+    t.string   "image"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20160320232423) do
     t.integer  "collection_id"
     t.integer  "type_id"
     t.decimal  "price"
-    t.binary   "image"
+    t.string   "image"
     t.text     "description"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

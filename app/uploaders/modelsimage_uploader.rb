@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class AisteUploader < CarrierWave::Uploader::Base
+class ModelsimageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

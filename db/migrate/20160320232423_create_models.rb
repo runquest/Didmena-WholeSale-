@@ -5,7 +5,7 @@ class CreateModels < ActiveRecord::Migration
       t.integer :collection_id
       t.integer :type_id
       t.decimal :price
-      t.binary :image
+      t.string :image
       t.text :description
 
       t.timestamps null: false
