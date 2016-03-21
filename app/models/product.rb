@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
 
-  # validates :code, uniqueness: { case_sensitive: false }		# supposed to be combination :code and :size
+  # validates :code, uniqueness: { case_sensitive: false }		# supposed to be combination :code, :size and :color
+  # validates [:code, :size, :color], uniqueness: { case_sensitive: false }
   validates :code, presence: true
 
   validates :title, presence: true
@@ -11,5 +12,14 @@ class Product < ActiveRecord::Base
   has_many :prices, inverse_of: :product, dependent: :destroy
 
   has_many :orderproducts, inverse_of: :product, dependent: :destroy
+
+  
+  def self.search(search)
+    if search
+        where(["name LIKE ?", "%#{search}%"])
+    else
+      all
+    end
+  end
 
 end

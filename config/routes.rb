@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users
+  resources :products
   resources :sessions, only: [:new, :create, :destroy]
+  resources :models
+  resources :types
+  resources :collections
 
 
   # Example of regular route:
