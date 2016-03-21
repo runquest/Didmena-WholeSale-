@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316020403) do
+ActiveRecord::Schema.define(version: 20160320232423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collections", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",        limit: 200, null: false
@@ -30,6 +38,17 @@ ActiveRecord::Schema.define(version: 20160316020403) do
 
   add_index "companies", ["email"], name: "ui_companies_email", unique: true, using: :btree
   add_index "companies", ["name"], name: "ui_companies_name", unique: true, using: :btree
+
+  create_table "models", force: :cascade do |t|
+    t.string   "code"
+    t.integer  "collection_id"
+    t.integer  "type_id"
+    t.decimal  "price"
+    t.string   "image"
+    t.text     "description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "order_products", force: :cascade do |t|
     t.integer  "order_id",   null: false
@@ -47,35 +66,35 @@ ActiveRecord::Schema.define(version: 20160316020403) do
   add_check "order_products", "(quantity > 0)", name: "ord_prod_quantity_chk"
 
   create_table "orders", force: :cascade do |t|
-    t.string   "order_number", limit: 20,                          null: false
-    t.date     "order_date",                                       null: false
-    t.integer  "agent_id",                                         null: false
-    t.integer  "contact_id",                                       null: false
-    t.integer  "quantity"
-    t.decimal  "price",                   precision: 10, scale: 2
-    t.decimal  "decimal",                 precision: 10, scale: 2
-    t.string   "currency",     limit: 3
-    t.decimal  "discount",                precision: 10, scale: 2
+    t.string   "order_number",   limit: 20,                          null: false
+    t.date     "order_date",                                         null: false
+    t.integer  "agent_id",                                           null: false
+    t.integer  "contact_id",                                         null: false
+    t.integer  "total_quantity"
+    t.decimal  "total_price",               precision: 10, scale: 2
+    t.decimal  "decimal",                   precision: 10, scale: 2
+    t.string   "currency",       limit: 3
+    t.decimal  "total_discount",            precision: 10, scale: 2
     t.text     "comment"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "orders", ["agent_id"], name: "i_orders_on_agent_id", using: :btree
   add_index "orders", ["contact_id"], name: "i_orders_on_contact_id", using: :btree
   add_index "orders", ["order_number"], name: "ui_order_number", unique: true, using: :btree
 
-  add_check "orders", "(quantity > 0)", name: "order_quantity_chk"
-  add_check "orders", "(price > (0)::numeric)", name: "order_price_chk"
-  add_check "orders", "(discount > (0)::numeric)", name: "order_discount_chk"
-  add_check "orders", "(price > discount)", name: "order_price_gt_discount_chk"
+  add_check "orders", "(total_quantity > 0)", name: "order_quantity_chk"
+  add_check "orders", "(total_price > (0)::numeric)", name: "order_price_chk"
+  add_check "orders", "(total_discount > (0)::numeric)", name: "order_discount_chk"
+  add_check "orders", "(total_price > total_discount)", name: "order_price_gt_discount_chk"
 
   create_table "prices", force: :cascade do |t|
     t.integer  "product_id",                                    null: false
     t.date     "from",                                          null: false
+    t.string   "currency",   limit: 3,                          null: false
     t.decimal  "price",                precision: 10, scale: 2, null: false
     t.decimal  "decimal",              precision: 10, scale: 2, null: false
-    t.string   "currency",   limit: 3,                          null: false
     t.text     "comment"
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
@@ -92,13 +111,13 @@ ActiveRecord::Schema.define(version: 20160316020403) do
     t.string   "color",      limit: 20,  null: false
     t.string   "size",       limit: 10,  null: false
     t.string   "category",   limit: 20,  null: false
+    t.binary   "image"
     t.text     "comment"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "products", ["code", "size"], name: "ui_products_code_size", unique: true, using: :btree
-  add_index "products", ["title", "color", "size"], name: "ui_products_tcs", unique: true, using: :btree
+  add_index "products", ["code", "size", "color"], name: "ui_products_code_size", unique: true, using: :btree
 
   create_table "representatives", force: :cascade do |t|
     t.integer  "company_id", null: false
@@ -112,6 +131,13 @@ ActiveRecord::Schema.define(version: 20160316020403) do
   add_index "representatives", ["company_id", "user_id"], name: "ui_reps", unique: true, using: :btree
   add_index "representatives", ["company_id"], name: "i_reps_on_company_id", using: :btree
   add_index "representatives", ["user_id"], name: "i_reps_on_user_id", using: :btree
+
+  create_table "types", force: :cascade do |t|
+    t.string   "name"
+    t.binary   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           limit: 100, null: false

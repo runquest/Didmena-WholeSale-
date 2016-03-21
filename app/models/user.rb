@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
 
   validates :lname, presence: true
 
-  validates :password_digest, length: { in: 6..100 }, on: :create
-  validates :password_digest, presence: true
+  validates :password, length: { in: 6..100 }, on: :create
+  validates :password, presence: true
 
   # Three roles are considered: ADMIN, BUYER, ANONYMOUS
   # It is suggested to mark roles as three characters string:
@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   validates :role, presence: true
 
   has_many :representatives, inverse_of: :user, dependent: :destroy
+
+  has_many :companies, through: :representatives
 
   def full_name
     "#{fname} #{lname}"

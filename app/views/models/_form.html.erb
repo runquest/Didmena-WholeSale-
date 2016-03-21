@@ -1,0 +1,22 @@
+<%= form_for(@model) do |f| %>
+    <%= f.label :type_id %><br>
+    <%= f.collection_select :type_id, Type.all, :id, :name, { prompt: "Choose a type" }, class: "browser-default" %>
+
+    <%= f.label :collection_id %><br>
+    <%= f.collection_select :collection_id, Collection.all, :id, :name, { prompt: "Choose a type" }, class: "browser-default" %>
+
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+
+    <%= f.label :image %><br>
+    <%= f.file_field :image %><br><br>
+
+    <%= f.label :price %><price>
+    <%= f.number_field :price, :class => 'text_field', :step => '0.01' %>
+
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: 'materialize-textarea' %>
+
+    <%= f.submit 'Create', class: 'btn waves-effect submit' %>
+
+<% end %>

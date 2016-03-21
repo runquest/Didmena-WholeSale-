@@ -3,13 +3,13 @@ class CreatePrices < ActiveRecord::Migration
     create_table :prices do |t|
       t.integer :product_id, null: false
       t.date :from, null: false			# Day when price set
-      t.decimal :price, :decimal, :precision => 10, :scale => 2, null: false
       t.string :currency, null: false, limit: 3  # EUR, USD, CAD, PLZ, RUR, etc.
+      t.decimal :price, :decimal, :precision => 10, :scale => 2, null: false
       t.text :comment
 
       t.timestamps null: false
 
-      t.check 'price > 0', name: 'price_price_chk'
+      t.check "price > 0", name: 'price_price_chk'
     end
 
     add_index :prices, [:product_id, :from, :currency], :unique => true, name: :ui_prices_product_from_curr

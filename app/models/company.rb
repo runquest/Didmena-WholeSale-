@@ -14,4 +14,6 @@ class Company < ActiveRecord::Base
 
   has_many :representatives, inverse_of: :company, dependent: :destroy
 
+  has_many :users, through: :representatives
+
 end
