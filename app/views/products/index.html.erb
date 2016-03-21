@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col s8 offset-s2">
+
+
+
+    <h2>All Products</h2>
+    <h3>Search form</h3>
+    <%= form_tag products_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search" %>
+    <% end %>
+    <% if @products.any? %>
+      <% @products.each do |product|  %>
+        <%= link_to product.title, product_path(product) %><br>
+      <% end %>
+    <% else %>
+        <p>"no products in database"</p>
+    <% end %>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

@@ -13,6 +13,7 @@ class Product < ActiveRecord::Base
 
   has_many :orderproducts, inverse_of: :product, dependent: :destroy
 
+  belongs_to :model
   
   def self.search(search)
     if search

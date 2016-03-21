@@ -1,14 +1,23 @@
-<div id="container">
-  <div id="profile-description">
-    <h2>What We Do</h2>
-    <p>We are working to launch a new online ordering system for wholesalers.</p>
-    <p>We sell t-shirts, jackets, jersey's for sprint, summer, fall seasons. Our products are for men, women and kids. We partner with XXX.</p>
-  </div>
-  <div id="contact" class="z-depth-5">
-    <h5>Get in touch</h5>
-
-    <li>informacija@didmena.com</li>
-    <li>1000 Gatves g., Vilnius, LT</li>
-    <li>604-234-1111</li>
-  </div>
+<div class="container">
+  <div class="row">
+    <div class="col s6">
+     <div class="section">
+      <h5>What we do</h5>
+      <p>We offer wide range of women's wear of different styles: T-shirrts, tanks, racerbacks, dresses, sweartshirts, shorts and pajamas. For production we use fabric of different density and colors with decorating elements.</p>
+    </div>
+    <div class="section">
+      <h5>Get in touch</h5>
+      <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
+      <i class="tiny material-icons prefix">phone</i> 604-234-1111
+      </div>
+    </div>
+    <div class="col s4 offset-s2 z-depth-1" id="login">  
+      <%= form_tag sessions_path do %>
+        <%= label_tag "email" %> 
+        <%= text_field_tag "email"%>
+        <%= label_tag :password %>
+        <%= password_field_tag :password %>
+        <%= submit_tag "Log In", class: 'btn waves-effect submit' %>
+      <% end %>
+    </div>
 </div>

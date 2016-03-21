@@ -1,17 +1,34 @@
-body {
+html {
   background-image: url('/assets/top_bg.jpg');
   background-repeat: repeat-x;
 }
 
-header {
-  width: 80%;
-  margin: 150px auto 50px auto;
+.container {
+  margin: 0 auto;
+}
+
+div#header {
+    margin-top: 150px;
+}
+
+input.btn.waves-effect.submit {
+    width: 100%;
+}
+
+div#login {
+    padding: 2rem;
+}
+
+div#register {
+    padding: 2rem;
+}
+
+.right-top-menu{
+  text-align: right;
 }
 
 ul#language-menu {
   list-style-type: none;
-  float: left;
-  width: 40%;
 }
 
 ul#language-menu li {
@@ -24,9 +41,6 @@ ul#language-menu li {
 
 ul#session-menu {
   list-style-type: none;
-  float: left;
-  text-align: right;
-  width: 40%;
 }
 
 ul#session-menu li {
@@ -35,9 +49,4 @@ ul#session-menu li {
 
     font-family: 'Lato', sans-serif;
     font-size: 18px;
-}
-
-div#login {
-  clear: both;
-  width: 30%;
 }
