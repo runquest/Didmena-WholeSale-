@@ -1,8 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col s12">
-      <h4>Collections</h4>
-      <p><%= link_to 'Add new collection', new_collection_path %>
+      <h4><%= t "collections.index.title" %></h4>
+
+
+      <p> <%= link_to t("collections.index.add_new_collection"), new_collection_path %></p>
+
       <div class="row">
         <% @collections.each do |collection| %>
           <div class="col s6">
