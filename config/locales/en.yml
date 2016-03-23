@@ -17,7 +17,40 @@
 # This would use the information in config/locales/es.yml.
 #
 # To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+
+  collections:
+    index:
+      title: "Collections"
+      add_new_collection: "Add new collection"
+
+  header:
+    you_logged_in: "You are logged in as"
+    logout: "Log out"
+
+  top_menu:
+    register: "Register"
+    home: "Home"
+    collections: "Collections"
+    models: "Models"
+
+  register:
+    intro: "To be able to place your order please register."
+
+  login:
+    label:
+      email: "Email"
+      password: "Password"
+      login: "Log in"
+
+  aiste:
+    register: "register"
+    home: "home"
+    collections: "collections"
+    models: "models"
+
+  welcome: 
+    do_title: "What we do"
+    do_description: "We offer wide range of women's wear of different styles: T-shirrts, tanks, racerbacks, dresses, sweartshirts, shorts and pajamas. For production we use fabric of different density and colors with decorating elements."
+    contact_title: "Get in touch"
