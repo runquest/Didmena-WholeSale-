@@ -5,7 +5,11 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to collections_path
+      if current_user.role == 'admin'
+        redirect_to users_path
+      else
+        redirect_to collections_path
+      end
     else
       flash.now[:alert] = "Log in failed...Try again."
     end

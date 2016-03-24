@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  resources :sizes
+  resources :colors
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # match '/:locale' => 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
   # You can have the root of your site routed with "root"
-    
     root "welcome#index"
 
     resources :users
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
     resources :models
     resources :types
     resources :collections
+    resources :representatives
 
   end
 

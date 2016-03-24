@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160320232423) do
+ActiveRecord::Schema.define(version: 20160324051341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,27 @@ ActiveRecord::Schema.define(version: 20160320232423) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "sizes",                   array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "colors_models", force: :cascade do |t|
+    t.integer  "model_id",   null: false
+    t.integer  "color_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "colors_sizes", force: :cascade do |t|
+    t.integer  "size_id",    null: false
+    t.integer  "color_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -45,6 +66,7 @@ ActiveRecord::Schema.define(version: 20160320232423) do
     t.integer  "type_id"
     t.decimal  "price"
     t.string   "image"
+    t.string   "sizes",                      array: true
     t.text     "description"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -120,17 +142,23 @@ ActiveRecord::Schema.define(version: 20160320232423) do
   add_index "products", ["code", "size", "color"], name: "ui_products_code_size", unique: true, using: :btree
 
   create_table "representatives", force: :cascade do |t|
-    t.integer  "company_id", null: false
-    t.integer  "user_id",    null: false
-    t.string   "type",       null: false
-    t.text     "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "company_id",   null: false
+    t.integer  "user_id",      null: false
+    t.string   "contact_type", null: false
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "representatives", ["company_id", "user_id"], name: "ui_reps", unique: true, using: :btree
   add_index "representatives", ["company_id"], name: "i_reps_on_company_id", using: :btree
   add_index "representatives", ["user_id"], name: "i_reps_on_user_id", using: :btree
+
+  create_table "sizes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "types", force: :cascade do |t|
     t.string   "name"

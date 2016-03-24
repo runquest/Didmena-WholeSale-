@@ -39,3 +39,6 @@ gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 gem "carrierwave"
 gem "rmagick" 
 
+#pry
+gem 'pry'
+

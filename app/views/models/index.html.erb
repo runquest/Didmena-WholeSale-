@@ -21,9 +21,11 @@
                 <p><%= model.type_id %></p>
               </div>
               <div class="card-action">
-                <%= link_to 'Show', model_path(model) %>
-                <%= link_to 'Edit', edit_model_path(model) %>
-                <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%= link_to 'Order', model_path(model) %>
+                <% if current_user.role == 'admin' %>
+                  <%= link_to 'Edit', edit_model_path(model) %>
+                  <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
               </div>
             </div>
           </div>

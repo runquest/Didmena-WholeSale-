@@ -6,8 +6,7 @@ class Representative < ActiveRecord::Base
   belongs_to :user, inverse_of: :representatives
   validates :user, presence: true
 
-  validates :type, presence: true
+  validates :contact_type, presence: true
 
   has_many :orders
-
 end

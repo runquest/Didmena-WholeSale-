@@ -21,8 +21,10 @@
               </div>
               <div class="card-action">
                 <%= link_to 'Show', models_path %>
-                <%= link_to 'Edit', edit_collection_path(collection) %>
-                <%= link_to 'Destroy', collection, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% if current_user.role == 'admin' %>
+                  <%= link_to 'Edit', edit_collection_path(collection) %>
+                  <%= link_to 'Destroy', collection, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
               </div>
             </div>
           </div>
