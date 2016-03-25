@@ -1,214 +1,56 @@
 <div class="container">
   <div class="row">
-    <div class="col s6 z-depth-1">
-      <h4><%= @model.code %></h4>
-      <div class="card-image">
-          <%= image_tag @model.image.url %>
-      </div>
-      <h5>Price: <%= @model.price %></h5>
-      <h5>Description: <%= @model.description %></h5>
-      <%= link_to 'Edit', edit_model_path(@model) %> |
-      <%= link_to 'Back', models_path %>
-    </div>    
     <div class="col s6">
-      <div class="row">
-          <div class="col s12">
-            <h5 style="background-color: #efa112">Color: #efa112</h5>
-              <div class="col s2">
-                <label>XS</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>S</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>M</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>L</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>XL</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>XXL</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-          </div>
+      <%= link_to 'Back', models_path %>
+      <div class="card medium">
+        <div class="card-image">
+          <img src="http://placehold.it/350x150">
+          <span class="card-title">
+            <h4><%= @model.code %></h4>
+            <p>EUR <%= @model.price %></p>
+          </span>
+        </div>
+        <div class="card-content">
+          <p><%= @model.description %></p>
+        </div>
+        <% if current_user %>
+          <% if current_user.role == 'admin' %>
+            <div class="card-action center-align">
+              <%= link_to 'Edit', edit_model_path(@model) %> |
+            </div>
+          <% end %>
+        <% end %>
       </div>
-      <div class="row">
-          <div class="col s12">
-            <h5 style="background-color: #ffeedd">Color: #efa112</h5>
-              <div class="col s2">
-                <label>XS</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
+    </div>    
+    <div class="col s6 right-align">
+       <% if @model.colors.any? %>
+          <% @model.colors.each do |model_color| %>
+            <div class="row">
+              <div class="col s12 left-align">
+                <h4><%= model_color.name %></h4>
+                <div class="divider"></div>
+                  <% if model_color.sizes.any? %>
+                    <% model_color.sizes.each do |model_color_size| %>
+                      <div class="col s2">
+                        <p class="center-align"><%= model_color_size.name %></p>
+                        <select class="browser-default">
+                          <option value="" selected>Units</option>
+                          <option value="1">1</option>
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="100">100</option>
+                        </select>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
-              <div class="col s2">
-                <label>S</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>M</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>L</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>XL</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>XXL</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col s12">
-            <h5 style="background-color: #1212da">Color: #efa112</h5>
-              <div class="col s2">
-                <label>XS</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>S</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>M</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>L</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>XL</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <div class="col s2">
-                <label>XXL</label>
-                <select class="browser-default">
-                  <option value="" selected>Units</option>
-                  <option value="1">1</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-          </div>
-      </div>
-      <div class="row">
+            <% end %>
+          <% end %>
+          <div class="row">
         <div class="col s12">
-          <button class="waves-effect waves-light btn-large">Preview Order</button>
+          <button class="waves-effect waves-light btn-large"><%= link_to 'Preview Order', cart_path%></button>
+          <button class="waves-effect waves-light btn-large">Add to cart</button>
         </div>
       </div>
     </div>

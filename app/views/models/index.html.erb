@@ -8,22 +8,26 @@
           <div class="col s6">
             <div class="card medium">
                <div class="card-image">
-                <%= image_tag model.image.url, class: 'thumb' if model.image? %>
+                <img src="http://placehold.it/350x150">
+                <%#= image_tag model.image.url %>
                 <span class="card-title">
                   <%=model.code%>
                 </span>
                </div>
-              <div class="model-content">
-                <p><%=model.description%></p>
+              <div class="card-content">
+                <div class='truncate'>
+                  <%=model.description%>
+                </div>
+                <h5><%= model.price %> | <%= Type.find(model.type_id).name %></h5>
               </div>
-              <div class="price">
-                <p><%= model.price %></p>
-                <p><%= model.type_id %></p>
-              </div>
-              <div class="card-action">
-                <%= link_to 'Show', model_path(model) %>
-                <%= link_to 'Edit', edit_model_path(model) %>
-                <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <div class="card-action center-align">
+                <%= link_to 'Order', model_path(model) %>
+                <% if current_user %>
+                  <% if current_user.role == 'admin' %>
+                    <%= link_to 'Edit', edit_model_path(model) %>
+                    <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>

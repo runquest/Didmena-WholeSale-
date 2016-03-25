@@ -17,6 +17,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.all
+  end
+
+  # GET /representatives/1
+  # GET /representatives/1.json
+  def show
+    @user = User.find(params[:id])
+  end
+
+
   protected
 
   def user_params

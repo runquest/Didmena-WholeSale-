@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_locale
 
-
   private
 
   def set_locale
@@ -29,5 +28,14 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def current_order
+      if !session[:order_id].nil?
+          Order.find(session[:oder_id])
+      else
+        Order.new
+      end
+  end
+
   helper_method :current_user
+  helper_method :current_order
 end

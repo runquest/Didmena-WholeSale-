@@ -6,6 +6,7 @@ class CreateModels < ActiveRecord::Migration
       t.integer :type_id
       t.decimal :price
       t.string :image
+      t.string :sizes, array: true
       t.text :description
 
       t.timestamps null: false
