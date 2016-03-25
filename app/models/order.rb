@@ -1,4 +1,4 @@
-xclass Order < ActiveRecord::Base
+class Order < ActiveRecord::Base
 
   # belongs_to :representative, inverse_of: :orders	# for :agent_id and :contact_id
   # validates :representative, presence: true
