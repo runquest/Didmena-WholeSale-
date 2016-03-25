@@ -1,12 +1,12 @@
-class OrderProduct < ActiveRecord::Base
+class Orderproduct < ActiveRecord::Base
 
 
   belongs_to :order, inverse_of: :orderproducts
   validates :order, presence: true
 
 
-  belongs_to :product, inverse_of: :orderproducts
-  validates :product, presence: true
+  belongs_to :model, inverse_of: :orderproducts
+  validates :model, presence: true
 
   validates :quantity, presence: true
 

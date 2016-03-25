@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
     root "welcome#index"
 
+    get 'cart' => 'carts#show'
+    get 'order' => 'order_products#create'
+
     resources :users
     resources :products
     resources :sessions, only: [:new, :create, :destroy]

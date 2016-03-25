@@ -72,20 +72,18 @@ ActiveRecord::Schema.define(version: 20160324051341) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "order_products", force: :cascade do |t|
+  create_table "orderproducts", force: :cascade do |t|
     t.integer  "order_id",   null: false
-    t.integer  "product_id", null: false
+    t.integer  "model_id",   null: false
+    t.integer  "size_id",    null: false
+    t.integer  "color_id",   null: false
     t.integer  "quantity",   null: false
     t.text     "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "order_products", ["order_id", "product_id"], name: "ui_order_products", unique: true, using: :btree
-  add_index "order_products", ["order_id"], name: "i_ord_prod_on_order_id", using: :btree
-  add_index "order_products", ["product_id"], name: "i_ord_prod_on_product_id", using: :btree
-
-  add_check "order_products", "(quantity > 0)", name: "ord_prod_quantity_chk"
+  add_check "orderproducts", "(quantity > 0)", name: "ord_prod_quantity_chk"
 
   create_table "orders", force: :cascade do |t|
     t.string   "order_number",   limit: 20,                          null: false
@@ -180,8 +178,6 @@ ActiveRecord::Schema.define(version: 20160324051341) do
 
   add_index "users", ["email"], name: "ui_users", unique: true, using: :btree
 
-  add_foreign_key "order_products", "orders", name: "fk_ord_prod_on_order_id", on_delete: :cascade
-  add_foreign_key "order_products", "products", name: "fk_ord_prod_on_product_id", on_delete: :cascade
   add_foreign_key "prices", "products", name: "fk_prices_on_product_id", on_delete: :cascade
   add_foreign_key "representatives", "companies", name: "fk_reps_on_company_id", on_delete: :cascade
   add_foreign_key "representatives", "users", name: "fk_reps_on_user_id", on_delete: :cascade
