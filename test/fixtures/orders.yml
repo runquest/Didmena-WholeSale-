@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_number: MyString
+  order_date: 2016-03-29
+  representative_id: 1
+  total_quantity: 1
+  total_price: 9.99
+  discount: 9.99
+  domain_id: 1
+  contact: MyString
+  note: MyText
+
+two:
+  order_number: MyString
+  order_date: 2016-03-29
+  representative_id: 1
+  total_quantity: 1
+  total_price: 9.99
+  discount: 9.99
+  domain_id: 1
+  contact: MyString
+  note: MyText

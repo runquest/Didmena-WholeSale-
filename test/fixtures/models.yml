@@ -2,14 +2,14 @@
 
 one:
   code: MyString
-  collection_id: 1
-  type_id: 1
-  price: 9.99
-  description: MyText
+  title: MyString
+  gender_id: 1
+  category_id: 1
+  note: MyText
 
 two:
   code: MyString
-  collection_id: 1
-  type_id: 1
-  price: 9.99
-  description: MyText
+  title: MyString
+  gender_id: 1
+  category_id: 1
+  note: MyText

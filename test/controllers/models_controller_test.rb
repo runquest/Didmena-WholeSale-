@@ -18,7 +18,7 @@ class ModelsControllerTest < ActionController::TestCase
 
   test "should create model" do
     assert_difference('Model.count') do
-      post :create, model: { code: @model.code, collection_id: @model.collection_id, description: @model.description, price: @model.price, type_id: @model.type_id }
+      post :create, model: { category_id: @model.category_id, code: @model.code, gender_id: @model.gender_id, note: @model.note, title: @model.title }
     end
 
     assert_redirected_to model_path(assigns(:model))
@@ -35,7 +35,7 @@ class ModelsControllerTest < ActionController::TestCase
   end
 
   test "should update model" do
-    patch :update, id: @model, model: { code: @model.code, collection_id: @model.collection_id, description: @model.description, price: @model.price, type_id: @model.type_id }
+    patch :update, id: @model, model: { category_id: @model.category_id, code: @model.code, gender_id: @model.gender_id, note: @model.note, title: @model.title }
     assert_redirected_to model_path(assigns(:model))
   end
 

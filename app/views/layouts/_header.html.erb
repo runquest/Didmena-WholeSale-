@@ -18,7 +18,7 @@
           <% end %>
         </ul>  
         <div id="login">
-          <p>Your role is <b><%= current_user.role %></b></p>
+          <p>Your role is <b><%= current_user.apps_manager %></b></p>
           <%= t "header.you_logged_in" %> <%= current_user.fname %> 
           <%= link_to t("header.logout"), session_path("current"), method: :delete %><br/>
         </div>

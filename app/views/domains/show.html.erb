@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Domain name:</strong>
+  <%= @domain.domain_name %>
+</p>
+
+<p>
+  <strong>Code value:</strong>
+  <%= @domain.code_value %>
+</p>
+
+<p>
+  <strong>Meaning:</strong>
+  <%= @domain.meaning %>
+</p>
+
+<p>
+  <strong>Special case:</strong>
+  <%= @domain.special_case %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @domain.note %>
+</p>
+
+<%= link_to 'Edit', edit_domain_path(@domain) %> |
+<%= link_to 'Back', domains_path %>

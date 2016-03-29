@@ -1,59 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div class="col s6">
-      <%= link_to 'Back', models_path %>
-      <div class="card medium">
-        <div class="card-image">
-          <img src="http://placehold.it/350x150">
-          <span class="card-title">
-            <h4><%= @model.code %></h4>
-            <p>EUR <%= @model.price %></p>
-          </span>
-        </div>
-        <div class="card-content">
-          <p><%= @model.description %></p>
-        </div>
-        <% if current_user %>
-          <% if current_user.role == 'admin' %>
-            <div class="card-action center-align">
-              <%= link_to 'Edit', edit_model_path(@model) %> |
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>    
-    <div class="col s6 right-align">
-       <% if @model.colors.any? %>
-          <% @model.colors.each do |model_color| %>
-            <div class="row">
-              <div class="col s12 left-align">
-                <h4><%= model_color.name %></h4>
-                <div class="divider"></div>
-                  <% if model_color.sizes.any? %>
-                    <% model_color.sizes.each do |model_color_size| %>
-                      <div class="col s2">
-                        <p class="center-align"><%= model_color_size.name %></p>
-                        <select class="browser-default">
-                          <option value="" selected>Units</option>
-                          <option value="1">1</option>
-                          <option value="5">5</option>
-                          <option value="10">10</option>
-                          <option value="100">100</option>
-                        </select>
-                      </div>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-          <div class="row">
-        <div class="col s12">
-          <button class="waves-effect waves-light btn-large"><%= link_to 'Preview Order', cart_path%></button>
-          <button class="waves-effect waves-light btn-large">Add to cart</button>
-        </div>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @model.code %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @model.title %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @model.gender_id %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @model.category_id %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @model.note %>
+</p>
+
+<%= link_to 'Edit', edit_model_path(@model) %> |
+<%= link_to 'Back', models_path %>

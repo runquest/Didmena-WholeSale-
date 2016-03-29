@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :purchases
+  resources :order_products
+  resources :orders
+  resources :prices
+  resources :products
+  resources :models
+  resources :representatives
+  resources :companies
+  resources :users
+  resources :domains
   resources :sizes
   resources :colors
   # The priority is based upon order of creation: first created -> highest priority.

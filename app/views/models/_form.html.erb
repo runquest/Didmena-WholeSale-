@@ -1,28 +1,37 @@
 <%= form_for(@model) do |f| %>
-    <%= f.label :type_id %><br>
-    <%= f.collection_select :type_id, Type.all, :id, :name, { prompt: "Choose a type" }, class: "browser-default" %>
+  <% if @model.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
 
-    <%= f.label :collection_id %><br>
-    <%= f.collection_select :collection_id, Collection.all, :id, :name, { prompt: "Choose a type" }, class: "browser-default" %>
+      <ul>
+      <% @model.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+  <div class="field">
     <%= f.label :code %><br>
     <%= f.text_field :code %>
-
-    <%= f.label :colors %><br>
-    <%= f.text_field :colors %>
-
-    <%= f.label :sizes %><br>
-    <%= f.text_field :sizes %>
-
-    <%= f.label :image %><br>
-    <%= f.file_field :image %><br><br>
-
-    <%= f.label :price %><price>
-    <%= f.number_field :price, :class => 'text_field', :step => '0.01' %>
-
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class: 'materialize-textarea' %>
-
-    <%= f.submit 'Create', class: 'btn waves-effect submit' %>
-
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :gender_id %><br>
+    <%= f.number_field :gender_id %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br>
+    <%= f.number_field :category_id %>
+  </div>
+  <div class="field">
+    <%= f.label :note %><br>
+    <%= f.text_area :note %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>

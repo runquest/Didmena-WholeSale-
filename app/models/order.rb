@@ -1,19 +1,19 @@
 class Order < ActiveRecord::Base
 
-  # belongs_to :representative, inverse_of: :orders	# for :agent_id and :contact_id
-  # validates :representative, presence: true
-
-  belongs_to :agent_id, :class_name => 'Representative', :foreign_key => 'fk_orders_on_agent_id'
-
-  belongs_to :contact_id, :class_name => 'Representative', :foreign_key => 'fk_orders_on_contact_id'
-
   validates :order_number, uniqueness: { case_sensitive: false }
   validates :order_number, presence: true
+  validates :order_number, length: { maximum: 20 }, on: :create
+  validates :order_number, format: { with: /\A[A-Z0-9]{1,20}\Z/, message: "only allows uppercase letters and digits"}
 
-  validates :order_date, presence: true
-  validates :agent_id, presence: true
-  validates :contact_id, presence: true
+  belongs_to :representative, inverse_of: :orders
+  validates :representative, presence: true
 
-  has_many :orderproducts, inverse_of: :order, dependent: :destroy
+  # domain CURRENCY !!!
+  belongs_to :domain, inverse_of: :orders
+  validates :domain, presence: true
+
+  has_many :purchases, inverse_of: :order, dependent: :destroy
+
+  has_many :products, through: :purchases
 
 end

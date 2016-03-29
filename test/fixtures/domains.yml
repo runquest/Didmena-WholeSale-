@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  domain_name: MyString
+  code_value: MyString
+  meaning: MyString
+  special_case: MyString
+  note: MyText
+
+two:
+  domain_name: MyString
+  code_value: MyString
+  meaning: MyString
+  special_case: MyString
+  note: MyText

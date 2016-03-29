@@ -7,7 +7,7 @@
     <tr>
       <th>Company</th>
       <th>User</th>
-      <th>Description</th>
+      <th>Note</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= representative.company_id %></td>
         <td><%= representative.user_id %></td>
-        <td><%= representative.description %></td>
+        <td><%= representative.note %></td>
         <td><%= link_to 'Show', representative %></td>
         <td><%= link_to 'Edit', edit_representative_path(representative) %></td>
         <td><%= link_to 'Destroy', representative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
