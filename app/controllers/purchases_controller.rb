@@ -24,12 +24,13 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
+    binding.pry
     @purchase = Purchase.new(purchase_params)
 
     respond_to do |format|
       if @purchase.save
         format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
-        format.json { render :show, status: :created, location: @purchase }
+        # format.json { render :show, status: :created, location: @purchase }
       else
         format.html { render :new }
         format.json { render json: @purchase.errors, status: :unprocessable_entity }

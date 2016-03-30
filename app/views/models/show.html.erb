@@ -1,29 +1,97 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Code:</strong>
-  <%= @model.code %>
-</p>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @model.title %>
-</p>
+  <p>
+    <strong>Code:</strong>
+    <%= @model.code %>
+  </p>
 
-<p>
-  <strong>Gender:</strong>
-  <%= @model.gender_id %>
-</p>
+  <p>
+    <strong>Title:</strong>
+    <%= @model.title %>
+  </p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @model.category_id %>
-</p>
+  <p>
+    <strong>Gender:</strong>
+    <%= @model.gender_id %>
+  </p>
 
-<p>
-  <strong>Note:</strong>
-  <%= @model.note %>
-</p>
+  <p>
+    <strong>Category:</strong>
+    <%= @model.category_id %>
+  </p>
 
-<%= link_to 'Edit', edit_model_path(@model) %> |
-<%= link_to 'Back', models_path %>
+  <p>
+    <strong>Note:</strong>
+    <%= @model.note %>
+  </p>
+
+    <%= link_to 'Edit', edit_model_path(@model) %> |
+  <%= link_to 'Back', models_path %>
+
+  <hr/>
+
+<h1>Products for this model</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Model</th>
+        <th>Color</th>
+        <th>Size</th>
+        <th colspan="5"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.model_id %></td>
+          <td><%= product.color_id %></td>
+          <td><%= product.size_id %></td>
+          <td><%= link_to 'Show', product %></td>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            
+          <td><%= form_for(@purchase) do |f| %>
+            <%= f.hidden_field :order_id, :value => Order.where(representative_id: current_user.id).last.id %>
+            <%= f.hidden_field :product_id, :value => product.id %>
+            <%= f.label :quantity %> <%= f.number_field :quantity %></td>
+            <td><%= f.submit %></td>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

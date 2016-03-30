@@ -19,8 +19,8 @@ class Model < ActiveRecord::Base
   belongs_to :domain, class_name: "Category", foreign_key: "category_id", inverse_of: :models
   validates :category_id, presence: true
 
-  has_many :modelpictures, inverse_of: :model, dependent: :destroy
+  # has_many :modelpictures, inverse_of: :model, dependent: :destroy
 
-  has_many :products, inverse_of: :model
+  has_many :products, inverse_of: :model, dependent: :destroy
 
 end

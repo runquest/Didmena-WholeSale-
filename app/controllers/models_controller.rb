@@ -10,6 +10,9 @@ class ModelsController < ApplicationController
   # GET /models/1
   # GET /models/1.json
   def show
+    @products = Product.where(model_id: @model.id)
+    @purchase = Purchase.new
+
   end
 
   # GET /models/new
