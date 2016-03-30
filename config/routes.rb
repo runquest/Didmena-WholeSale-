@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+  # You can have the root of your site routed with "root"
+    root "welcome#index"
+
+    # get 'cart' => 'carts#show'
+    post 'addtocart' => 'purchases#addtocart'
+
   resources :purchases
   resources :order_products
   resources :orders
   resources :prices
+  resources :sessions, only: [:new, :create, :destroy]
   resources :products
   resources :models
   resources :representatives
@@ -11,26 +19,28 @@ Rails.application.routes.draw do
   resources :domains
   resources :sizes
   resources :colors
+
+end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # match '/:locale' => 
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
-  # You can have the root of your site routed with "root"
-    root "welcome#index"
+  # scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+  # # You can have the root of your site routed with "root"
+  #   root "welcome#index"
 
-    get 'cart' => 'carts#show'
-    get 'order' => 'order_products#create'
+  #   get 'cart' => 'carts#show'
+  #   get 'order' => 'order_products#create'
 
-    resources :users
-    resources :products
-    resources :sessions, only: [:new, :create, :destroy]
-    resources :models
-    resources :types
-    resources :collections
-    resources :representatives
+  #   resources :users
+  #   resources :products
+  #   resources :sessions, only: [:new, :create, :destroy]
+  #   resources :models
+  #   resources :types
+  #   resources :collections
+  #   resources :representatives
 
-  end
+  # end
 
 
   # Example of regular route:

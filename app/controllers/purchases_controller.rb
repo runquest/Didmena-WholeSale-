@@ -21,15 +21,40 @@ class PurchasesController < ApplicationController
   def edit
   end
 
+  def addtocart
+    binding.pry
+    @order = Order.find(params[:purchase][:order_id])
+    @purchase = @order.purchases.new(purchase_params)
+
+    @order.purchases << @purchase
+ respond_to do |format|
+      if @purchase.save
+        binding.pry
+        format.html { redirect_to order_path(@order), notice: 'Purchase was successfully created.' }
+        # format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        # format.json { render :show, status: :created, location: @purchase }
+      else
+        format.html { render :new }
+        format.json { render json: @purchase.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /purchases
   # POST /purchases.json
   def create
     binding.pry
-    @purchase = Purchase.new(purchase_params)
+    @order = Order.find(params[:purchase][:order_id])
+    @purchase = @order.purchases.new(purchase_params)
+
+    # @purchase = Purchase.new(purchase_params)
+    # binding.pry
 
     respond_to do |format|
       if @purchase.save
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        # binding.pry
+        format.html { redirect_to order_path(@order), notice: 'Purchase was successfully created.' }
+        # format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         # format.json { render :show, status: :created, location: @purchase }
       else
         format.html { render :new }
@@ -41,6 +66,9 @@ class PurchasesController < ApplicationController
   # PATCH/PUT /purchases/1
   # PATCH/PUT /purchases/1.json
   def update
+    binding.pry
+    @order = Order.find(params[:purchase][:order_id])
+    @purchase = @order.purchases.new(purchase_params)
     respond_to do |format|
       if @purchase.update(purchase_params)
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
