@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+
   def add
     id = params[:id]
 
