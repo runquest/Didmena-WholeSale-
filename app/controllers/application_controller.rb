@@ -7,6 +7,35 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_order
 
+  def current_order
+    if !session[:order_id].nil?
+      Order.find(session[:order_id])
+    else
+      Order.new.save
+    end
+  end
+
+  # def current_order
+  #   if !session[:order_id].nil?
+  #     logger.debug "not nil in current order"
+  #     @current_order = Order.find(session[:order_id])
+  #   else
+  #     logger.debug "before order created"
+  #     # @current_order = Order.find(3)
+  #     @current_order = Order.create
+  #     Order.find(session[:order_id])
+  #     binding.pry
+  #     logger.debug "after order created"
+  #   end
+
+  # end
+
+  # def current_order
+  #   binding.pry
+  #   @current_order ||= Order.find(session[:order_id]) if session[:order_id]
+  #   logger.debug "after checkign for current_order"
+  # end
+
   private
 
   def set_locale
@@ -31,11 +60,4 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def current_order
-      if !session[:order_id].nil?
-        Order.find(session[:oder_id])
-      else
-        Order.new
-      end
-  end
 end

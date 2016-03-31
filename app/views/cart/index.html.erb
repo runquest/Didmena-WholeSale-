@@ -1,0 +1,12 @@
+<div class="container">
+<h1>YOUR CART</h1>
+<%= link_to 'Empty Your Cart', cart_clear_path %>
+  <ul>
+  <% @cart.each do |id, quantity| %>
+    <% product = Product.find_by_id(id) %>
+
+    <li><%= link_to product.model_id, model_path(product.model_id) %> <%= product.color_id %> <%= product.size_id %></li>
+
+  <% end %>
+  </ul>
+</div>

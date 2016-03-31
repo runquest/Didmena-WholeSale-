@@ -10,10 +10,20 @@ class Order < ActiveRecord::Base
 
   # domain CURRENCY !!!
   belongs_to :domain, inverse_of: :orders
-  validates :domain, presence: true
+  # validates :domain, presence: true
+  belongs_to :order_status
 
   has_many :purchases, inverse_of: :order, dependent: :destroy
 
   has_many :products, through: :purchases
+
+  before_create :set_order_status
+
+  private
+
+  def set_order_status
+    self.order_status_id = 1
+  end
+
 
 end

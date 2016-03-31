@@ -1,6 +1,6 @@
 class ModelsController < ApplicationController
   before_action :set_model, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /models
   # GET /models.json
   def index
@@ -11,8 +11,7 @@ class ModelsController < ApplicationController
   # GET /models/1.json
   def show
     @products = Product.where(model_id: @model.id)
-    @purchase = Purchase.new
-
+    @purchase = Order.find(2).purchases.new
   end
 
   # GET /models/new
@@ -73,5 +72,9 @@ class ModelsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
       params.require(:model).permit(:code, :title, :gender_id, :category_id, :note)
+    end
+
+    def purchase_params
+      params.require(:purchase).permit(:order_id, :product_id, :quantity, :note)
     end
 end

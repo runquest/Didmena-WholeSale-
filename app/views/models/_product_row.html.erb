@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col s4">
+      <h4><%= product.model_id %> <%= product.color_id %> <%= product.size_id %></h4>
+      <%= link_to 'Show', product %>
+      <%= link_to 'Edit', edit_product_path(product) %> <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s8">
+
+    <a href="/cart/<%= product.id %>"> Add to cart</a>
+<!--         <%#= form_for purchase, remote: true do |f| %>
+          <%#= f.hidden_field :order_id, :value => "2" %>
+          <%#= f.hidden_field :product_id, :value => product.id %>
+          <%#= f.label :quantity %><%#=f.number_field :quantity %>
+          <%#= f.submit "Add to cart", class: "btn" %>
+        <#% end %> -->
+    </div>
+  </div>
+</div>
