@@ -14,4 +14,10 @@
   <% end %>
   <strong>TOTAL QUANTITY <%= total %></strong>
   </ul>
+
+
+  <!-- <%#= link_to "Confirm order", orders_path(@cart.id, param1: 'value1', param2: 'value2'), method: :post %> -->
+
+  <%= link_to "Confirm order", purchases_path(quantity: '7'), method: :post %>
+
 </div>

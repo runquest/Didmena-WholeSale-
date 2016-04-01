@@ -4,25 +4,44 @@ class PurchasesController < ApplicationController
   def create
     # logger.debug "purchase controller create"
     # logger.info "purchase controller create"
-    @order = current_order
-    @purchase = @order.purchases.new(purchase_params)
-    @order.save
-    session[:order_id] = @order.id
+    # @order = Order.new
+    # binding.pry
+    # @purchase = @order.purchases.new(purchase_params)
+    #     binding.pry
+
+    if session[:cart] then
+      cart = session[:cart]
+    else
+      session[:cart] = {}
+      cart = session[:cart]
+    end
+
+    binding.pry
+
+    @order = Order.create(order_number: '17', order_date: Time.now, representative_id: current_user.id)
+
+    binding.pry
+
+    cart.each do |product_id, quantity|
+      binding.pry
+      @purchase = Purchase.new(order_id: @order.id, product_id: product_id, quantity: quantity)
+    end
+
   end
 
-  def update
-    @order = current_order
-    @purchase = @order.purchases.find(params[:id])
-    @purchase.update_attributes(purchase_params)
-    @purchases = @order.purchases
-  end
+  # def update
+  #   @order = current_order
+  #   @purchase = @order.purchases.find(params[:id])
+  #   @purchase.update_attributes(purchase_params)
+  #   @purchases = @order.purchases
+  # end
 
-  def destroy
-    @order = current_order
-    @purchase = @order.purchases.find(params[:id])
-    @purchase.destroy
-    @purchases = @order.purchases
-  end
+  # def destroy
+  #   @order = current_order
+  #   @purchase = @order.purchases.find(params[:id])
+  #   @purchase.destroy
+  #   @purchases = @order.purchases
+  # end
 # private
 #   def purchase_params
 #     params.require(:purchase).permit(:quantity, :product_id)

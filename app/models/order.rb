@@ -17,13 +17,13 @@ class Order < ActiveRecord::Base
 
   has_many :products, through: :purchases
 
-  before_create :set_order_status
+  # before_create :set_order_status
 
-  private
+  # private
 
-  def set_order_status
-    self.order_status_id = 1
-  end
+  # def set_order_status
+  #   self.order_status_id = 1
+  # end
 
 
 end
