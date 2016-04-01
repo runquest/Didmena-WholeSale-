@@ -16,17 +16,17 @@ class PurchasesController < ApplicationController
       cart = session[:cart]
     end
 
-    binding.pry
+    @order_number = (0..8).map {(65 + rand(26)).chr}.join
 
-    @order = Order.create(order_number: '17', order_date: Time.now, representative_id: current_user.id)
-
-    binding.pry
+    @order = Order.new(order_number: @order_number, order_date: Time.now, representative_id: current_user.id)
+    @order.save
 
     cart.each do |product_id, quantity|
-      binding.pry
-      @purchase = Purchase.new(order_id: @order.id, product_id: product_id, quantity: quantity)
+      @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
+      @purchase.save
     end
 
+    @purchases_for_order = Purchase.where(order_id: @order.id)
   end
 
   # def update

@@ -26,7 +26,6 @@ class CartController < ApplicationController
   def index
     if session[:cart] then
       @cart = session[:cart]
-      binding.pry
     else
       @cart = {}
     end

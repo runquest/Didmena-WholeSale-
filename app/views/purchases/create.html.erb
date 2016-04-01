@@ -1,3 +1,6 @@
-<h1>OrderItems#create</h1>
-<p>Find me in app/views/order_items/create.html.erb</p>
-
+<div class="container">
+  <h2>THIS IS YOUR ORDER</h2>
+  <% @purchases_for_order.each do |pfo| %>
+    <strong>Product ID:</strong> <%= pfo.product_id %>, <strong>Quantity: </strong> <%= pfo.quantity %>
+    <% end %>
+</div>

@@ -8,7 +8,6 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    binding.pry
     @order = Order.new
   end
 
@@ -19,18 +18,8 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    binding.pry
     @order = Order.new(order_params)
-    binding.pry
-    # respond_to do |format|
-    #   if @order.save
-    #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
-    #     format.json { render :show, status: :created, location: @order }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    @order.save
   end
 
   # PATCH/PUT /orders/1
