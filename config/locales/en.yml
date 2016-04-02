@@ -33,7 +33,7 @@ en:
     register: "Register"
     home: "Home"
     collections: "Collections"
-    models: "Models"
+    models: "Products"
 
   register:
     intro: "To be able to place your order please register."

@@ -1,23 +1,37 @@
 <div class="container">
-<h1>YOUR CART</h1>
-<%= link_to 'Empty Your Cart', cart_clear_path %>
-<% total = 0 %>
-  <ul>
-  <% @cart.each do |id, quantity| %>
-    <% product = Product.find_by_id(id) %>
-
-    <li><%= link_to product.model_id, model_path(product.model_id) %> <%= product.color_id %> <%= product.size_id %></li>
-    <li>Quantity: <%= quantity %></li>
-
-
-    <% total += quantity %>
-  <% end %>
-  <strong>TOTAL QUANTITY <%= total %></strong>
-  </ul>
-
-
-  <!-- <%#= link_to "Confirm order", orders_path(@cart.id, param1: 'value1', param2: 'value2'), method: :post %> -->
-
-  <%= link_to "Confirm order", purchases_path, method: :post %>
-
+  <div class="row">
+    <div class="col s12">
+      <h4>This is your cart</h4>
+      <div><%= link_to 'Empty Your Cart', cart_clear_path %></div>
+      <div class="row">
+        <div class="col s8 offset-s2">
+          <table>
+            <thead>
+              <tr>
+                <th data-field="model-title">Product</th>
+                <th data-field="product-color">Color</th>
+                <th data-field="product-size">Size</th>
+                <th data-field="quantity">Quantity</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @cart.any? %>
+                <% total = 0 %>
+                <% @cart.each do |id, quantity| %>
+                  <% product = Product.find(id) %>
+                  <tr><%= render "cart_row", product: product, quantity: quantity %></tr>
+                  <% total += quantity.to_i %>
+                <% end %>
+              <% end %>          
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div><b>Total: </b><%= total %></div>
+      <div class=".align-right"><%= link_to "Confirm order", purchases_path, method: :post %></div>
+    </div>
+  </div>
 </div>
+
+

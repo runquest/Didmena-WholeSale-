@@ -1,7 +1,8 @@
 class CartController < ApplicationController
 
   def add
-    id = params[:id]
+    id = params[:product_id]
+    quantity = params[:quantity]
 
     if session[:cart] then
       cart = session[:cart]
@@ -11,11 +12,13 @@ class CartController < ApplicationController
     end
 
     if cart[id] then
-      cart[id] = cart[id] + 1
+      cart[id] = cart[id] + quantity
     else
-      cart[id] = 1
+      cart[id] = quantity
     end
-    redirect_to :action => :index
+    flash[:notice] = "Item successfully added"
+    redirect_to :back
+    return
   end
 
   def clearCart

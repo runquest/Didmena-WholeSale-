@@ -11,22 +11,21 @@
       <% if current_user %> 
         <ul id='session-menu'>
           <li><%= link_to t("top_menu.home"), root_path %> | </li>
-          <li><%= link_to "Order", orders_path %> | </li>
-         <!--  <li><%#= link_to t("top_menu.collections"), collections_path %></li> -->
+          <li><%= link_to "Cart", cart_path %> | </li>
           <% if Model.all.any? %>
             <li><%= link_to t("top_menu.models"), models_path %></li>
           <% end %>
         </ul>  
         <div id="login">
-          <p>Your role is <b><%= current_user.apps_manager %></b></p>
+          <% if current_user.apps_manager %>
+            <p>You have administrative rights</p>
+          <% end %>
           <%= t "header.you_logged_in" %> <%= current_user.fname %> 
           <%= link_to t("header.logout"), session_path("current"), method: :delete %><br/>
         </div>
       <% else %>
         <ul id='session-menu'>
-         <!--  <li><%#= link_to t("top_menu.register"),  new_user_path %> | </li> -->
           <li><%= link_to t("top_menu.home"), root_path %> | </li>
-         <!--  <li><%#= link_to t("top_menu.collections"), collections_path %></li> -->
           <% if Model.all.any? %>
             <li> <%= link_to t("top_menu.models"), models_path %></li>
           <% end %>

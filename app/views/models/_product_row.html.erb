@@ -1,21 +1,22 @@
-<div class="container">
-  <div class="row">
-    <div class="col s4">
-      <h4><%= product.model_id %> <%= product.color_id %> <%= product.size_id %></h4>
-      <%= link_to 'Show', product %>
-      <%= link_to 'Edit', edit_product_path(product) %> <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col s8">
+<td><%= Domain.find(product.color_id).meaning %></td>
+<td><%= Domain.find(product.size_id).code_value %></td>
+<td class="col s3">
 
-    <a href="/cart/<%= product.id %>"> Add to cart</a>
-<!--         <%#= form_for purchase, remote: true do |f| %>
-          <%#= f.hidden_field :order_id, :value => "2" %>
-          <%#= f.hidden_field :product_id, :value => product.id %>
-          <%#= f.label :quantity %><%#=f.number_field :quantity %>
-          <%#= f.submit "Add to cart", class: "btn" %>
-        <#% end %> -->
-    </div>
-  </div>
-</div>
+
+    <%= form_tag cart_path do %>
+      <%= hidden_field_tag "product_id", product.id %>
+      <%= number_field_tag :quantity, params[:quantity] %>
+      <% if current_user %>
+        <%= submit_tag 'Add to cart' %>
+      <% else %>
+        <%= link_to 'Add to cart', root_path %>
+      <% end %>
+    <% end %>
+
+
+</td>
+<td><% if current_user && current_user.apps_manager %>
+  <%= link_to 'Edit', edit_product_path(product) %>
+  <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %></td>
+
