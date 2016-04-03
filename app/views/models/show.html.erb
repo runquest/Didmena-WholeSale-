@@ -3,6 +3,13 @@
     <div class="col s6">
       <div class="card">
         <div class="card-image">
+          <% @model_attachments.each do |p| %>
+            <%= image_tag p.avatar_url %>
+            <%= link_to "Edit Attachment", edit_model_attachment_path(p) %>
+          <%end%>
+
+
+
           <img src="http://placehold.it/350x150">
           <span class="card-title"><%= @model.title %></span>
         </div>

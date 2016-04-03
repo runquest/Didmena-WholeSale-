@@ -1,5 +1,5 @@
 <div class="container">
-<%= form_for(@model) do |f| %>
+<%= form_for(@model, :html => { :multipart => true } ) do |f| %>
   <% if @model.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
@@ -29,6 +29,14 @@
     </div>
     <div class="input-field col s6">
       <%= f.collection_select :category_id, Domain.all.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a category" }, class: "browser-default" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s6">
+    <%= f.fields_for :model_attachments do |p| %>
+      <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]"%>
+    <% end %>
     </div>
   </div>
 

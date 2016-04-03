@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :model_attachments
+  resources :model_pictures
   # match '/:locale' => 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 
