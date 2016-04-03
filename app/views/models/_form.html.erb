@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_for(@model) do |f| %>
   <% if @model.errors.any? %>
     <div id="error_explanation">
@@ -11,27 +12,34 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :code %><br>
-    <%= f.text_field :code %>
-  </div>
-  <div class="field">
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.label :code %><br>
+      <%= f.text_field :code %>
+    </div>
+    <div class="input-field col s6">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :gender_id %><br>
-    <%= f.number_field :gender_id %>
+
+  <div class="row">
+    <div class="input-field col s6">
+       <%= f.collection_select :gender_id, Domain.all.where(domain_name: "GENDER"), :id, :meaning, { prompt: "Choose a gender" }, class: "browser-default" %>
+    </div>
+    <div class="input-field col s6">
+      <%= f.collection_select :category_id, Domain.all.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a category" }, class: "browser-default" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :category_id %><br>
-    <%= f.number_field :category_id %>
-  </div>
-  <div class="field">
-    <%= f.label :note %><br>
-    <%= f.text_area :note %>
-  </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <%= f.label :note %><br>
+        <%= f.text_area :note %>
+      </div>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+</div>

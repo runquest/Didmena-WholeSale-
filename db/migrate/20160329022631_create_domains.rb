@@ -20,3 +20,6 @@ class CreateDomains < ActiveRecord::Migration
     add_index :domains, [:domain_name, :code_value], :unique => true, name: :ui_domains_name_value
   end
 end
+
+
+

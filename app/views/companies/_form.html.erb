@@ -1,53 +1,63 @@
-<%= form_for(@company) do |f| %>
-  <% if @company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+<div class="container">
+  <%= form_for(@company) do |f| %>
+    <% if @company.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
-      <ul>
-      <% @company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @company.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <%= f.label :title, 'Company name' %><br>
+        <%= f.text_field :title %>
+        <%= f.hidden_field :status, :value => 'active'%>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="input-field col s6">
+        <%= f.label :phone %><br>
+        <%= f.text_field :phone %>
+      </div>
+      <div class="input-field col s6">
+        <%= f.label :email, 'Company email address' %><br>
+        <%= f.text_field :email %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <%= f.label :street, 'Street address' %><br>
+        <%= f.text_field :street %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <%= f.label :city, 'City' %><br>
+        <%= f.text_field :city %>
+      </div>
+      <div class="input-field col s6">
+      <%= f.label :postal_code %><br>
+      <%= f.text_field :postal_code %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6 browser-default">
+        <%= f.collection_select :domain_id, Domain.all.where(domain_name: "COUNTRY"), :id, :meaning, { prompt: "Choose a country" }, class: "browser-default" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :domain_id %><br>
-    <%= f.number_field :domain_id %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :street %><br>
-    <%= f.text_field :street %>
-  </div>
-  <div class="field">
-    <%= f.label :postal_code %><br>
-    <%= f.text_field :postal_code %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

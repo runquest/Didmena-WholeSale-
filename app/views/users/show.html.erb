@@ -17,16 +17,6 @@
   </p>
 
   <p>
-    <strong>Password digest:</strong>
-    <%= @user.password_digest %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= @user.status %>
-  </p>
-
-  <p>
     <strong>Apps manager:</strong>
     <%= @user.apps_manager %>
   </p>
@@ -34,11 +24,6 @@
   <p>
     <strong>Phone:</strong>
     <%= @user.phone %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @user.description %>
   </p>
 
   <%= link_to 'Edit', edit_user_path(@user) %> |

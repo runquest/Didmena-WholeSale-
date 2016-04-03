@@ -26,7 +26,7 @@
           <td><%= company.title %></td>
           <td><%= company.email %></td>
           <td><%= company.status %></td>
-          <td><%= company.domain_id %></td>
+          <td><%= Domain.find(company.domain_id).meaning %></td>
           <td><%= company.city %></td>
           <td><%= company.street %></td>
           <td><%= company.postal_code %></td>

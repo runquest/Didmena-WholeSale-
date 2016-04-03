@@ -19,6 +19,7 @@
         <div id="login">
           <% if current_user.apps_manager %>
             <p>You have administrative rights</p>
+            <%= render 'layouts/admin_menu' %>
           <% end %>
           <%= t "header.you_logged_in" %> <%= current_user.fname %> 
           <%= link_to t("header.logout"), session_path("current"), method: :delete %><br/>
