@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Model Attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Avatar</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @model_attachments.each do |model_attachment| %>
+      <tr>
+        <td><%= model_attachment.model_id %></td>
+        <td><%= model_attachment.avatar %></td>
+        <td><%= link_to 'Show', model_attachment %></td>
+        <td><%= link_to 'Edit', edit_model_attachment_path(model_attachment) %></td>
+        <td><%= link_to 'Destroy', model_attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Model attachment', new_model_attachment_path %>

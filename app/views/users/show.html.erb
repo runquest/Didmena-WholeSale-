@@ -1,8 +1,31 @@
 <div class="container">
-  <div class="row">
-    <div class="col s12">
-      <h4><%= @user.full_name %></h4>
-      
-    </div>
-  </div>
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <strong>Fname:</strong>
+    <%= @user.fname %>
+  </p>
+
+  <p>
+    <strong>Lname:</strong>
+    <%= @user.lname %>
+  </p>
+
+  <p>
+    <strong>Apps manager:</strong>
+    <%= @user.apps_manager %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= @user.phone %>
+  </p>
+
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>
 </div>

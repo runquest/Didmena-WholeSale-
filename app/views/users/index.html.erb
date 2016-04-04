@@ -1,71 +1,101 @@
 <div class="container">
-  <div class="row">
-    <div class="col s12">
-      <h4>Users</h4>
-      <p><%= link_to 'New user', new_user_path %></p>
-      <table>
-        <thead>
-          <tr>
-              <th data-field="id">Id</th>
-              <th data-field="name">Full Name</th>
-              <th data-field="price">Company</th>
-              <th>Manage</th>
-          </tr>
-        </thead>
+  <h5>Orders</h5>
+  <table>
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Date</th>
+        <th>Total Quantity</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-        <tbody>
-         <% @users.each do |user| %>
-          <tr>
-            <td><%=user.id %></td>
-            <td><%= user.full_name %></td>
-            <% if user.companies.any? %>
-              <td><%= user.companies.first.name%></td>
-            <% else %>
-              <td></td>
-            <% end %>
-            <td><%= link_to 'Show', user_path(user) %></td>
-            <td><%= link_to 'Edit', edit_user_path(user) %></td>
-            <td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="divider"></div>
-  <div class="row">
-    <div class="col s12">
-      <h4>Collections</h4>
-      <p><%= link_to 'New collection', new_collection_path %></p>
-      <table>
-        <thead>
-          <tr>
-              <th data-field="id">Id</th>
-              <th data-field="name">Title</th>
-              <th data-field="price">Number of Models</th>
-              <th>Manage</th>
-          </tr>
-        </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.order_number %></td>
+          <td><%= order.order_date %></td>
+          <td><%= order.total_quantity %></td>
+          <td><%= link_to 'Show', order %></td>
+          <td><%= link_to 'Edit', edit_order_path(order) %></td>
+          <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <h5>Users</h5>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Fname</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Admin</th>
+        <th>Phone</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-        <tbody>
-        <% if Collection.all != [] %>
-         <% Collection.all.each do |collection| %>
-          <tr>
-            <td><%=collection.id %></td>
-            <td><%= collection.name %></td>
-            <% if collection.models.any? %>
-              <td><%= collection.models.size%></td>
-            <% else %>
-              <td></td>
-            <% end %>
-            <td><%= link_to 'Show', collection_path(collection) %></td>
-            <td><%= link_to 'Edit', edit_collection_path(collection) %></td>
-            <td><%= link_to 'Destroy', @collection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.fname %></td>
+          <td><%= user.lname %></td>
+          <td><%= user.status %></td>
+          <td><%= user.apps_manager %></td>
+          <td><%= user.phone %></td>
+          <td><%= link_to 'Show', user %></td>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New User', new_user_path %>
+  <hr/>
+
+  <h5>Companies</h5>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Domain</th>
+        <th>City</th>
+        <th>Street</th>
+        <th>Postal code</th>
+        <th>Phone</th>
+        <th>Description</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @companies.each do |company| %>
+        <tr>
+          <td><%= company.title %></td>
+          <td><%= company.email %></td>
+          <td><%= company.status %></td>
+          <td><%= company.domain_id %></td>
+          <td><%= company.city %></td>
+          <td><%= company.street %></td>
+          <td><%= company.postal_code %></td>
+          <td><%= company.phone %></td>
+          <td><%= company.description %></td>
+          <td><%= link_to 'Show', company %></td>
+          <td><%= link_to 'Edit', edit_company_path(company) %></td>
+          <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Company', new_company_path %>
 </div>

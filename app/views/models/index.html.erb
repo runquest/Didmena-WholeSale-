@@ -1,38 +1,32 @@
 <div class="container">
   <div class="row">
-    <div class="col s12">
-      <h4>Models</h4>
-      <p><%= link_to 'New Model', new_model_path %></p>
-      <div class="row">
-        <% @models.each do |model| %>
-          <div class="col s6">
-            <div class="card medium">
-               <div class="card-image">
+    <h6>Search and filters will go here </h6>
+  </div>
+  <div class="row">
+    <% if @models.any? %>
+      <% @models.each do |model| %>
+        <div class="col s4">
+          <div class="card left">
+            <div class="card-image">
+              <% if ModelAttachment.where(model_id: model.id).any? %>
+                <%= image_tag ModelAttachment.where(model_id: model.id).first.avatar_url %>
+              <% else %>
                 <img src="http://placehold.it/350x150">
-                <%#= image_tag model.image.url %>
-                <span class="card-title">
-                  <%=model.code%>
-                </span>
-               </div>
-              <div class="card-content">
-                <div class='truncate'>
-                  <%=model.description%>
-                </div>
-                <h5><%= model.price %> | <%= Type.find(model.type_id).name %></h5>
-              </div>
-              <div class="card-action center-align">
-                <%= link_to 'Order', model_path(model) %>
-                <% if current_user %>
-                  <% if current_user.role == 'admin' %>
-                    <%= link_to 'Edit', edit_model_path(model) %>
-                    <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
-                  <% end %>
-                <% end %>
-              </div>
+              <% end %>
+              <span class="card-title"><%= model.title %></span>
             </div>
+            <% if current_user && current_user.apps_manager %>
+              <div class="card-action center">
+                <%= link_to 'Show', model %> | <%= link_to 'Edit', edit_model_path(model) %> | <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            <% else %>
+              <div class="card-action center">
+                <%= link_to 'Show', model %>
+              </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-    </div>
+        </div>
+      <% end %>  
+    <% end %>
   </div>
 </div>

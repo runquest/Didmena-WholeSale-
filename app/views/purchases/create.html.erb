@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <h4>Order sent.</h4>
+      <h4> Order # <%= @order_number %></h4>
+      <div class="row">
+        <div class="col s8 offset-s2">
+          <table>
+            <thead>
+              <tr>
+                <th data-field="model-title">Product ID</th>
+                <th data-field="product-color">Model title</th>
+                <th data-field="product-size">Color</th>
+                <th data-field="product-size">Size</th>
+                <th data-field="quantity">Quantity</th>
+                <th colspan="2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @purchases_for_order.any? %>
+                <% @purchases_for_order.each do |pfo| %>
+                  <tr><%= render "purchase_row", purchases_for_order: pfo %></tr>
+                <% end %>
+              <% end %>          
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

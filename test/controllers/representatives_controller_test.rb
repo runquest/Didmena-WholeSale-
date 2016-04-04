@@ -18,7 +18,7 @@ class RepresentativesControllerTest < ActionController::TestCase
 
   test "should create representative" do
     assert_difference('Representative.count') do
-      post :create, representative: { company_id: @representative.company_id, description: @representative.description, user_id: @representative.user_id }
+      post :create, representative: { company_id: @representative.company_id, note: @representative.note, user_id: @representative.user_id }
     end
 
     assert_redirected_to representative_path(assigns(:representative))
@@ -35,7 +35,7 @@ class RepresentativesControllerTest < ActionController::TestCase
   end
 
   test "should update representative" do
-    patch :update, id: @representative, representative: { company_id: @representative.company_id, description: @representative.description, user_id: @representative.user_id }
+    patch :update, id: @representative, representative: { company_id: @representative.company_id, note: @representative.note, user_id: @representative.user_id }
     assert_redirected_to representative_path(assigns(:representative))
   end
 

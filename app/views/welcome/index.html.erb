@@ -1,27 +1,54 @@
 <div class="container">
   <div class="row">
     <div class="col s6">
-     <div class="section">
-      <h5><%= t "welcome.do_title" %></h5>
-      <p><%= t "welcome.do_description" %></p>
-    </div>
-    <div class="section">
-      <h5><%= t "welcome.contact_title" %></h5>
-      <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
-      <i class="tiny material-icons prefix">phone</i> 604-234-1111
+      <div class="section">
+        <h5><%= t "welcome.do_title" %></h5>
+        <p><%= t "welcome.do_description" %></p>
+      </div>
+      <div class="section">
+        <h5><%= t "welcome.contact_title" %></h5>
+        <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
+        <i class="tiny material-icons prefix">phone</i> 604-234-1111
       </div>
     </div>
-
-     <% if !current_user %> 
-      <div class="col s4 offset-s2 z-depth-1" id="login">  
+    <% if !current_user %>    
+      <div class="col s4 offset-s2 z-depth-1" id="login"> 
         <%= form_tag sessions_path do %>
-          <%= label_tag t "login.label.email" %> 
-          <%= text_field_tag "email"%>
-          <%= label_tag t "login.label.password" %>
-          <%= password_field_tag :password %>
-          <%= submit_tag t "login.label.login", class: 'btn waves-effect submit' %>
+        <%= label_tag t "login.label.email" %> 
+        <%= text_field_tag "email"%>
+        <%= label_tag t "login.label.password" %>
+        <%= password_field_tag :password %>
+        <%= submit_tag t "login.label.login", class: 'btn waves-effect submit' %>
         <% end %>
       </div>
+    <% end %>    
+  </div>
+  <hr/>
+  <div class="row">
+    <% if @models.any? %>
+      <% @models.each do |model| %>
+        <div class="col s4">
+          <div class="card left">
+            <div class="card-image">
+              <% if ModelAttachment.where(model_id: model.id).any? %>
+                <%= image_tag ModelAttachment.where(model_id: model.id).first.avatar_url %>
+              <% else %>
+                <img src="http://placehold.it/350x150">
+              <% end %>
+              <span class="card-title"><%= model.title %></span>
+            </div>
+            <% if current_user && current_user.apps_manager %>
+              <div class="card-action center">
+                <%= link_to 'Show', model %> | <%= link_to 'Edit', edit_model_path(model) %> | <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            <% else %>
+              <div class="card-action center">
+                <%= link_to 'Show', model %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>  
     <% end %>
-
+  </div>
 </div>

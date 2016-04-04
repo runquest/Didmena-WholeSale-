@@ -1,28 +1,58 @@
-<%= form_for(@model) do |f| %>
-    <%= f.label :type_id %><br>
-    <%= f.collection_select :type_id, Type.all, :id, :name, { prompt: "Choose a type" }, class: "browser-default" %>
+<div class="container">
+<%= form_for(@model, :html => { :multipart => true } ) do |f| %>
+  <% if @model.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
 
-    <%= f.label :collection_id %><br>
-    <%= f.collection_select :collection_id, Collection.all, :id, :name, { prompt: "Choose a type" }, class: "browser-default" %>
+      <ul>
+      <% @model.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-    <%= f.label :code %><br>
-    <%= f.text_field :code %>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.label :code %><br>
+      <%= f.text_field :code %>
+    </div>
+    <div class="input-field col s6">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+    </div>
+  </div>
 
-    <%= f.label :colors %><br>
-    <%= f.text_field :colors %>
+  <div class="row">
+    <div class="input-field col s6">
+       <%= f.collection_select :gender_id, Domain.all.where(domain_name: "GENDER"), :id, :meaning, { prompt: "Choose a gender" }, class: "browser-default" %>
+    </div>
+    <div class="input-field col s6">
+      <%= f.collection_select :category_id, Domain.all.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a category" }, class: "browser-default" %>
+    </div>
+  </div>
 
-    <%= f.label :sizes %><br>
-    <%= f.text_field :sizes %>
+  <div class="row">
+    <div class="col s6">
+    <%= f.fields_for :model_attachments do |p| %>
+      <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]"%>
+    <% end %>
+    </div>
+    <div class="col s6">
+      <%= f.label :price %><br>
+      <%= f.number_field :price %>
+    </div>
 
-    <%= f.label :image %><br>
-    <%= f.file_field :image %><br><br>
+  </div>
 
-    <%= f.label :price %><price>
-    <%= f.number_field :price, :class => 'text_field', :step => '0.01' %>
-
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class: 'materialize-textarea' %>
-
-    <%= f.submit 'Create', class: 'btn waves-effect submit' %>
-
+    <div class="row">
+      <div class="input-field col s6">
+        <%= f.label :note %><br>
+        <%= f.text_area :note %>
+      </div>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
+</div>

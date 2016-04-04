@@ -1,0 +1,39 @@
+<div class="container">
+<%= form_for(@domain) do |f| %>
+  <% if @domain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
+
+      <ul>
+      <% @domain.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.select(:domain_name, options_for_select([["GENDER", "GENDER"], ["COLOR", "COLOR"], ["COUNTRY", "COUNTRY"], ["CURRENCY", "CURRENCY"]]), {:include_blank => 'Select attribute'}, {:required => true, :class => 'select browser-default'}) %>
+    </div>
+  </div>
+
+  <div class="row">
+     <div class="input-field col s6">
+    <%= f.label :code_value %><br>
+    <%= f.text_field :code_value %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.label :meaning %><br>
+      <%= f.text_field :meaning %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>

@@ -1,6 +1,6 @@
 class ModelsController < ApplicationController
   before_action :set_model, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /models
   # GET /models.json
   def index
@@ -10,11 +10,16 @@ class ModelsController < ApplicationController
   # GET /models/1
   # GET /models/1.json
   def show
+    @products = Product.where(model_id: @model.id)
+    @purchase = Order.find(2).purchases.new
+    @model_attachments = @model.model_attachments.all
+
   end
 
   # GET /models/new
   def new
     @model = Model.new
+    @model_attachment = @model.model_attachments.build
   end
 
   # GET /models/1/edit
@@ -26,13 +31,26 @@ class ModelsController < ApplicationController
   def create
     @model = Model.new(model_params)
 
+    # respond_to do |format|
+    #   if @model.save
+    #     format.html { redirect_to @model, notice: 'Model was successfully created.' }
+    #     format.json { render :show, status: :created, location: @model }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @model.errors, status: :unprocessable_entity }
+    #   end
+    # end
+
     respond_to do |format|
       if @model.save
-        format.html { redirect_to @model, notice: 'Model was successfully created.' }
-        format.json { render :show, status: :created, location: @model }
+          # binding.pry
+          params[:model_attachments]['avatar'].each do |a|
+            @model_attachment = @model.model_attachments.create(:avatar => a)
+          end
+
+          format.html {redirect_to @model, notice: "Model was created successfully." }
       else
-        format.html { render :new }
-        format.json { render json: @model.errors, status: :unprocessable_entity }
+          format.html {render action: 'new'}
       end
     end
   end
@@ -69,6 +87,10 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:code, :collection_id, :type_id, :price, :description, :image)
+      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note)
+    end
+
+    def purchase_params
+      params.require(:purchase).permit(:order_id, :product_id, :quantity, :note, model_attachments_attributes: [:id, :model_id, :avatar])
     end
 end

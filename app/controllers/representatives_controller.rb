@@ -69,6 +69,6 @@ class RepresentativesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def representative_params
-      params.require(:representative).permit(:company_id, :user_id, :contact_type)
+      params.require(:representative).permit(:company_id, :user_id, :note)
     end
 end
