@@ -3,6 +3,7 @@ class PurchasesController < ApplicationController
 
   def create
 
+    total_quantity = params[:total_quantity]
     if session[:cart] then
       cart = session[:cart]
     else
@@ -15,13 +16,13 @@ class PurchasesController < ApplicationController
     @order = Order.new(order_number: @order_number, order_date: Time.now, representative_id: current_user.id)
     @order.save
 
-    cart.each do |product_id, quantity|
-      @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
+    cart.each do |product_id, quantity, total_quantity|
+      @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: total_quantity)
       @purchase.save
     end
 
     @purchases_for_order = Purchase.where(order_id: @order.id)
-    session[:cart] = nil
+    # session[:cart] = nil
   end
 
   # def update

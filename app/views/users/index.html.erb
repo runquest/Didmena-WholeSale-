@@ -1,4 +1,29 @@
 <div class="container">
+  <h5>Orders</h5>
+  <table>
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Date</th>
+        <th>Total Quantity</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.order_number %></td>
+          <td><%= order.order_date %></td>
+          <td><%= order.total_quantity %></td>
+          <td><%= link_to 'Show', order %></td>
+          <td><%= link_to 'Edit', edit_order_path(order) %></td>
+          <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
   <h5>Users</h5>
   <table>
     <thead>
@@ -32,6 +57,7 @@
   <br>
   <%= link_to 'New User', new_user_path %>
   <hr/>
+
   <h5>Companies</h5>
   <table>
     <thead>

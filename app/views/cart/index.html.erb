@@ -32,7 +32,7 @@
         </div>
       </div>
       <div><b>Total cost: </b>EUR <%= total %></div>
-      <div class=".align-right"><%= link_to "Confirm order", purchases_path, method: :post %></div>
+      <div class=".align-right"><%= link_to "Confirm order", purchases_path(total_quantity: total), method: :post %></div>
     </div>
   </div>
 </div>

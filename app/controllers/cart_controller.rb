@@ -1,6 +1,7 @@
 class CartController < ApplicationController
 
   def add
+
     id = params[:product_id]
     quantity = params[:quantity]
 

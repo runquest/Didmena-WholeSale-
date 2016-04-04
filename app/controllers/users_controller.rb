@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @companies = Company.all
+    @orders = Order.all
   end
 
   # GET /users/1
