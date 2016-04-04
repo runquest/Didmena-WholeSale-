@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160403164834) do
     t.string   "title",       limit: 100, null: false
     t.integer  "gender_id",               null: false
     t.integer  "category_id",             null: false
+    t.integer  "price"
     t.text     "note"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
@@ -91,22 +92,6 @@ ActiveRecord::Schema.define(version: 20160403164834) do
   add_check "orders", "(total_price > (0)::numeric)", name: "order_total_price_chk"
   add_check "orders", "(discount > (0)::numeric)", name: "order_discount_chk"
   add_check "orders", "(total_price > discount)", name: "order_total_price_gt_discount_chk"
-
-  create_table "prices", force: :cascade do |t|
-    t.integer  "product_id",                          null: false
-    t.date     "from_date",                           null: false
-    t.decimal  "price",      precision: 10, scale: 2, null: false
-    t.integer  "domain_id",                           null: false
-    t.text     "note"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "prices", ["domain_id"], name: "i_prices_on_domain_id", using: :btree
-  add_index "prices", ["product_id", "from_date", "domain_id"], name: "ui_prices_product_from_currency", unique: true, using: :btree
-  add_index "prices", ["product_id"], name: "i_prices_on_product_id", using: :btree
-
-  add_check "prices", "(price > (0)::numeric)", name: "price_price_chk"
 
   create_table "products", force: :cascade do |t|
     t.integer  "model_id",   null: false
@@ -171,8 +156,6 @@ ActiveRecord::Schema.define(version: 20160403164834) do
   add_foreign_key "models", "domains", column: "gender_id", name: "fk_models_on_gender_id"
   add_foreign_key "orders", "domains", name: "fk_orders_on_domain_id"
   add_foreign_key "orders", "representatives", name: "fk_orders_on_rep_id"
-  add_foreign_key "prices", "domains", name: "fk_prices_on_domain_id"
-  add_foreign_key "prices", "products", name: "fk_prices_on_product_id", on_delete: :cascade
   add_foreign_key "products", "domains", column: "color_id", name: "fk_products_on_color_id"
   add_foreign_key "products", "domains", column: "size_id", name: "fk_products_on_size_id"
   add_foreign_key "products", "models", name: "fk_products_on_model_id"

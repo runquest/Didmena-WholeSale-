@@ -38,6 +38,11 @@
       <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]"%>
     <% end %>
     </div>
+    <div class="col s6">
+      <%= f.label :price %><br>
+      <%= f.number_field :price %>
+    </div>
+
   </div>
 
     <div class="row">

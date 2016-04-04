@@ -21,20 +21,21 @@
         <%= submit_tag t "login.label.login", class: 'btn waves-effect submit' %>
         <% end %>
       </div>
-    <% end %>      
+    <% end %>    
   </div>
   <hr/>
   <div class="row">
     <% if @models.any? %>
       <% @models.each do |model| %>
         <div class="col s4">
-          <div class="card">
+          <div class="card left">
             <div class="card-image">
-              <img src="http://placehold.it/350x150">
+              <% if ModelAttachment.where(model_id: model.id).any? %>
+                <%= image_tag ModelAttachment.where(model_id: model.id).first.avatar_url %>
+              <% else %>
+                <img src="http://placehold.it/350x150">
+              <% end %>
               <span class="card-title"><%= model.title %></span>
-            </div>
-            <div class="card-content trunkate">
-              <p><%= model.note %></p>
             </div>
             <% if current_user && current_user.apps_manager %>
               <div class="card-action center">

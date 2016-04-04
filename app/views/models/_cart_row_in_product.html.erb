@@ -2,5 +2,4 @@
 <td><%= Domain.find(product.color_id).meaning %></td>
 <td><%= Domain.find(product.size_id).code_value %></td>
 <td><%= quantity.to_i %></td>
-<td><%= quantity.to_i * price %></td>
 <td><%= link_to "Remove", cart_path(:product_id => product.id), method: :delete %></td>

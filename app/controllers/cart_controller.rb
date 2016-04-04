@@ -21,6 +21,15 @@ class CartController < ApplicationController
     return
   end
 
+  def destroy
+    id = params[:product_id]
+    cart = session[:cart]
+    cart.delete(id)
+    flash[:notice] = "Item successfully removed"
+    redirect_to :back
+
+  end
+
   def clearCart
     session[:cart] = nil
     redirect_to :action => :index

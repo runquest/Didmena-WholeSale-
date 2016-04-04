@@ -67,12 +67,12 @@ Representative.create(user_id: 5, company_id: 2)
 
 ## MODEL:
 
-Model.create(code: 'HELLO1', title: 'Maikute 001', gender_id: 1, category_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-Model.create(code: 'HELLO2', title: 'Maikute 002', gender_id: 2, category_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Model.create(code: 'HELLO3', title: 'Jacket 001', gender_id: 1, category_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Model.create(code: 'HELLO4', title: 'Jacket 002', gender_id: 2, category_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Model.create(code: 'HELLO5', title: 'Coat 001', gender_id: 1, category_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Model.create(code: 'HELLO6', title: 'Coat 002', gender_id: 2, category_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+Model.create(code: 'HELLO1', price: 25, title: 'Maikute 001', gender_id: 1, category_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+Model.create(code: 'HELLO2', price: 50, title: 'Maikute 002', gender_id: 2, category_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+Model.create(code: 'HELLO3', price: 100, title: 'Jacket 001', gender_id: 1, category_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+Model.create(code: 'HELLO4', price: 66, title: 'Jacket 002', gender_id: 2, category_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+Model.create(code: 'HELLO5', price: 45, title: 'Coat 001', gender_id: 1, category_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+Model.create(code: 'HELLO6', price: 3, title: 'Coat 002', gender_id: 2, category_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
 
 ## PRODUCT
 
@@ -98,20 +98,20 @@ Product.create(model_id: 4, color_id: 4, size_id: 9, note: "Lorem ipsum dolor si
 Product.create(model_id: 4, color_id: 4, size_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
 Product.create(model_id: 4, color_id: 6, size_id: 11)
 
-## PRICE
+# ## PRICE
 
-Price.create(product_id: 1, from_date: "2012-04-25", price: 25.00, domain_id: 22)
-Price.create(product_id: 2, from_date: "2012-04-25", price: 55.00, domain_id: 22)
-Price.create(product_id: 3, from_date: "2012-04-25", price: 125.00, domain_id: 22)
-Price.create(product_id: 4, from_date: "2012-04-25", price: 225.00, domain_id: 22)
-Price.create(product_id: 5, from_date: "2012-04-25", price: 250.00, domain_id: 22)
-Price.create(product_id: 6, from_date: "2012-04-25", price: 50.00, domain_id: 22)
-Price.create(product_id: 7, from_date: "2012-04-25", price: 2.00, domain_id: 22)
-Price.create(product_id: 8, from_date: "2012-04-25", price: 25.00, domain_id: 22)
-Price.create(product_id: 9, from_date: "2012-04-25", price: 15.00, domain_id: 22)
-Price.create(product_id: 10, from_date: "2012-04-25", price: 45.00, domain_id: 22)
-Price.create(product_id: 11, from_date: "2012-04-25", price: 25.00, domain_id: 22)
-Price.create(product_id: 12, from_date: "2012-04-25", price: 25.00, domain_id: 22)
+# Price.create(model_id: 1, from_date: "2012-04-25", price: 25.00, domain_id: 22)
+# Price.create(model_id: 2, from_date: "2012-04-25", price: 55.00, domain_id: 22)
+# Price.create(model_id: 3, from_date: "2012-04-25", price: 125.00, domain_id: 22)
+# Price.create(model_id: 4, from_date: "2012-04-25", price: 225.00, domain_id: 22)
+# Price.create(model_id: 5, from_date: "2012-04-25", price: 250.00, domain_id: 22)
+# Price.create(model_id: 6, from_date: "2012-04-25", price: 50.00, domain_id: 22)
+# Price.create(model_id: 7, from_date: "2012-04-25", price: 2.00, domain_id: 22)
+# Price.create(model_id: 8, from_date: "2012-04-25", price: 25.00, domain_id: 22)
+# Price.create(model_id: 9, from_date: "2012-04-25", price: 15.00, domain_id: 22)
+# Price.create(model_id: 10, from_date: "2012-04-25", price: 45.00, domain_id: 22)
+# Price.create(model_id: 11, from_date: "2012-04-25", price: 25.00, domain_id: 22)
+# Price.create(model_id: 12, from_date: "2012-04-25", price: 25.00, domain_id: 22)
 
 ## ORDER
 

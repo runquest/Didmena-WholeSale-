@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
   
-  resources :model_attachments
-  resources :model_pictures
   # match '/:locale' => 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 
   root "welcome#index"
 
     get '/cart' => 'cart#index'
-    get '/cart/clear' => 'cart#clearCart'
     post '/cart' => 'cart#add'
+    delete ':id' => 'cart#destroy'
+    get '/cart/clear' => 'cart#clearCart'
 
     resources :purchases
     resources :order_products
@@ -24,6 +23,8 @@ Rails.application.routes.draw do
     resources :domains
     resources :sizes
     resources :colors
+    resources :model_attachments
+    resources :model_pictures
     # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

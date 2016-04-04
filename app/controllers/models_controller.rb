@@ -47,6 +47,7 @@ class ModelsController < ApplicationController
           params[:model_attachments]['avatar'].each do |a|
             @model_attachment = @model.model_attachments.create(:avatar => a)
           end
+
           format.html {redirect_to @model, notice: "Model was created successfully." }
       else
           format.html {render action: 'new'}
@@ -86,7 +87,7 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:code, :title, :gender_id, :category_id, :note)
+      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note)
     end
 
     def purchase_params

@@ -21,7 +21,7 @@ class Domain < ActiveRecord::Base
       has_many :products, class_name: "Product", foreign_key: "size_id", inverse_of: :domain       # as a SIZE
 
       # has_many :prices, class_name: "Price", foreign_key: "currency_id", inverse_of :domain       # as a CURRENCY
-      has_many :prices, inverse_of: :domain       # as a CURRENCY
+      # has_many :prices, inverse_of: :domain       # as a CURRENCY
 
       has_many :orders, inverse_of: :domain       # as a CURRENCY
 

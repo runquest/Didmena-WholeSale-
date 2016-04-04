@@ -26,4 +26,5 @@ class Model < ActiveRecord::Base
   has_many :model_attachments
   accepts_nested_attributes_for :model_attachments
 
+
 end

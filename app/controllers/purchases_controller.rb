@@ -21,6 +21,7 @@ class PurchasesController < ApplicationController
     end
 
     @purchases_for_order = Purchase.where(order_id: @order.id)
+    session[:cart] = nil
   end
 
   # def update

@@ -1,29 +1,32 @@
 <div class="container">
   <div class="row">
-    <div class="col s6">
-      <div class="card">
-        <div class="card-image">
+    <div class="col s8">
+      <div class= "row">
+
+        <% if @model_attachments.any? %>
+
           <% @model_attachments.each do |p| %>
             <%= image_tag p.avatar_url %>
-            <%= link_to "Edit Attachment", edit_model_attachment_path(p) %>
-          <%end%>
-
-
-
-          <img src="http://placehold.it/350x150">
-          <span class="card-title"><%= @model.title %></span>
-        </div>
+            <% if current_user && current_user.apps_manager %>
+              <%= link_to "Edit Attachment", edit_model_attachment_path(p) %>
+            <% end %>
+          <% end %>
+        <% else %>
+            <img src="http://placehold.it/350x150">
+        <% end %>
       </div>
     </div>
 
-    <div class="col s6">
+    <div class="col s4">
       <div class="card">
         <div class="card-content">
           <%= Domain.find(@model.gender_id).meaning %><br/>
+          Price: <%= @model.price %><br/>
           <% if current_user && current_user.apps_manager %>
             Category:<%= @model.category_id %><br/>
             Code: <%= @model.code %><br/>
           <% end %>
+          <h3><%= @model.title %></h3>
           <h4>Description:</h4><br/>
           <p><%= @model.note %></p>
         </div>
@@ -42,7 +45,7 @@
     <% if flash[:notice] %>
       <p id="notice"><%= flash[:notice] %></p>
     <% end %>
-      <div class="col s8 offset-s2">
+      <div class="col s8">
       <table>
           <thead>
             <tr>
@@ -60,6 +63,35 @@
             <% end %>          
           </tbody>
         </table>
+      </div>
+
+      <div class="col s4" style="background: lightgrey">
+      <% if current_user %>
+        <% if current_cart && current_cart.any? %>
+        <table>
+          <thead>
+            <tr>
+              <th data-field="model-title">Product</th>
+              <th data-field="product-color">Color</th>
+              <th data-field="product-size">Size</th>
+              <th data-field="quantity">Quantity</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+              <% total = 0 %>
+              <% current_cart.each do |id, quantity| %>
+                <% product = Product.find(id) %>
+                <tr><%= render "cart_row_in_product", product: product, quantity: quantity %></tr>
+                <% total += quantity.to_i %>
+              <% end %>
+          </tbody>
+        </table>
+        <p><%= link_to "Review your cart", cart_path %></p>
+        <% end %>   
+      <% else %>
+        <p>To order you need to log in.</p>
+      <% end %>
       </div>
     </div>
 </div>
