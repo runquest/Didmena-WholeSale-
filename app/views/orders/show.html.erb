@@ -1,3 +1,4 @@
+<div class="container">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -31,8 +32,11 @@
 </p>
 
 <p>
-  <strong>Domain:</strong>
-  <%= @order.domain_id %>
+  <strong>Currency:</strong>
+  <% binding.pry %>
+  <% if !@order.domain_id.nil? %>
+    <%= Domain.find(@order.domain_id).meaning %>
+  <% end %>
 </p>
 
 <p>
@@ -47,3 +51,35 @@
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
+<div class="divider"></div>
+
+<h3>Purchases</h3>
+<div class="row">
+        <div class="col s8 offset-s2">
+          <table>
+            <thead>
+              <tr>
+                <th data-field="model-title">Product</th>
+                <th data-field="product-color">Color</th>
+                <th data-field="product-size">Size</th>
+                <th data-field="quantity">Quantity</th>
+                <th data-field="quantity">Cost</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @order.purchases.any? %>
+                <% @order.purchases.each do |purchase| %>
+                  <% product = Product.find(purchase.product_id) %>
+                  <% price = Model.find(product.model_id).price %>
+                  <tr><%= render "order_purchases_row", product: product, quantity: purchase.quantity, price: price %></tr>
+
+                <% end %>
+              <% end %>          
+            </tbody>
+          </table>
+        </div>
+
+
+
+</div>

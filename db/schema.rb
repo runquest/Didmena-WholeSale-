@@ -56,14 +56,14 @@ ActiveRecord::Schema.define(version: 20160403164834) do
   end
 
   create_table "models", force: :cascade do |t|
-    t.string   "code",        limit: 10,  null: false
-    t.string   "title",       limit: 100, null: false
-    t.integer  "gender_id",               null: false
-    t.integer  "category_id",             null: false
-    t.integer  "price"
+    t.string   "code",        limit: 10,                           null: false
+    t.string   "title",       limit: 100,                          null: false
+    t.integer  "gender_id",                                        null: false
+    t.integer  "category_id",                                      null: false
+    t.decimal  "price",                   precision: 10, scale: 2, null: false
     t.text     "note"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "models", ["category_id"], name: "i_models_on_category_id", using: :btree
