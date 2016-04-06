@@ -17,31 +17,13 @@ class PurchasesController < ApplicationController
     @order.save
 
     cart.each do |product_id, quantity, total_quantity|
-      @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: total_quantity)
-      @purchase.save
+      @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
     end
 
-    @purchases_for_order = Purchase.where(order_id: @order.id)
-    # session[:cart] = nil
+    # @purchases_for_order = Purchase.where(order_id: @order.id)
+    @purchases_for_order = Order.find(@order.id).purchases
+    session[:cart] = nil
   end
-
-  # def update
-  #   @order = current_order
-  #   @purchase = @order.purchases.find(params[:id])
-  #   @purchase.update_attributes(purchase_params)
-  #   @purchases = @order.purchases
-  # end
-
-  # def destroy
-  #   @order = current_order
-  #   @purchase = @order.purchases.find(params[:id])
-  #   @purchase.destroy
-  #   @purchases = @order.purchases
-  # end
-# private
-#   def purchase_params
-#     params.require(:purchase).permit(:quantity, :product_id)
-#   end
 
   private
     # Use callbacks to share common setup or constraints between actions.

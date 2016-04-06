@@ -20,6 +20,7 @@ class ModelsController < ApplicationController
   def new
     @model = Model.new
     @model_attachment = @model.model_attachments.build
+    @product = @model.products.build
   end
 
   # GET /models/1/edit
@@ -43,9 +44,17 @@ class ModelsController < ApplicationController
 
     respond_to do |format|
       if @model.save
-          # binding.pry
           params[:model_attachments]['avatar'].each do |a|
             @model_attachment = @model.model_attachments.create(:avatar => a)
+          end
+          binding.pry
+          params[:model][:products][:color_id].each do |c|
+            if !Domain.all.where(domain_name: "SIZE").blank?
+              Domain.all.where(domain_name: "SIZE").each do |s|
+                binding.pry
+                @product = @model.products.create(:color_id => c, :size_id => s.id, :model_id => @model.id)
+              end
+            end
           end
 
           format.html {redirect_to @model, notice: "Model was created successfully." }

@@ -40,11 +40,24 @@
     </div>
     <div class="col s6">
       <%= f.label :price %><br>
-      <%= f.number_field :price %>
+      <%= f.number_field(:price, step: 0.05) %>
     </div>
-
   </div>
+  <div class="divider"></div>
+  <div class="row" style="background: 'green'">
+    <div class="col s12">
+        <%= f.fields_for :products do |r| %>
+          <% if !Domain.all.where(domain_name: "COLOR").blank? %>
+            <% Domain.all.where(domain_name: "COLOR").each do |color| %>
+              <%= r.check_box(:color_id, { :multiple => true }, color.id, nil) %>
+              <%= r.label "#{:color_id}_#{color.id}", color.meaning  %><br>
 
+            <% end %>
+          <% end %>
+        <% end %>
+    </div>
+  </div>
+  <div class="divider"></div>
     <div class="row">
       <div class="input-field col s6">
         <%= f.label :note %><br>

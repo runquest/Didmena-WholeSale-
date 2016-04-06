@@ -1,5 +1,5 @@
 <td><%= purchases_for_order.product_id %></td>
-<td><%= Model.find(purchases_for_order.product_id).title %>
+<td><%= Model.find(Product.find(purchases_for_order.product_id).model_id).title %>
 <% product = Product.find(purchases_for_order.product_id) %>
 <td><%= Domain.find(product.color_id).meaning %>
 <td><%= Domain.find(product.size_id).code_value %>

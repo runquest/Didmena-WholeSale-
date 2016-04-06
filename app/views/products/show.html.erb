@@ -1,19 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Model:</strong>
-  <%= @product.model_id %>
-</p>
+  <p>
+    <strong>Model:</strong>
+    <%= @product.model_id %>
+  </p>
 
-<p>
-  <strong>Color:</strong>
-  <%= @product.color_id %>
-</p>
+  <p>
+    <strong>Color:</strong>
+    <%= @product.color_id %>
+  </p>
 
-<p>
-  <strong>Size:</strong>
-  <%= @product.size_id %>
-</p>
+  <p>
+    <strong>Size:</strong>
+    <%= @product.size_id %>
+  </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+  <%= link_to 'Back', models_path %>
+</div>
