@@ -8,8 +8,8 @@
         <div class="col s4">
           <div class="card left">
             <div class="card-image">
-              <% if ModelAttachment.where(model_id: model.id).any? %>
-                <%= image_tag ModelAttachment.where(model_id: model.id).first.avatar_url %>
+              <% if model.model_attachments.any? %>
+                <%= image_tag model.model_attachments.first.avatar_url %>
               <% else %>
                 <img src="http://placehold.it/350x150">
               <% end %>

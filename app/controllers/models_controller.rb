@@ -31,28 +31,15 @@ class ModelsController < ApplicationController
   # POST /models.json
   def create
     @model = Model.new(model_params)
-
-    # respond_to do |format|
-    #   if @model.save
-    #     format.html { redirect_to @model, notice: 'Model was successfully created.' }
-    #     format.json { render :show, status: :created, location: @model }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @model.errors, status: :unprocessable_entity }
-    #   end
-    # end
-
     respond_to do |format|
       if @model.save
           params[:model_attachments]['avatar'].each do |a|
             @model_attachment = @model.model_attachments.create(:avatar => a)
           end
-          binding.pry
           params[:model][:products][:color_id].each do |c|
-            if !Domain.all.where(domain_name: "SIZE").blank?
-              Domain.all.where(domain_name: "SIZE").each do |s|
-                binding.pry
-                @product = @model.products.create(:color_id => c, :size_id => s.id, :model_id => @model.id)
+            if !Domain.where(domain_name: "SIZE").blank?
+              Domain.where(domain_name: "SIZE").each do |s|
+                # @product = @model.products.create(:color_id => c, :size_id => s.id, :model_id => @model.id)
               end
             end
           end
@@ -96,7 +83,7 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note)
+      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note, products_attributes: [:color_id, :size_id])
     end
 
     def purchase_params

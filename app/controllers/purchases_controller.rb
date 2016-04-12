@@ -22,6 +22,9 @@ class PurchasesController < ApplicationController
 
     # @purchases_for_order = Purchase.where(order_id: @order.id)
     @purchases_for_order = Order.find(@order.id).purchases
+    binding.pry
+
+    Notifier.welcome_email(current_user).deliver_now
     session[:cart] = nil
   end
 

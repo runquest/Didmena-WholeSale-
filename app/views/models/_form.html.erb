@@ -1,5 +1,5 @@
 <div class="container">
-<%= form_for(@model, :html => { :multipart => true } ) do |f| %>
+<%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
   <% if @model.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
@@ -15,7 +15,7 @@
   <div class="row">
     <div class="input-field col s6">
       <%= f.label :code %><br>
-      <%= f.text_field :code %>
+      <%= f.text_field :code, id: 'code' %>
     </div>
     <div class="input-field col s6">
     <%= f.label :title %><br>
@@ -25,10 +25,10 @@
 
   <div class="row">
     <div class="input-field col s6">
-       <%= f.collection_select :gender_id, Domain.all.where(domain_name: "GENDER"), :id, :meaning, { prompt: "Choose a gender" }, class: "browser-default" %>
+       <%= f.collection_select :gender_id, Domain.where(domain_name: "GENDER"), :id, :meaning, { prompt: "Choose a gender" }, class: "browser-default" %>
     </div>
     <div class="input-field col s6">
-      <%= f.collection_select :category_id, Domain.all.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a category" }, class: "browser-default" %>
+      <%= f.collection_select :category_id, Domain.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a category" }, class: "browser-default" %>
     </div>
   </div>
 
@@ -47,8 +47,8 @@
   <div class="row" style="background: 'green'">
     <div class="col s12">
         <%= f.fields_for :products do |r| %>
-          <% if !Domain.all.where(domain_name: "COLOR").blank? %>
-            <% Domain.all.where(domain_name: "COLOR").each do |color| %>
+          <% if !Domain.where(domain_name: "COLOR").blank? %>
+            <% Domain.where(domain_name: "COLOR").each do |color| %>
               <%= r.check_box(:color_id, { :multiple => true }, color.id, nil) %>
               <%= r.label "#{:color_id}_#{color.id}", color.meaning  %><br>
 
