@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post '/cart' => 'cart#add'
     delete ':id' => 'cart#destroy'
     get '/cart/clear' => 'cart#clearCart'
+    get '/cls' => 'domains#colors'
 
     resources :purchases
     resources :order_products
