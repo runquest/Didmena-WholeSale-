@@ -75,6 +75,11 @@ class ModelsController < ApplicationController
     end
   end
 
+  def size
+    binding.pry
+    render :partial => 'size_to_color'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_model

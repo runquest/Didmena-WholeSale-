@@ -1,11 +1,20 @@
-
 $(function() {
+
   var options = {
   url: "/cls.json",
 
   getValue: "meaning",
 
   list: {
+    onClickEvent: function() {
+      var value = $(".color_box").getSelectedItemData().meaning;
+      var checkbox = "<input type='checkbox' id='extra-large'><label for='extra-large'>Extra Large</label><br/><input type='checkbox' id='large'><label for='large'>Large</label><br/><input type='checkbox' id='medium'><label for='medium'>Medium</label><br/><input type='checkbox' id='small'><label for='small'>Small</label><br/><input type='checkbox' id='extra-small'><label for='extra-small'>Extra Small</label><br/>";
+
+      $("div#color_meaning").append(value + "<br/>");
+      $("div#color_meaning").append(checkbox);
+      // $("div#size_div").append(checkbox);
+    },
+
     match: {
       enabled: true
     },
@@ -14,10 +23,26 @@ $(function() {
 
   theme: "plate-dark"
 
-};
+  };
 
-$("#plate").easyAutocomplete(options);
+  $(".color_box").easyAutocomplete(options);
 });
+
+
+  // $(".color_box").on('autocomplete.select', function(){
+    
+  //   console.log("yay");
+  //   // var color = $(this).val();
+  //   // $("#model_form").data('color', color);
+  //   // $.post('/colors/create', {color: color}, function() {
+  //   //   show_size_checkboxes();
+  //   // });
+  // });
+
+
+
+
+
 
 
 // $(function() {

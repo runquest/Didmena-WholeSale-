@@ -1,0 +1,5 @@
+<% all_sizes = ['xxl', 'xxl', 'l', 'm', 's'] %>
+<% all_sizes.each do |size| %>
+  <%= label_tag size, size %>
+  <%= check_box_tag size, class: 'size_box' %>
+<% end %>

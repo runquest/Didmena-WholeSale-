@@ -47,15 +47,9 @@
   <div class="row" style="background: 'green'">
     <div class="col s6">
         <%= f.fields_for :products do |r| %>
-        <%= r.text_field :color_id, id: "plate" %>
-
-<!--           <#% if !Domain.where(domain_name: "COLOR").blank? %>
-            <#% Domain.where(domain_name: "COLOR").each do |color| %>
-              <%#= r.check_box(:color_id, { :multiple => true }, color.id, nil) %>
-              <%#= r.label "#{:color_id}_#{color.id}", color.meaning  %><br>
-
-            <#% end %>
-          <#% end %> -->
+        <%= r.text_field :color_id, class: "color_box" %>
+        <div id="color_meaning"></div>
+        <div id="size_div" class="input-field browser-default"></div>
         <% end %>
     </div>
   </div>
