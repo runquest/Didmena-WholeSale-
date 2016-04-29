@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     get '/cart/clear' => 'cart#clearCart'
     get '/cls' => 'domains#colors'
     get '/models/size' => 'models#size'
+    post '/products/remove' => 'products#remove'
+    get '/models/:id/add_products' => 'models#add_products'
 
     resources :purchases
     resources :order_products

@@ -24,7 +24,13 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    binding.pry
+    color_id = Domain.where(meaning: params[:color]).first.id
+    size_id = Domain.where(code_value: params[:size].upcase).first.id
+    product_params = {'model_id' => params[:model], 'color_id' => color_id, 'size_id' => size_id}
     @product = Product.new(product_params)
+
+    binding.pry
 
     respond_to do |format|
       if @product.save
@@ -54,12 +60,22 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
+    binding.pry
     @product.destroy
     # respond_to do |format|
     #   format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
     #   format.json { head :no_content }
     # end
     redirect_to :back
+    return
+  end
+
+  def remove
+
+    color_id = Domain.where(meaning: params[:color]).first.id
+    size_id = Domain.where(code_value: params[:size].upcase).first.id
+    
+    product_id = Product.where(model_id: params[:model]).where(color_id: color_id).where(size_id: size_id).take.id
     return
   end
 

@@ -6,16 +6,15 @@
         <% if @model_attachments.any? %>
 
           <% @model_attachments.each do |p| %>
-            <%= image_tag p.avatar_url %>
-            <% if current_user && current_user.apps_manager %>
-              <%= link_to "Edit Attachment", edit_model_attachment_path(p) %>
-            <% end %>
+            <%= image_tag p.avatar_url, :class => "prod_image" %>
+ <!--            <#% if current_user && current_user.apps_manager %>
+              <%#= link_to "Edit Attachment", edit_model_attachment_path(p) %>
+            <#% end %> -->
           <% end %>
         <% else %>
             <img src="http://placehold.it/350x150">
         <% end %>
       </div>
-    </div>
 
     <div class="col s4">
       <div class="card">
@@ -63,7 +62,7 @@
             <% end %>          
           </tbody>
         </table>
-        <%= link_to 'New Product', new_product_path %>
+        <%#= link_to 'New Product', new_product_path %>
       </div>
 
       <div class="col s4" style="background: lightgrey">
