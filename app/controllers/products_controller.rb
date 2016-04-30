@@ -24,24 +24,91 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    binding.pry
-    color_id = Domain.where(meaning: params[:color]).first.id
-    size_id = Domain.where(code_value: params[:size].upcase).first.id
-    product_params = {'model_id' => params[:model], 'color_id' => color_id, 'size_id' => size_id}
-    @product = Product.new(product_params)
+    # binding.pry
 
-    binding.pry
+    @products = params[:_json]
+    # @model = Model.find(item[])
 
-    respond_to do |format|
+    @products.each do |item| 
+      # binding.pry
+      color_id = Domain.where(meaning: item[:color]).first.id
+            # binding.pry
+
+      size_id = Domain.where(code_value: item[:size].upcase).first.id
+
+      model_id = item[:model]
+            # binding.pry
+
+      product_params = {'model_id' => item[:model], 'color_id' => color_id, 'size_id' => size_id}
+      # binding.pry
+
+
+      @product = Product.new(product_params)
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
+        # binding.pry
+        # logger.info "created " + item
+    #     binding.pry
+    #     format.html {redirect_to model_url(@model), notice: 'Created.' }
+    #     # format.html { redirect_to action: 's', id: @model.id }
+    #     # format.html { redirect_to @product, notice: 'Product was successfully created.' }
+    #     format.json { render :show, status: :created, location: @product }
       else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        # binding.pry
+        # logger.info "failed " + item
+    #     format.html { render :new }
+    #     format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
+
+    respond_to do |format|
+      binding.pry
+      @model = Model.find(@product.model_id)
+      binding.pry
+      format.html {redirect_to model_url(@model), notice: 'Created.' }
+    end
+
+
+    # @product = Product.new(product_params)
+
+    # # binding.pry
+
+    # respond_to do |format|
+    #   if @product.save
+    #     binding.pry
+    #     format.html {redirect_to model_url(@model), notice: 'Created.' }
+    #     # format.html { redirect_to action: 's', id: @model.id }
+    #     # format.html { redirect_to @product, notice: 'Product was successfully created.' }
+    #     format.json { render :show, status: :created, location: @product }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @product.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
+
+  # def save
+
+  #   color_id = Domain.where(meaning: params[:color]).first.id
+  #   size_id = Domain.where(code_value: params[:size].upcase).first.id
+  #   product_params = {'model_id' => params[:model], 'color_id' => color_id, 'size_id' => size_id}
+  #   @product = Product.new(product_params)
+
+  #   # binding.pry
+
+  #   respond_to do |format|
+  #     if @product.save
+  #       binding.pry
+  #       format.html {redirect_to model_url(@model), notice: 'Created.' }
+  #       # format.html { redirect_to action: 's', id: @model.id }
+  #       # format.html { redirect_to @product, notice: 'Product was successfully created.' }
+  #       format.json { render :show, status: :created, location: @product }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @product.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+
+  # end
 
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
@@ -60,7 +127,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    binding.pry
+    # binding.pry
     @product.destroy
     # respond_to do |format|
     #   format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }

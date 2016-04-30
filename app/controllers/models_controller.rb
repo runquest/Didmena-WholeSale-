@@ -54,7 +54,7 @@ class ModelsController < ApplicationController
           #     end
           #   end
           # end
-# binding.pry
+          
 
           format.html {redirect_to action: 'add_products', id: @model.id
           # format.html {render :edit, notice: "Model was created successfully." 
@@ -68,7 +68,7 @@ class ModelsController < ApplicationController
   # PATCH/PUT /models/1
   # PATCH/PUT /models/1.json
   def update
-    binding.pry
+    # binding.pry
     respond_to do |format|
       if @model.update(model_params)
         format.html { redirect_to @model, notice: 'Model was successfully updated.' }
@@ -91,7 +91,7 @@ class ModelsController < ApplicationController
   end
 
   def size
-    binding.pry
+    # binding.pry
     render :partial => 'size_to_color'
   end
 
