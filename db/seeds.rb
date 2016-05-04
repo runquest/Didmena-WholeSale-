@@ -13,17 +13,17 @@ Domain.create(domain_name: 'COLOR', code_value: 'Y', meaning: 'Yellow')
 
 # SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
 
+Domain.create(domain_name: 'SIZE', code_value: 'XS', meaning: 'Extra small')
 Domain.create(domain_name: 'SIZE', code_value: 'S', meaning: 'Small')
 Domain.create(domain_name: 'SIZE', code_value: 'M', meaning: 'Medium')
 Domain.create(domain_name: 'SIZE', code_value: 'L', meaning: 'Large')
 Domain.create(domain_name: 'SIZE', code_value: 'XL', meaning: 'Extra Large')
-Domain.create(domain_name: 'SIZE', code_value: 'XXL', meaning: 'Super Extra Large')
 
 # CATEGORY: JACKET - Jacket, COAT - Coat, etc.
 
-Domain.create(domain_name: 'CATEGORY', code_value: 'JACKET', meaning: 'Jacket')
-Domain.create(domain_name: 'CATEGORY', code_value: 'TSHIRT', meaning: 'T-Shirt')
-Domain.create(domain_name: 'CATEGORY', code_value: 'COAT', meaning: 'Coat')
+Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'Sprint')
+Domain.create(domain_name: 'CATEGORY', code_value: 'SUMMER', meaning: 'Summer')
+Domain.create(domain_name: 'CATEGORY', code_value: 'WINTER', meaning: 'Winter')
 
 # AGE_GROUP: ADULT - Adult, CHILD - Child, JUVENILE - Juvenile, etc.
 

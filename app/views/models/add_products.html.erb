@@ -1,49 +1,47 @@
 <div class="container">
-  <h1>ADDING PRODUCTS</h1>
-
-  <%= render 'form' %>
-
   <div class="row">
-      <div class="col s8">
-
-      <table id="colorSize">
-        <thead>
-          <tr>
-              <th data-field="id">Color</th>
-              <th data-field="xl">XL</th>
-              <th data-field="l">L</th>
-              <th data-field="m">M</th>
-              <th data-field="s">S</th>
-              <th data-field="xs">XS</th>
-          </tr>
-        </thead>
-        <tbody id="color_row">
-
-        <% if @model.products.any? %>
-          <% @model.products.each do |prdct| %>
-            <!-- <@% binding.pry %> -->
-
-            <%= prdct.id %> <%= Domain.find(prdct.color_id).meaning %> <%= Domain.find(prdct.size_id).code_value %><br/>
-          <% end %>
-        <% end %>
-
-        </tbody>
-      </table>
-      <br/>
-      <button id="create">Create Products</button>
-      </div>
+    <h4><%= @model.title %></h4>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <%= render 'form' %>
+      <%= link_to 'Show', @model %> |
+      <%= link_to 'Back', models_path %>
     </div>
-
- <div class="row">
-        <div class="col s8">
-          <%= label_tag 'Color' %>
-          <%= text_field_tag 'color_box' %>
-          <%#= render partial: 'size_to_color', locals: { model: @model} %>
+    <div class="col s6">
+      <div class="row">
+        <div class="col s12">
+          <h5>add color and sizes</h5>
+          <%= text_field_tag 'color_box', nil, placeholder: 'Type color' %>
         </div>
       </div>
-     
+      <div class="row">
+        <div class="col s12">
+          <table id="colorSize">
+            <thead>
+              <tr>
+                <th data-field="id">Color</th>
+                <% sizes = Domain.where(domain_name: 'SIZE') %>
+                  <% sizes.each do |size| %>
+                    <th data-field='<%= size.code_value%>'><%= size.code_value%></th>
+                  <% end %>
+              </tr>
+            </thead>
+            <tbody id="color_row">
+              <% if @model.products.any? %>
+                <% @model.products.each do |prdct| %>
+                  <%= prdct.id %> <%= Domain.find(prdct.color_id).meaning %> <%= Domain.find(prdct.size_id).code_value %><br/>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <button id="create" class="btn waves-effect waves-light">Add products</button>
+        </div>
+      </div>
     </div>
-
-  <%= link_to 'Show', @model %> |
-  <%= link_to 'Back', models_path %>
+  </div>
 </div>

@@ -2,24 +2,26 @@ class CartController < ApplicationController
 
   def add
 
-    id = params[:product_id]
-    quantity = params[:quantity]
+    @items = params[:_json]
 
-    if session[:cart] then
-      cart = session[:cart]
-    else
-      session[:cart] = {}
-      cart = session[:cart]
-    end
+    @items.each do |item|
+      id = item[:product_id]
+      quantity = item[:quantity]
 
-    if cart[id] then
-      cart[id] = cart[id] + quantity
-    else
-      cart[id] = quantity
+      if session[:cart] then
+        cart = session[:cart]
+      else
+        session[:cart] = {}
+        cart = session[:cart]
+      end
+
+      if cart[id] then
+        cart[id] = cart[id].to_i + quantity.to_i
+      else
+        cart[id] = quantity
+      end
     end
-    flash[:notice] = "Item successfully added"
-    redirect_to :back
-    return
+    redirect_to "/cart"
   end
 
   def destroy

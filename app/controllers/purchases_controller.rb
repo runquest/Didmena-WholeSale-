@@ -11,7 +11,7 @@ class PurchasesController < ApplicationController
       cart = session[:cart]
     end
 
-    @order_number = (0..8).map {(65 + rand(26)).chr}.join
+    @order_number = Time.now.strftime("%Y%d%m%H%M%S")
 
     @order = Order.new(order_number: @order_number, order_date: Time.now, representative_id: current_user.id)
     @order.save
@@ -22,7 +22,7 @@ class PurchasesController < ApplicationController
 
     # @purchases_for_order = Purchase.where(order_id: @order.id)
     @purchases_for_order = Order.find(@order.id).purchases
-    binding.pry
+    # binding.pry
 
     Notifier.welcome_email(current_user).deliver_now
     session[:cart] = nil

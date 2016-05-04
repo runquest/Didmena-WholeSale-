@@ -4,8 +4,3 @@
 <td><%= quantity.to_i %></td>
 <td><%= compute_price(quantity, price) %></td>
 <td><%= link_to "Remove", cart_path(:product_id => product.id), method: :delete %></td>
-
-
-order model as callback :after_create
-
-Rotten Mangoes --- User mode - :after_delete
