@@ -75,7 +75,7 @@ $(function() {
   $(".size").on('click', function() { 
     
     if(this.checked) {
-      console.log('I am checking'); 
+      console.log('checking'); 
     } else {
       console.log('unchecking'); 
     }
