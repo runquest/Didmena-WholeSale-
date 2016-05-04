@@ -21,7 +21,7 @@ Domain.create(domain_name: 'SIZE', code_value: 'XL', meaning: 'Extra Large')
 
 # CATEGORY: JACKET - Jacket, COAT - Coat, etc.
 
-Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'Sprint')
+Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'Spring')
 Domain.create(domain_name: 'CATEGORY', code_value: 'SUMMER', meaning: 'Summer')
 Domain.create(domain_name: 'CATEGORY', code_value: 'WINTER', meaning: 'Winter')
 
@@ -29,7 +29,6 @@ Domain.create(domain_name: 'CATEGORY', code_value: 'WINTER', meaning: 'Winter')
 
 Domain.create(domain_name: 'AGE_GROUP', code_value: 'ADULT', meaning: 'Adult')
 Domain.create(domain_name: 'AGE_GROUP', code_value: 'CHILD', meaning: 'Child')
-Domain.create(domain_name: 'AGE_GROUP', code_value: 'JUVENILE', meaning: 'Juvenile')
 
 # COUNTRY: CA - Canada, US - USA, LT - Lithuania, PL - Poland, RU - Russia, etc.
 
@@ -65,38 +64,38 @@ Representative.create(user_id: 3, company_id: 3)
 Representative.create(user_id: 4, company_id: 1)
 Representative.create(user_id: 5, company_id: 2)
 
-## MODEL:
+# ## MODEL:
 
-Model.create(code: 'HELLO1', price: 25, title: 'Maikute 001', gender_id: 1, category_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-Model.create(code: 'HELLO2', price: 50, title: 'Maikute 002', gender_id: 2, category_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Model.create(code: 'HELLO3', price: 100, title: 'Jacket 001', gender_id: 1, category_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Model.create(code: 'HELLO4', price: 66, title: 'Jacket 002', gender_id: 2, category_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Model.create(code: 'HELLO5', price: 45, title: 'Coat 001', gender_id: 1, category_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Model.create(code: 'HELLO6', price: 3, title: 'Coat 002', gender_id: 2, category_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Model.create(code: 'HELLO1', price: 25, title: 'Maikute 001', gender_id: 1, category_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+# Model.create(code: 'HELLO2', price: 50, title: 'Maikute 002', gender_id: 2, category_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Model.create(code: 'HELLO3', price: 100, title: 'Jacket 001', gender_id: 1, category_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Model.create(code: 'HELLO4', price: 66, title: 'Jacket 002', gender_id: 2, category_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Model.create(code: 'HELLO5', price: 45, title: 'Coat 001', gender_id: 1, category_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Model.create(code: 'HELLO6', price: 3, title: 'Coat 002', gender_id: 2, category_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
 
-## PRODUCT
+# ## PRODUCT
 
-Product.create(model_id: 1, color_id: 5, size_id: 7)
-Product.create(model_id: 1, color_id: 5, size_id: 8)
-Product.create(model_id: 1, color_id: 5, size_id: 9)
+# Product.create(model_id: 1, color_id: 5, size_id: 7)
+# Product.create(model_id: 1, color_id: 5, size_id: 8)
+# Product.create(model_id: 1, color_id: 5, size_id: 9)
 
-Product.create(model_id: 2, color_id: 5, size_id: 7)
-Product.create(model_id: 2, color_id: 5, size_id: 9)
-Product.create(model_id: 2, color_id: 5, size_id: 8)
-Product.create(model_id: 2, color_id: 5, size_id: 10)
-Product.create(model_id: 2, color_id: 5, size_id: 11, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 2, color_id: 5, size_id: 7)
+# Product.create(model_id: 2, color_id: 5, size_id: 9)
+# Product.create(model_id: 2, color_id: 5, size_id: 8)
+# Product.create(model_id: 2, color_id: 5, size_id: 10)
+# Product.create(model_id: 2, color_id: 5, size_id: 11, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
 
-Product.create(model_id: 2, color_id: 3, size_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Product.create(model_id: 2, color_id: 3, size_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Product.create(model_id: 2, color_id: 3, size_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Product.create(model_id: 2, color_id: 3, size_id: 10, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Product.create(model_id: 2, color_id: 3, size_id: 11, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 2, color_id: 3, size_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 2, color_id: 3, size_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 2, color_id: 3, size_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 2, color_id: 3, size_id: 10, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 2, color_id: 3, size_id: 11, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
 
-Product.create(model_id: 4, color_id: 3, size_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Product.create(model_id: 4, color_id: 3, size_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Product.create(model_id: 4, color_id: 4, size_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Product.create(model_id: 4, color_id: 4, size_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-Product.create(model_id: 4, color_id: 6, size_id: 11)
+# Product.create(model_id: 4, color_id: 3, size_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 4, color_id: 3, size_id: 7, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 4, color_id: 4, size_id: 9, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 4, color_id: 4, size_id: 8, note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+# Product.create(model_id: 4, color_id: 6, size_id: 11)
 
 # ## PRICE
 
@@ -115,9 +114,9 @@ Product.create(model_id: 4, color_id: 6, size_id: 11)
 
 ## ORDER
 
-Order.create(order_number: "123HOW", order_date: "2016-03-01", representative_id: 3, domain_id: 22)
-Order.create(order_number: "113HOW", order_date: Time.now, representative_id: 3, domain_id: 22)
-Order.create(order_number: "123ENSW", order_date: Time.now, representative_id: 2, domain_id: 22)
+# Order.create(order_number: "123HOW", order_date: "2016-03-01", representative_id: 3, domain_id: 22)
+# Order.create(order_number: "113HOW", order_date: Time.now, representative_id: 3, domain_id: 22)
+# Order.create(order_number: "123ENSW", order_date: Time.now, representative_id: 2, domain_id: 22)
 
 
 ## ORDER PRODUCT
