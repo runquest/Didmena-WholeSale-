@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
         redirect_to models_path
       end
     else
-      flash.now[:alert] = "Log in failed...Try again."
+      flash.now[:alert] = "Log in failed..."
+      render :new
     end
   end
 
