@@ -22,6 +22,7 @@ class Model < ActiveRecord::Base
   # has_many :modelpictures, inverse_of: :model, dependent: :destroy
 
   has_many :products, inverse_of: :model, dependent: :destroy
+  accepts_nested_attributes_for :products
 
   has_many :model_attachments
   accepts_nested_attributes_for :model_attachments

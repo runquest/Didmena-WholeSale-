@@ -21,6 +21,11 @@ class DomainsController < ApplicationController
   def edit
   end
 
+  # GET /domains/colors.json
+  def colors
+    @colors = Domain.where(domain_name: "COLOR")
+  end
+
   # POST /domains
   # POST /domains.json
   def create

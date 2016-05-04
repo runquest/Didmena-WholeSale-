@@ -9,6 +9,11 @@ Rails.application.routes.draw do
     post '/cart' => 'cart#add'
     delete ':id' => 'cart#destroy'
     get '/cart/clear' => 'cart#clearCart'
+    get '/cls' => 'domains#colors'
+    get '/models/size' => 'models#size'
+    post '/products/remove' => 'products#remove'
+    get '/models/:id/add_products' => 'models#add_products'
+    get '/admin' => 'welcome#admin'
 
     resources :purchases
     resources :order_products

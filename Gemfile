@@ -42,3 +42,4 @@ gem "rmagick"
 #pry
 gem 'pry'
 
+gem 'mini_magick'

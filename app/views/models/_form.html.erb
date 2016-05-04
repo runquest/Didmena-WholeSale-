@@ -1,5 +1,5 @@
 <div class="container">
-<%= form_for(@model, :html => { :multipart => true } ) do |f| %>
+<%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
   <% if @model.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
@@ -13,59 +13,51 @@
   <% end %>
 
   <div class="row">
-    <div class="input-field col s6">
-      <%= f.label :code %><br>
+    <div class="input-field col s12">
+      <%= f.label :title, "Model name" %><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.label :code, "Model ID" %><br>
       <%= f.text_field :code %>
     </div>
-    <div class="input-field col s6">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.collection_select :gender_id, Domain.where(domain_name: "GENDER"), :id, :meaning, { prompt: "Choose a gender" }, class: "browser-default" %>
+    </div>
+    <div class="input-field col s12">
+      <%= f.collection_select :category_id, Domain.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a collection" }, class: "browser-default" %>
     </div>
   </div>
 
   <div class="row">
-    <div class="input-field col s6">
-       <%= f.collection_select :gender_id, Domain.all.where(domain_name: "GENDER"), :id, :meaning, { prompt: "Choose a gender" }, class: "browser-default" %>
-    </div>
-    <div class="input-field col s6">
-      <%= f.collection_select :category_id, Domain.all.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a category" }, class: "browser-default" %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col s6">
-    <%= f.fields_for :model_attachments do |p| %>
-      <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]"%>
-    <% end %>
-    </div>
-    <div class="col s6">
-      <%= f.label :price %><br>
-      <%= f.number_field(:price, step: 0.05) %>
-    </div>
-  </div>
-  <div class="divider"></div>
-  <div class="row" style="background: 'green'">
     <div class="col s12">
-        <%= f.fields_for :products do |r| %>
-          <% if !Domain.all.where(domain_name: "COLOR").blank? %>
-            <% Domain.all.where(domain_name: "COLOR").each do |color| %>
-              <%= r.check_box(:color_id, { :multiple => true }, color.id, nil) %>
-              <%= r.label "#{:color_id}_#{color.id}", color.meaning  %><br>
-
-            <% end %>
-          <% end %>
-        <% end %>
+      <%= f.fields_for :model_attachments do |p| %>
+        <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload"%>
+        <%= p.hidden_field :avatar_cache %>
+      <% end %>
     </div>
   </div>
-  <div class="divider"></div>
-    <div class="row">
-      <div class="input-field col s6">
-        <%= f.label :note %><br>
-        <%= f.text_area :note %>
-      </div>
+  <div class="row">
+    <div class="col 6">
+      <%#= f.label :price %>
+      <%= f.number_field(:price, :placeholder => "Price $ (e.g. 10.15)", step: 0.05) %>
     </div>
-  <div class="actions">
-    <%= f.submit %>
+  </div>
+  <div class="row">
+    <div class="input-field materialize-textarea col s12">
+        <!-- <%#= f.label :note %><br> -->
+        <%= f.text_area :note, :placeholder => "Notes" %>
+      <!-- </div> -->
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col 12">
+      <button id="model_button" class="btn waves-effect waves-light">submit</button>
+    </div>
   </div>
 <% end %>
 </div>

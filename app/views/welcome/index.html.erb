@@ -14,11 +14,11 @@
     <% if !current_user %>    
       <div class="col s4 offset-s2 z-depth-1" id="login"> 
         <%= form_tag sessions_path do %>
-        <%= label_tag t "login.label.email" %> 
-        <%= text_field_tag "email"%>
-        <%= label_tag t "login.label.password" %>
-        <%= password_field_tag :password %>
-        <%= submit_tag t "login.label.login", class: 'btn waves-effect submit' %>
+          <%= label_tag t "login.label.email" %> 
+          <%= text_field_tag "email"%>
+          <%= label_tag t "login.label.password" %>
+          <%= password_field_tag :password %>
+          <%= submit_tag t "login.label.login", class: 'btn waves-effect submit' %>
         <% end %>
       </div>
     <% end %>    
@@ -30,8 +30,8 @@
         <div class="col s4">
           <div class="card left">
             <div class="card-image">
-              <% if ModelAttachment.where(model_id: model.id).any? %>
-                <%= image_tag ModelAttachment.where(model_id: model.id).first.avatar_url %>
+              <% if model.model_attachments.any? %>
+                <%= image_tag model.model_attachments.first.avatar_url, class: 'model_image' %>
               <% else %>
                 <img src="http://placehold.it/350x150">
               <% end %>

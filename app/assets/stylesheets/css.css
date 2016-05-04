@@ -50,3 +50,16 @@ ul#session-menu li {
     font-family: 'Lato', sans-serif;
     font-size: 18px;
 }
+
+img.model_image {
+  height: 150px;
+  width: 350px;
+}
+
+img.prod_image {
+  width: 100%;
+}
+img.prod_image_small {
+  width: 30%;
+  padding: 5px;
+}
