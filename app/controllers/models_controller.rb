@@ -11,7 +11,9 @@ class ModelsController < ApplicationController
   # GET /models/1.json
   def show
     @products = Product.where(model_id: @model.id)
+    @purchase = Order.find(2).purchases.new
     @model_attachments = @model.model_attachments.all
+
   end
 
   # GET /models/new
