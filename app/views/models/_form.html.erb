@@ -33,10 +33,10 @@
   </div>
 
   <div class="row">
-    <div class="col s12">
+    <div id="img_upload" class="col s12">
+
       <%= f.fields_for :model_attachments do |p| %>
-        <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload"%>
-        <%= p.hidden_field :avatar_cache %>
+        <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>   
       <% end %>
     </div>
   </div>
