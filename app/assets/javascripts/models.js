@@ -82,22 +82,6 @@ $(function() {
      
   });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   $(".order_button").on('click', function() {
 
     var order_items = [];
@@ -130,3 +114,63 @@ $(function() {
     });
   });
 });
+
+// function readURL(input) {
+
+//   if (input.files) {
+  
+//     for (i = 0; i < input.files.length; i++) {
+
+//       var image_id_html = "img_prev" + i;
+//       var image = '<img id=' + image_id_html + ' src="#" alt="your image" />';
+//       $("div#img_upload").append(image);
+
+//       var image_id = "#img_prev" + i;
+//       var reader = new FileReader();
+
+//       // console.log(reader);
+
+//       reader.onload = function (e) {  
+//         console.log(e.target.result);
+//         $(image_id)
+//           .attr('src', e.target.result)
+//           .width(150)
+//           .height(200);
+//       };
+
+//       reader.readAsDataURL(input.files[i]);
+//     }
+//   }
+// }
+
+function readURL() {
+
+  var preview = document.querySelector('#img_upload');
+  var deletePreview = document.querySelector('#img_delete');
+  var files   = document.querySelector('input[type=file]').files;
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        var image = new Image();
+        image.height = 100;
+        image.title = file.name;
+        image.src = this.result;
+        preview.appendChild( image );
+      }, false);
+
+      reader.readAsDataURL(file);
+    }
+
+  }
+
+  if (files) {
+    [].forEach.call(files, readAndPreview);
+  }
+
+}
+
