@@ -1,10 +1,10 @@
 # didmena
 
-## Framework: 
+### Framework: 
 Ruby on Rails
-## ORM: 
+### ORM: 
 ActiveRecord
-## Database: 
+### Database: 
 Postgres (Heroku)
-## FrontEnd framework: 
+### FrontEnd framework: 
 Materialize
