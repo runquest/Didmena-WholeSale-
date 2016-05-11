@@ -8,9 +8,10 @@
 
           <% @model_attachments.each do |p| %>
             <%= image_tag p.avatar_url, :class => "prod_image_small" %>
-            <!-- <#% if current_user && current_user.apps_manager %>
+            <% if current_user && current_user.apps_manager %>
+              <%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
               <%#= link_to "Edit Attachment", edit_model_attachment_path(p) %>
-            <#% end %> -->
+            <% end %>
           <% end %>
         <% else %>
             <img src="http://placehold.it/350x150">
