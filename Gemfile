@@ -30,6 +30,10 @@ gem 'spring',        group: :development
 
 gem 'puma'
 
+# aws S3
+gem 'aws-sdk', '~> 2'
+gem 'carrierwave_direct'
+
 gem 'postgresql-check', '~> 0.1.1'
 
 # Use ActiveModel has_secure_password
