@@ -21,10 +21,11 @@
             <thead>
               <tr>
                 <th data-field="id">Color</th>
-                <% sizes = Domain.where(domain_name: 'SIZE') %>
+                <% sizes = Domain.where(domain_name: 'SIZE').order(:id) %>
+                <% binding.pry %>
                   <% sizes.each do |size| %>
                     <th data-field='<%= size.code_value%>'><%= size.code_value%></th>
-                  <% end %>
+                  <% end %> 
               </tr>
             </thead>
             <tbody id="color_row">
@@ -37,7 +38,6 @@
                     <% sizes.each do |size| %>
                       <td>
                       <% if prdct.size_id == size.id %>
-                        <!-- <#% binding.pry %> -->
                         <input type='checkbox' class='size' id='<%= value %><%=size.code_value %>' checked >
                       <% else %>
                         <input type='checkbox' class='size' id='<%= value %><%=size.code_value %>'>

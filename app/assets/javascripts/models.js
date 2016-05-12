@@ -1,26 +1,44 @@
 $(function() {
 
-  var options = {
-    url: "/cls.json",
-    getValue: "meaning",
-    list: {
-      onClickEvent: function() {
-        var value = $("#color_box").getSelectedItemData().meaning;
+
+  function isInArray(value, array) {
+    console.log('checking for value in array');
+    return array.indexOf(value) > -1;
+  }
+
+  $('#color_box').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+
+    if(keycode == '13'){
+      var value = $("#color_box").val().toUpperCase();
+      console.log(value);
+      var rows = document.getElementById("colorSize").rows;
+      var colors = [];
+      console.log(colors);
+
+      if (rows.length > 0) {
+        for (i = 0; i < rows.length; i++) {
+          var x = document.getElementById("colorSize").rows[i].id;
+          console.log(x);
+          colors.push(x.toUpperCase());
+        }
+        console.log(colors);
+      }
+
+      if (colors.length > 0) {
+        if (isInArray(value, colors)){
+        } else  {
+          var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td></tr>";
+          $("tbody#color_row").append(checkbox);
+        }
+      }
+
+      if ($.trim($("tbody#color_row").html())=='') {
         var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td></tr>";
         $("tbody#color_row").append(checkbox);
-      },
-    match: {
-      enabled: true
-    },
-
-    maxNumberOfElements: 8
-    },
-
-    theme: "plate-dark"
-
+      } 
     }
-
-  $("#color_box").easyAutocomplete(options);
+  });
 
   $("#create").on('click', function() {    
     var rows = document.getElementById("colorSize").rows;

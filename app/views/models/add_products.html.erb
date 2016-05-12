@@ -21,7 +21,7 @@
             <thead>
               <tr>
                 <th data-field="id">Color</th>
-                <% sizes = Domain.where(domain_name: 'SIZE') %>
+                <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
                   <% sizes.each do |size| %>
                     <th data-field='<%= size.code_value%>'><%= size.code_value%></th>
                   <% end %>
