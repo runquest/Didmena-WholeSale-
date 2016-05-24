@@ -1,8 +1,6 @@
 $(function() {
 
-
   function isInArray(value, array) {
-    console.log('checking for value in array');
     return array.indexOf(value) > -1;
   }
 
@@ -11,24 +9,22 @@ $(function() {
 
     if(keycode == '13'){
       var value = $("#color_box").val().toUpperCase();
-      console.log(value);
       var rows = document.getElementById("colorSize").rows;
       var colors = [];
-      console.log(colors);
 
       if (rows.length > 0) {
         for (i = 0; i < rows.length; i++) {
           var x = document.getElementById("colorSize").rows[i].id;
-          console.log(x);
           colors.push(x.toUpperCase());
         }
-        console.log(colors);
       }
 
       if (colors.length > 0) {
         if (isInArray(value, colors)){
         } else  {
-          var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td></tr>";
+          var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td><td><a href='' onclick='javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])'>Remove</a></td></tr>";
+          // var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td><td><a href='' onclick='javascript,removeElement($(this))'>Remove</a></td></tr>";
+          // var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td><td><a class='remove_block' onclick='remove_line'>delete</a></td></tr>";
           $("tbody#color_row").append(checkbox);
         }
       }
@@ -37,7 +33,10 @@ $(function() {
         var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td></tr>";
         $("tbody#color_row").append(checkbox);
       } 
+
+      $("#color_box").val('');
     }
+
   });
 
   $("#create").on('click', function() {    
@@ -61,19 +60,24 @@ $(function() {
         };
       };
 
-      $.ajax({
-        method: 'post',
-        url: '/products',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify(products),
-        success: function (data) {
-          console.log(data);
-        },
-        error: function(err){
-          console.log(err);
-        }
-      });
+      if (products.length > 0) {
+        $.ajax({
+          method: 'post',
+          url: '/products',
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'json',
+          data: JSON.stringify(products),
+          success: function (data) {
+            console.log(data);
+          },
+          error: function(err){
+            console.log(err);
+          }
+        });
+      } else {
+        alert('No products selected.');
+        return false;
+      };
     };
 
     $.ajax({
@@ -164,11 +168,5 @@ function readURL() {
   if (files) {
     [].forEach.call(files, readAndPreview);
   }
-}
-
-function remove(x) {
-  x.remove();
-  console.log('removed');
-}
-
+};
 

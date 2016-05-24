@@ -34,7 +34,6 @@ class ProductsController < ApplicationController
         Domain.create(domain_name: 'COLOR', code_value: color_value, meaning: item[:color])
       end
 
-      binding
       color_id = Domain.where(meaning: item[:color]).first.id
       size_id = Domain.where(code_value: item[:size].upcase).first.id
       model_id = item[:model]
@@ -43,7 +42,7 @@ class ProductsController < ApplicationController
       @product = Product.new(product_params)
 
       if @product.save
-      
+        
       else
 
       end
