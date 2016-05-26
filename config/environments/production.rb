@@ -91,20 +91,14 @@ Rails.application.configure do
     # for more optional configuration
   end
 
-  # CarrierWave.configure do |config|
-
-  #   if Rails.env.development? || Rails.env.test?
-  #     config.storage = :file
-  #   else
-  #     config.storage = :fog
-  #     config.fog_credentials = {
-  #       :provider               => 'AWS',
-  #       :aws_access_key_id      =>  ENV["AWS_KEY"],
-  #       :aws_secret_access_key  => ENV["AWS_SECRET"],
-  #       :region                 => 'us-west-2' 
-  #     }
-  #     config.fog_directory = ENV["S3_BUCKET_NAME"]
-  #   end
-
-  # end
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+   :address              => "smtp.gmail.com",
+   :port                 => 587,
+   :user_name            => ENV['GMAIL_USERNAME'],
+   :password             => ENV['GMAIL_PASSWORD'],
+   :authentication       => "plain",
+  :enable_starttls_auto => true
+  }
 end
