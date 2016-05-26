@@ -4,6 +4,11 @@ class PurchasesController < ApplicationController
   def create
 
     total_quantity = params[:total_quantity]
+    if total_quantity.to_i < 1 then
+      flash[:alert] = 'no items in the cart'
+      redirect_to :back
+    end
+    
     if session[:cart] then
       cart = session[:cart]
     else
@@ -20,11 +25,9 @@ class PurchasesController < ApplicationController
       @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
     end
 
-    # @purchases_for_order = Purchase.where(order_id: @order.id)
     @purchases_for_order = Order.find(@order.id).purchases
-    # binding.pry
-
-    Notifier.welcome_email(current_user).deliver_now
+    binding.pry
+    Notifier.welcome_email().deliver_now
     session[:cart] = nil
   end
 

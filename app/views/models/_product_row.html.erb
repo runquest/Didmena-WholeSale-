@@ -1,12 +1,13 @@
-<td><%= Domain.find(product.color_id).meaning %></td>
-<td><%= Domain.find(product.size_id).code_value %></td>
-<td class="col s3 product_row">
-  <%= hidden_field_tag "product_id", product.id %>
-  <%= number_field_tag :quantity, params[:quantity] %>
-</td>
+
+  <td class=""><%= Domain.find(product.color_id).meaning %></td>
+  <td class=""><%= Domain.find(product.size_id).code_value %></td>
+  <td class="product_row" colspan="3" >
+    <%= hidden_field_tag "product_id", product.id %>
+    <%= number_field_tag :quantity, params[:quantity], min: 1, class: 'special_input' %>
+  </td>
+
 <td>
   <% if current_user && current_user.apps_manager %>
-    <%= link_to 'Edit', edit_product_path(product) %>
     <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
 </td>

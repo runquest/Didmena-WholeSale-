@@ -1,15 +1,15 @@
 ## DOMAIN:
 # GENDER: F - Female, M - Male
 
-Domain.create(domain_name: 'GENDER', code_value: 'F', meaning: 'Female')
-Domain.create(domain_name: 'GENDER', code_value: 'M', meaning: 'Male')
+Domain.create(domain_name: 'GENDER', code_value: 'F', meaning: 'FEMALE')
+Domain.create(domain_name: 'GENDER', code_value: 'M', meaning: 'MALE')
 
 # COLOR:  R - Red, G - Green, B - Blue, Y - Yellow, etc.
 
-Domain.create(domain_name: 'COLOR', code_value: 'R', meaning: 'Red')
-Domain.create(domain_name: 'COLOR', code_value: 'G', meaning: 'Green')
-Domain.create(domain_name: 'COLOR', code_value: 'B', meaning: 'Blue')
-Domain.create(domain_name: 'COLOR', code_value: 'Y', meaning: 'Yellow')
+Domain.create(domain_name: 'COLOR', code_value: 'R', meaning: 'RED')
+Domain.create(domain_name: 'COLOR', code_value: 'G', meaning: 'GREEN')
+Domain.create(domain_name: 'COLOR', code_value: 'B', meaning: 'BLUE')
+Domain.create(domain_name: 'COLOR', code_value: 'Y', meaning: 'YELLOW')
 
 # SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
 
@@ -21,9 +21,9 @@ Domain.create(domain_name: 'SIZE', code_value: 'XL', meaning: 'Extra Large')
 
 # CATEGORY: JACKET - Jacket, COAT - Coat, etc.
 
-Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'Spring')
-Domain.create(domain_name: 'CATEGORY', code_value: 'SUMMER', meaning: 'Summer')
-Domain.create(domain_name: 'CATEGORY', code_value: 'WINTER', meaning: 'Winter')
+Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'SPRINT')
+Domain.create(domain_name: 'CATEGORY', code_value: 'SUMMER', meaning: 'SUMMER')
+Domain.create(domain_name: 'CATEGORY', code_value: 'WINTER', meaning: 'WINTER')
 
 # AGE_GROUP: ADULT - Adult, CHILD - Child, JUVENILE - Juvenile, etc.
 

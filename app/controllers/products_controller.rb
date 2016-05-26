@@ -24,8 +24,15 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+
     @products = params[:_json]
     @products.each do |item|
+      # if color doesn't exist we need to add it
+      if Domain.where(meaning: item[:color]).empty?
+
+        color_value = item[:color][0..2]
+        Domain.create(domain_name: 'COLOR', code_value: color_value, meaning: item[:color])
+      end
 
       color_id = Domain.where(meaning: item[:color]).first.id
       size_id = Domain.where(code_value: item[:size].upcase).first.id
@@ -35,7 +42,7 @@ class ProductsController < ApplicationController
       @product = Product.new(product_params)
 
       if @product.save
-      
+        
       else
 
       end

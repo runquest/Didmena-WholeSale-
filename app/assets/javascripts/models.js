@@ -1,26 +1,43 @@
 $(function() {
 
-  var options = {
-    url: "/cls.json",
-    getValue: "meaning",
-    list: {
-      onClickEvent: function() {
-        var value = $("#color_box").getSelectedItemData().meaning;
+  function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+  }
+
+  $('#color_box').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+
+    if(keycode == '13'){
+      var value = $("#color_box").val().toUpperCase();
+      var rows = document.getElementById("colorSize").rows;
+      var colors = [];
+
+      if (rows.length > 0) {
+        for (i = 0; i < rows.length; i++) {
+          var x = document.getElementById("colorSize").rows[i].id;
+          colors.push(x.toUpperCase());
+        }
+      }
+
+      if (colors.length > 0) {
+        if (isInArray(value, colors)){
+        } else  {
+          var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td><td><a href='' onclick='javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])'>Remove</a></td></tr>";
+          // var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td><td><a href='' onclick='javascript,removeElement($(this))'>Remove</a></td></tr>";
+          // var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td><td><a class='remove_block' onclick='remove_line'>delete</a></td></tr>";
+          $("tbody#color_row").append(checkbox);
+        }
+      }
+
+      if ($.trim($("tbody#color_row").html())=='') {
         var checkbox = "<tr id='" +value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "xl" +"'><label for='"+ value + "xl" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "l" +"'><label for='"+ value + "l" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "m" +"'><label for='"+ value + "m" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "s" +"'><label for='"+ value + "s" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "xs" +"'><label for='"+ value + "xs" +"'></label></td></tr>";
         $("tbody#color_row").append(checkbox);
-      },
-    match: {
-      enabled: true
-    },
+      } 
 
-    maxNumberOfElements: 8
-    },
-
-    theme: "plate-dark"
-
+      $("#color_box").val('');
     }
 
-  $("#color_box").easyAutocomplete(options);
+  });
 
   $("#create").on('click', function() {    
     var rows = document.getElementById("colorSize").rows;
@@ -43,19 +60,24 @@ $(function() {
         };
       };
 
-      $.ajax({
-        method: 'post',
-        url: '/products',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify(products),
-        success: function (data) {
-          console.log(data);
-        },
-        error: function(err){
-          console.log(err);
-        }
-      });
+      if (products.length > 0) {
+        $.ajax({
+          method: 'post',
+          url: '/products',
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'json',
+          data: JSON.stringify(products),
+          success: function (data) {
+            console.log(data);
+          },
+          error: function(err){
+            console.log(err);
+          }
+        });
+      } else {
+        alert('No products selected.');
+        return false;
+      };
     };
 
     $.ajax({
@@ -71,6 +93,16 @@ $(function() {
       }
     });
   });
+
+
+
+
+
+
+
+
+
+
 
   $(".size").on('click', function() { 
     
@@ -90,28 +122,38 @@ $(function() {
       var quantity = $(this).find("#quantity").val();
 
       if (!!quantity) {
-        var item_data = {product_id: product_id, quantity: quantity}
-        console.log(item_data);
-        order_items.push(item_data);
+        if (quantity < 0) {
+          alert('You cannot order negative number of products');
+          console.log('You cannot order negative number of products');
+          return false;
+        } else {
+          var item_data = {product_id: product_id, quantity: quantity}
+          console.log(item_data);
+          order_items.push(item_data);
+        };
       }
     });
-
-    $.ajax({
-      method: 'post',
-      url: '/cart',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      data: JSON.stringify(order_items),
-      success: function (data) {
-        console.log('success');
-        window.location = '/cart'
-      },
-      error: function(err){
-        console.log('error');
-        window.location = '/cart'
-        // to-do: it is not hitting success function even though it posts well.
-      }
-    });
+    if (order_items.length > 0) {
+      $.ajax({
+        method: 'post',
+        url: '/cart',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(order_items),
+        success: function (data) {
+          console.log('success');
+          window.location = '/cart'
+        },
+        error: function(err){
+          console.log('error');
+          window.location = '/cart'
+          // to-do: it is not hitting success function even though it posts well.
+        }
+      });
+    } else {
+      alert('No product selected');
+      console.log('No product selected');
+    };
   });
 });
 
@@ -146,11 +188,5 @@ function readURL() {
   if (files) {
     [].forEach.call(files, readAndPreview);
   }
-}
-
-function remove(x) {
-  x.remove();
-  console.log('removed');
-}
-
+};
 

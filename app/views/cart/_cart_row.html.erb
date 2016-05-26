@@ -1,4 +1,6 @@
-<td><%= Model.find(product.model_id).title %></td>
+<% @model = Model.find(product.model_id) %>
+
+<td><%= link_to @model.title, model_path(@model) %></td>
 <td><%= Domain.find(product.color_id).meaning %></td>
 <td><%= Domain.find(product.size_id).code_value %></td>
 <td><%= quantity.to_i %></td>
