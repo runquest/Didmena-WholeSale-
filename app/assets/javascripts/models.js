@@ -94,6 +94,16 @@ $(function() {
     });
   });
 
+
+
+
+
+
+
+
+
+
+
   $(".size").on('click', function() { 
     
     if(this.checked) {
@@ -112,28 +122,38 @@ $(function() {
       var quantity = $(this).find("#quantity").val();
 
       if (!!quantity) {
-        var item_data = {product_id: product_id, quantity: quantity}
-        console.log(item_data);
-        order_items.push(item_data);
+        if (quantity < 0) {
+          alert('You cannot order negative number of products');
+          console.log('You cannot order negative number of products');
+          return false;
+        } else {
+          var item_data = {product_id: product_id, quantity: quantity}
+          console.log(item_data);
+          order_items.push(item_data);
+        };
       }
     });
-
-    $.ajax({
-      method: 'post',
-      url: '/cart',
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      data: JSON.stringify(order_items),
-      success: function (data) {
-        console.log('success');
-        window.location = '/cart'
-      },
-      error: function(err){
-        console.log('error');
-        window.location = '/cart'
-        // to-do: it is not hitting success function even though it posts well.
-      }
-    });
+    if (order_items.length > 0) {
+      $.ajax({
+        method: 'post',
+        url: '/cart',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(order_items),
+        success: function (data) {
+          console.log('success');
+          window.location = '/cart'
+        },
+        error: function(err){
+          console.log('error');
+          window.location = '/cart'
+          // to-do: it is not hitting success function even though it posts well.
+        }
+      });
+    } else {
+      alert('No product selected');
+      console.log('No product selected');
+    };
   });
 });
 

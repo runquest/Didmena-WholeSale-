@@ -4,6 +4,11 @@ class PurchasesController < ApplicationController
   def create
 
     total_quantity = params[:total_quantity]
+    if total_quantity.to_i < 1 then
+      flash[:alert] = 'no items in the cart'
+      redirect_to :back
+    end
+    
     if session[:cart] then
       cart = session[:cart]
     else

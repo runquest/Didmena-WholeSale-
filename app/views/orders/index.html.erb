@@ -22,7 +22,7 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.order_number %></td>
+        <td><%= link_to order.order_number, order  %></td>
         <td><%= order.order_date %></td>
         <td><%= order.representative_id %></td>
         <td><%= order.total_quantity %></td>
@@ -31,7 +31,6 @@
         <td><%= order.domain_id %></td>
         <td><%= order.contact %></td>
         <td><%= order.note %></td>
-        <td><%= link_to 'Show', order %></td>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
