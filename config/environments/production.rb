@@ -65,7 +65,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.default_url_options = { :host => "https://serene-ridge-97774.herokuapp.com" }
+  # config.action_mailer.default_url_options = { :host => "https://serene-ridge-97774.herokuapp.com" }
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
