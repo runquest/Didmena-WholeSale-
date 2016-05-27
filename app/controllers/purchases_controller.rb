@@ -26,7 +26,6 @@ class PurchasesController < ApplicationController
     end
 
     @purchases_for_order = Order.find(@order.id).purchases
-    binding.pry
     Notifier.welcome_email().deliver_now
     session[:cart] = nil
   end
