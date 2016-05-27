@@ -26,7 +26,7 @@ class PurchasesController < ApplicationController
     end
 
     @purchases_for_order = Order.find(@order.id).purchases
-    Notifier.welcome_email().deliver
+    Notifier.welcome_email.deliver
     session[:cart] = nil
     redirect_to root_path
   end
