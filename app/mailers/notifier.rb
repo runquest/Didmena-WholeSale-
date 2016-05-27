@@ -1,7 +1,7 @@
 class Notifier < ApplicationMailer
-  default from: 'aiste.ulozaite+didmena@gmail.com'
+  default from: 'aiste.ulozaite@gmail.com'
  
   def welcome_email
-    mail(to: 'aiste.ulozaite+welcome@gmail.com', subject: 'welcome')
+    mail(to: 'aiste.ulozaite@gmail.com', subject: 'welcome')
   end
 end
