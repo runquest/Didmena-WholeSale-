@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get '/cls' => 'domains#colors'
     get '/models/size' => 'models#size'
     post '/products/remove' => 'products#remove'
+    post '/products/delete_item' => 'products#delete_item'
     get '/models/:id/add_products' => 'models#add_products'
     get '/admin' => 'welcome#admin'
 

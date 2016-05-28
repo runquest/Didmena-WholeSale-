@@ -94,24 +94,77 @@ $(function() {
     });
   });
 
-
-
-
-
-
-
-
-
-
-
   $(".size").on('click', function() { 
     
+    var rows = document.getElementById("colorSize").rows;
+    var str = window.location.href;
+    var n = str.match(/\/(\d+)\//);
+    var model_id = n[1];
+
+    if (rows.length > 1) {
+      for (i = 1; i < rows.length; i++) {
+        var sizes = ['xl', 'l', 'm', 's', 'xs'];
+        var color = rows[i].id;
+        for (m = 0; m < sizes.length; m++) {
+          var x = document.getElementById(rows[i].id + sizes[m]).checked;
+          var size = sizes[m];
+          if (x) {
+            var product_data = {color: color, size: size, model: model_id};
+            products.push(product_data);
+          };
+        };
+      };
+
+
     if(this.checked) {
       console.log('checking'); 
+      // console.log(this);
+
+      var str = window.location.href;
+      var n = str.match(/\/(\d+)\//);
+      var model_id = n[1];
+
+      var color_new = "RED";
+      var size_new = "XL";
+
+      var product_data = {color: color_new, size: size_new, model: model_id};
+
+      $.ajax({
+          method: 'put',
+          url: '/products',
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'json',
+          data: JSON.stringify(product_data),
+          success: function (data) {
+            console.log(data);
+          },
+          error: function(err){
+            console.log(err);
+          }
+        });
+
+
     } else {
       console.log('unchecking'); 
+      // console.log(this);
+
+
+      $.ajax({
+          method: 'post',
+          url: '/products/delete_item',
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'json',
+          data: JSON.stringify(product),
+          success: function(data) {
+            console.log('deleted');
+          },
+          error: function(err){
+            console.log(err);
+          }
+        });
+
     }
-     
+   }  
   });
 
   $(".order_button").on('click', function() {
@@ -156,6 +209,16 @@ $(function() {
     };
   });
 });
+
+// function checkAddress(checkbox)
+// {
+//     if (checkbox.checked)
+//     {
+//       // remove product
+//     } else {
+//       // add product
+//     }
+// };
 
 function readURL() {
 

@@ -27,23 +27,22 @@
               </tr>
             </thead>
             <tbody id="color_row">
-              <% if @model.products.any? %>
-                <% @model.products.each do |prdct| %>
-                  <% value = Domain.find(prdct.color_id).meaning %>
-                  <tr>
+              <% if @products.any? %>
+                <% @colors.each do |color| %>
+                  <% value = Domain.find(color).meaning%>
+                  <tr id='<%= value %>'>
                     <td><%= value %></td>
-                    <% sizes = Domain.where(domain_name: 'SIZE') %>
+                    <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
                     <% sizes.each do |size| %>
                       <td>
-                      <% if prdct.size_id == size.id %>
-                        <input type='checkbox' class='size' id='<%= value %><%=size.code_value %>' checked >
+                      <%if Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id).exists? %>
+                      <input type='checkbox' class='size' id='<%= value %><%=size.code_value %>' checked >
                       <% else %>
-                        <input type='checkbox' class='size' id='<%= value %><%=size.code_value %>'>
+                      <input type='checkbox' class='size' id='<%= value %><%=size.code_value %>'>
                       <% end %>
-                      <label for='<%= value %><%=size.code_value %>'></label>
+                        <label for='<%= value %><%=size.code_value %>'></label>
                       </td>
                     <% end %>
-
                   </tr>
                 <% end %>
               <% end %>

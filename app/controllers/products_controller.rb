@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
       end
 
       color_id = Domain.where(meaning: item[:color]).first.id
-      size_id = Domain.where(code_value: item[:size].upcase).first.id
+      size_id = Domain.where(domain_name: 'SIZE').where(code_value: item[:size].upcase).first.id
       model_id = item[:model]
       product_params = {'model_id' => item[:model], 'color_id' => color_id, 'size_id' => size_id}
 
@@ -58,13 +58,19 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @product }
+
+        redirect_to :back, notice: 'Updated product.'
+
+        # format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @product }
       else
-        format.html { render :edit }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+
+        redirect_to :back, notice: 'Updated did not.'
+        # format.html { render :edit }
+        # format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,9 +78,14 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
+    binding.pry
     @product.destroy
     redirect_to :back
     return
+  end
+
+  def delete_item
+    binding.pry
   end
 
   def remove

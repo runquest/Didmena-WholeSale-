@@ -22,8 +22,16 @@ class ModelsController < ApplicationController
 
   # GET /models/1/edit
   def edit
+    @model = Model.find(params[:id])
+    @products = @model.products
+    @colors = Array.new;
     # binding.pry
-    # @model = Model.new
+
+    @products.each do |prdct|
+      if !@colors.include? prdct.color_id
+        @colors.push(prdct.color_id)
+      end
+    end
     # @model_attachment = @model.model_attachments.build
   end
 
