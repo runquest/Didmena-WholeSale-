@@ -46,7 +46,9 @@
               <tbody>
                 <% if @products.any? %>
                   <% @products.each do |product| %>
-                    <tr><%= render "product_row", product: product, purchase: @purchase %></tr>
+                    <% if product.in_storage %>
+                      <tr><%= render "product_row", product: product, purchase: @purchase %></tr>
+                    <% end %>
                   <% end %>
                 <% end %>          
               </tbody>

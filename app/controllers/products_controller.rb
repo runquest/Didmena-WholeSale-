@@ -61,13 +61,16 @@ class ProductsController < ApplicationController
   def update
 
     binding.pry
-    respond_to do |format|
+    # respond_to do |format|
       if @product.update(product_params)
+        binding.pry
         logger.info "product updated"
+        redirect_to :back
       else
         logger.info "failed to update"
+        # redirect_to :back
       end
-    end
+    # end
   end
 
   def update_product
