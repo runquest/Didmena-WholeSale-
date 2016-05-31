@@ -22,9 +22,15 @@ class ModelsController < ApplicationController
 
   # GET /models/1/edit
   def edit
-    # binding.pry
-    # @model = Model.new
-    # @model_attachment = @model.model_attachments.build
+    @model = Model.find(params[:id])
+    @products = @model.products
+    @colors = Array.new;
+
+    @products.each do |prdct|
+      if !@colors.include? prdct.color_id
+        @colors.push(prdct.color_id)
+      end
+    end
   end
 
   # GET /models/1/add_products
@@ -73,7 +79,6 @@ class ModelsController < ApplicationController
   end
 
   def size
-    # binding.pry
     render :partial => 'size_to_color'
   end
 
@@ -86,7 +91,6 @@ class ModelsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
       params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note)
-      # params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note, products_attributes: [:color_id, :size_id])
     end
 
     def purchase_params

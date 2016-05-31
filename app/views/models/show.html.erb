@@ -10,7 +10,6 @@
             <%= image_tag p.avatar_url, :class => "prod_image_small" %>
             <% if current_user && current_user.apps_manager %>
               <%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
-              <%#= link_to "Edit Attachment", edit_model_attachment_path(p) %>
             <% end %>
           <% end %>
         <% else %>
@@ -46,14 +45,15 @@
               <tbody>
                 <% if @products.any? %>
                   <% @products.each do |product| %>
-                    <tr><%= render "product_row", product: product, purchase: @purchase %></tr>
+                    <% if product.in_storage %>
+                      <tr><%= render "product_row", product: product, purchase: @purchase %></tr>
+                    <% end %>
                   <% end %>
                 <% end %>          
               </tbody>
             </table>
             <button class="btn waves-effect waves-light order_button" style="width: 100%">order</button>
           </div>
-        <!-- <#% end %> -->
       </div>
     </div>
   </div>

@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20160403164834) do
     t.integer  "model_id",   null: false
     t.integer  "color_id",   null: false
     t.integer  "size_id",    null: false
+    t.boolean  "in_storage"
     t.text     "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
