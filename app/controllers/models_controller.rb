@@ -25,6 +25,9 @@ class ModelsController < ApplicationController
     @model = Model.find(params[:id])
     @products = @model.products
     @colors = Array.new;
+
+    # binding.pry
+    # @product = Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id)
     # binding.pry
 
     @products.each do |prdct|

@@ -128,8 +128,13 @@ $(function() {
         // var x = document.getElementById(this.id);
         // console.log(x);
         // console.log(x.checked);
+    if(this.checked) {
 
-var product_data = {model: model_id, color: color, size: size, in_storage: true};
+        var product_data = {model: model_id, color: color, size: size, in_storage: true};
+      }{
+                var product_data = {model: model_id, color: color, size: size, in_storage: false};
+
+      }
 
         // $.ajax({
         //   method: 'put',
