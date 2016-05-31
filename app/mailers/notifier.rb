@@ -1,4 +1,4 @@
-class Notifier < ApplicationMailer
+class Notifier < ActionMailer::Base
   default from: 'aiste.ulozaite@gmail.com'
  
   def welcome_email

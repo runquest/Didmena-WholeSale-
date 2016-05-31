@@ -19,19 +19,16 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    
+
   end
 
   # POST /products
   # POST /products.json
   def create
-
     @products = params[:_json]
-    binding.pry
     @products.each do |item|
       # if color doesn't exist we need to add it
       if Domain.where(meaning: item[:color]).empty?
-
         color_value = item[:color][0..2]
         Domain.create(domain_name: 'COLOR', code_value: color_value, meaning: item[:color])
       end
@@ -44,9 +41,9 @@ class ProductsController < ApplicationController
       @product = Product.new(product_params)
 
       if @product.save
-        
+        logger.info "product saved"
       else
-
+        logger.info "failed to save product"
       end
     end
 
@@ -60,44 +57,33 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
-
-    binding.pry
-    # respond_to do |format|
-      if @product.update(product_params)
-        binding.pry
-        logger.info "product updated"
-        redirect_to :back
-      else
-        logger.info "failed to update"
-        # redirect_to :back
-      end
-    # end
+    if @product.update(product_params)
+      logger.info "product updated"
+      redirect_to :back
+    else
+      logger.info "failed to update"
+    end
   end
 
   def update_product
-  # def update
-  binding.pry
     @color_id = Domain.where(meaning: params[:color]).take.id
-    @size_id = Domain.where(code_value: params[:size]).take.id
+    @size_id = Domain.where(domain_name: 'SIZE').where(code_value: params[:size]).take.id
     @model_id = params[:model]
     @in_storage = params[:in_storage]
     @product_id = Product.where(model_id: @model_id).where(color_id: @color_id).where(size_id: @size_id).take.id
     @product = Product.find(@product_id)
-    binding.pry
     update()
   end
 
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    binding.pry
     @product.destroy
     redirect_to :back
     return
   end
 
   def delete_item
-    binding.pry
   end
 
   def remove
