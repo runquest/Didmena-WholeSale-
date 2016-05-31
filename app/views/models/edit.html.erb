@@ -36,11 +36,11 @@
                     <% sizes.each do |size| %>
                       <td>
                       <%if Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id).exists? %>
-                      <input type='checkbox' class='size' id='<%= value %><%=size.code_value %>' checked >
+                      <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>' checked >
                       <% else %>
-                      <input type='checkbox' class='size' id='<%= value %><%=size.code_value %>'>
+                      <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>'>
                       <% end %>
-                        <label for='<%= value %><%=size.code_value %>'></label>
+                        <label for='<%= value %>-<%=size.code_value %>'></label>
                       </td>
                     <% end %>
                   </tr>

@@ -4,6 +4,7 @@ class CreateProducts < ActiveRecord::Migration
       t.integer :model_id, null: false
       t.integer :color_id, :references => "domain", null: false   # domain_name COLOR
       t.integer :size_id, :references => "domain", null: false    # domain_name SIZE
+      t.boolean :in_storage
       t.text :note
 
       t.timestamps null: false

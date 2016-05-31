@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
   def create
 
     @products = params[:_json]
+    binding.pry
     @products.each do |item|
       # if color doesn't exist we need to add it
       if Domain.where(meaning: item[:color]).empty?
@@ -58,21 +59,28 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+
     binding.pry
     respond_to do |format|
       if @product.update(product_params)
-
-        redirect_to :back, notice: 'Updated product.'
-
-        # format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @product }
+        logger.info "product updated"
       else
-
-        redirect_to :back, notice: 'Updated did not.'
-        # format.html { render :edit }
-        # format.json { render json: @product.errors, status: :unprocessable_entity }
+        logger.info "failed to update"
       end
     end
+  end
+
+  def update_product
+  # def update
+  binding.pry
+    @color_id = Domain.where(meaning: params[:color]).take.id
+    @size_id = Domain.where(code_value: params[:size]).take.id
+    @model_id = params[:model]
+    @in_storage = params[:in_storage]
+    @product_id = Product.where(model_id: @model_id).where(color_id: @color_id).where(size_id: @size_id).take.id
+    @product = Product.find(@product_id)
+    binding.pry
+    update()
   end
 
   # DELETE /products/1
@@ -103,6 +111,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:model_id, :color_id, :size_id)
+      params.require(:product).permit(:model_id, :color_id, :size_id, :in_storage)
     end
 end
