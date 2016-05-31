@@ -23,7 +23,13 @@ class ModelsController < ApplicationController
   # GET /models/1/edit
   def edit
     @model = Model.find(params[:id])
-    @products = @model.products
+    if @model.products.any?
+      @products = @model.products
+    else
+      @products = []
+    end
+    
+
     @colors = Array.new;
 
     @products.each do |prdct|
@@ -42,16 +48,24 @@ class ModelsController < ApplicationController
   # POST /models.json
   def create
     @model = Model.new(model_params)
-    respond_to do |format|
+
+    if @model.products.any?
+      @products = @model.products
+    else
+      @products = []
+    end
+
+    # respond_to do |format|
       if @model.save
         params[:model_attachments]['avatar'].each do |a|
           @model_attachment = @model.model_attachments.create(:avatar => a)
         end
-        format.html {redirect_to action: 'add_products', id: @model.id
-      } else
-        format.html {render action: 'new'}
+        redirect_to action: "edit", id: @model.id
+        # format.html {redirect_to action: 'add_products', id: @model.id
+      else
+        render action: 'new'
       end
-    end
+    # end
   end
 
   # PATCH/PUT /models/1

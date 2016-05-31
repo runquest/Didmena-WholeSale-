@@ -4,6 +4,7 @@ $(function() {
     return array.indexOf(value) > -1;
   }
 
+
   $('#color_box').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
 
@@ -46,6 +47,15 @@ $(function() {
       }
     }
   });
+
+  // $('td#remove').on('click', function() {
+  //   console.log(this);
+  //   // tbody#color_row.removeChild(tbody#color_row.childNodes[0]);
+
+  //   // var row = document.getElementById(rowid);
+  //   // row.parentNode.removeChild(row);
+  // });
+
 
   $(".size").on('click', function() { 
     var rows = document.getElementById("colorSize").rows;
