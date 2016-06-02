@@ -25,6 +25,7 @@ class ModelsController < ApplicationController
     @model = Model.find(params[:id])
     # @model_attachments = @model.model_attachments
 
+
     if @model.products.any?
       @products = @model.products
       # @model_attachments = @model.model_attachments
@@ -86,7 +87,6 @@ class ModelsController < ApplicationController
     @model.model_attachments(params[:model])
     
     if @model.products.empty?
-      # binding.pry
       flash[:notice] = "no products!"
       redirect_to :back
     else

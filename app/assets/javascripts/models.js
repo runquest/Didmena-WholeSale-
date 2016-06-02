@@ -6,7 +6,6 @@ $(function() {
 
   $('#color_box').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
-
     if (null != $("#color_box").val()) {
 
       if(keycode == '13'){
@@ -22,12 +21,17 @@ $(function() {
         var checkbox = "<tr id='" + value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a href='' onclick='javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])'>Remove</a></td></tr>";
         var sizes = ['XL', 'L', 'M', 'S', 'XS'];
 
+        console.log('after variables');
 
         for (j = 0; j < rows.length; j++) {
+            // console.log('inside taking j');
             rowColors.push(rows[j].id);
         };
 
+        // console.log("colors in line " + name);
+
         if (!rowColors.includes(value)) {
+        // console.log('row Colors does not include');
 
           $("tbody#color_row").append(checkbox);
 
@@ -35,6 +39,8 @@ $(function() {
             var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
             products.push(product_data);
           }
+
+          console.log(products);
 
           $.ajax({
             method: 'post',
@@ -66,8 +72,10 @@ $(function() {
   //   // row.parentNode.removeChild(row);
   // });
 
+  /// creating selectors
+  $(".size").on('click', '.size', function() { 
 
-  $(".size").on('click', function() { 
+    console.log('click on size');
     var rows = document.getElementById("colorSize").rows;
     var str = window.location.href;
     var n = str.match(/\/(\d+)\//);
@@ -75,7 +83,7 @@ $(function() {
 
     var color = this.id.match(/(\w+)/);
     var size = this.id.match(/\w+$/);
-
+    console.log('inside size ' + this.checked);
     if (this.checked) {
       var product_data = {model: model_id, color: color, size: size, in_storage: true};
     } else {

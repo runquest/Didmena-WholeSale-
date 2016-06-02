@@ -32,11 +32,11 @@ class ProductsController < ApplicationController
         color_value = item[:color][0..2]
         Domain.create(domain_name: 'COLOR', code_value: color_value, meaning: item[:color])
       end
-
       color_id = Domain.where(meaning: item[:color]).first.id
       size_id = Domain.where(domain_name: 'SIZE').where(code_value: item[:size].upcase).first.id
       model_id = item[:model]
-      product_params = {'model_id' => item[:model], 'color_id' => color_id, 'size_id' => size_id}
+      in_storage = item[:in_storage]
+      product_params = {'model_id' => item[:model], 'color_id' => color_id, 'size_id' => size_id, 'in_storage' => in_storage}
 
       @product = Product.new(product_params)
 
@@ -57,6 +57,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    binding.pry
     if @product.update(product_params)
       logger.info "product updated"
       redirect_to :back
