@@ -34,12 +34,42 @@
 
   <div class="row">
     <div id="img_upload" class="col s12">
-
       <%= f.fields_for :model_attachments do |p| %>
-        <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>   
+        <% if !@model_attachments.nil? %>
+          <% if @model_attachments[0].id.equal?(p.object.id) %>
+            <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>  
+          <% end %>
+        <% else %>
+          <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>  
+        <% end %>
       <% end %>
     </div>
   </div>
+
+  <div class="row">
+    <div id="img_upload_x" class="col s12">
+    <% if !@model_attachments.blank? %>
+      <% @model_attachments.each do |p| %>
+        <div><%= image_tag p.avatar_url, :class => "prod_image_small" %>
+        <% if current_user && current_user.apps_manager %>
+          <%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %></div>
+      <% end %>
+    <% end %>
+
+<!--     <#% if @model_attachments.any? %>
+      <#% @model_attachments.each do |p| %>
+        <%#= image_tag p.avatar_url, :class => "prod_image_small" %>
+        <#% if current_user && current_user.apps_manager %>
+          <#%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <#% end %>
+      <#% end %>
+    <#% else %>
+        <img src="http://placehold.it/350x150">
+      <#% end %> -->
+    </div>
+  </div>
+
   <div class="row">
     <div class="col 6">
       <%#= f.label :price %>
