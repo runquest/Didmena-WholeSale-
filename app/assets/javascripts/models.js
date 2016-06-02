@@ -58,10 +58,6 @@ $(function() {
     }
   });
 
-  $("#model_button").on('click', function() {
-    console.log(@model);
-  });
-
   // $('td#remove').on('click', function() {
   //   console.log(this);
   //   // tbody#color_row.removeChild(tbody#color_row.childNodes[0]);

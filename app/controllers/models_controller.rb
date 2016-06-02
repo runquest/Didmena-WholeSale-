@@ -57,7 +57,7 @@ class ModelsController < ApplicationController
   # POST /models.json
   def create
     @model = Model.new(model_params)
-    binding.pry
+
     if @model.products.any?
       @products = @model.products
     else
@@ -65,7 +65,7 @@ class ModelsController < ApplicationController
     end
 
     if @model.save
-      binding.pry
+
       if !params[:model_attachments].nil?
         params[:model_attachments]['avatar'].each do |a|
           @model_attachment = @model.model_attachments.create(:avatar => a)
@@ -82,25 +82,27 @@ class ModelsController < ApplicationController
   # PATCH/PUT /models/1
   # PATCH/PUT /models/1.json
   def update
-    # binding.pry
     @model = Model.find(params[:id])
-    # binding.pry
     @model.model_attachments(params[:model])
-
-    if @model.save
+    
+    if @model.products.empty?
       # binding.pry
-        # params[:model][:model_attachments_attributes].each do |a|
+      flash[:notice] = "no products!"
+      redirect_to :back
+    else
+      if @model.save
         if !params[:model_attachments].nil?
-
           params[:model_attachments]['avatar'].each do |a|
             @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
           end
         end
         redirect_to action: "show", id: @model.id
-        # format.html {redirect_to action: 'add_products', id: @model.id
       else
         render action: 'edit'
       end
+    end
+
+    
 
     # respond_to do |format|
     #   if @model.update(model_params)

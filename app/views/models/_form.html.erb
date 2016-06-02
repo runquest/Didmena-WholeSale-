@@ -1,4 +1,6 @@
 <div class="container">
+<p id="notice"><%= notice %></p>
+
 <%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
   <% if @model.errors.any? %>
     <div id="error_explanation">
@@ -86,7 +88,7 @@
   <hr/>
   <div class="row">
     <div class="col 12">
-      <button id="model_button" class="btn waves-effect waves-light">submit</button>
+      <button id="model_button" class="btn waves-effect waves-light" >submit</button>
     </div>
   </div>
 <% end %>
