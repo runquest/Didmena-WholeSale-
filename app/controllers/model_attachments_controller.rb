@@ -25,7 +25,6 @@ class ModelAttachmentsController < ApplicationController
   # POST /model_attachments.json
   def create
     @model_attachment = ModelAttachment.new(model_attachment_params)
-
     respond_to do |format|
       if @model_attachment.save
         format.html { redirect_to @model_attachment, notice: 'Model attachment was successfully created.' }

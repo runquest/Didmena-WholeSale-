@@ -27,4 +27,11 @@ class Model < ActiveRecord::Base
   has_many :model_attachments
   accepts_nested_attributes_for :model_attachments
 
+  before_validation :uppercase_fields
+
+  def uppercase_fields
+    code.upcase!
+    title.upcase!
+  end
+
 end

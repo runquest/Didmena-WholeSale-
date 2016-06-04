@@ -6,8 +6,8 @@
     <%= number_field_tag :quantity, params[:quantity], min: 1, class: 'special_input' %>
   </td>
 
-<td>
-  <% if current_user && current_user.apps_manager %>
-    <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
-</td>
+<!-- <td>
+  <#% if current_user && current_user.apps_manager %>
+    <%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <#% end %>
+</td> -->

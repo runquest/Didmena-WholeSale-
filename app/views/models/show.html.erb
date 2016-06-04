@@ -7,10 +7,11 @@
           <%= image_tag @model_attachments[0].avatar_url, :class => "prod_image" %>
 
           <% @model_attachments.each do |p| %>
-            <%= image_tag p.avatar_url, :class => "prod_image_small" %>
-            <% if current_user && current_user.apps_manager %>
-              <%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% end %>
+            <div>
+              <%= image_tag p.avatar_url, :class => "prod_image_small" %>
+              <% if current_user && current_user.apps_manager %>
+                <%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %></div>
           <% end %>
         <% else %>
             <img src="http://placehold.it/350x150">
@@ -31,7 +32,6 @@
         <p><%= @model.note %></p>
         </div>
 
-        <!-- <#% if current_user && current_user.apps_manager %> -->
           <div class="card-action center">
             <table id="product_table">
               <thead>

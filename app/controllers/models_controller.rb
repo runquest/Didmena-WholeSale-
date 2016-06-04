@@ -23,7 +23,23 @@ class ModelsController < ApplicationController
   # GET /models/1/edit
   def edit
     @model = Model.find(params[:id])
-    @products = @model.products
+    # @model_attachments = @model.model_attachments
+
+
+    if @model.products.any?
+      @products = @model.products
+      # @model_attachments = @model.model_attachments
+    else
+      @products = []
+      # @model_attachments = []
+    end
+
+    if @model.model_attachments.any?
+      @model_attachments = @model.model_attachments
+    else
+      @model_attachment = @model.model_attachments.build
+    end
+    
     @colors = Array.new;
 
     @products.each do |prdct|
@@ -42,30 +58,63 @@ class ModelsController < ApplicationController
   # POST /models.json
   def create
     @model = Model.new(model_params)
-    respond_to do |format|
-      if @model.save
+
+    if @model.products.any?
+      @products = @model.products
+    else
+      @products = []
+    end
+
+    if @model.save
+
+      if !params[:model_attachments].nil?
         params[:model_attachments]['avatar'].each do |a|
           @model_attachment = @model.model_attachments.create(:avatar => a)
         end
-        format.html {redirect_to action: 'add_products', id: @model.id
-      } else
-        format.html {render action: 'new'}
+      else
+        @model_attachments = []
       end
+      redirect_to action: "edit", id: @model.id
+    else
+      render action: 'new'
     end
   end
 
   # PATCH/PUT /models/1
   # PATCH/PUT /models/1.json
   def update
-    respond_to do |format|
-      if @model.update(model_params)
-        format.html { redirect_to @model, notice: 'Model was successfully updated.' }
-        format.json { render :show, status: :ok, location: @model }
+    @model = Model.find(params[:id])
+    @model.model_attachments(params[:model])
+    
+    if @model.products.empty? || !productsInStore(@model.products)
+        flash[:notice] = "no products!"
+        redirect_to :back
+
+    else
+      if @model.save
+        if !params[:model_attachments].nil?
+          params[:model_attachments]['avatar'].each do |a|
+            @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
+          end
+        end
+        redirect_to action: "show", id: @model.id
       else
-        format.html { render :edit }
-        format.json { render json: @model.errors, status: :unprocessable_entity }
+        render action: 'edit'
       end
     end
+  end
+
+  def productsInStore(products)
+    
+    inStorage = false
+    products.each do |product|
+      if product.in_storage === true
+        inStorage = true
+        break
+      end
+    end
+
+    return inStorage
   end
 
   # DELETE /models/1

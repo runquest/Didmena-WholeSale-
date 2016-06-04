@@ -21,7 +21,7 @@ Domain.create(domain_name: 'SIZE', code_value: 'XL', meaning: 'Extra Large')
 
 # CATEGORY: JACKET - Jacket, COAT - Coat, etc.
 
-Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'SPRINT')
+Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'SPRING')
 Domain.create(domain_name: 'CATEGORY', code_value: 'SUMMER', meaning: 'SUMMER')
 Domain.create(domain_name: 'CATEGORY', code_value: 'WINTER', meaning: 'WINTER')
 

@@ -32,11 +32,11 @@ class ProductsController < ApplicationController
         color_value = item[:color][0..2]
         Domain.create(domain_name: 'COLOR', code_value: color_value, meaning: item[:color])
       end
-
       color_id = Domain.where(meaning: item[:color]).first.id
       size_id = Domain.where(domain_name: 'SIZE').where(code_value: item[:size].upcase).first.id
       model_id = item[:model]
-      product_params = {'model_id' => item[:model], 'color_id' => color_id, 'size_id' => size_id}
+      in_storage = item[:in_storage]
+      product_params = {'model_id' => item[:model], 'color_id' => color_id, 'size_id' => size_id, 'in_storage' => in_storage}
 
       @product = Product.new(product_params)
 
@@ -91,6 +91,20 @@ class ProductsController < ApplicationController
     size_id = Domain.where(code_value: params[:size].upcase).first.id
     product_id = Product.where(model_id: params[:model]).where(color_id: color_id).where(size_id: size_id).take.id
     return
+  end
+
+  def delete_products
+
+    color_name = params[:color_name]
+    model_id = params[:model_id]
+    model_products = Product.where(model_id: model_id)
+    color_id = Domain.where(domain_name: "COLOR").where(meaning: params[:color_name]).take.id
+
+    products = model_products.where(color_id: color_id)
+
+    products.each do |product|
+      product.destroy
+    end
   end
 
   private

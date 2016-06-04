@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get '/models/:id/add_products' => 'models#add_products'
     get '/admin' => 'welcome#admin'
     put '/products_update' => 'products#update_product'
+    post '/delete_products' => 'products#delete_products'
 
     resources :purchases
     resources :order_products
