@@ -18,7 +18,7 @@ $(function() {
         var products = [];
         var rowColors = [];
 
-        var checkbox = "<tr id='" + value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a href='' onclick='javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])'>Remove</a></td></tr>";
+        var checkbox = "<tr id='" + value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a id='"+ value +"' href='' onclick='removeColor(this)'>Remove</a></td></tr>";
         var sizes = ['XL', 'L', 'M', 'S', 'XS'];
 
         for (j = 0; j < rows.length; j++) {
@@ -71,7 +71,8 @@ $(function() {
         var products = [];
         var rowColors = [];
 
-        var checkbox = "<tr id='" + value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a href='' onclick='javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])'>Remove</a></td></tr>";
+        var checkbox = "<tr id='" + value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a id='value' href='' onclick='removeColor(this)'>Remove</a></td></tr>";
+        // var checkbox = "<tr id='" + value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a href='' onclick='javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])'>Remove</a></td></tr>";
         var sizes = ['XL', 'L', 'M', 'S', 'XS'];
 
         for (j = 0; j < rows.length; j++) {
@@ -109,13 +110,17 @@ $(function() {
     }
   });
 
-  // $('td#remove').on('click', function() {
-  //   console.log(this);
-  //   // tbody#color_row.removeChild(tbody#color_row.childNodes[0]);
+  $('td#remove').on('click', function() {
+    console.log(this);
+    // tbody#color_row.removeChild(tbody#color_row.childNodes[0]);
 
-  //   // var row = document.getElementById(rowid);
-  //   // row.parentNode.removeChild(row);
-  // });
+    // var row = document.getElementById(rowid);
+    // row.parentNode.removeChild(row);
+
+    // javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])
+  });
+
+
 
   /// creating selectors
   $("tbody#color_row").on("click", ".size", function() { 
@@ -223,4 +228,37 @@ function readURL() {
     [].forEach.call(files, readAndPreview);
   }
 };
+
+function removeColor(some) {
+
+      var str = window.location.href;
+      var n = str.match(/\/(\d+)\//);
+      var model_id = n[1];
+      var color_name = some.id
+
+      var products_data = {color_name: color_name, model_id: model_id}
+
+      $.ajax({
+        method: 'post',
+        url: '/delete_products',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(products_data),
+        success: function (data) {
+          console.log('success');
+          window.location = '/models/' + model_id
+        },
+        error: function(err){
+          console.log(err);
+          // to-do: it is not hitting success function even though it posts well.
+        }
+      });
+
+    // tbody#color_row.removeChild(tbody#color_row.childNodes[0]);
+
+    // var row = document.getElementById(rowid);
+    // row.parentNode.removeChild(row);
+
+    // javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])
+}
 

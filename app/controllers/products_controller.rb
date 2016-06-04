@@ -93,6 +93,20 @@ class ProductsController < ApplicationController
     return
   end
 
+  def delete_products
+
+    color_name = params[:color_name]
+    model_id = params[:model_id]
+    model_products = Product.where(model_id: model_id)
+    color_id = Domain.where(domain_name: "COLOR").where(meaning: params[:color_name]).take.id
+
+    products = model_products.where(color_id: color_id)
+
+    products.each do |product|
+      product.destroy
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

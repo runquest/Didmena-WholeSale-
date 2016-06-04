@@ -87,7 +87,6 @@ class ModelsController < ApplicationController
     @model.model_attachments(params[:model])
     
     if @model.products.empty? || !productsInStore(@model.products)
-        binding.pry
         flash[:notice] = "no products!"
         redirect_to :back
 
