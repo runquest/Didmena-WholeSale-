@@ -21,17 +21,11 @@ $(function() {
         var checkbox = "<tr id='" + value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a href='' onclick='javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])'>Remove</a></td></tr>";
         var sizes = ['XL', 'L', 'M', 'S', 'XS'];
 
-        console.log('after variables');
-
         for (j = 0; j < rows.length; j++) {
-            // console.log('inside taking j');
             rowColors.push(rows[j].id);
         };
 
-        // console.log("colors in line " + name);
-
         if (!rowColors.includes(value)) {
-        // console.log('row Colors does not include');
 
           $("tbody#color_row").append(checkbox);
 
@@ -39,8 +33,6 @@ $(function() {
             var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
             products.push(product_data);
           }
-
-          console.log(products);
 
           $.ajax({
             method: 'post',
@@ -73,7 +65,7 @@ $(function() {
   // });
 
   /// creating selectors
-  $(".size").on('click', '.size', function() { 
+  $("tbody#color_row").on("click", ".size", function() { 
 
     console.log('click on size');
     var rows = document.getElementById("colorSize").rows;

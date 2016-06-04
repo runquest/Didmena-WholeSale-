@@ -86,9 +86,11 @@ class ModelsController < ApplicationController
     @model = Model.find(params[:id])
     @model.model_attachments(params[:model])
     
-    if @model.products.empty?
-      flash[:notice] = "no products!"
-      redirect_to :back
+    if @model.products.empty? || !productsInStore(@model.products)
+        binding.pry
+        flash[:notice] = "no products!"
+        redirect_to :back
+
     else
       if @model.save
         if !params[:model_attachments].nil?
@@ -101,19 +103,17 @@ class ModelsController < ApplicationController
         render action: 'edit'
       end
     end
+  end
 
-    
-
-    # respond_to do |format|
-    #   if @model.update(model_params)
-    #     format.html { redirect_to @model, notice: 'Model was successfully updated.' }
-    #     format.json { render :show, status: :ok, location: @model }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @model.errors, status: :unprocessable_entity }
-    #   end
-    # end
-
+  def productsInStore(products)
+    for product in products
+       if product.in_storage === true
+          return true
+          break
+       else
+        return false
+       end
+    end
   end
 
   # DELETE /models/1
