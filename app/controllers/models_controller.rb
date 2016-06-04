@@ -106,14 +106,16 @@ class ModelsController < ApplicationController
   end
 
   def productsInStore(products)
-    for product in products
-       if product.in_storage === true
-          return true
-          break
-       else
-        return false
-       end
+    
+    inStorage = false
+    products.each do |product|
+      if product.in_storage === true
+        inStorage = true
+        break
+      end
     end
+
+    return inStorage
   end
 
   # DELETE /models/1
