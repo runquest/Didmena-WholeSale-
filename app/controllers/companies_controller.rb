@@ -24,6 +24,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
+    binding.pry
     @company = Company.new(company_params)
 
     respond_to do |format|

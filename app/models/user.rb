@@ -29,6 +29,13 @@ class User < ActiveRecord::Base
 
   has_many :companies, through: :representatives
 
+  before_validation :uppercase_fields
+
+  def uppercase_fields
+    fname.upcase!
+    lname.upcase!
+  end
+
   def full_name
     "#{fname} #{lname}"
   end
