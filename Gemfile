@@ -47,3 +47,5 @@ gem "rmagick"
 gem 'pry'
 
 gem 'mini_magick'
+
+#adding new gems
