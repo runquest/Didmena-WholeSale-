@@ -23,7 +23,7 @@ class ModelsController < ApplicationController
   # GET /models/1/edit
   def edit
     @model = Model.find(params[:id])
-    # @model_attachments = @model.model_attachments
+    @model_attachments = @model.model_attachments
 
 
     if @model.products.any?

@@ -18,8 +18,6 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @companies = Company.all
-
-    # @company = @user.companies.build
   end
 
   # GET /users/1/edit
@@ -30,51 +28,11 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     if @user.save
-              binding.pry
-
-      # if !params[:user][:companies].nil?
-      #   binding.pry
-      #   # params[:companies].each do |c|
-      #     # @companies = @user.companies.create(params[:companies])
-      #     @user.companies(params[:user]).create(:company => params[:user][:companies])
-      #     # @user.companies.create(:companies => params[:user][:companies])
-      #   # end
-
-      #   # @model.model_attachments(params[:model]).create(:avatar => a)
-      # end
       redirect_to @user
     else
       render :new
     end
-
-# if @model.save
-
-#       if !params[:model_attachments].nil?
-#         params[:model_attachments]['avatar'].each do |a|
-#           @model_attachment = @model.model_attachments.create(:avatar => a)
-#         end
-#       else
-#         @model_attachments = []
-#       end
-#       redirect_to action: "edit", id: @model.id
-#     else
-#       render action: 'new'
-#     end
-
-
-
-
-    # respond_to do |format|
-    #   if @user.save
-    #     format.html { redirect_to @user, notice: 'User was successfully created.' }
-    #     format.json { render :show, status: :created, location: @user }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @user.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /users/1
