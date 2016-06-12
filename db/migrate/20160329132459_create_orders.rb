@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.string :order_number, null: false, limit: 20
       t.date :order_date, null: false
-      t.integer :representative_id, null: false     # representative as an agent
+      # t.integer :representative_id, null: false     # representative as an agent
       t.integer :total_quantity
       t.decimal :total_price, :precision => 10, :scale => 2
       t.decimal :discount, :precision => 10, :scale => 2
@@ -21,8 +21,8 @@ class CreateOrders < ActiveRecord::Migration
 
     add_index :orders, [:order_number], :unique => true, name: :ui_order_number
  
-    add_foreign_key :orders, :representatives, name: :fk_orders_on_rep_id
-    add_index :orders, [:representative_id], name: :i_orders_on_rep_id
+    # add_foreign_key :orders, :representatives, name: :fk_orders_on_rep_id
+    # add_index :orders, [:representative_id], name: :i_orders_on_rep_id
  
     # domain_name CURRENCY
     add_foreign_key :orders, :domains, name: :fk_orders_on_domain_id

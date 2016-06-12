@@ -16,6 +16,8 @@ class Company < ActiveRecord::Base
   belongs_to :domain, inverse_of: :companies
   validates :domain, presence: true
 
+  # belongs_to :user, inverse_of: :companies
+
   # validates :city, presence: true
   validates :city, length: { maximum: 30 }, on: :create
 
@@ -26,8 +28,7 @@ class Company < ActiveRecord::Base
 
   validates :phone, length: { maximum: 100 }, on: :create
 
-  has_many :representatives, inverse_of: :company, dependent: :destroy
-
+  # has_many :representatives, inverse_of: :company, dependent: :destroy
   has_many :users, through: :representatives
 
 end

@@ -53,16 +53,16 @@ User.create(email: 'daug@didmena.lt', fname: 'DAUG', lname: 'KASNORS', password:
 User.create(email: 'uzsakovas2@didmena.lt', fname: 'ANTRAS', lname: 'UZSAKOVAS', password: 'didmena', password_confirmation: 'didmena', status: 'inactive',  apps_manager: false)
 
 ## COMPANIES:
-Company.create(title: "Aiste inc.", email: "aiste@aiste.ca", status: "active", domain_id: 13, city: "Vilnius", street: "Konarskio", postal_code: "LT-0234", phone: "613 929 2222")
-Company.create(title: "Perku inc.", email: "perku@didmena.ca", status: "active", domain_id: 13, city: "Vilnius", street: "Konarskio", postal_code: "LT-0234", phone: "613 929 2222")
-Company.create(title: "Didmena inc.", email: "didmena@didmena.ca", status: "inactive", domain_id: 13, city: "Vilnius", street: "Konarskio", postal_code: "LT-0234", phone: "613 929 2222")
+# Company.create(title: "Aiste inc.", email: "aiste@aiste.ca", status: "active", domain_id: 13, city: "Vilnius", street: "Konarskio", postal_code: "LT-0234", phone: "613 929 2222")
+# Company.create(title: "Perku inc.", email: "perku@didmena.ca", status: "active", domain_id: 13, city: "Vilnius", street: "Konarskio", postal_code: "LT-0234", phone: "613 929 2222")
+# Company.create(title: "Didmena inc.", email: "didmena@didmena.ca", status: "inactive", domain_id: 13, city: "Vilnius", street: "Konarskio", postal_code: "LT-0234", phone: "613 929 2222")
 
-## REPRESENTATIVE:
-Representative.create(user_id: 1, company_id: 1)
-Representative.create(user_id: 2, company_id: 2)
-Representative.create(user_id: 3, company_id: 3)
-Representative.create(user_id: 4, company_id: 1)
-Representative.create(user_id: 5, company_id: 2)
+# ## REPRESENTATIVE:
+# Representative.create(user_id: 1, company_id: 1)
+# Representative.create(user_id: 2, company_id: 2)
+# Representative.create(user_id: 3, company_id: 3)
+# Representative.create(user_id: 4, company_id: 1)
+# Representative.create(user_id: 5, company_id: 2)
 
 # ## MODEL:
 

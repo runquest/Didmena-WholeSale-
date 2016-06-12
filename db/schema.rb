@@ -71,22 +71,20 @@ ActiveRecord::Schema.define(version: 20160403164834) do
   add_index "models", ["gender_id"], name: "i_models_on_gender_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.string   "order_number",      limit: 20,                           null: false
-    t.date     "order_date",                                             null: false
-    t.integer  "representative_id",                                      null: false
+    t.string   "order_number",   limit: 20,                           null: false
+    t.date     "order_date",                                          null: false
     t.integer  "total_quantity"
-    t.decimal  "total_price",                   precision: 10, scale: 2
-    t.decimal  "discount",                      precision: 10, scale: 2
+    t.decimal  "total_price",                precision: 10, scale: 2
+    t.decimal  "discount",                   precision: 10, scale: 2
     t.integer  "domain_id"
-    t.string   "contact",           limit: 100
+    t.string   "contact",        limit: 100
     t.text     "note"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
 
   add_index "orders", ["domain_id"], name: "i_orders_on_domain_id", using: :btree
   add_index "orders", ["order_number"], name: "ui_order_number", unique: true, using: :btree
-  add_index "orders", ["representative_id"], name: "i_orders_on_rep_id", using: :btree
 
   add_check "orders", "(total_quantity > 0)", name: "order_total_quantity_chk"
   add_check "orders", "(total_price > (0)::numeric)", name: "order_total_price_chk"
@@ -123,24 +121,13 @@ ActiveRecord::Schema.define(version: 20160403164834) do
 
   add_check "purchases", "(quantity > 0)", name: "purchase_quantity_chk"
 
-  create_table "representatives", force: :cascade do |t|
-    t.integer  "company_id", null: false
-    t.integer  "user_id",    null: false
-    t.text     "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "representatives", ["company_id", "user_id"], name: "ui_reps", unique: true, using: :btree
-  add_index "representatives", ["company_id"], name: "i_reps_on_company_id", using: :btree
-  add_index "representatives", ["user_id"], name: "i_reps_on_user_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "email",           limit: 100, null: false
     t.string   "fname",           limit: 31,  null: false
     t.string   "lname",           limit: 31,  null: false
     t.string   "password_digest",             null: false
     t.string   "status",          limit: 20,  null: false
+    t.integer  "company_id"
     t.boolean  "apps_manager"
     t.string   "phone",           limit: 100
     t.text     "description"
@@ -156,12 +143,9 @@ ActiveRecord::Schema.define(version: 20160403164834) do
   add_foreign_key "models", "domains", column: "category_id", name: "fk_models_on_category_id"
   add_foreign_key "models", "domains", column: "gender_id", name: "fk_models_on_gender_id"
   add_foreign_key "orders", "domains", name: "fk_orders_on_domain_id"
-  add_foreign_key "orders", "representatives", name: "fk_orders_on_rep_id"
   add_foreign_key "products", "domains", column: "color_id", name: "fk_products_on_color_id"
   add_foreign_key "products", "domains", column: "size_id", name: "fk_products_on_size_id"
   add_foreign_key "products", "models", name: "fk_products_on_model_id"
   add_foreign_key "purchases", "orders", name: "fk_purchase_on_order_id", on_delete: :cascade
   add_foreign_key "purchases", "products", name: "fk_purchase_on_product_id", on_delete: :cascade
-  add_foreign_key "representatives", "companies", name: "fk_reps_on_company_id", on_delete: :cascade
-  add_foreign_key "representatives", "users", name: "fk_reps_on_user_id", on_delete: :cascade
 end

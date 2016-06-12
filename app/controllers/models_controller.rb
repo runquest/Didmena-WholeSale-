@@ -23,7 +23,7 @@ class ModelsController < ApplicationController
   # GET /models/1/edit
   def edit
     @model = Model.find(params[:id])
-    # @model_attachments = @model.model_attachments
+    @model_attachments = @model.model_attachments
 
 
     if @model.products.any?
@@ -87,11 +87,11 @@ class ModelsController < ApplicationController
     @model.model_attachments(params[:model])
     
     if @model.products.empty? || !productsInStore(@model.products)
-        flash[:notice] = "no products!"
-        redirect_to :back
-
+      flash[:notice] = "no products!"
+      redirect_to :back
     else
-      if @model.save
+      if @model.update_attributes(model_params)
+        binding.pry
         if !params[:model_attachments].nil?
           params[:model_attachments]['avatar'].each do |a|
             @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
