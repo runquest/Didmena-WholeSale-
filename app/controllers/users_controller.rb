@@ -17,7 +17,9 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @company = @user.companies.build
+    @companies = Company.all
+
+    # @company = @user.companies.build
   end
 
   # GET /users/1/edit
@@ -30,18 +32,18 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-              # binding.pry
+              binding.pry
 
-      if !params[:user][:companies].nil?
-        binding.pry
-        # params[:companies].each do |c|
-          # @companies = @user.companies.create(params[:companies])
-          @user.companies(params[:user]).create(:company => params[:user][:companies])
-          # @user.companies.create(:companies => params[:user][:companies])
-        # end
+      # if !params[:user][:companies].nil?
+      #   binding.pry
+      #   # params[:companies].each do |c|
+      #     # @companies = @user.companies.create(params[:companies])
+      #     @user.companies(params[:user]).create(:company => params[:user][:companies])
+      #     # @user.companies.create(:companies => params[:user][:companies])
+      #   # end
 
-        # @model.model_attachments(params[:model]).create(:avatar => a)
-      end
+      #   # @model.model_attachments(params[:model]).create(:avatar => a)
+      # end
       redirect_to @user
     else
       render :new
@@ -107,7 +109,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :fname, :lname, :password, :password_confirmation, :status, :apps_manager, :phone, :description)
+      params.require(:user).permit(:email, :fname, :lname, :password, :password_confirmation, :status, :apps_manager, :phone, :description, :company_id)
     end
 
     def company_params

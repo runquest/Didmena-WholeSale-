@@ -1,5 +1,4 @@
-<div class="container">
-  <div class="row">
+<div class="container"> <div class="row">
     <div class="col s8">
       <%= form_for(@user) do |f| %>
         <% if @user.errors.any? %>
@@ -37,6 +36,13 @@
         </div>
 
         <div class="row">
+          <div class="input-field col s12">
+          <%= f.collection_select :company_id, Company.all, :id, :title, { prompt: "Choose company" }, class: "browser-default" %>
+
+          </div>
+        </div>
+
+        <div class="row">
           <div class="input-field col s6">
             <%= f.label :password, 'Password' %><br>
             <%= f.text_field :password %>
@@ -54,67 +60,6 @@
           </div>
         </div>
         <hr/>
-
-        <%= f.fields_for :companies do |c| %>
-
-      <% if !@company.nil? %>
-      <% if @company.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
-          <ul>
-          <% @company.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <% end %>
-
-    <div class="row">
-      <div class="input-field col s6">
-        <%= c.label :title, 'Company name' %><br>
-        <%= c.text_field :title %>
-        <%= c.hidden_field :status, :value => 'active'%>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="input-field col s6">
-        <%= c.label :phone %><br>
-        <%= c.text_field :phone %>
-      </div>
-      <div class="input-field col s6">
-        <%= c.label :email, 'Company email address' %><br>
-        <%= c.text_field :email %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s6">
-        <%= c.label :street, 'Street address' %><br>
-        <%= c.text_field :street %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s6">
-        <%= c.label :city, 'City' %><br>
-        <%= c.text_field :city %>
-      </div>
-      <div class="input-field col s6">
-      <%= c.label :postal_code %><br>
-      <%= c.text_field :postal_code %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s6 browser-default">
-        <%= c.collection_select :domain_id, Domain.all.where(domain_name: "COUNTRY"), :id, :meaning, { prompt: "Choose a country" }, class: "browser-default" %>
-      </div>
-    </div>
-        <%end%>
 
         <div class="actions">
           <%= f.submit %>

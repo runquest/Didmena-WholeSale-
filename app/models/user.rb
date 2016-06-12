@@ -24,10 +24,12 @@ class User < ActiveRecord::Base
 
   validates :phone, length: { maximum: 100 }
   # validates :phone, length: { maximum: 100 }, on: :create
+  belongs_to :company;
+  # has_many :representatives, inverse_of: :user, dependent: :destroy
 
-  has_many :representatives, inverse_of: :user, dependent: :destroy
-
-  has_many :companies, through: :representatives
+  has_many :companies, inverse_of: :user, dependent: :destroy
+  # has_many :companies, through: :representatives
+  accepts_nested_attributes_for :companies
 
   before_validation :uppercase_fields
 
