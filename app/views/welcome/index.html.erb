@@ -24,6 +24,7 @@
     <% end %>    
   </div>
   <hr/>
+  <%= button_to "send email", action: "email_sent" %>
   <div class="row">
     <% if @models.any? %>
       <% @models.each do |model| %>
