@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
+# ruby '2.2.0'
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -47,3 +48,12 @@ gem "rmagick"
 gem 'pry'
 
 gem 'mini_magick'
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
+gem 'coffee-script-source', '1.8.0'
+
+#gem 'dotenv-rails', :groups => [:development, :test]
+#gem 'dotenv-rails'
+
+gem 'figaro'

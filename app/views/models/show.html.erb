@@ -3,21 +3,6 @@
   </div>
   <div class="row">
     <div class="col s6">
-      <% if @model_attachments.any? %>
-          <%= image_tag @model_attachments[0].avatar_url, :class => "prod_image" %>
-
-          <% @model_attachments.each do |p| %>
-            <div>
-              <%= image_tag p.avatar_url, :class => "prod_image_small" %>
-              <% if current_user && current_user.apps_manager %>
-                <%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
-              <% end %></div>
-          <% end %>
-        <% else %>
-            <img src="http://placehold.it/350x150">
-        <% end %>
-    </div>
-    <div class="col s6">
       <div class="card">
         <% if current_user && current_user.apps_manager %>
           <div class="card-action center">

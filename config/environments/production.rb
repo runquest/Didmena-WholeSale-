@@ -68,6 +68,8 @@ Rails.application.configure do
   # config.action_mailer.default_url_options = { :host => "https://serene-ridge-97774.herokuapp.com" }
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
+#   :domain               => "gmail.com",
+#   :authentication       => "login",
   config.action_mailer.smtp_settings = {
    :address              => "smtp.gmail.com",
    :port                 => 587,
@@ -91,16 +93,16 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Direct upload AWS S3
-  CarrierWave.configure do |config|
+#  CarrierWave.configure do |config|
     
-    config.fog_credentials = {
-      :provider               => 'AWS',       # required
-      :aws_access_key_id      => ENV["AWS_KEY"],       # required
-      :aws_secret_access_key  => ENV["AWS_SECRET"],       # required
-      :region                 => 'us-west-2'  # optional, defaults to 'us-east-1'
-    }
+#    config.fog_credentials = {
+#      :provider               => 'AWS',       # required
+#      :aws_access_key_id      => ENV["AWS_KEY"],       # required
+#      :aws_secret_access_key  => ENV["AWS_SECRET"],       # required
+#      :region                 => 'us-west-2'  # optional, defaults to 'us-east-1'
+#    }
     config.fog_directory  = ENV["S3_BUCKET_NAME"] # required
     # see https://github.com/jnicklas/carrierwave#using-amazon-s3
     # for more optional configuration
-  end
+ # end
 end
