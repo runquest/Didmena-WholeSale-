@@ -47,3 +47,6 @@ gem "rmagick"
 gem 'pry'
 
 gem 'mini_magick'
+
+gem 'figaro'
+

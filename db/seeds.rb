@@ -46,7 +46,7 @@ Domain.create(domain_name: 'CURRENCY', code_value: 'RUR', meaning: 'Ruble')
 
 
 ## USERS:
-User.create(email: 'aiste@aiste.ca', fname: 'AISTE', lname: 'ULO', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: true)
+User.create(email: 'aiste.ulozaite@gmail.com', fname: 'AISTE', lname: 'ULO', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: true)
 User.create(email: 'edvinas@didmena.lt', fname: 'EDVINAS', lname: 'ULOZA', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: true)
 User.create(email: 'uzsakovas@didmena.lt', fname: 'UZSAKOVAS', lname: 'KASNORS', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: false)
 User.create(email: 'daug@didmena.lt', fname: 'DAUG', lname: 'KASNORS', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: false)
