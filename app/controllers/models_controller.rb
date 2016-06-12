@@ -12,6 +12,15 @@ class ModelsController < ApplicationController
   def show
     @products = Product.where(model_id: @model.id)
     @model_attachments = @model.model_attachments.all
+    # Linas sending email START
+    respond_to do |format|
+      @user = User.first
+      DidmenaMailer.first_email(@user).deliver_now
+      # format.html { redirect_to @user, notice: 'User was successfully created.' }
+      format.html { redirect_to @user, notice: 'Linas sent first email.' }
+      #       format.json { render :show, status: :created, location: @user }
+    end
+    # Linas sending email END
   end
 
   # GET /models/new
