@@ -91,7 +91,6 @@ class ModelsController < ApplicationController
       redirect_to :back
     else
       if @model.update_attributes(model_params)
-        binding.pry
         if !params[:model_attachments].nil?
           params[:model_attachments]['avatar'].each do |a|
             @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)

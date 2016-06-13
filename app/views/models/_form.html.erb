@@ -1,5 +1,5 @@
 <div class="container">
-<p id="notice"><%= notice %></p>
+<p id="notice flash-message"><%= notice %></p>
 
 <%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
   <% if @model.errors.any? %>
@@ -63,18 +63,18 @@
 
   <div class="row">
     <div class="col 6">
-      <%= f.number_field(:price, :placeholder => "Price $ (e.g. 10.15)", step: 0.05) %>
+      EUR <%= f.number_field(:price, :placeholder => "Price $ (e.g. 10.15)", step: 0.05) %>
     </div>
   </div>
   <div class="row">
     <div class="input-field materialize-textarea col s12">
-        <%= f.text_area :note, :placeholder => "Notes" %>
+        Description: <%= f.text_area :note, :placeholder => "Notes" %>
     </div>
   </div>
   <hr/>
   <div class="row">
     <div class="col 12">
-      <button id="model_button" class="btn waves-effect waves-light" >submit</button>
+      <button id="model_button" class="btn waves-effect waves-light" >save</button>
     </div>
   </div>
 <% end %>
