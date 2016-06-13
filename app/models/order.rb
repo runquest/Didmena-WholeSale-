@@ -6,7 +6,7 @@ class Order < ActiveRecord::Base
   validates :order_number, format: { with: /\A[A-Z0-9]{1,20}\Z/, message: "only allows uppercase letters and digits"}
 
   belongs_to :representative, inverse_of: :orders
-  validates :representative, presence: true
+  # validates :representative, presence: true
 
   # domain CURRENCY !!!
   belongs_to :domain, inverse_of: :orders

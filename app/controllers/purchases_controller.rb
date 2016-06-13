@@ -18,17 +18,14 @@ class PurchasesController < ApplicationController
 
     @order_number = Time.now.strftime("%Y%d%m%H%M%S")
 
-    @order = Order.new(order_number: @order_number, order_date: Time.now, representative_id: current_user.id)
+    @order = Order.new(order_number: @order_number, order_date: Time.now)
     @order.save
 
     cart.each do |product_id, quantity, total_quantity|
       @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
     end
-
     @purchases_for_order = Order.find(@order.id).purchases
-    # Notifier.welcome_email.deliver_now
     session[:cart] = nil
-    # redirect_to root_path
   end
 
   private

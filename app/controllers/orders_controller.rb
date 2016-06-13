@@ -9,21 +9,21 @@ end
   def show
   end
 
-#   # GET /orders/new
-#   def new
-#     @order = Order.new
-#   end
+  # GET /orders/new
+  def new
+    @order = Order.new
+  end
 
   # GET /orders/1/edit
   def edit
   end
 
-#   # POST /orders
-#   # POST /orders.json
-#   def create
-#     @order = Order.new(order_params)
-#     @order.save
-#   end
+  # POST /orders
+  # POST /orders.json
+  def create
+    @order = Order.new(order_params)
+    @order.save
+  end
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
@@ -57,6 +57,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:order_number, :order_date, :representative_id, :total_quantity, :total_price, :discount, :domain_id, :contact, :note)
+      params.require(:order).permit(:order_number, :order_date, :total_quantity, :total_price, :discount, :domain_id, :contact, :note)
     end
 end

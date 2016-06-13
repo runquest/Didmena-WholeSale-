@@ -1,11 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col s12">
-      <h4>This is your cart</h4>
-      <div><%= link_to 'Empty Your Cart', cart_clear_path %></div>
+      <h4>Cart</h4>
       <div class="row">
       <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
+        <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
       <% end %>
               <div class="col s8 offset-s2">
           <table>
@@ -34,9 +33,14 @@
           </table>
         </div>
       </div>
-      <div><b>Total cost: </b>EUR <%= total %></div>
+      <h6 class="right"><b>Total cost: </b>EUR <%= total %></h6>
+      <br>
+            <br>
+      <br>
+
       <div class=".align-right">
-        <%= link_to "Confirm order", purchases_path(total_quantity: total), method: :post %></div>
+        <%= link_to "Confirm order", purchases_path(total_quantity: total), method: :post, :class => "btn waves-effect waves-light right" %></div>
+      <div><%= link_to 'Empty Your Cart', cart_clear_path, :class => "btn waves-effect waves-light left" %></div>
     </div>
   </div>
 </div>
