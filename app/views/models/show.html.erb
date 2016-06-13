@@ -1,60 +1,76 @@
 <div class="container">
   <div class="row">
-  </div>
-  <div class="row">
     <div class="col s6">
       <% if @model_attachments.any? %>
- <!--          <%#= image_tag @model_attachments[0].avatar_url, :class => "prod_image" %> -->
-          <!-- <div class="col s12"> -->
             <% @model_attachments.each do |p| %>
               <% if current_user && current_user.apps_manager %>
-                <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' }, :class => "center-align" %><br>
-                <%= image_tag p.avatar_url, :class => "prod_image_small" %>
+                <div class="card">
+                  <div class="card-image">
+                    <%= image_tag p.avatar_url, :class => "prod_image_small" %>
+                  </div>
+                  <div class="card-action">
+                    <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' }, :class => "center-align" %>
+                  </div>
+                </div>
               <% end %>
             <% end %>
-          <!-- </div> -->
         <% else %>
             <img src="http://placehold.it/350x150">
         <% end %>
     </div>
-    <div class="col s6">
-      <div class="card">
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col s6">     
+      <div class="card-content">
+        <p><%= Domain.find(@model.gender_id).meaning %> <%= Domain.find(@model.category_id).meaning %></p>
+        <h3><%= @model.title %></h3>
+        <h4 style="color: orange">$<%= @model.price %></h4>
+        <p><%= @model.note %></p>
+        </div>
         <% if current_user && current_user.apps_manager %>
           <div class="card-action center">
             <%= link_to 'Edit', edit_model_path(@model) %> |
             <%= link_to 'Back', models_path %>
           </div>
         <% end %>
-        <div class="card-content">
-          <p><%= Domain.find(@model.gender_id).meaning %> <%= Domain.find(@model.category_id).meaning %></p>
-        <h3><%= @model.title %></h3>
-        <h4 style="color: orange">$<%= @model.price %></h4>
-        <p><%= @model.note %></p>
-        </div>
+    </div>
 
-          <div class="card-action center">
-            <table id="product_table">
-              <thead>
-                <tr>
-                    <th data-field="color">Color</th>
-                    <th data-field="size">Size</th>
-                    <th colspan="3" data-field="quantity">Quantity</th>
-                    <th colspan="3"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% if @products.any? %>
-                  <% @products.each do |product| %>
-                    <% if product.in_storage %>
-                      <tr><%= render "product_row", product: product, purchase: @purchase %></tr>
-                    <% end %>
+    <div class="col s6">
+      <table id="product_table">
+        <thead>
+          <tr>
+            <th></th>
+            <th data-field="id">Color</th>
+            <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
+              <% sizes.each do |size| %>
+                <th data-field='<%= size.code_value%>' colspan="3" class="center-align"><%= size.code_value%></th>
+              <% end %> 
+          </tr>
+        </thead>
+        <tbody id="color_row">
+          <% if @products.any? %>
+            <% @colors.each do |color| %>
+              <% value = Domain.find(color).meaning%>
+              <tr id='<%= value %>'>
+                <td style="background-color: <%= value %>; width: 5%;"></td>
+                <td style="padding-left: 10px;"><%= value %></td>
+                <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
+                <% sizes.each do |size| %>
+                  <% product = Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id).exists? && Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id).take %>
+                  <%if product.in_storage %>
+                    <td class="product_row center-align" colspan="3" >
+                      <%= hidden_field_tag "product_id", product.id %>
+                      <%= number_field_tag :quantity, params[:quantity], min: 1, class: 'special_input' %>
+                    </td>
                   <% end %>
-                <% end %>          
-              </tbody>
-            </table>
-            <button class="btn waves-effect waves-light order_button" style="width: 100%">order</button>
-          </div>
-      </div>
+                <%end%>
+              </tr>
+            <% end %>
+          <%end%>
+        </tbody>
+      </table>
+      <button class="btn waves-effect waves-light order_button offset-s2 col s10">order</button>
     </div>
   </div>
 </div>
