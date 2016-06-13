@@ -2,11 +2,27 @@
   <div class="row">
     <div class="col s12">
       <h4>Cart</h4>
+      <div><%= link_to 'Back', models_path %></div><br>
+        <div class="row">
+          <div class="col s12">
+
+            User name: <%= current_user.fname + " " + current_user.lname %><br>
+            E-mail: <%= current_user.email %>
+            <% company = Company.find(current_user.company_id) %><br>
+            Company: <%= company.title %><br>
+            Address: <%= company.street + " " + company.city + " " + company.postal_code%><br>
+            Phone #: <%= company.phone %><br>
+            <br>
+            <div><%= link_to 'Edit profile', edit_user_path(current_user) %></div><br>
+          </div>
+        </div>
+      <hr/>
+
       <div class="row">
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
       <% end %>
-              <div class="col s8 offset-s2">
+        <div class="col s8 offset-s2">
           <table>
             <thead>
               <tr>
@@ -26,7 +42,6 @@
                   <% price = Model.find(product.model_id).price %>
                   <tr><%= render "cart_row", product: product, quantity: quantity, price: price %></tr>
                   <% total += quantity.to_i * price %>
-
                 <% end %>
               <% end %>          
             </tbody>
@@ -35,9 +50,8 @@
       </div>
       <h6 class="right"><b>Total cost: </b>EUR <%= total %></h6>
       <br>
-            <br>
       <br>
-
+      <br>
       <div class=".align-right">
         <%= link_to "Confirm order", purchases_path(total_quantity: total), method: :post, :class => "btn waves-effect waves-light right" %></div>
       <div><%= link_to 'Empty Your Cart', cart_clear_path, :class => "btn waves-effect waves-light left" %></div>
