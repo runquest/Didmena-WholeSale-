@@ -1,24 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+<h2>show</h2>
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <p class="align-center">Thank you for your order.</p>
+      <p class="align-center"> Confirmation email has been sent to <%= current_user.email %>.</p>
+      <h6 class="align-center"> Your order number: <%= @order_number %></h6>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="col s8 offset-s2">
+          <table>
+            <thead>
+              <tr>
+                <th data-field="model-title">Product ID</th>
+                <th data-field="product-color">Model title</th>
+                <th data-field="product-size">Color</th>
+                <th data-field="product-size">Size</th>
+                <th data-field="quantity">Quantity</th>
+                <th colspan="2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @purchases_for_order.any? %>
+                <% @purchases_for_order.each do |pfo| %>
+                <% binding.pry %>
 
-<p>
-  <strong>Order:</strong>
-  <%= @purchase.order_id %>
-</p>
-
-<p>
-  <strong>Product:</strong>
-  <%= @purchase.product_id %>
-</p>
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @purchase.quantity %>
-</p>
-
-<p>
-  <strong>Note:</strong>
-  <%= @purchase.note %>
-</p>
-
-<%= link_to 'Edit', edit_purchase_path(@purchase) %> |
-<%= link_to 'Back', purchases_path %>
+                  <tr><%= render "purchase_row", purchases_for_order: pfo %></tr>
+                <% end %>
+              <% end %>          
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
