@@ -59,10 +59,16 @@
                 <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
                 <% sizes.each do |size| %>
                   <% product = Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id).exists? && Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id).take %>
+                  <!-- <#% binding.pry %> -->
                   <%if product.in_storage %>
                     <td class="product_row center-align" colspan="3" >
                       <%= hidden_field_tag "product_id", product.id %>
                       <%= number_field_tag :quantity, params[:quantity], min: 1, class: 'special_input' %>
+                    </td>
+                  <% else %>
+                    <td class="product_row center-align" colspan="3" >
+                      <%= hidden_field_tag "product_id", product.id %>
+                      <%= number_field_tag :quantity, params[:quantity], min: 1, class: 'special_input', disabled: true %>
                     </td>
                   <% end %>
                 <%end%>
