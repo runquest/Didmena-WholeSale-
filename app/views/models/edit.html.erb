@@ -39,7 +39,7 @@
                 <% @colors.each do |color| %>
                   <% value = Domain.find(color).meaning%>
                   <tr id='<%= value %>'>
-                    <td style="background-color: <%= value %>; width: 5%;"></td>
+                    <td style="background-color: #<%= value %>; width: 5%;"></td>
                     <td style="padding-left: 10px;"><%= value %></td>
                     <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
                     <% sizes.each do |size| %>
@@ -57,6 +57,11 @@
               <% end %>
             </tbody>
           </table>
+          <div class="row">
+            <% flash.each do |key, value| %>
+              <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

@@ -110,7 +110,7 @@ class ModelsController < ApplicationController
     @model.model_attachments(params[:model])
     
     if @model.products.empty? || !productsInStore(@model.products)
-      flash[:notice] = "no products!"
+      flash[:notice] = "no products selected"
       redirect_to :back
     else
       if @model.update_attributes(model_params)

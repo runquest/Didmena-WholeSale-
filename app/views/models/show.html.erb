@@ -54,7 +54,7 @@
             <% @colors.each do |color| %>
               <% value = Domain.find(color).meaning%>
               <tr id='<%= value %>'>
-                <td style="background-color: <%= value %>; width: 5%;"></td>
+                <td style="background-color: #<%= value %>; width: 5%;"></td>
                 <td style="padding-left: 10px;"><%= value %></td>
                 <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
                 <% sizes.each do |size| %>
