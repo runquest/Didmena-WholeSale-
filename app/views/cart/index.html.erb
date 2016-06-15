@@ -5,18 +5,19 @@
       <div><%= link_to 'Back', models_path %></div><br>
         <div class="row">
           <div class="col s6">
-
             User name: <%= current_user.fname + " " + current_user.lname %><br>
             E-mail: <%= current_user.email %><br>
             <%= link_to 'Edit profile', edit_user_path(current_user) %>
           </div>
 
           <div class="col s6">
+          <% if !current_user.company_id == null %>
             <% company = Company.find(current_user.company_id) %>
             Company: <%= company.title %><br>
             Address: <%= company.street + " " + company.city + " " + company.postal_code%><br>
             Phone #: <%= company.phone %><br>
             <br>
+          <% end %>
           </div>
         </div>
       <hr/>
