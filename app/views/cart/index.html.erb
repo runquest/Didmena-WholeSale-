@@ -41,7 +41,6 @@
               <% if @cart.any? %>
                 <% total = 0 %>
                 <% @cart.each do |id, quantity| %>
-                  <% binding.pry %>
                   <% product = Product.find(id) %>
                   <% price = Model.find(product.model_id).price %>
                   <tr><%= render "cart_row", product: product, quantity: quantity, price: price %></tr>
