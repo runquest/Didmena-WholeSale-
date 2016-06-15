@@ -11,7 +11,7 @@
           </div>
 
           <div class="col s6">
-          <% if !current_user.company_id == null %>
+          <% if !current_user.company.nil? %>
             <% company = Company.find(current_user.company_id) %>
             Company: <%= company.title %><br>
             Address: <%= company.street + " " + company.city + " " + company.postal_code%><br>
