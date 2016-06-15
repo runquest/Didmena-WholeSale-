@@ -1,10 +1,11 @@
 class CartController < ApplicationController
 
   def add
-
     @items = params[:_json]
 
     @items.each do |item|
+          binding.pry
+
       id = item[:product_id]
       quantity = item[:quantity]
 

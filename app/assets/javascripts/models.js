@@ -57,7 +57,6 @@ $(function() {
   });
 
   $('#add_color').on("click", function(event){
-    console.log('button click');
     // var keycode = (event.keyCode ? event.keyCode : event.which);
     if (null != $("#color_box").val()) {
 
@@ -125,7 +124,6 @@ $(function() {
   /// creating selectors
   $("tbody#color_row").on("click", ".size", function() { 
 
-    console.log('click on size');
     var rows = document.getElementById("colorSize").rows;
     var str = window.location.href;
     var n = str.match(/\/(\d+)\//);
@@ -133,7 +131,7 @@ $(function() {
 
     var color = this.id.match(/(\w+)/);
     var size = this.id.match(/\w+$/);
-    console.log('inside size ' + this.checked);
+
     if (this.checked) {
       var product_data = {model: model_id, color: color, size: size, in_storage: true};
     } else {
@@ -159,20 +157,30 @@ $(function() {
 
     var order_items = [];
 
-    $('#product_table tr').each(function() {
-      var product_id = $(this).find("#product_id").val();
-      var quantity = $(this).find("#quantity").val();
+    var rowsNumber = $("#product_table tr").length;
 
-      if (!!quantity) {
-        if (quantity < 0) {
-          alert('You cannot order negative number of products');
-          return false;
-        } else {
-          var item_data = {product_id: product_id, quantity: quantity}
-          order_items.push(item_data);
-        };
-      }
-    });
+    for (var i = 1; i < rowsNumber; i++) {
+      var row = $("#product_table tr")[i];
+      // var color_name = row.id;
+
+      for (var j = 2; j < row.children.length; j++) {
+
+          var quantity = $("#product_table tr")[i].children[j].getElementsByTagName("input")[1].value
+          
+          if (!!quantity) {
+            if (quantity < 0) {
+              alert('You cannot order negative number of products');
+              return false;
+            } else {
+
+              var product_id = $("#product_table tr")[i].children[j].getElementsByTagName("input")[0].value
+
+              var item_data = {product_id: product_id, quantity: quantity}
+              order_items.push(item_data);
+            };
+          }
+      };
+    };
 
     if (order_items.length > 0) {
       
