@@ -12,6 +12,29 @@ class ModelsController < ApplicationController
   def show
     @products = Product.where(model_id: @model.id)
     @model_attachments = @model.model_attachments.all
+
+
+    @colors = Array.new;
+    @sizes = Domain.where(domain_name: 'SIZE')
+
+    # binding.pry
+
+    @products.each do |prdct|
+      if !@colors.include? prdct.color_id
+        color_size = []
+        @sizes.each do |size|
+          p = Product.where(color_id: prdct.color_id).where(size_id: size.id).take
+          if p.in_storage
+            color_size.push(p)
+            # @colors.push(prdct.color_id)
+          end
+        end
+
+        if color_size.any?
+          @colors.push(prdct.color_id)
+        end
+      end
+    end
   end
 
   # GET /models/new
@@ -87,11 +110,10 @@ class ModelsController < ApplicationController
     @model.model_attachments(params[:model])
     
     if @model.products.empty? || !productsInStore(@model.products)
-      flash[:notice] = "no products!"
+      flash[:notice] = "no products selected"
       redirect_to :back
     else
       if @model.update_attributes(model_params)
-        binding.pry
         if !params[:model_attachments].nil?
           params[:model_attachments]['avatar'].each do |a|
             @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)

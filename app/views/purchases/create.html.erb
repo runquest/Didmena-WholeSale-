@@ -1,8 +1,14 @@
 <div class="container">
   <div class="row">
+    <div class="col s8 offset-s2">
+      <p class="align-center">Thank you for your order.</p>
+      <p class="align-center"> Confirmation email has been sent to <%= current_user.email %>.</p>
+      <h6 class="align-center"> Your order number: <%= @order_number %></h6>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
     <div class="col s12">
-      <h4>Order sent.</h4>
-      <h4> Order # <%= @order_number %></h4>
       <div class="row">
         <div class="col s8 offset-s2">
           <table>
@@ -26,6 +32,11 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <%= link_to t("header.logout"), session_path("current"), method: :delete, :class => "btn waves-effect waves-light left"  %>
     </div>
   </div>
 </div>

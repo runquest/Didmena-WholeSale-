@@ -2,33 +2,43 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
   def create
-
-    total_quantity = params[:total_quantity]
-    if total_quantity.to_i < 1 then
+   if session[:cart].nil? || session[:cart].empty?
       flash[:alert] = 'no items in the cart'
       redirect_to :back
-    end
-    
-    if session[:cart] then
-      cart = session[:cart]
     else
-      session[:cart] = {}
-      cart = session[:cart]
+      if session[:cart] then
+        cart = session[:cart]
+      else
+        session[:cart] = {}
+        cart = session[:cart]
+      end
+
+      @order_number = Time.now.strftime("%Y%d%m%H%M%S")
+
+      total_purchase_price = 0
+
+      cart.each do |item|
+
+        product = Product.find(item[0])
+        product_id = product.id
+        model = Model.find(product.model_id)
+        price = model.price.to_i
+        quantity = item[1].to_i
+        total_price = price * quantity
+
+        total_purchase_price += total_price
+      end
+
+      @order = Order.new(order_number: @order_number, order_date: Time.now, total_price: total_purchase_price, contact: current_user.id)
+
+      @order.save
+
+      cart.each do |product_id, quantity|
+        @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
+      end
+      @purchases_for_order = Order.find(@order.id).purchases
+      session[:cart] = nil
     end
-
-    @order_number = Time.now.strftime("%Y%d%m%H%M%S")
-
-    @order = Order.new(order_number: @order_number, order_date: Time.now, representative_id: current_user.id)
-    @order.save
-
-    cart.each do |product_id, quantity, total_quantity|
-      @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
-    end
-
-    @purchases_for_order = Order.find(@order.id).purchases
-    # Notifier.welcome_email.deliver_now
-    session[:cart] = nil
-    # redirect_to root_path
   end
 
   private
