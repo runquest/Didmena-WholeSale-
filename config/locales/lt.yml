@@ -49,3 +49,23 @@ lt:
     do_title: "Ką mes darome"
     do_description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
     contact_title: "Susisiekite su mumis"
+
+
+  cart:
+    
+    # cart: "Vezimelis"
+    username: "Vartotojo vardas: "
+    email: "El.paštas: "
+    edit_profile: "Redaguoti kontaktus"
+    company: "Imone"
+    address: "Adresas"
+    phone: "Telefono # "
+    back: "Atgal"
+    product: "Produktas"
+    color: "Spalva"
+    size: "Dydis"
+    quantity: "Kiekis"
+    cost: "Kaina"
+    total_cost: "Galutine kaina"
+    confirm_order: "Patvirtinti"
+    empty_cart: "Istrinti"
