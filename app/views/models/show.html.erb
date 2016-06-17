@@ -9,7 +9,7 @@
                     <%= image_tag p.avatar_url, :class => "prod_image_small" %>
                   </div>
                   <div class="card-action">
-                    <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' }, :class => "center-align" %>
+                    <%= link_to t('model.delete'), p, method: :delete, data: { confirm: 'Are you sure?' }, :class => "center-align" %>
                   </div>
                 </div>
               <% end %>
@@ -31,8 +31,8 @@
         <hr/>
         <% if current_user && current_user.apps_manager %>
           <div class="card-action center">
-            <%= link_to 'Edit', edit_model_path(@model) %> |
-            <%= link_to 'Back', models_path %>
+            <%= link_to t('model.edit'), edit_model_path(@model) %> |
+            <%= link_to t('model.back'), models_path %>
           </div>
         <% end %>
     </div>
@@ -42,7 +42,7 @@
         <thead>
           <tr>
             <th></th>
-            <th data-field="id">Color</th>
+            <th data-field="id"><%= t('model.color') %></th>
             <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
               <% sizes.each do |size| %>
                 <th data-field='<%= size.code_value%>' colspan="3" class="center-align"><%= size.code_value%></th>
@@ -76,7 +76,7 @@
           <%end%>
         </tbody>
       </table>
-      <button class="btn waves-effect waves-light order_button offset-s2 col s10">order</button>
+      <button class="btn waves-effect waves-light order_button offset-s2 col s10"><%= t('model.order') %></button>
     </div>
   </div>
 </div>

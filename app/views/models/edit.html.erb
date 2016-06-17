@@ -5,12 +5,12 @@
   <div class="row">
     <div class="col s6">
       <%= render 'form' %>
-      <%= link_to 'Back', @model %>
+      <%= link_to t('back'), @model %>
     </div>
     <div class="col s6">
       <div class="row">
         <div class="col s12">
-          <h5>Colors & Sizes</h5>
+          <h5><%= t('model.color_and_size')%></h5>
         </div>
       </div>
       <div class="row">
@@ -18,7 +18,7 @@
           <%= text_field_tag 'color_box', nil, placeholder: 'Type color' %>
         </div>
         <div class="col s5">
-          <button id="add_color" class="btn waves-effect waves-light">add color</button>
+          <button id="add_color" class="btn waves-effect waves-light"><%= t('model.add_color')%></button>
         </div>
       </div>
       <div class="row">
@@ -27,7 +27,7 @@
             <thead>
               <tr>
                 <th></th>
-                <th data-field="id">Color</th>
+                <th data-field="id"><%= t('model.color')%></th>
                 <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
                   <% sizes.each do |size| %>
                     <th data-field='<%= size.code_value%>'><%= size.code_value%></th>
