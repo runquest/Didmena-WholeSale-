@@ -11,7 +11,6 @@ class WelcomeController < ApplicationController
   end
 
   def email_sent
-    binding.pry
     @user = User.first
     DidmenaMailer.first_email(@user).deliver_now
       # format.html { redirect_to @user, notice: 'User was successfully created.' }

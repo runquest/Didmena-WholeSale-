@@ -21,7 +21,6 @@ end
   # POST /orders
   # POST /orders.json
   def create
-    binding.pry
     @order = Order.new(order_params)
     @order.save
   end

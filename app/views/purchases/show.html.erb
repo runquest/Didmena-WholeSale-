@@ -26,8 +26,6 @@
             <tbody>
               <% if @purchases_for_order.any? %>
                 <% @purchases_for_order.each do |pfo| %>
-                <% binding.pry %>
-
                   <tr><%= render "purchase_row", purchases_for_order: pfo %></tr>
                 <% end %>
               <% end %>          

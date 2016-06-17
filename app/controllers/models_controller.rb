@@ -13,11 +13,8 @@ class ModelsController < ApplicationController
     @products = Product.where(model_id: @model.id)
     @model_attachments = @model.model_attachments.all
 
-
     @colors = Array.new;
     @sizes = Domain.where(domain_name: 'SIZE')
-
-    # binding.pry
 
     @products.each do |prdct|
       if !@colors.include? prdct.color_id
