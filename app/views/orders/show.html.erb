@@ -9,8 +9,13 @@
   <div class="row">
     <div class="col s5 offset-s1">
       <p><strong>Total quantity:</strong> <%= @order.total_quantity %></p>
-      <p><strong>Total price:</strong> <%= @order.total_price %></p>
-      <p><strong>Discount:</strong><%= @order.discount %></p>
+      <p><strong>Total price:</strong> <%= sprintf "%.2f", @order.total_price %></p>
+      <% if @order.discount.nil? %>
+        <p><strong>Discount:</strong><%= sprintf "%.2f", 0 %></p>
+      <% else %>
+        <p><strong>Discount:</strong><%= sprintf "%.2f", @order.discount %></p>
+      <%end %>
+      <
     </div>
   </div>
   <div class="row">

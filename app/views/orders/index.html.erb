@@ -19,7 +19,7 @@
       <tr>
         <td><%= link_to order.order_number, order  %></td>
         <td><%= order.order_date %></td>
-        <td><%= order.total_price %></td>
+        <td><%= sprintf "%.2f", order.total_price %></td>
         <td><%= order.contact %></td>
         <td><%= link_to 'Show', order_path(order) %></td>
       </tr>

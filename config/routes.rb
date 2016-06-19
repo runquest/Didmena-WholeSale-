@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     put '/products_update' => 'products#update_product'
     post '/delete_products' => 'products#delete_products'
     post '/email_sent' => 'welcome#email_sent'
+    get '/my_orders/' => 'orders#my_orders'
 
     resources :purchases
     resources :order_products
