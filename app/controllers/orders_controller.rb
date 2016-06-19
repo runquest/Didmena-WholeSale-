@@ -49,6 +49,12 @@ end
     end
   end
 
+  # Orders that user has made in the past & their status
+  def my_orders
+    @user = current_user
+    @orders = Order.where(contact: @user.id)
+  end
+
   private
 #     # Use callbacks to share common setup or constraints between actions.
     def set_order
