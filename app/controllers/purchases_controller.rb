@@ -37,9 +37,16 @@ class PurchasesController < ApplicationController
         @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
       end
       @purchases_for_order = Order.find(@order.id).purchases
+      email_confirm
       session[:cart] = nil
     end
   end
+
+  def email_confirm
+    @user = current_user
+    DidmenaMailer.order_confirmation(@user, @order).deliver_now
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
