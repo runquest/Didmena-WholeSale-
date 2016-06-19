@@ -4,6 +4,12 @@ $(function() {
     return array.indexOf(value) > -1;
   }
 
+  var url = window.location.href;
+  var locale = url.match(/\/(\d+)\//);
+
+  console.log(url);
+  console.log(locale);
+
   $('#color_box').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if (null != $("#color_box").val()) {
@@ -36,7 +42,7 @@ $(function() {
 
           $.ajax({
             method: 'post',
-            url: '/products',
+            url: '/'+locale+'/products',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             data: JSON.stringify(products),
@@ -161,7 +167,6 @@ $(function() {
 
     for (var i = 1; i < rowsNumber; i++) {
       var row = $("#product_table tr")[i];
-      // var color_name = row.id;
 
       for (var j = 2; j < row.children.length; j++) {
 
@@ -186,7 +191,7 @@ $(function() {
       
       $.ajax({
         method: 'post',
-        url: '/cart',
+        url: '/'+locale+'/cart',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         data: JSON.stringify(order_items),
@@ -248,7 +253,7 @@ function removeColor(some) {
 
       $.ajax({
         method: 'post',
-        url: '/delete_products',
+        url: "/"+locale+'/delete_products',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         data: JSON.stringify(products_data),
