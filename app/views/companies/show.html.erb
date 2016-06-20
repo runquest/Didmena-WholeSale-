@@ -3,50 +3,50 @@
   <p id="notice"><%= notice %></p>
 
   <p>
-    <strong>Title:</strong>
+    <strong><%= t('company.name')%></strong>
     <%= @company.title %>
   </p>
 
   <p>
-    <strong>Email:</strong>
+    <strong><%= t('company.email')%></strong>
     <%= @company.email %>
   </p>
 
   <p>
-    <strong>Status:</strong>
+    <strong><%= t('company.status')%></strong>
     <%= @company.status %>
   </p>
 
   <p>
-    <strong>Domain:</strong>
+    <strong><%= t('company.country')%></strong>
     <%= @company.domain_id %>
   </p>
 
   <p>
-    <strong>City:</strong>
+    <strong><%= t('company.city')%></strong>
     <%= @company.city %>
   </p>
 
   <p>
-    <strong>Street:</strong>
+    <strong><%= t('company.address')%></strong>
     <%= @company.street %>
   </p>
 
   <p>
-    <strong>Postal code:</strong>
+    <strong><%= t('company.postal_code')%></strong>
     <%= @company.postal_code %>
   </p>
 
   <p>
-    <strong>Phone:</strong>
+    <strong><%= t('company.phone')%></strong>
     <%= @company.phone %>
   </p>
 
   <p>
-    <strong>Description:</strong>
+    <strong><%= t('company.description')%></strong>
     <%= @company.description %>
   </p>
 
-  <%= link_to 'Edit', edit_company_path(@company) %> |
-  <%= link_to 'Back', companies_path %>
+  <%= link_to t('company.edit'), edit_company_path(@company) %> |
+  <%= link_to t('company.back'), companies_path %>
 </div>
