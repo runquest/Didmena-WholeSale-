@@ -1,0 +1,8 @@
+<td><%= product.id %></td>
+<td><%= Model.find(Product.find(product.id).model_id).title %>
+<% product = Product.find(product.id) %>
+<td><%= Domain.find(product.color_id).meaning %>
+<td><%= Domain.find(product.size_id).code_value %>
+<td><%= quantity %></td>
+<% cost = quantity * Model.find(Product.find(product.id).model_id).price %>
+<td><%= sprintf "%.2f", cost %></td>

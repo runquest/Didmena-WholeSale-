@@ -1,8 +1,16 @@
 class DidmenaMailer < ActionMailer::Base
-  default from: "aiste@aiste.ca"
+  default from: "aiste.ulozaite@gmail.com"
 
-  def first_email(user)
+  # def first_email(user)
+  #   @user = user
+  #   mail(to: 'aiste@aiste.ca', subject: 'First Email')
+  # end
+
+  def order_confirmation(user, order)
     @user = user
-    mail(to: @user.email, subject: 'First Email')
+    @order = order
+    @purchases_for_order = Order.find(@order.id).purchases
+    mail(to: @user.email, subject: 'Order confirmation.')
   end
+
 end
