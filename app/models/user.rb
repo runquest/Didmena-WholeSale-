@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   def uppercase_fields
     fname.upcase!
     lname.upcase!
+    email.upcase!
   end
 
   def full_name

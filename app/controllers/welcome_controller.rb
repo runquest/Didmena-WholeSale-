@@ -13,7 +13,6 @@ class WelcomeController < ApplicationController
   def email_sent
     @user = User.first
     DidmenaMailer.first_email(@user).deliver_now
-      # format.html { redirect_to @user, notice: 'User was successfully created.' }
     redirect_to user_path(@user)
   end
 

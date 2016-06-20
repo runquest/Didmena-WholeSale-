@@ -1,6 +1,6 @@
 module ProductsHelper
 
   def compute_price(qty, price)
-    qty.to_i * price
+    sprintf "%.2f", qty.to_i * price
   end
 end
