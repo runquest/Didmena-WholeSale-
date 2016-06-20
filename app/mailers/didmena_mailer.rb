@@ -9,6 +9,7 @@ class DidmenaMailer < ActionMailer::Base
   def order_confirmation(user, order)
     @user = user
     @order = order
+    @purchases_for_order = Order.find(@order.id).purchases
     mail(to: @user.email, subject: 'Order confirmation.')
   end
 
