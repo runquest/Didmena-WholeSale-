@@ -4,11 +4,20 @@ $(function() {
     return array.indexOf(value) > -1;
   }
 
-  var url = window.location.href;
-  var locale = url.match(/\/(\d+)\//);
+  // var url = window.location.href;
+  // var locale = url.match(/\/(\d+)\//);
 
-  console.log(url);
-  console.log(locale);
+  // console.log(url);
+  // console.log(locale);
+
+  // console.log($("body").data("locale"))
+
+  // function locale() { 
+  //   return $("body").data("locale"); 
+  // }
+
+
+  var localization = $("body").data("locale");
 
   $('#color_box').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -42,7 +51,7 @@ $(function() {
 
           $.ajax({
             method: 'post',
-            url: '/'+locale+'/products',
+            url: '/'+localization+'/products',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             data: JSON.stringify(products),
@@ -95,7 +104,7 @@ $(function() {
 
           $.ajax({
             method: 'post',
-            url: '/products',
+            url: '/'+localization+'/products',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             data: JSON.stringify(products),
@@ -146,12 +155,12 @@ $(function() {
 
     $.ajax({
       method: 'put',
-      url: '/products_update',
+      url: '/'+localization+'/products_update',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify(product_data),
       success: function(data) {
-        window.location = '/models/' + model_id
+        window.location = '/'+localization+'/models/' + model_id
       },
       error: function(err){
         console.log(err);
@@ -191,16 +200,16 @@ $(function() {
       
       $.ajax({
         method: 'post',
-        url: '/'+locale+'/cart',
+        url: '/'+localization+'/cart',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         data: JSON.stringify(order_items),
         success: function (data) {
           console.log('success');
-          window.location = '/cart'
+          window.location = '/'+localization+'/cart'
         },
         error: function(err){
-          window.location = '/cart'
+          window.location = '/'+localization+'/cart'
           // to-do: it is not hitting success function even though it posts well.
         }
       });
@@ -253,13 +262,13 @@ function removeColor(some) {
 
       $.ajax({
         method: 'post',
-        url: "/"+locale+'/delete_products',
+        url: '/'+localization+'/delete_products',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         data: JSON.stringify(products_data),
         success: function (data) {
           console.log('success');
-          window.location = '/models/' + model_id
+          window.location = '/'+localization+'/models/' + model_id
         },
         error: function(err){
           console.log(err);
