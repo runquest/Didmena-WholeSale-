@@ -4,9 +4,57 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @user.fname %></h1>
-    <p>
-      <%= @order.order_number %>
-    </p>
+    <div class="container">
+  <p id="notice" class="flash-message"><%= notice %></p>
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h5><strong>Order number:</strong><%= @order.order_number %></h5>
+      <h6>Order date:</strong><%= @order.order_date %></h6>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s5 offset-s1">
+      <p><strong>Total quantity:</strong> <%= @order.total_quantity %></p>
+      <p><strong>Total price:</strong> <%= sprintf "%.2f", @order.total_price %></p>
+      <% if @order.discount.nil? %>
+        <p><strong>Discount:</strong><%= sprintf "%.2f", 0 %></p>
+      <% else %>
+        <p><strong>Discount:</strong><%= sprintf "%.2f", @order.discount %></p>
+      <%end %>
+      <
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <table>
+        <thead>
+          <tr>
+            <th data-field="model-title">Product</th>
+            <th data-field="product-color">Color</th>
+            <th data-field="product-size">Size</th>
+            <th data-field="quantity">Quantity</th>
+            <th data-field="quantity">Cost</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
+            <tbody>
+              <% if @order.purchases.any? %>
+                <% @order.purchases.each do |purchase| %>
+                  <% product = Product.find(purchase.product_id) %>
+                  <% price = Model.find(product.model_id).price %>
+                  <tr><%= render "order_purchases_row", product: product, quantity: purchase.quantity, price: price %></tr>
+                <% end %>
+              <% end %>          
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <%= link_to 'Back', orders_path %>
+    </div>
+  </div>
+</div>
   </body>
 </html>
