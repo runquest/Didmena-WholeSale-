@@ -31,12 +31,12 @@ class User < ActiveRecord::Base
   # has_many :companies, through: :representatives
   accepts_nested_attributes_for :companies
 
-  before_validation :uppercase_fields
+  before_validation :downcase_fields
 
-  def uppercase_fields
-    fname.upcase!
-    lname.upcase!
-    email.upcase!
+  def downcase_fields
+    fname.downcase!
+    lname.downcase!
+    email.downcase!
   end
 
   def full_name
