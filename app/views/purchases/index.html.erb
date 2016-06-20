@@ -14,16 +14,18 @@
   </thead>
 
   <tbody>
-    <% @purchases.each do |purchase| %>
-      <tr>
-        <td><%= purchase.order_id %></td>
-        <td><%= purchase.product_id %></td>
-        <td><%= purchase.quantity %></td>
-        <td><%= purchase.note %></td>
-        <td><%= link_to 'Show', purchase %></td>
-        <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
-        <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% if !@purchases.nil? %>
+      <% @purchases.each do |purchase| %>
+        <tr>
+          <td><%= purchase.order_id %></td>
+          <td><%= purchase.product_id %></td>
+          <td><%= purchase.quantity %></td>
+          <td><%= purchase.note %></td>
+          <td><%= link_to 'Show', purchase %></td>
+          <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
+          <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

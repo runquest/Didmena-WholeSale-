@@ -16,7 +16,7 @@
 
   <div class="row">
     <div class="input-field col s12">
-      <%= f.label :title, "Model name" %><br>
+      <%= f.label :title, t('model.product_name') %><br>
       <%= f.text_field :title %>
     </div>
     <div class="input-field col s12">
@@ -68,13 +68,13 @@
   </div>
   <div class="row">
     <div class="input-field materialize-textarea col s12">
-        Description: <%= f.text_area :note, :placeholder => "Notes" %>
+       <%= t('model.description') %><%= f.text_area :note, :placeholder => "Notes" %>
     </div>
   </div>
   <hr/>
   <div class="row">
     <div class="col 12">
-      <button id="model_button" class="btn waves-effect waves-light" >save</button>
+      <button id="model_button" class="btn waves-effect waves-light" ><%= t('model.save') %></button>
     </div>
   </div>
 <% end %>
