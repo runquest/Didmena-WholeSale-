@@ -127,6 +127,7 @@ lt:
         model_title: "Pavadinimas"
         color: "Spalva"
         size: "Dydis"
-        Quantity: "Kiekis"
+        quantity: "Kiekis"
+        cost: "Kaina"
 
 

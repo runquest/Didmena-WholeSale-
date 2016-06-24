@@ -80,3 +80,7 @@ div.model-title {
   font-family: 'Lato', sans-serif;
   font-size: 16px; 
 }
+
+div#login {
+  background-color: lightgrey;
+}

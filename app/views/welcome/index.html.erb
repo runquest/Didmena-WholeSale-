@@ -1,6 +1,30 @@
 <div class="container">
   <div class="row">
-    <div class="col s6">
+    <% if !current_user %>
+      <div class="col s6">
+        <div class="section">
+          <h5><%= t "welcome.do_title" %></h5>
+          <p><%= t "welcome.do_description" %></p>
+        </div>
+        <div class="section">
+          <h5><%= t "welcome.contact_title" %></h5>
+          <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
+          <i class="tiny material-icons prefix">phone</i> 604-234-1111
+        </div>
+      </div>   
+      <div class="col s4 offset-s2 z-depth-1" id="login"> 
+        <%= form_tag sessions_path do %>
+          <%= label_tag t "login.label.email" %> 
+          <%= text_field_tag "email"%>
+          <%= label_tag t "login.label.password" %>
+          <%= password_field_tag :password %>
+          <%= submit_tag t "login.label.login", class: 'btn waves-effect submit' %>
+        <% end %>
+      </div>
+
+    <% else %>
+
+        <div class="col s12">
       <div class="section">
         <h5><%= t "welcome.do_title" %></h5>
         <p><%= t "welcome.do_description" %></p>
@@ -11,17 +35,9 @@
         <i class="tiny material-icons prefix">phone</i> 604-234-1111
       </div>
     </div>
-    <% if !current_user %>    
-      <div class="col s4 offset-s2 z-depth-1" id="login"> 
-        <%= form_tag sessions_path do %>
-          <%= label_tag t "login.label.email" %> 
-          <%= text_field_tag "email"%>
-          <%= label_tag t "login.label.password" %>
-          <%= password_field_tag :password %>
-          <%= submit_tag t "login.label.login", class: 'btn waves-effect submit' %>
-        <% end %>
-      </div>
-    <% end %>    
+
+    <% end %>  
+
   </div>
   <hr/>
   <div class="row">

@@ -5,17 +5,19 @@
       <div><%= link_to t('cart.back'), models_path %></div><br>
         <div class="row">
           <div class="col s6">
-            <%= t('cart.username') %> <%= current_user.fname + " " + current_user.lname %><br>
-            <%= t('cart.email') %>: <%= current_user.email %><br>
+            <%= current_user.fname + " " + current_user.lname %><br>
+            <%= current_user.email %><br>
+            <%= current_user.phone %><br>
             <%= link_to t('cart.edit_profile'), edit_user_path(current_user) %>
           </div>
 
           <div class="col s6">
           <% if !current_user.company.nil? %>
             <% company = Company.find(current_user.company_id) %>
-            <%= t('cart.company') %> <%= company.title %><br>
-            <%= t('cart.address') %> <%= company.street + " " + company.city + " " + company.postal_code%><br>
-            <%= t('cart.phone') %> <%= company.phone %><br>
+              <%= company.title %><br>
+              <%= company.street %><br>
+              <%= company.city + ", " + company.postal_code%><br>
+              <%= company.phone %><br>
             <br>
           <% end %>
           </div>
