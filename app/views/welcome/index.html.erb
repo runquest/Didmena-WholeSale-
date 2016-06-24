@@ -24,29 +24,29 @@
     <% end %>    
   </div>
   <hr/>
-  <%= button_to "send email", action: "email_sent" %>
   <div class="row">
     <% if @models.any? %>
       <% @models.each do |model| %>
         <div class="col s4">
           <div class="card left">
             <div class="card-image">
-              <% if model.model_attachments.any? %>
-                <%= image_tag model.model_attachments.first.avatar_url, class: 'model_image' %>
-              <% else %>
+              <% if !model.model_attachments.any? || model.model_attachments.nil? %>
                 <img src="http://placehold.it/350x150">
+              <% else %>
+                <%= link_to model_path(model) do %>
+                  <%= image_tag model.model_attachments.first.avatar_url, class: 'model_image'%>
+                <% end %>
               <% end %>
-              <span class="card-title"><%= model.title %></span>
             </div>
-            <% if current_user && current_user.apps_manager %>
-              <div class="card-action center">
-                <%= link_to 'Show', model %> | <%= link_to 'Edit', edit_model_path(model) %> | <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
-              </div>
-            <% else %>
-              <div class="card-action center">
+            <div class="card-action center">
+              <div class="model-title"><%= model.title %></div>
+              <br/>
+              <% if current_user && current_user.apps_manager %>
+                <%= link_to 'Show', model %> | <%= link_to 'Edit', edit_model_path(model) %> | <%= link_to 'Delete', model, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% else %>
                 <%= link_to 'Show', model %>
-              </div>
             <% end %>
+            </div>
           </div>
         </div>
       <% end %>  
