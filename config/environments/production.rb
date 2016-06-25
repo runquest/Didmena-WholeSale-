@@ -90,7 +90,7 @@ Rails.application.configure do
     authentication: 'plain', 
     enable_starttls_auto: true, 
     user_name: 'aiste.ulozaite@gmail.com',
-    password: 'hiwakkmrcgdmbetv'
+    password: 'fddgzfzjzfvxcexp'
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
