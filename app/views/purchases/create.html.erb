@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col s8 offset-s2">
       <p class="align-center"><%= t('order.thank_you')%></p>
-      <p class="align-center"> <%= t('purchase.confirmation_email') %><%= current_user.email %>.</p>
-      <h6 class="align-center"> <%= t('purchase.your_order_number') %><%= @order_number %></h6>
+      <p class="align-center"> <%= t('purchase.confirmation_email') %> <%= current_user.email %></p>
+      <h6 class="align-center"> <%= t('purchase.your_order_number') %> <%= @order_number %></h6>
     </div>
   </div>
   <hr/>
@@ -19,6 +19,7 @@
                 <th data-field="product-size"><%= t('purchase.color')%></th>
                 <th data-field="product-size"><%= t('purchase.size')%></th>
                 <th data-field="quantity"><%= t('purchase.quantity')%></th>
+                <th data-field="quantity"><%= t('purchase.cost')%></th>
                 <th colspan="2"></th>
               </tr>
             </thead>
@@ -32,6 +33,15 @@
           </table>
         </div>
       </div>
+
+
+      <div class="row">
+        <div class="col s8 offset-s2">
+        Total cost: <%= sprintf "%.2f", @order.total_price %>
+        </div>
+      </div>
+
+
     </div>
   </div>
   <div class="row">

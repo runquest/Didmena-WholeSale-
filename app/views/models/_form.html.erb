@@ -17,11 +17,7 @@
   <div class="row">
     <div class="input-field col s12">
       <%= f.label :title, t('model.product_name') %><br>
-      <%= f.text_field :title %>
-    </div>
-    <div class="input-field col s12">
-      <%= f.label :code, "Model ID" %><br>
-      <%= f.text_field :code %>
+      <%= f.text_field :title, :placeholder => 'Pima Cotton t-shirt' %>
     </div>
   </div>
 
@@ -54,7 +50,7 @@
       <% @model_attachments.each do |p| %>
         <div><%= image_tag p.avatar_url, :class => "prod_image_small" %>
         <% if current_user && current_user.apps_manager %>
-          <%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %></div>
       <% end %>
     <% end %>
@@ -63,12 +59,15 @@
 
   <div class="row">
     <div class="col 6">
-      EUR <%= f.number_field(:price, :placeholder => "Price $ (e.g. 10.15)",  :precision => 2, step: 0.05) %>
+      <%= f.label :price %>
+      <!-- <%#= f.number_field(:price, :placeholder => "e.g. 10.15",  :precision => 2, step: 0.01) %> -->
+      <%= f.number_field(:price, :placeholder => "e.g. 10.15",  :class => 'text_field', :step => '0.01') %>
+
     </div>
   </div>
   <div class="row">
     <div class="input-field materialize-textarea col s12">
-       <%= t('model.description') %><%= f.text_area :note, :placeholder => "Notes" %>
+       <%= t('model.description') %><%= f.text_area :note, :placeholder => "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton." %>
     </div>
   </div>
   <hr/>

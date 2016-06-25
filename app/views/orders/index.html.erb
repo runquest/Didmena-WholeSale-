@@ -20,14 +20,10 @@
         <td><%= link_to order.order_number, order  %></td>
         <td><%= order.order_date %></td>
         <td><%= sprintf "%.2f", order.total_price %></td>
-        <td><%= order.contact %></td>
+        <td><%= User.find(order.contact).fname %> <%= User.find(order.contact).lname %></td>
         <td><%= link_to 'Show', order_path(order) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Order', new_order_path, :class => "btn waves-effect waves-light right"  %>
 </div>

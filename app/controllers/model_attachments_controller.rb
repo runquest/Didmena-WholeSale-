@@ -55,7 +55,7 @@ class ModelAttachmentsController < ApplicationController
   def destroy
     @model_attachment.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Model attachment was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Model attachment was successfully deleted.' }
       format.json { head :no_content }
     end
   end

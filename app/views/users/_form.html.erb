@@ -27,16 +27,18 @@
         <div class="row">
           <div class="input-field col s6">
             <%= f.label :email, 'Email' %><br>
-            <%= f.text_field :email %>
+            <%= f.text_field :email, :placeholder => 'info@example.com' %>
           </div>
           <div class="input-field col s6">
             <%= f.label :phone %><br>
-            <%= f.text_field :phone %>
+            <%= f.text_field :phone, :placeholder => '+1 (604) 222-2222' %>
           </div>
         </div>
 
         <div class="row">
           <div class="input-field col s12">
+          <%= link_to 'add new company', new_company_path %><br>
+          <br>
           <%= f.collection_select :company_id, Company.all, :id, :title, { prompt: "Choose company" }, class: "browser-default" %>
 
           </div>
@@ -45,24 +47,24 @@
         <div class="row">
           <div class="input-field col s6">
             <%= f.label :password, 'Password' %><br>
-            <%= f.text_field :password %>
+            <%= f.password_field :password %>
           </div>
           <div class="input-field col s6">
             <%= f.label :password_confirmation, 'Password Confirmation' %><br>
-            <%= f.text_field :password_confirmation %>
+            <%= f.password_field :password_confirmation %>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <%= f.hidden_field :status, :value => 'active'%>
             <%= f.check_box :apps_manager, class: "browser-default" %>
-            <%= f.label :apps_manager, 'Administrator'  %><br>
+            <%= f.label :apps_manager, "Check if user has administrator\'s status"  %>
+                        <%= f.hidden_field :status, :value => 'active'%>
+
           </div>
         </div>
-        <hr/>
-
+        <br>
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit class: "btn wave" %>
         </div>
       <% end %>
       </div>

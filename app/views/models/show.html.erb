@@ -1,22 +1,32 @@
 <div class="container">
+  <div class='row'>
+    <div class="col s12">
+      <% if current_user && current_user.apps_manager %>
+        <div class="card-action center", style="text-align: left">
+          <%= link_to t('model.edit'), edit_model_path(@model) %> |
+          <%= link_to t('model.back'), models_path %>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <div class="row">
     <div class="col s12">
       <% if @model_attachments.any? %>
-            <% @model_attachments.each do |p| %>
-              <% if current_user && current_user.apps_manager %>
-                <div class="card col s3">
-                  <div class="card-image">
-                    <%= image_tag p.avatar_url, :class => "prod_image_small" %>
-                  </div>
-                  <div class="card-action">
-                    <%= link_to t('model.delete'), p, method: :delete, data: { confirm: 'Are you sure?' }, :class => "center-align" %>
-                  </div>
-                </div>
-              <% end %>
+        <% @model_attachments.each do |p| %>
+          <div class="card col s3">
+            <div class="card-image">
+              <%= image_tag p.avatar_url, :class => "prod_image_small" %>
+            </div>
+            <% if current_user && current_user.apps_manager %>
+              <div class="card-action">
+                <%= link_to t('model.delete'), p, method: :delete, data: { confirm: 'Are you sure?' }, :class => "center-align" %>
+              </div>
             <% end %>
-        <% else %>
-            <img src="http://placehold.it/350x150">
+          </div>
         <% end %>
+      <% else %>
+        <img src="http://placehold.it/350x150">
+      <% end %>
     </div>
   </div>
   <hr/>
@@ -25,16 +35,9 @@
       <div class="card-content">
         <p><%= Domain.find(@model.gender_id).meaning %> <%= Domain.find(@model.category_id).meaning %></p>
         <h3><%= @model.title %></h3>
-        <h4 style="color: orange"><%= number_to_currency @model.price, precision: 2 %></h4>
+        <h4 style="color: orange"><%= sprintf "%.2f", @model.price %></h4>
         <p><%= @model.note %></p>
         </div>
-        <hr/>
-        <% if current_user && current_user.apps_manager %>
-          <div class="card-action center">
-            <%= link_to t('model.edit'), edit_model_path(@model) %> |
-            <%= link_to t('model.back'), models_path %>
-          </div>
-        <% end %>
     </div>
 
     <div class="col s6">
@@ -76,7 +79,12 @@
           <%end%>
         </tbody>
       </table>
-      <button class="btn waves-effect waves-light order_button offset-s2 col s10"><%= t('model.order') %></button>
+      <% if current_user %>
+        <button class="btn waves-effect waves-light order_button offset-s2 col s10"><%= t('model.order') %></button>
+      <% else %>
+        <button class="btn waves-effect waves-light order_button offset-s2 col s10"><%= link_to 'Log in', new_session_path %></button>
+      <% end %>
+
     </div>
   </div>
 </div>

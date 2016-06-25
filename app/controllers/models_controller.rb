@@ -77,6 +77,9 @@ class ModelsController < ApplicationController
   # POST /models
   # POST /models.json
   def create
+    code = params[:model][:title].delete(' ')[0..8]
+
+    params[:model][:code] = code
     @model = Model.new(model_params)
 
     if @model.products.any?
@@ -141,7 +144,7 @@ class ModelsController < ApplicationController
   def destroy
     @model.destroy
     respond_to do |format|
-      format.html { redirect_to models_url, notice: 'Model was successfully destroyed.' }
+      format.html { redirect_to models_url, notice: 'Model was successfully deleted.' }
       format.json { head :no_content }
     end
   end

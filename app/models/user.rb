@@ -27,16 +27,20 @@ class User < ActiveRecord::Base
   belongs_to :company;
   # has_many :representatives, inverse_of: :user, dependent: :destroy
 
-  has_many :companies, inverse_of: :user, dependent: :destroy
+  has_many :companies, inverse_of: :user
   # has_many :companies, through: :representatives
   accepts_nested_attributes_for :companies
 
   before_validation :downcase_fields
+  before_validation :uppercase_fields
 
   def downcase_fields
-    fname.downcase!
-    lname.downcase!
     email.downcase!
+  end
+
+  def uppercase_fields
+    fname.upcase!
+    lname.upcase!
   end
 
   def full_name
