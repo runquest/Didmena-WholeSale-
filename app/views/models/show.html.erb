@@ -1,4 +1,14 @@
 <div class="container">
+  <div class='row'>
+    <div class="col s12">
+      <% if current_user && current_user.apps_manager %>
+        <div class="card-action center", style="text-align: left">
+          <%= link_to t('model.edit'), edit_model_path(@model) %> |
+          <%= link_to t('model.back'), models_path %>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <div class="row">
     <div class="col s12">
       <% if @model_attachments.any? %>
@@ -25,15 +35,9 @@
       <div class="card-content">
         <p><%= Domain.find(@model.gender_id).meaning %> <%= Domain.find(@model.category_id).meaning %></p>
         <h3><%= @model.title %></h3>
-        <h4 style="color: orange"><%= number_to_currency @model.price, precision: 2 %></h4>
+        <h4 style="color: orange"><%= sprintf "%.2f", @model.price %></h4>
         <p><%= @model.note %></p>
         </div>
-        <% if current_user && current_user.apps_manager %>
-          <div class="card-action center", style="background: green">
-            <%= link_to t('model.edit'), edit_model_path(@model) %> |
-            <%= link_to t('model.back'), models_path %>
-          </div>
-        <% end %>
     </div>
 
     <div class="col s6">

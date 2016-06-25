@@ -11,10 +11,19 @@
       <h6>Order date: <%= @order.order_date %></h6>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <%= @user.fname %> <%= @user.lname %><br>
+      <%= @user.email %><br>
+      <%= @company.title %><br>
+      <%= @company.phone %>
+    </div>
+  </div>
+
   <div class="row">
     <ul class="col s5 offset-s1">
 
-      <li>Total quantity: <%= @order.total_quantity %></li>
       <li>Total price: <%= sprintf "%.2f", @order.total_price %></li>
       <% if @order.discount.nil? %>
         <li>Discount: <%= sprintf "%.2f", 0 %></li>

@@ -10,6 +10,15 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @users = User.where(company_id: params[:id])
+    # @companies_orders
+    # binding.pry
+    @companies_orders = []
+    @users.each do |u|
+      Order.where(contact: u.id).each do |o|
+        @companies_orders << o
+      end
+    end
   end
 
   # GET /companies/new
