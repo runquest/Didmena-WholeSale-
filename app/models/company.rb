@@ -30,5 +30,11 @@ class Company < ActiveRecord::Base
 
   # has_many :representatives, inverse_of: :company, dependent: :destroy
   has_many :users, through: :representatives
+  before_validation :uppercase_fields
+
+  def uppercase_fields
+    title.upcase!
+  end
+
 
 end

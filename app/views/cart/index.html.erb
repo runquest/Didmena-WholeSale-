@@ -2,34 +2,33 @@
   <div class="row">
     <div class="col s12">
       <h4><%= t('cart.cart') %></h4>
-      <div><%= link_to t('cart.back'), models_path %></div><br>
+      <div><%= link_to t('back'), models_path %></div><br>
         <div class="row">
-          <div class="col s6">
-            <%= current_user.fname + " " + current_user.lname %><br>
-            <%= current_user.email %><br>
-            <%= current_user.phone %><br>
-            <%= link_to t('cart.edit_profile'), edit_user_path(current_user) %>
-          </div>
-
-          <div class="col s6">
-          <% if !current_user.company.nil? %>
-            <% company = Company.find(current_user.company_id) %>
-              <%= company.title %><br>
-              <%= company.street %><br>
-              <%= company.city + ", " + company.postal_code%><br>
-              <%= company.phone %><br>
-            <br>
-          <% end %>
+          <div class="col s8 offset-s2">
+            <div class="col s6">
+              <%= link_to t('cart.edit_profile'), edit_user_path(current_user) %>
+              <h5><%= current_user.full_name %></h5>
+              <%= current_user.email %><br/>
+              <%= current_user.phone %><br/>
+            </div>
+            <div class="col s6 right-align ">
+              <% if !@company.nil? %>
+                <%= link_to t('cart.edit_company'), edit_company_path(@company) %>
+                <h5><%= @company.title %></h5>
+                <%= @company.street  + ", " + @company.city %><br/>
+                <%= @company.postal_code + ", " + Domain.find(@company.domain_id).meaning %><br>
+                <%= @company.phone %>
+              <% end %>
+            </div>
           </div>
         </div>
-      <hr/>
-
-      <div class="row">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
-      <% end %>
+      <div class="divider"></div>
+      <div class="row section">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
+        <% end %>
         <div class="col s8 offset-s2">
-          <table>
+          <table class="striped centered">
             <thead>
               <tr>
                 <th data-field="model-title"><%= t('cart.product') %></th>
@@ -42,27 +41,31 @@
             </thead>
             <tbody>
               <% if @cart.any? %>
-                <% total = 0 %>
                 <% @cart.each do |id, quantity| %>
-                  <% product = Product.find(id) %>
-                  <% price = Model.find(product.model_id).price %>
-                  <tr><%= render "cart_row", product: product, quantity: quantity, price: price %></tr>
-                  <% total += quantity.to_i * price %>
+                  <tr><%= render "cart_row", id: id, quantity: quantity %></tr>
                 <% end %>
               <% end %>          
             </tbody>
           </table>
         </div>
       </div>
-      <% if !total.nil? %>
-      <h6 class="right"><b>Total cost: </b><%= sprintf "%.2f", total %></h6>
-      <% end %>
-      <br>
-      <br>
-      <br>
-      <div class="align-right">
-        <%= link_to t('cart.confirm_order'), purchases_path, method: :post, :class => "btn waves-effect waves-light right" %></div>
-      <div><%= link_to t('cart.empty_cart'), cart_clear_path, :class => "btn waves-effect waves-light left" %></div>
+      <div class="row">
+        <div class="col s8 offset-s2">
+          <div class="row">
+            <% if !@cart_total_cost.nil? %>
+              <h6 class="right"><b><%= t('cart.total_cost') %></b><%= sprintf "%.2f", @cart_total_cost %></h6>
+            <% end %>
+          </div>
+          <div class="row">
+            <div class="align-right">
+              <%= link_to t('cart.confirm_order'), purchases_path, method: :post, :class => "btn waves-effect waves-light right" %>  
+            </div>
+            <div>
+              <%= link_to t('cart.empty_cart'), cart_clear_path, :class => "btn waves-effect waves-light left" %>          
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

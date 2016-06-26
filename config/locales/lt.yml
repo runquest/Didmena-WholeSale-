@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 lt:
+    back: "atgal"
 
     collections:
         index:
@@ -53,13 +54,8 @@ lt:
 
     cart:
         cart: "Krepšelis"
-        username: "Vartotojo vardas: "
-        email: "El.paštas: "
-        edit_profile: "Redaguoti kontaktus"
-        company: "Įmonė: "
-        address: "Adresas: "
-        phone: "Telefonas:  "
-        back: "Atgal"
+        edit_profile: "redaguoti užsakovo kontaktus"
+        edit_company: "redaguoti įmonės kontaktus"
         product: "Produktas"
         color: "Spalva"
         size: "Dydis"
