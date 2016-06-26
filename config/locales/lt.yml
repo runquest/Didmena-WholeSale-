@@ -39,16 +39,15 @@ lt:
         title: "Kolekcijos"
         add_new_collection: "Pridėti naują kolekciją"
 
-    top_menu:
-        register: "Registruotis"
-        home: "Pradžia"
-        collections: "Kolekcijos"
-        models: "Produktai"
+    session_menu:
+        home: "pradžia"
+        cart: "krepšelis"
+        my_orders: "užsakymai"
+        models: "produktai"
 
     header:
-        you_logged_in: "Sveiki,"
-        logout: "Atsijungti"
-        dashboard: "cpanel"
+        logout: "atsijungti"
+        dashboard: "apžvalga"
 
     register:
         intro: "Atlikti produktų užsakymus turite registruotis."
