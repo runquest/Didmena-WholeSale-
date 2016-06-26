@@ -21,15 +21,18 @@
 
 lt:
     back: "atgal"
-
-
+    edit: "redaguoti"
+    show: "rodyti"
+    delete: "ištrinti"
 
     ## Purchases
     purchases:
         create:
             alert: "Tuščias krepšelis."
 
-
+    ## Users
+    users:
+        add_representative: "sukurti vartotoją"
 
     collections:
         index:
@@ -88,6 +91,7 @@ lt:
         address: "Adresas"
         city: "Miestas"
         postal_code: "Pašto kodas"
+        representatives: "Atstovai"
 
         form:
             choose_country: "Pasirink šalį"
@@ -128,8 +132,6 @@ lt:
         back: "Atgal"
         order: "Užsakyti"
 
-
-
     #order confirmation
         thank_you: "Ačiū už užsakymą." 
         confirmation_email: "Užsakymo patvirtinimo detalės buvo iššiųstos el. adresu "
@@ -158,13 +160,10 @@ lt:
     form:
         cannot_save: "Negali iššsaugoti formos:"
         button_save: "Išsaugoti"
-    # errors:
-    #     models:
-    #         company:
-    #             attributes:
-    #                 title:
-    #                     blank: "Trūksta pavadinimo."
-    # Email translation missing: lt.activerecord.errors.models.company.attributes.email.blank
-    # Domain translation missing: lt.activerecord.errors.models.company.attributes.domain.blank
 
-
+    ## Order
+    orders:
+        number: "Užsakymo numeris"
+        date: "Užsakymo data"
+        cost: "Užsakymo kaina"
+        representative: "Atstovas"

@@ -36,5 +36,14 @@ class Company < ActiveRecord::Base
     title.upcase!
   end
 
+  def full_street_address
+     "#{street} #{city}"
+  end
+
+  def country_postal
+    country = Domain.find(domain_id).meaning
+    "#{country}, #{postal_code}"
+  end
+
 
 end

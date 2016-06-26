@@ -4,7 +4,6 @@
       <h2><%= t('form.cannot_save') %></h2>
       <ul>
         <% object.errors.messages.each do |message| %>
-          <% binding.pry %>
           <li><%= message[1].join(',') %></li>
         <% end %>
         <br>
