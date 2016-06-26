@@ -23,6 +23,10 @@ en:
     destroy:
       notice: "Item successfully removed."
 
+  purchases:
+    create:
+      alert: "No items in the cart."
+
   collections:
     index:
       title: "Collections"

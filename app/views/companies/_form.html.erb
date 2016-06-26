@@ -1,63 +1,44 @@
 <div class="container">
   <%= form_for(@company) do |f| %>
-    <% if @company.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
-        <ul>
-        <% @company.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="row">
+    <%= form_errors_for @company %>
+    <div class="row section">
       <div class="input-field col s6">
-        <%= f.label :title, t('company.company_name') %><br>
-        <%= f.text_field :title %>
+        <%= f.label :title, t('company.company_name')%><br>
+        <%= f.text_field :title, :placeholder => "Best T-Shirt inc." %>
         <%= f.hidden_field :status, :value => 'active'%>
       </div>
     </div>
-
-
     <div class="row">
       <div class="input-field col s6">
         <%= f.label :phone, t('company.phone') %><br>
-        <%= f.text_field :phone %>
+        <%= f.text_field :phone, :placeholder => "+1 233 231-2023" %>
       </div>
       <div class="input-field col s6">
         <%= f.label :email, t('company.email') %><br>
-        <%= f.text_field :email %>
+        <%= f.text_field :email, :placeholder => "btshirt@besttshirtinc.com" %>
       </div>
     </div>
-
     <div class="row">
       <div class="input-field col s6">
         <%= f.label :street, t('company.address') %><br>
-        <%= f.text_field :street %>
+        <%= f.text_field :street, :placeholder => "22 - 1829 Broadway" %>
       </div>
-    </div>
-
-    <div class="row">
       <div class="input-field col s6">
         <%= f.label :city, t('company.city') %><br>
-        <%= f.text_field :city %>
+        <%= f.text_field :city,  :placeholder => "New York" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6 browser-default">
+        <%= f.collection_select :domain_id, Domain.all.where(domain_name: "COUNTRY"), :id, :meaning, { prompt: t('company.form.choose_country') }, class: "browser-default" %>
       </div>
       <div class="input-field col s6">
       <%= f.label :postal_code, t('company.postal_code') %><br>
-      <%= f.text_field :postal_code %>
+      <%= f.text_field :postal_code, :placeholder => "KN122" %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="input-field col s6 browser-default">
-        <%= f.collection_select :domain_id, Domain.all.where(domain_name: "COUNTRY"), :id, :meaning, { prompt: "Choose country" }, class: "browser-default" %>
-      </div>
-    </div>
-
-    <div class="actions">
-      <%= f.submit %>
+    <div class="actions waves-effect waves-light btn-large">
+      <%= f.submit t('form.button_save') %>
     </div>
   <% end %>
 </div>

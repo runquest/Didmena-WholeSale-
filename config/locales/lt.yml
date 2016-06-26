@@ -24,6 +24,13 @@ lt:
 
 
 
+    ## Purchases
+    purchases:
+        create:
+            alert: "Tuščias krepšelis."
+
+
+
     collections:
         index:
         title: "Kolekcijos"
@@ -75,12 +82,15 @@ lt:
     company:
 
     # Create/Edit company form
-        company_name: "Pavadinimas"
+        company_name: "** Pavadinimas"
         phone: "Telefonas"
-        email: "El. paštas"
+        email: "** El. paštas"
         address: "Adresas"
         city: "Miestas"
         postal_code: "Pašto kodas"
+
+        form:
+            choose_country: "Pasirink šalį"
 
     # Edit company
         edit: "Redaguoti"
@@ -118,8 +128,7 @@ lt:
         back: "Atgal"
         order: "Užsakyti"
 
-   ## Purchase
-    purchase:
+
 
     #order confirmation
         thank_you: "Ačiū už užsakymą." 
@@ -131,5 +140,31 @@ lt:
         size: "Dydis"
         quantity: "Kiekis"
         cost: "Kaina"
+
+    activerecord:
+        errors:
+          models:
+            company:
+                keys:
+                    title: "Pavadinimas: "
+
+                attributes:
+                    title:
+                        blank: "Trūksta pavadinimo."
+                    email:
+                        blank: "Trūksta el.pašto."
+                    domain:
+                        blank: "Pasirink šalį."
+    form:
+        cannot_save: "Negali iššsaugoti formos:"
+        button_save: "Išsaugoti"
+    # errors:
+    #     models:
+    #         company:
+    #             attributes:
+    #                 title:
+    #                     blank: "Trūksta pavadinimo."
+    # Email translation missing: lt.activerecord.errors.models.company.attributes.email.blank
+    # Domain translation missing: lt.activerecord.errors.models.company.attributes.domain.blank
 
 

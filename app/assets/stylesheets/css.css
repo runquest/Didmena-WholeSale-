@@ -84,3 +84,7 @@ div.model-title {
 div#login {
   background-color: lightgrey;
 }
+
+.btn-large {
+  width: 100%;
+}

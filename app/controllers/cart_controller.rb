@@ -28,9 +28,7 @@ class CartController < ApplicationController
     id = params[:product_id]
     cart = session[:cart]
     cart.delete(id)
-    # flash[:notice] = "Item successfully removed"
     redirect_to :back, notice: t('.notice')
-
   end
 
   def clearCart
