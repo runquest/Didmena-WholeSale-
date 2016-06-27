@@ -15,7 +15,9 @@ class UsersController < ApplicationController
     # binding.pry
     @user = User.find(params[:id])
     @orders = Order.where(contact: params[:id])
-    @company = Company.find(@user.company_id)
+    if !@user.company_id.nil?
+      @company = Company.find(@user.company_id)
+    end
   end
 
   # GET /users/new

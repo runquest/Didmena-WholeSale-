@@ -2,7 +2,7 @@
   <% flash.each do |key, value| %>
     <%= content_tag(:div, value, class: 'flash-message') %>
   <% end %>
-  <h5>Try again</h5>
+  <h5><%= t('try_again') %></h5>
   <br>
   <div class="col s4 offset-s2 z-depth-1" id="login"> 
     <%= form_tag sessions_path do %>
@@ -11,10 +11,10 @@
         <%= text_field_tag "email" %>
       </div>
       <div>
-        <%= label_tag :password %><br/>
+        <%= label_tag :password, t('password') %><br/>
         <%= password_field_tag :password %>
       </div>
-      <div><%= submit_tag "Log In", class: 'btn waves-effect submit' %></div>
+      <div><%= submit_tag t('log_in'), class: 'btn waves-effect submit' %></div>
     <% end %>
   </div>
 </div>

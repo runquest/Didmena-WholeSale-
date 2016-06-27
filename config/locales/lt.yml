@@ -25,15 +25,40 @@ lt:
     show: "rodyti"
     delete: "ištrinti"
     are_you_sure: "patvirkinte"
+    save: "išsaugoti"
 
     ## Purchases
     purchases:
         create:
             alert: "Tuščias krepšelis."
-
+        thank_you: "Ačiū. Jūsų užsakymas buvo gautas."
+        confirmation_email_message: "Jūsų užsakymo patvirtinimas išsiųstas el.pašto adresu"
+        product_id: "Prekės ID"
+        model_title: "Modelis"
+        color: "Spalva"
+        size: "Dydis"
+        quantity: "Kiekis"
+        cost: "Kaina"
+        total_cost: "Galutinė kaina"
+        your_order_number: "Užsakymo numeris"
     ## Users
     users:
         add_representative: "sukurti vartotoją"
+        first_name: "Vardas"
+        last_name: "Pavardė"
+        email: "El. paštas"
+        phone: "Telefonas"
+        add_company: "sukurti įmonę"
+        edit_company: "redaguoti įmonę"
+        choose_company: "pasrinkti įmonę"
+        password: "Slaptažodis"
+        password_confirmation: "Pakartoti slaptažodį"
+        user_admin: "Pažymėti jei vartotojas administratorius"
+        new: "Sukurti naują vartotoją"
+        edit: "Redaguoti vartotojo informaciją"
+        admin: "administratorius"
+        status: "statusas"
+        edit_user_company: "redaguoti vartotoją"
 
     collections:
         index:
@@ -107,7 +132,7 @@ lt:
             choose_country: "Pasirink šalį"
 
     # Edit company
-        edit: "Redaguoti"
+        edit: "Redaguoti įmonę"
         show: "Rodyti"
         back: "Atgal"
 
@@ -181,6 +206,20 @@ lt:
                         blank: "Pasirinkite kolekciją."
                     price:
                         blank: "Įrašykite kainą."
+            user:
+                attributes:
+                    password:
+                        blank: "Trūksta slaptažodžio."
+                    email: 
+                        blank: "Trūksta el.pašto."
+                        too_short: "El.paštas mažiausia 3 simbolių."
+                    fname:
+                        blank: "Trūksta vardo."
+                        too_short: "Vardas per trumpas."
+                    lname: 
+                        blank: "Trūksta pavardės"
+                        too_short: "Pavardė per trumpa."
+
 
 
     form:
@@ -189,7 +228,22 @@ lt:
 
     ## Order
     orders:
+        orders: "Užsakymai"
+        contact: "Užsakovas"
+        my_orders: "Mano užsakymai"
         number: "Užsakymo numeris"
         date: "Užsakymo data"
         cost: "Užsakymo kaina"
         representative: "Atstovas"
+        status: "Statusas"
+        products: "Prekės"
+        color: "Spalva"
+        size: "Dydis"
+        quantity: "Kiekis"
+        total_price: "Užsakymo kaina"
+        discount: "Nuolaida"
+
+
+
+
+
