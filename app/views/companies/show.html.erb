@@ -1,80 +1,64 @@
 <div class="container">
-
-  <p id="notice"><%= notice %></p>
-  <h5><%= @company.title %></h5>
-  <br/>
-  <%= link_to t('company.edit'), edit_company_path(@company) %> |
-  <%= link_to t('company.back'), companies_path %>
-
   <div class="row">
     <div class="col s6">
-     <%= @company.email %>
-      <%= @company.phone %>
-  <%= @company.description %>
-    </div>
-    <div class="col s6">
-     <%= @company.street %>
-     <%= @company.city %>, <%= @company.postal_code %><br>
-      <%= Domain.find(@company.domain_id).meaning %>
+      <h4><%= @company.title %></h4>
+      <%= link_to t('back'), companies_path %> | <%= link_to t('edit'), edit_company_path(@company) %>
     </div>
   </div>
-  <hr/>
-
-  <h6>Users</h6>
-  <table>
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Fname</th>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Admin</th>
-        <th>Phone</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.email %></td>
-          <td><%= user.fname %></td>
-          <td><%= user.lname %></td>
-          <td><%= user.status %></td>
-          <td><%= user.apps_manager %></td>
-          <td><%= user.phone %></td>
-          <td><%= link_to 'Show', user %></td>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <br>
-  <button class="btn wave"><%= link_to 'New User', new_user_path %></button>
-
-  <hr/>
-  <h4>All orders</h4>
-<table>
-  <thead>
-    <tr>
-      <th>Order number</th>
-      <th>Order date</th>
-      <th>Total price</th>
-      <th>Contact</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @companies_orders.each do |co| %>
-      <tr>
-        <td><%= link_to co.order_number, co  %></td>
-        <td><%= co.order_date %></td>
-        <td><%= sprintf "%.2f", co.total_price %></td>
-        <td><%= link_to User.find(co.contact).fname, user_path(User.find(co.contact)) %> <%= link_to User.find(co.contact).lname, user_path(User.find(co.contact)) %></td>
-      </tr>
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <div class="col s6">
+        <%= @company.email %><br>
+        <%= @company.phone %><br>
+        <%= @company.full_street_address %><br>
+        <%= @company.country_postal %><br>
+        <%= @company.description %>
+      </div>
+      <div class="col s6">
+        <b><%= t('company.representatives') %></b>
+        <table>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= link_to user.full_name, user %></td>
+                <td><%= link_to t('edit'), edit_user_path(user) %></td>
+                <td><%= link_to t('delete'), user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="right">
+          <%= link_to t('users.add_representative'), new_user_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+    <div class="row section">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
     <% end %>
-  </tbody>
-</table>
+    <div class="col s8 offset-s2">
+      <table class="striped centered">
+        <thead>
+          <tr>
+            <th><%= t('orders.number') %></th>
+            <th><%= t('orders.date') %></th>
+            <th><%= t('orders.cost') %></th>
+            <th><%= t('orders.representative') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @companies_orders.each do |co| %>
+            <tr>
+              <td><%= link_to co.order_number, co  %></td>
+              <td><%= co.order_date %></td>
+              <td><%= sprintf "%.2f", co.total_price %></td>
+              <td><%= link_to find_user(co).full_name, user_path(find_user(co)) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

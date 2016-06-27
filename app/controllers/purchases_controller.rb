@@ -4,7 +4,8 @@ class PurchasesController < ApplicationController
   def create
    if session[:cart].nil? || session[:cart].empty?
       flash[:alert] = 'no items in the cart'
-      redirect_to :back
+      redirect_to :back, alert: t('.alert')
+      # redirect_to :back, notice: t('.notice')
     else
       if session[:cart] then
         cart = session[:cart]
@@ -37,7 +38,7 @@ class PurchasesController < ApplicationController
         @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
       end
       @purchases_for_order = Order.find(@order.id).purchases
-      email_confirm
+      # email_confirm
       session[:cart] = nil
     end
   end

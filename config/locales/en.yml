@@ -19,6 +19,13 @@
 # To learn more, please read the Rails Internationalization guide
 
 en:
+  cart:
+    destroy:
+      notice: "Item successfully removed."
+
+  purchases:
+    create:
+      alert: "No items in the cart."
 
   collections:
     index:

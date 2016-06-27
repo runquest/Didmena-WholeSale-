@@ -4,7 +4,6 @@
 <% product = Product.find(product.id) %>
 <td><%= Domain.find(product.color_id).meaning %>
 <td><%= Domain.find(product.size_id).code_value %>
-<% binding.pry %>
 <td><%= quantity %></td>
 <% cost = quantity * model.price %>
 <td><%= sprintf "%.2f", cost %></td>

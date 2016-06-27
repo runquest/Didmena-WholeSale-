@@ -1,8 +1,8 @@
-<% @model = Model.find(product.model_id) %>
+<% @model = find_model(id) %>
 
 <td><%= link_to @model.title, model_path(@model) %></td>
-<td><%= Domain.find(product.color_id).meaning %></td>
-<td><%= Domain.find(product.size_id).code_value %></td>
+<td><%= find_color(id) %></td>
+<td><%= find_size(id) %></td>
 <td><%= quantity.to_i %></td>
-<td><%= compute_price(quantity, price) %></td>
-<td><%= link_to t('cart.remove'), cart_path(:product_id => product.id), method: :delete %></td>
+<td><%= compute_price(quantity, id) %></td>
+<td><%= link_to t('cart.remove'), cart_path(:product_id => id), method: :delete %></td>

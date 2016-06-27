@@ -28,9 +28,7 @@ class CartController < ApplicationController
     id = params[:product_id]
     cart = session[:cart]
     cart.delete(id)
-    flash[:notice] = "Item successfully removed"
-    redirect_to :back
-
+    redirect_to :back, notice: t('.notice')
   end
 
   def clearCart
@@ -39,8 +37,21 @@ class CartController < ApplicationController
   end
 
   def index
+    @company = Company.find(current_user.company_id)
+
     if session[:cart] then
       @cart = session[:cart]
+      @cart_total_cost = 0
+      @cart.each do |item|
+        product = Product.find(item[0])
+        model = Model.find(product.model_id)
+
+        price = model.price
+        quantity = item[1].to_i
+
+        product_cost = price * quantity
+        @cart_total_cost += product_cost
+      end
     else
       @cart = {}
     end

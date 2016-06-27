@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Didmena</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="//code.jquery.com/jquery-2.1.2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,900,100' rel='stylesheet' type='text/css'>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'jquery.easy-autocomplete.min' %>
+  <head>
+    <title>Didmena</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="//code.jquery.com/jquery-2.1.2.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,900,100' rel='stylesheet' type='text/css'>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'jquery.easy-autocomplete.min' %>
 
-  <%= csrf_meta_tags %>
-</head>
-<header>
-  <%= render 'layouts/header' %>
-</header>
-<body data-locale='<%=I18n.locale%>'>
-<%= yield %>
-</body>
+    <%= csrf_meta_tags %>
+  </head>
+  <header>
+    <%= render 'layouts/header' %>
+  </header>
+  <body data-locale='<%=I18n.locale%>'>
+    <div class="container">
+      <%= yield :form_errors %>
+    </div>
+    <%= yield %>
+  </body>
 </html>

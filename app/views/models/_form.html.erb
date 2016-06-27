@@ -2,31 +2,35 @@
 <p id="notice flash-message"><%= notice %></p>
 
 <%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
-  <% if @model.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
-
-      <ul>
-      <% @model.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_errors_for @model %>
 
   <div class="row">
     <div class="input-field col s12">
-      <%= f.label :title, t('model.product_name') %><br>
+      <%= f.label :title, t('models.title') %><br>
       <%= f.text_field :title, :placeholder => 'Pima Cotton t-shirt' %>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s12">
-      <%= f.collection_select :gender_id, Domain.where(domain_name: "GENDER"), :id, :meaning, { prompt: "Choose a gender" }, class: "browser-default" %>
+      <%= f.collection_select :gender_id, Domain.where(domain_name: "GENDER"), :id, :meaning, { prompt: t('models.choose_type') }, class: "browser-default" %>
     </div>
+
     <div class="input-field col s12">
-      <%= f.collection_select :category_id, Domain.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a collection" }, class: "browser-default" %>
+      <%= f.collection_select :category_id, Domain.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: t('models.choose_collection') }, class: "browser-default" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col 6">
+      <%= f.label :price, t('models.price') %>
+      <%= f.number_field(:price, :placeholder => "e.g. 10.15",  :class => 'text_field', :step => '0.01') %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="input-field col s12">
+       <%= t('models.description') %><%= f.text_area :note, :placeholder => "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton." %>
     </div>
   </div>
 
@@ -50,7 +54,7 @@
       <% @model_attachments.each do |p| %>
         <div><%= image_tag p.avatar_url, :class => "prod_image_small" %>
         <% if current_user && current_user.apps_manager %>
-          <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to t('delete'), p, method: :delete, data: { confirm: t('are_you_sure') } %>
         <% end %></div>
       <% end %>
     <% end %>
@@ -58,23 +62,7 @@
   </div>
 
   <div class="row">
-    <div class="col 6">
-      <%= f.label :price %>
-      <!-- <%#= f.number_field(:price, :placeholder => "e.g. 10.15",  :precision => 2, step: 0.01) %> -->
-      <%= f.number_field(:price, :placeholder => "e.g. 10.15",  :class => 'text_field', :step => '0.01') %>
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field materialize-textarea col s12">
-       <%= t('model.description') %><%= f.text_area :note, :placeholder => "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton." %>
-    </div>
-  </div>
-  <hr/>
-  <div class="row">
-    <div class="col 12">
-      <button id="model_button" class="btn waves-effect waves-light" ><%= t('model.save') %></button>
-    </div>
+    <button id="model_button" class="btn waves-effect waves-light btn-large" ><%= t('models.save') %></button>
   </div>
 <% end %>
 </div>

@@ -20,22 +20,64 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 lt:
+    back: "atgal"
+    edit: "redaguoti"
+    show: "rodyti"
+    delete: "ištrinti"
+    are_you_sure: "patvirkinte"
+    save: "išsaugoti"
+
+    form:
+        cannot_save: "Negali iššsaugoti formos:"
+        button_save: "Išsaugoti"
+        choose_country: "Pasirink šalį"
+
+    purchases:
+        create:
+            alert: "Tuščias krepšelis."
+        thank_you: "Ačiū. Jūsų užsakymas buvo gautas."
+        confirmation_email_message: "Jūsų užsakymo patvirtinimas išsiųstas el.pašto adresu"
+        product_id: "Prekės ID"
+        model_title: "Modelis"
+        color: "Spalva"
+        size: "Dydis"
+        quantity: "Kiekis"
+        cost: "Kaina"
+        total_cost: "Galutinė kaina"
+        your_order_number: "Užsakymo numeris"
+
+    users:
+        add_representative: "sukurti vartotoją"
+        first_name: "Vardas"
+        last_name: "Pavardė"
+        email: "El. paštas"
+        phone: "Telefonas"
+        add_company: "sukurti įmonę"
+        edit_company: "redaguoti įmonę"
+        choose_company: "pasrinkti įmonę"
+        password: "Slaptažodis"
+        password_confirmation: "Pakartoti slaptažodį"
+        user_admin: "Pažymėti jei vartotojas administratorius"
+        new: "Sukurti naują vartotoją"
+        edit: "Redaguoti vartotojo informaciją"
+        admin: "administratorius"
+        status: "statusas"
+        edit_user_company: "redaguoti vartotoją"
 
     collections:
         index:
         title: "Kolekcijos"
         add_new_collection: "Pridėti naują kolekciją"
 
-    top_menu:
-        register: "Registruotis"
-        home: "Pradžia"
-        collections: "Kolekcijos"
-        models: "Produktai"
+    session_menu:
+        home: "pradžia"
+        cart: "krepšelis"
+        my_orders: "užsakymai"
+        models: "produktai"
 
     header:
-        you_logged_in: "Sveiki,"
-        logout: "Atsijungti"
-        dashboard: "cpanel"
+        logout: "atsijungti"
+        dashboard: "apžvalga"
 
     register:
         intro: "Atlikti produktų užsakymus turite registruotis."
@@ -51,15 +93,20 @@ lt:
         do_description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
         contact_title: "Susisiekite su mumis"
 
+        add_user: "pridėti vartotoją"
+        add_company: "pridėti įmonę"
+        users: "vartotojai"
+        companies: "įmonės"
+        clients: "klientai"
+        products: "prekės"
+        add_model: "pridėti modelį"
+        models: "modeliai / produktai"
+        all_orders: "užsakymai"
+
     cart:
         cart: "Krepšelis"
-        username: "Vartotojo vardas: "
-        email: "El.paštas: "
-        edit_profile: "Redaguoti kontaktus"
-        company: "Įmonė: "
-        address: "Adresas: "
-        phone: "Telefonas:  "
-        back: "Atgal"
+        edit_profile: "redaguoti užsakovo kontaktus"
+        edit_company: "redaguoti įmonės kontaktus"
         product: "Produktas"
         color: "Spalva"
         size: "Dydis"
@@ -70,56 +117,46 @@ lt:
         empty_cart: "Išvalyti krepšelį"
         remove: "Ištrinti"
 
+        destroy:
+            notice: "Produktas sėkmingai ištrintas."
+
     company:
 
-    # Create/Edit company form
-        company_name: "Pavadinimas"
+        company_name: "** Pavadinimas"
         phone: "Telefonas"
-        email: "El. paštas"
+        email: "** El. paštas"
         address: "Adresas"
         city: "Miestas"
         postal_code: "Pašto kodas"
+        representatives: "Atstovai"
 
-    # Edit company
-        edit: "Redaguoti"
+        edit: "Redaguoti įmonę"
         show: "Rodyti"
         back: "Atgal"
-
-    # Add company
         new: "Nauja įmonė"
-
-    # All companies
         title: "Įmonės"
         status: "Statusas"
         delete: "Ištrinti"
         new_company: "Sukurti naują"
-
-    # Show company
         description: "Aprašymas"
 
-  ## Models
-    model:
-
-    # Model form
-        product_name: "Produkto pavadinimas"
+    models:
+        title: "* Modelio pavadinimas"
+        choose_type: "Pasirink tipą"
+        choose_collection: "Pasirink kolekciją"
         price: "Kaina"
         description: "Aprašymas"
+        description_placeholder: "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton."
         save: "Išsaugoti"
-    
-    # Model edit
+        new_model: "Kurti naują modelį"
         color_and_size: "Spalvos ir dydžiai"
         add_color: "Pridėti spalvą"
         color: "Spalva"
-
-    # Model show
+        select_sizes: "Pasirinkite turimus dydžius."
+        type_color: "Įrašykite spalvą (hex code): pvz. ef22dd"
         edit: "Redaguoti"
         back: "Atgal"
         order: "Užsakyti"
-
-   ## Purchase
-    purchase:
-
-    #order confirmation
         thank_you: "Ačiū už užsakymą." 
         confirmation_email: "Užsakymo patvirtinimo detalės buvo iššiųstos el. adresu "
         your_order_number: "Užsakymo numeris"
@@ -130,4 +167,55 @@ lt:
         quantity: "Kiekis"
         cost: "Kaina"
 
+    orders:
+        orders: "Užsakymai"
+        contact: "Užsakovas"
+        my_orders: "Mano užsakymai"
+        number: "Užsakymo numeris"
+        date: "Užsakymo data"
+        cost: "Užsakymo kaina"
+        representative: "Atstovas"
+        status: "Statusas"
+        products: "Prekės"
+        color: "Spalva"
+        size: "Dydis"
+        quantity: "Kiekis"
+        total_price: "Užsakymo kaina"
+        discount: "Nuolaida"
 
+    activerecord:
+        errors:
+          models:
+            company:
+                attributes:
+                    title:
+                        blank: "Trūksta pavadinimo."
+                    email:
+                        blank: "Trūksta el.pašto."
+                    domain:
+                        blank: "Pasirink šalį."
+            model:
+                attributes:
+                    code:
+                        blank: ""
+                    title:
+                        blank: "Trūksta pavadinimo."
+                    gender_id:
+                        blank: "Pasirinkite tipą."
+                    category_id:
+                        blank: "Pasirinkite kolekciją."
+                    price:
+                        blank: "Įrašykite kainą."
+            user:
+                attributes:
+                    password:
+                        blank: "Trūksta slaptažodžio."
+                    email: 
+                        blank: "Trūksta el.pašto."
+                        too_short: "El.paštas mažiausia 3 simbolių."
+                    fname:
+                        blank: "Trūksta vardo."
+                        too_short: "Vardas per trumpas."
+                    lname: 
+                        blank: "Trūksta pavardės"
+                        too_short: "Pavardė per trumpa."

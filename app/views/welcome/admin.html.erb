@@ -1,23 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col s4">
-      <h3>Clients</h3>
+      <h3><%= t('welcome.clients') %></h3>
       <hr>
-      <%= link_to 'add user', new_user_path %><br>
-      <%= link_to 'add companies', new_company_path %><br>
-      <%= link_to 'users', users_path %><br>
-      <%= link_to 'companies', companies_path %>
+      <%= link_to t('welcome.add_user'), new_user_path %><br>
+      <%= link_to t('welcome.add_company'), new_company_path %><br>
+      <%= link_to t('welcome.users'), users_path %><br>
+      <%= link_to t('welcome.companies'), companies_path %>
     </div>
     <div class="col s4">
-      <h3>Products</h3>
+      <h3><%= t('welcome.products') %></h3>
       <hr>
-      <%= link_to 'add model', new_model_path %><br>
-      <%= link_to 'models', models_path %>
+      <%= link_to t('welcome.add_model'), new_model_path %><br>
+      <%= link_to t('welcome.models'), models_path %>
     </div>
     <div class="col s4">
-      <h3>Orders</h3>
+      <h3><%= t('welcome.all_orders') %></h3>
       <hr>
-      <%= link_to 'orders', orders_path %>
+      <%= link_to t('welcome.all_orders'), orders_path %>
     </div>
   </div>
 </div>

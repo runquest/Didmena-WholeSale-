@@ -9,12 +9,12 @@ class User < ActiveRecord::Base
 
   validates :fname, presence: true
   validates :fname, length: { in: 1..31 }, on: :create
-  validates :fname, format: { with: /\A[A-Z]{1,31}\Z/, message: "only allows uppercase letters"}
+  # validates :fname, format: { with: /\A[A-Z]{1,31}\Z/ }
   # validates :fname, format: { with: /\A[A-Za-z]{1,31}\Z/, message: "only allows letters"}
 
   validates :lname, presence: true
   validates :lname, length: { in: 1..31 }, on: :create
-  validates :lname, format: { with: /\A[A-Z]{1,31}\Z/, message: "only allows uppercase letters"}
+  # validates :lname, format: { with: /\A[A-Z]{1,31}\Z/ }
 
   # validates :password_digest, length: { in: 6..100 }, on: :create
   # validates :password_digest, presence: true

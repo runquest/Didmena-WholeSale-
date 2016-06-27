@@ -21,48 +21,48 @@
           <%= submit_tag t "login.label.login", class: 'btn waves-effect waves-light' %>
         <% end %>
       </div>
-
     <% else %>
-
-        <div class="col s12">
-      <div class="section">
-        <h5><%= t "welcome.do_title" %></h5>
-        <p><%= t "welcome.do_description" %></p>
+      <div class="col s12">
+        <div class="section">
+          <h5><%= t "welcome.do_title" %></h5>
+          <p><%= t "welcome.do_description" %></p>
+        </div>
+        <div class="section">
+          <h5><%= t "welcome.contact_title" %></h5>
+          <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
+          <i class="tiny material-icons prefix">phone</i> 604-234-1111
+        </div>
       </div>
-      <div class="section">
-        <h5><%= t "welcome.contact_title" %></h5>
-        <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
-        <i class="tiny material-icons prefix">phone</i> 604-234-1111
-      </div>
-    </div>
-
     <% end %>  
-
   </div>
-  <hr/>
+  <div class="divider"></div>
   <div class="row">
     <% if @models.any? %>
       <% @models.each do |model| %>
         <div class="col s4">
           <div class="card left">
             <div class="card-image">
-              <% if !model.model_attachments.any? || model.model_attachments.nil? %>
+              <% if model.model_attachments.any? %>
+                <%=link_to( image_tag(model.model_attachments.first.avatar_url), model_path(model), :class=>"work") %>
+
+              <% else %>
                 <img src="http://placehold.it/350x150">
-              <% else %>
-                <%= link_to model_path(model) do %>
-                  <%= image_tag model.model_attachments.first.avatar_url, class: 'model_image'%>
-                <% end %>
               <% end %>
+              <span class="card-title"><%= model.title %></span>
             </div>
-            <div class="card-action center">
-              <div class="model-title"><%= model.title %></div>
-              <br/>
-              <% if current_user && current_user.apps_manager %>
-                <%= link_to 'Show', model %> | <%= link_to 'Edit', edit_model_path(model) %> | <%= link_to 'Delete', model, method: :delete, data: { confirm: 'Are you sure?' } %>
-              <% else %>
-                <%= link_to 'Show', model %>
+            <% if current_user && current_user.apps_manager %>
+              <div class="card-action center">
+                <ul id='card-menu'>
+                  <li><%= link_to t('show'), model %></li>
+                  <li><%= link_to t('edit'), edit_model_path(model) %></li>
+                  <li><%= link_to t('delete'), model, method: :delete, data: { confirm: t('are_you_sure') } %></li>
+                </ul>
+              </div>
+            <% else %>
+              <div class="card-action center">
+                <%= link_to t('show'), model %>
+              </div>
             <% end %>
-            </div>
           </div>
         </div>
       <% end %>  
