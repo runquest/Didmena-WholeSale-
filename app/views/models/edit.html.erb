@@ -5,25 +5,22 @@
   </div>
   <div class="row">
     <div class="col s6">
-      <%= render 'form' %>
-    </div>
-    <div class="col s6">
       <div class="row">
         <div class="col s12">
-          <h5><%= t('model.color_and_size')%></h5>
+          <h5><%= t('models.color_and_size')%></h5>
         </div>
       </div>
       <div class="row">
         <div class="col s7">
-          <%= text_field_tag 'color_box', nil, placeholder: 'Type color (hex code): eg. ef22dd' %>
+          <%= text_field_tag 'color_box', nil, placeholder: t('models.type_color') %>
         </div>
         <div class="col s5">
-          <button id="add_color" class="btn waves-effect waves-light"><%= t('model.add_color')%></button>
+          <button id="add_color" class="btn waves-effect waves-light"><%= t('models.add_color')%></button>
         </div>
       </div>
       <div class="row">
         <div class="col s12">
-          <p>Select product sizes available.</p>
+          <b><%= t('models.select_sizes')%></b>
         </div>
       </div>      
       <div class="row">
@@ -33,8 +30,7 @@
               <tr>
                 <th></th>
                 <th data-field="id"><%= t('model.color')%></th>
-                <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
-                  <% sizes.each do |size| %>
+                  <% @sizes.each do |size| %>
                     <th data-field='<%= size.code_value%>'><%= size.code_value%></th>
                   <% end %> 
               </tr>
@@ -46,15 +42,14 @@
                   <tr id='<%= value %>'>
                     <td style="background-color: #<%= value %>; width: 5%;"></td>
                     <td style="padding-left: 10px;"><%= value %></td>
-                    <% sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse %>
-                    <% sizes.each do |size| %>
+                    <% @sizes.each do |size| %>
                       <td>
-                      <%if Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id).exists? && Product.where(size_id: size.id).where(color_id: color).where(model_id: @model.id).take.in_storage %>
-                      <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>' checked >
-                      <% else %>
-                      <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>'>
-                      <% end %>
-                        <label for='<%= value %>-<%=size.code_value %>'></label>
+                        <% if product_exist?(color, size) && product_in_storage?(color, size) %>
+                          <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>' checked >
+                        <% else %>
+                          <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>'>
+                        <% end %>
+                          <label for='<%= value %>-<%=size.code_value %>'></label>
                       </td>
                     <% end %>
                   </tr>
@@ -69,6 +64,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="col s6">
+      <%= render 'form' %>
     </div>
   </div>
 </div>

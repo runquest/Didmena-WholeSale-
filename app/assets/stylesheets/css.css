@@ -52,8 +52,8 @@ ul#session-menu li {
 }
 
 img.model_image {
-  height: 150px;
-  width: 350px;
+  max-height: 350px;
+  max-width: 350px;
 }
 
 img.prod_image {
@@ -85,6 +85,18 @@ div#login {
   background-color: lightgrey;
 }
 
-.btn-large {
+.btn-large, button.btn-large {
   width: 100%;
+}
+
+ul#card-menu {
+  list-style-type: none;
+}
+
+ul#card-menu li {
+  display: block;
+  display: inline;
+
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
 }

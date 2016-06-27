@@ -12,7 +12,8 @@ class ModelsController < ApplicationController
   def show
     @products = Product.where(model_id: @model.id)
     @model_attachments = @model.model_attachments.all
-
+    @type = Domain.find(@model.gender_id).meaning
+    @collection = Domain.find(@model.category_id).meaning
     @colors = Array.new;
     @sizes = Domain.where(domain_name: 'SIZE')
 
@@ -44,7 +45,7 @@ class ModelsController < ApplicationController
   def edit
     @model = Model.find(params[:id])
     @model_attachments = @model.model_attachments
-
+    @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
 
     if @model.products.any?
       @products = @model.products
@@ -77,9 +78,17 @@ class ModelsController < ApplicationController
   # POST /models
   # POST /models.json
   def create
-    code = params[:model][:title].delete(' ')[0..8]
 
-    params[:model][:code] = code
+    # to avoid error message on model creation
+    # when clarified if client needs model code
+    if !params[:model][:title].blank?
+      code = params[:model][:title].delete(' ')[0..8]
+      params[:model][:code] = code
+    else
+      code = Time.now.strftime("%Y%d%m%H%M%S")[0..8]
+      params[:model][:code] = code
+    end
+
     @model = Model.new(model_params)
 
     if @model.products.any?

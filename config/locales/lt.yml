@@ -24,6 +24,7 @@ lt:
     edit: "redaguoti"
     show: "rodyti"
     delete: "ištrinti"
+    are_you_sure: "patvirkinte"
 
     ## Purchases
     purchases:
@@ -62,6 +63,16 @@ lt:
         do_title: "Ką mes darome"
         do_description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
         contact_title: "Susisiekite su mumis"
+
+        add_user: "pridėti vartotoją"
+        add_company: "pridėti įmonę"
+        users: "vartotojai"
+        companies: "įmonės"
+        clients: "klientai"
+        products: "prekės"
+        add_model: "pridėti modelį"
+        models: "modeliai / produktai"
+        all_orders: "užsakymai"
 
     cart:
         cart: "Krepšelis"
@@ -113,18 +124,23 @@ lt:
         description: "Aprašymas"
 
   ## Models
-    model:
+    models:
 
     # Model form
-        product_name: "Produkto pavadinimas"
+        title: "* Modelio pavadinimas"
+        choose_type: "Pasirink tipą"
+        choose_collection: "Pasirink kolekciją"
         price: "Kaina"
         description: "Aprašymas"
+        description_placeholder: "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton."
         save: "Išsaugoti"
-    
+        new_model: "Kurti naują modelį"
     # Model edit
         color_and_size: "Spalvos ir dydžiai"
         add_color: "Pridėti spalvą"
         color: "Spalva"
+        select_sizes: "Pasirinkite turimus dydžius."
+        type_color: "Įrašykite spalvą (hex code): pvz. ef22dd"
 
     # Model show
         edit: "Redaguoti"
@@ -146,9 +162,6 @@ lt:
         errors:
           models:
             company:
-                keys:
-                    title: "Pavadinimas: "
-
                 attributes:
                     title:
                         blank: "Trūksta pavadinimo."
@@ -156,6 +169,20 @@ lt:
                         blank: "Trūksta el.pašto."
                     domain:
                         blank: "Pasirink šalį."
+            model:
+                attributes:
+                    code:
+                        blank: ""
+                    title:
+                        blank: "Trūksta pavadinimo."
+                    gender_id:
+                        blank: "Pasirinkite tipą."
+                    category_id:
+                        blank: "Pasirinkite kolekciją."
+                    price:
+                        blank: "Įrašykite kainą."
+
+
     form:
         cannot_save: "Negali iššsaugoti formos:"
         button_save: "Išsaugoti"

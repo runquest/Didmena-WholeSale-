@@ -1,4 +1,4 @@
-<% if @company.errors.any? %>
+<% if object.errors.any? %>
     <% content_for :form_errors do %>
       <div id="error_explanation">
       <h2><%= t('form.cannot_save') %></h2>

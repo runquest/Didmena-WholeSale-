@@ -10,6 +10,7 @@ class Model < ActiveRecord::Base
   validates :title, presence: true
   validates :title, length: { maximum: 100 }, on: :create
 
+  validates :price, presence: true
   # domain GENDER !!!
   # belongs_to :domain, inverse_of: :models
   belongs_to :domain, class_name: "Gender", foreign_key: "gender_id", inverse_of: :models
