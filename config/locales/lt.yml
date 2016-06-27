@@ -27,7 +27,11 @@ lt:
     are_you_sure: "patvirkinte"
     save: "išsaugoti"
 
-    ## Purchases
+    form:
+        cannot_save: "Negali iššsaugoti formos:"
+        button_save: "Išsaugoti"
+        choose_country: "Pasirink šalį"
+
     purchases:
         create:
             alert: "Tuščias krepšelis."
@@ -41,7 +45,7 @@ lt:
         cost: "Kaina"
         total_cost: "Galutinė kaina"
         your_order_number: "Užsakymo numeris"
-    ## Users
+
     users:
         add_representative: "sukurti vartotoją"
         first_name: "Vardas"
@@ -113,13 +117,11 @@ lt:
         empty_cart: "Išvalyti krepšelį"
         remove: "Ištrinti"
 
-
         destroy:
             notice: "Produktas sėkmingai ištrintas."
 
     company:
 
-    # Create/Edit company form
         company_name: "** Pavadinimas"
         phone: "Telefonas"
         email: "** El. paštas"
@@ -128,30 +130,17 @@ lt:
         postal_code: "Pašto kodas"
         representatives: "Atstovai"
 
-        form:
-            choose_country: "Pasirink šalį"
-
-    # Edit company
         edit: "Redaguoti įmonę"
         show: "Rodyti"
         back: "Atgal"
-
-    # Add company
         new: "Nauja įmonė"
-
-    # All companies
         title: "Įmonės"
         status: "Statusas"
         delete: "Ištrinti"
         new_company: "Sukurti naują"
-
-    # Show company
         description: "Aprašymas"
 
-  ## Models
     models:
-
-    # Model form
         title: "* Modelio pavadinimas"
         choose_type: "Pasirink tipą"
         choose_collection: "Pasirink kolekciją"
@@ -160,19 +149,14 @@ lt:
         description_placeholder: "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton."
         save: "Išsaugoti"
         new_model: "Kurti naują modelį"
-    # Model edit
         color_and_size: "Spalvos ir dydžiai"
         add_color: "Pridėti spalvą"
         color: "Spalva"
         select_sizes: "Pasirinkite turimus dydžius."
         type_color: "Įrašykite spalvą (hex code): pvz. ef22dd"
-
-    # Model show
         edit: "Redaguoti"
         back: "Atgal"
         order: "Užsakyti"
-
-    #order confirmation
         thank_you: "Ačiū už užsakymą." 
         confirmation_email: "Užsakymo patvirtinimo detalės buvo iššiųstos el. adresu "
         your_order_number: "Užsakymo numeris"
@@ -182,6 +166,22 @@ lt:
         size: "Dydis"
         quantity: "Kiekis"
         cost: "Kaina"
+
+    orders:
+        orders: "Užsakymai"
+        contact: "Užsakovas"
+        my_orders: "Mano užsakymai"
+        number: "Užsakymo numeris"
+        date: "Užsakymo data"
+        cost: "Užsakymo kaina"
+        representative: "Atstovas"
+        status: "Statusas"
+        products: "Prekės"
+        color: "Spalva"
+        size: "Dydis"
+        quantity: "Kiekis"
+        total_price: "Užsakymo kaina"
+        discount: "Nuolaida"
 
     activerecord:
         errors:
@@ -219,31 +219,3 @@ lt:
                     lname: 
                         blank: "Trūksta pavardės"
                         too_short: "Pavardė per trumpa."
-
-
-
-    form:
-        cannot_save: "Negali iššsaugoti formos:"
-        button_save: "Išsaugoti"
-
-    ## Order
-    orders:
-        orders: "Užsakymai"
-        contact: "Užsakovas"
-        my_orders: "Mano užsakymai"
-        number: "Užsakymo numeris"
-        date: "Užsakymo data"
-        cost: "Užsakymo kaina"
-        representative: "Atstovas"
-        status: "Statusas"
-        products: "Prekės"
-        color: "Spalva"
-        size: "Dydis"
-        quantity: "Kiekis"
-        total_price: "Užsakymo kaina"
-        discount: "Nuolaida"
-
-
-
-
-

@@ -4,19 +4,6 @@ $(function() {
     return array.indexOf(value) > -1;
   }
 
-  // var url = window.location.href;
-  // var locale = url.match(/\/(\d+)\//);
-
-  // console.log(url);
-  // console.log(locale);
-
-  // console.log($("body").data("locale"))
-
-  // function locale() { 
-  //   return $("body").data("locale"); 
-  // }
-
-
   var localization = $("body").data("locale");
 
   $('#color_box').keypress(function(event){

@@ -38,7 +38,7 @@ class PurchasesController < ApplicationController
         @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
       end
       @purchases_for_order = Order.find(@order.id).purchases
-      email_confirm
+      # email_confirm
       session[:cart] = nil
     end
   end
