@@ -14,11 +14,11 @@
       </div>   
       <div class="col s4 offset-s2 z-depth-1" id="login"> 
         <%= form_tag sessions_path do %>
-          <%= label_tag t "login.label.email" %> 
+          <%= label_tag t "login.email" %> 
           <%= text_field_tag "email"%>
-          <%= label_tag t "login.label.password" %>
+          <%= label_tag t "login.password" %>
           <%= password_field_tag :password %>
-          <%= submit_tag t "login.label.login", class: 'btn waves-effect waves-light' %>
+          <%= submit_tag t "login.login", class: 'btn waves-effect waves-light' %>
         <% end %>
       </div>
     <% else %>

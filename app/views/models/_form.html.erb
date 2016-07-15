@@ -54,7 +54,7 @@
       <% @model_attachments.each do |p| %>
         <div><%= image_tag p.avatar_url, :class => "prod_image_small" %>
         <% if current_user && current_user.apps_manager %>
-          <%= link_to t('delete'), p, method: :delete, data: { confirm: t('are_you_sure') } %>
+          <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') } %>
         <% end %></div>
       <% end %>
     <% end %>
