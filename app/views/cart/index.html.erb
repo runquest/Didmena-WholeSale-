@@ -23,32 +23,101 @@
           </div>
         </div>
       <div class="divider"></div>
-      <div class="row section">
-        <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
-        <% end %>
+      <!-- <div class="row section">
+        <#% flash.each do |key, value| %>
+          <div class="alert alert-<%#= key %> center flash-message"><%#= value %></div>
+        <#% end %>
         <div class="col s8 offset-s2">
           <table class="striped centered">
             <thead>
               <tr>
-                <th data-field="model-title"><%= t('cart.product') %></th>
-                <th data-field="product-color"><%= t('cart.color') %></th>
-                <th data-field="product-size"><%= t('cart.size') %></th>
-                <th data-field="quantity"><%= t('cart.quantity') %></th>
-                <th data-field="quantity"><%= t('cart.cost') %></th>
+                <th data-field="model-title"><%#= t('cart.product') %></th>
+                <th data-field="product-color"><%#= t('cart.color') %></th>
+                <th data-field="product-size"><%#= t('cart.size') %></th>
+                <th data-field="quantity"><%#= t('cart.quantity') %></th>
+                <th data-field="quantity"><%#= t('cart.cost') %></th>
                 <th colspan="3"></th>
               </tr>
             </thead>
             <tbody>
-              <% if @cart.any? %>
-                <% @cart.each do |id, quantity| %>
-                  <tr><%= render "cart_row", id: id, quantity: quantity %></tr>
-                <% end %>
-              <% end %>          
+              <#% if @cart.any? %>
+                <#% @cart.each do |id, quantity| %>
+                  <tr><%#= render "cart_row", id: id, quantity: quantity %></tr>
+                <#% end %>
+              <#% end %>          
             </tbody>
           </table>
         </div>
+      </div> -->
+      <div class="row section">
+
+
+      <!-- kiekvienam modeliui sukurk lentele -->
+      <!-- lenteles pavadinimas bus pirmas -->
+      <!-- eilutes bus spalvos -->
+      <!-- stulpeliai bus dydziai --> 
+      <!-- lasteles bus kiekis -->
+
+        <% if @ordered_models.any? %>
+          <% @ordered_models.each do |om| %>
+            <table id="product_table">
+              <h5><%= om.title %></h5>
+              <thead>
+                <tr>
+                  <th></th>
+                    <% @sizes.each do |size| %>
+                      <th data-field='<%= size.code_value%>' colspan="3" class="center-align"><%= size.code_value%></th>
+                    <% end %>
+                </tr>
+              </thead>
+              <tbody>
+              <% @model_colors = Array.new %>
+              <% @ordered_products.each do |op|%>
+                <% if op.model_id == om.id %>
+                  <% if !@model_colors.include? op.color_id %>
+                    <% @model_colors.push(op.color_id) %>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+                <% @model_colors.each do |mc|%>
+                  <tr>
+                    <td style="background-color: #<%= Domain.find(mc).meaning %>"><%= Domain.find(mc).meaning %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+
+
+
+            </table>
+          <% end %>
+        <% end %>
+
+
+        <!-- <#% if @cart.any? %>
+          <#% @cart.each do |product_id, order_quantity| %>
+            <table id="product_table">
+              <thead>
+              <!- surasti modelio pavadinima -->
+                <!-- <tr><%#= Model.find(Product.find(product_id).model_id).title %></tr> -->
+            <!--     <tr>
+                  <th></th> -->
+  <!--                 <th data-field="id"><%#= t('models.color') %></th>
+                    <#% @sizes.each do |size| %>
+                      <th data-field='<%#= size.code_value%>' colspan="3" class="center-align"><%#= size.code_value%></th>
+                    <#% end %>  -->
+    <!--             </tr>
+              </thead>
+              <tbody id="color_row">
+              </tbody>
+            </table>
+          <#% end %>
+        <#% end %>    -->
+
+
+
       </div>
+
       <div class="row">
         <div class="col s8 offset-s2">
           <div class="row">

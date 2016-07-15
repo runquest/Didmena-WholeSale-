@@ -39,12 +39,25 @@ class CartController < ApplicationController
   def index
     @company = Company.find(current_user.company_id)
 
+# find all the module names
+    @ordered_models = Array.new;
+    @ordered_products = Array.new
+    @sizes = Domain.where(domain_name: "SIZE");
+
     if session[:cart] then
       @cart = session[:cart]
       @cart_total_cost = 0
       @cart.each do |item|
         product = Product.find(item[0])
         model = Model.find(product.model_id)
+
+        if !@ordered_models.include? model
+          @ordered_models.push(model)
+        end
+
+        if !@ordered_products.include? product
+          @ordered_products.push(product)
+        end
 
         price = model.price
         quantity = item[1].to_i
@@ -56,5 +69,4 @@ class CartController < ApplicationController
       @cart = {}
     end
   end
-
 end
