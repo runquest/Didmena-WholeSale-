@@ -1,0 +1,10 @@
+<% @model = find_model(id) %>
+<% @color = Domain.find(Product.find(id).color_id).meaning%>
+
+<!-- <#% binding.pry %> -->
+<td style="background-color: #<%= @color %>;"><%= link_to @model.title, model_path(@model) %></td>
+<td style="background-color: #<%= @color %>;"><%= find_color(id) %></td>
+<td><%= find_size(id) %></td>
+<td><%= quantity.to_i %></td>
+<td><%= compute_price(quantity, id) %></td>
+<td><%= link_to t('cart.remove'), cart_path(:product_id => id), method: :delete %></td>

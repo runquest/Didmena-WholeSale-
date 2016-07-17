@@ -69,8 +69,25 @@
                     <tr>
                       <td style="background: #<%=color_meaning%>"><%=color_meaning%></td>
 
+<!-- jeigu yra produktas kuris atitinka spalva ir dydi
+spausdini kiek, kitaip 0 -->
+                    <% @sizes.each do |s|%>
+
+                      <% if products.any?{|pr| pr["color_id"] == color_id && products[0]["product"].size_id == s.id } %>
+
+                            <td><%= pr["quantity"]%></td>
+                      <% else %>
+                        <td><%= "0" %></td>
+                      <% end %>
+
+                    <% end %>
+
+                    
+
+
                       <% @sizes.each do |s|%>
                         <% products.each do |pr| %>
+                          <% binding.pry %> 
                           <% if s.id == pr["product"].size_id %>
                             <td><%= pr["quantity"]%></td>
                           <% else %>
