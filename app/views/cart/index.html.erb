@@ -73,29 +73,19 @@
 spausdini kiek, kitaip 0 -->
                     <% @sizes.each do |s|%>
 
-                      <% if products.any?{|pr| pr["color_id"] == color_id && products[0]["product"].size_id == s.id } %>
+                      <% if products.any?{ |pr| pr["color_id"] == color_id && products[0]["product"].size_id == s.id } %>
+<!-- <#% binding.pry %> -->
 
-                            <td><%= pr["quantity"]%></td>
+                         <% print_product = Product.where(color_id: color_id, size_id: s.id) %>
+                          <% qty = @cart[print_product[0].id.to_s] %>
+                            <td><%=  qty %></td>
                       <% else %>
-                        <td><%= "0" %></td>
+                        <td></td>
                       <% end %>
 
                     <% end %>
 
-                    
-
-
-                      <% @sizes.each do |s|%>
-                        <% products.each do |pr| %>
-                          <% binding.pry %> 
-                          <% if s.id == pr["product"].size_id %>
-                            <td><%= pr["quantity"]%></td>
-                          <% else %>
-                            <td><%= "0" %></td>
-                          <% end %>
-                        <%end%>
-                        
-                      <% end %>
+                
                     </tr>
                   <% end %>
                 </tbody>
