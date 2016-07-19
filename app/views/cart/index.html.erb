@@ -51,9 +51,10 @@
       </div> -->
       <div class="row section">
         <div class="col s8 offset-s2">
-          <% if !@color_product_hash.empty? %>
-            <% @color_product_hash.each do |model_id, colors| %>
-              <h5><%= Model.find(model_id).title %></h5>
+          <!-- <#% if !@color_product_hash.empty? %> -->
+            <!-- <#% @color_product_hash.each do |model_id, colors| %> -->
+            <% @unique_models_array.each do |unique_model| %>
+              <h5><%= unique_model.title %></h5>
               <table id="product_table">
                 <thead>
                   <tr>
@@ -63,34 +64,52 @@
                       <% end %>
                   </tr>
                 </thead>
+
+                  <% @ordered_items.each do |item| %>
+                    <% if item["model"].id == unique_model.id %>
+                      <tr>
+                        <td><%= item["color"].meaning %></td>
+                        <% @sizes.each do |size| %>
+                          <% if item["size"].id == size.id %>
+                            <td><%= item["quantity"] %></td>
+                          <% else %>
+                            <td></td>
+                          <% end %>
+                        <% end %>   
+                      </tr>
+                    <% end %>
+                  <% end %>
+
                 <tbody>
-                  <% colors.each do |color_id, products|%>
-                    <% color_meaning = Domain.find(color_id).meaning %>
-                    <tr>
-                      <td style="background: #<%=color_meaning%>"><%=color_meaning%></td>
+                <!-- <#% @ordered_items.uniq%> -->
+
+                  <!-- <#% colors.each do |color_id, products|%> -->
+                    <!-- <#% color_meaning = Domain.find(color_id).meaning %> -->
+                    <!-- <tr> -->
+                      <!-- <td style="background: #<%#=color_meaning%>"><%#=color_meaning%></td> -->
 
 <!-- jeigu yra produktas kuris atitinka spalva ir dydi
 spausdini kiek, kitaip 0 -->
-                    <% @sizes.each do |s|%>
+                    <!-- <#% @sizes.each do |s|%> -->
 
-                      <% if products.any?{ |pr| pr["color_id"] == color_id && products[0]["product"].size_id == s.id } %>
+                      <!-- <#% if products.any?{ |pr| pr["color_id"] == color_id products[0]["product"].size_id == s.id } %> -->
 <!-- <#% binding.pry %> -->
 
-                         <% print_product = Product.where(color_id: color_id, size_id: s.id) %>
-                          <% qty = @cart[print_product[0].id.to_s] %>
-                            <td><%=  qty %></td>
-                      <% else %>
-                        <td></td>
-                      <% end %>
+                         <!-- <#% print_product = Product.where(color_id: color_id, size_id: s.id) %> -->
+                          <!-- <#% qty = @cart[print_product[0].id.to_s] %> -->
+                            <!-- <td><%#=  qty %></td> -->
+                      <!-- <#% else %> -->
+                        <!-- <td></td> -->
+                      <!-- <#% end %> -->
 
-                    <% end %>
+                    <!-- <#% end %> -->
 
                 
-                    </tr>
-                  <% end %>
+                    <!-- </tr> -->
+                  <!-- <#% end %> -->
                 </tbody>
               </table>
-            <% end %>
+            <!-- <#% end %> -->
           <% end %>
         </div>
       </div>

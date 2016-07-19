@@ -40,8 +40,9 @@ class CartController < ApplicationController
     @company = Company.find(current_user.company_id)
 
 # find all the module names
-    @ordered_models = Array.new;
-    @ordered_products = Array.new
+    # @ordered_models = Array.new;
+    # @ordered_products = Array.new
+    @ordered_items = Array.new
     @sizes = Domain.where(domain_name: "SIZE");
 
     # lentele atsikirai kiekvienam modeliui
@@ -68,13 +69,17 @@ class CartController < ApplicationController
       #per krepseli
       @cart.each do |item|
         product = Product.find(item[0])
-        quantity = item[1]
+        # quantity = item[1]
 
         model = Model.find(product.model_id)
+        color = Domain.find(product.color_id)
+        size = Domain.find(product.size_id)
 
-        order_item = {"model_id" => product.model_id, "color_id" => product.color_id, "quantity" => quantity, "product" => product}
+        # order_item = {"model_id" => product.model_id, "color_id" => product.color_id, "quantity" => quantity, "product" => product}
+        order_item = {"model" => model, "color" => color, "size" => size, "quantity" => item[1]}
         # binding.pry
-        @ordered_products.push(order_item)
+        @ordered_items.push(order_item)
+        # @ordered_products.push(order_item)
         price = model.price
         quantity = item[1].to_i
 
@@ -84,37 +89,54 @@ class CartController < ApplicationController
     else
       @cart = {}
     end
-# binding.pry
+
+    models = @ordered_items.uniq { |item| item.first } 
+    @unique_models_array = Array.new
+    @unique_colors_array = Array.new
+
+    models.each do |model_uniq|
+      @unique_models_array.push(model_uniq["model"])
+      @unique_colors_array.push(model_uniq["colors"])
+    end
+
+
+
+    # binding.pry
     
-    # Kokie yra modeliai uzsakyme
-    @models_array = Array.new
-    @ordered_products.each do |op|
-      if !@models_array.include? op["model_id"]
-        @models_array.push(op["model_id"])
-      end
-    end
-
-    # find all the products in module
-    @models_array_with_hashes = Array.new
-    @color_product_hash = Hash.new
+    # # ordered_items
+    # # model_titles
+  
 
 
-    @models_array.each do |model_id|
+    # # Kokie yra modeliai uzsakyme
+    # @models_array = Array.new
+    # @ordered_products.each do |op|
+    #   if !@models_array.include? op["model_id"]
+    #     @models_array.push(op["model_id"])
+    #   end
+    # end
 
-      model_products_array = @ordered_products.select { 
-        |num|  num["model_id"] == model_id  
-      }
+    # # find all the products in module
+    # @models_array_with_hashes = Array.new
+    # @color_product_hash = Hash.new
 
-      # isrenku visas spalvas tame modelyje
-      model_colors = model_products_array.uniq{|x| x["color_id"] }
-            # binding.pry
 
-      model_colors.each do |mc|
-        model_color_array = model_products_array.select { |m| m["color_id"] == mc["color_id"] }
-        color_product = { mc["color_id"] => model_color_array}
-        @color_product_hash[mc["model_id"]] = color_product
-      end      
+    # @models_array.each do |model_id|
+
+    #   model_products_array = @ordered_products.select { 
+    #     |num|  num["model_id"] == model_id  
+    #   }
+
+    #   # isrenku visas spalvas tame modelyje
+    #   model_colors = model_products_array.uniq{|x| x["color_id"] }
+    #         # binding.pry
+
+    #   model_colors.each do |mc|
+    #     model_color_array = model_products_array.select { |m| m["color_id"] == mc["color_id"] }
+    #     color_product = { mc["color_id"] => model_color_array}
+    #     @color_product_hash[mc["model_id"]] = color_product
+    #   end      
       # binding.pry
-    end
+    # end
   end
 end
