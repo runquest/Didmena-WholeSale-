@@ -100,7 +100,9 @@ en:
         products: "products"
         add_model: "add model"
         models: "products"
-        all_orders: "orders"
+        all_orders: "orders"        
+        add_domains: "add domains"
+        domains: "domains"
 
     cart:
         cart: "cart"
@@ -130,13 +132,15 @@ en:
         color_and_size: "colors & Sizes"
         add_color: "add color"
         select_sizes: "select existing sizes"
-        type_color: "enter color (hex code): eg. ef22dd"
+        type_color: "color name"
         order: "place an order"
         thank_you: "thank you for your order" 
         confirmation_email: "order details has been sent to email address "
         your_order_number: "order number"
         product_id: "product id"
         model_title: "name"
+        color_code: "eg. ef22dd"
+
 
     orders:
         orders: "orders"
@@ -146,6 +150,12 @@ en:
         date: "order date"
         representative: "representative"
         products: "products"
+
+    domains:
+        code_value: "code value"
+        meaning: "meaning"
+        meaning_eg: "green"
+        new: "New domain"
 
     # warning pop ups
 

@@ -20,20 +20,20 @@
 
   <div class="row">
      <div class="input-field col s6">
-    <%= f.label :code_value %><br>
-    <%= f.text_field :code_value %>
+    <%= f.label :code_value, t('domains.code_value') %><br>
+    <%= f.text_field :code_value, :placeholder => "HEX color: e.g. ee22ff" %>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s6">
-      <%= f.label :meaning %><br>
-      <%= f.text_field :meaning %>
+      <%= f.label :meaning, t('domains.meaning') %><br>
+      <%= f.text_field :meaning, :placeholder => t('domains.meaning_eg') %>
     </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions waves-effect waves-light btn-large">
+      <%= f.submit t('form.button_save') %>
+    </div>
 <% end %>
 </div>

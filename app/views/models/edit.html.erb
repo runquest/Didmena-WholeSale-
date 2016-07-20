@@ -12,7 +12,10 @@
       </div>
       <div class="row">
         <div class="col s7">
-          <%= text_field_tag 'color_box', nil, placeholder: t('models.type_color') %>
+          <%= text_field_tag 'color_code', nil, placeholder: t('models.type_color') %>
+        </div>
+        <div class="col s7">
+          <%= text_field_tag 'color_box', nil, placeholder: t('models.color_code') %>
         </div>
         <div class="col s5">
           <button id="add_color" class="btn waves-effect waves-light"><%= t('models.add_color')%></button>

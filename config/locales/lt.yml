@@ -107,6 +107,8 @@ lt:
         add_model: "pridėti modelį"
         models: "produktai"
         all_orders: "užsakymai"
+        add_domains: "pridėti atributus"
+        domains: "atributai"
 
     cart:
         cart: "Krepšelis"
@@ -142,13 +144,14 @@ lt:
         color_and_size: "Spalvos ir dydžiai"
         add_color: "Pridėti spalvą"
         select_sizes: "Pasirinkite turimus dydžius."
-        type_color: "Įrašykite spalvą (hex code): pvz. ef22dd"
+        type_color: "Spalvos pavadinimas"
         order: "Užsakyti"
         thank_you: "Ačiū už užsakymą." 
         confirmation_email: "Užsakymo patvirtinimo detalės buvo iššiųstos el. adresu "
         your_order_number: "Užsakymo numeris"
         product_id: "Produkto ID"
         model_title: "Pavadinimas"
+        color_code: "pvz. ef22dd"
 
     orders:
         orders: "Užsakymai"
@@ -159,6 +162,12 @@ lt:
         cost: "Užsakymo kaina"
         representative: "Atstovas"
         products: "Prekės"
+
+    domains:
+        code_value: "Kodas"
+        meaning: "Reikšmė"
+        meaning_eg: "Žalia"
+        new: "Naujas atributas"
 
     # warning pop ups
 
