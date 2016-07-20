@@ -69,6 +69,7 @@
                     <% if item["model"].id == unique_model.id %>
                       <tr>
                         <td><%= item["color"].meaning %></td>
+                        #
                         <% @sizes.each do |size| %>
                           <% if item["size"].id == size.id %>
                             <td><%= item["quantity"] %></td>

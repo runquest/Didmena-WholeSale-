@@ -90,7 +90,53 @@ class CartController < ApplicationController
       @cart = {}
     end
 
+    all_models = @ordered_items.collect { |x| x["model"].title }
+    # all_models = @ordered_items.collect { |x| x["model"] }
+    @diff_models = all_models.uniq
+    # binding.pry
+
+    model_items = @ordered_items.select { |x| x["model"].id == 1 }
+    all_model_colors = model_items.collect { |x| x["color"].id }
+    diff_model_colors = all_model_colors.uniq
+    # binding.pry
+
+    answers = Array.new
+    # answer_lines = Array.new
+
+    diff_model_colors.each do |model_color|
+      model_color_items = model_items.select { |x| x["color"].id ==  model_color }
+      # binding.pry
+      answer_lines = Array.new
+
+      answer_lines.push(model_color)
+      @sizes.each do |s|
+        # binding.pry
+        q = "0"
+        model_color_items.each do |item|
+          if item["size"].id == s.id
+            q = item["quantity"]
+            break
+          end
+        end
+
+        answer_lines.push(q)
+          # if model_color_items["size"].id == s.id
+          # # if model_color_items.first["size"].id == s.id
+          #   # binding.pry
+          #   answer_lines.push(model_color_items.first["quantity"])
+          # else
+          #   answer_lines.push("0")
+          # end
+        # end
+      end
+      answers.push(answer_lines)
+    end
+
+    binding.pry
+
+
     models = @ordered_items.uniq { |item| item.first } 
+    # binding.pry
     @unique_models_array = Array.new
     @unique_colors_array = Array.new
 
