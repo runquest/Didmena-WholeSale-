@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     delete ':id' => 'cart#destroy'
     get '/cart/clear' => 'cart#clearCart'
     get '/cls' => 'domains#colors'
+    get '/sizes' => 'domains#sizes'
     get '/models/size' => 'models#size'
     post '/products/remove' => 'products#remove'
     post '/products/delete_item' => 'products#delete_item'

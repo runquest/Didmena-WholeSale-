@@ -45,15 +45,49 @@ $('#add_color').on("click", function(event){
     var rowColors = [];
     var value = $("#colors").val().toUpperCase();
 
+    var sizes = [];
 
-    var checkbox = "<tr id='" + value + "'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a id='value' href='' onclick='removeColor(this)'>Remove</a></td></tr>";
-    var sizes = ['XL', 'L', 'M', 'S', 'XS'];
+    var color_row = "<tr id='" + value +"'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td></tr>";
+    $("tbody#color_row").append(color_row);
+
+    $.ajax({
+      url: '/'+localization+'/sizes',
+      cache: false,
+      success: function(data){
+        getSizes(data);
+      }
+    });
+
+    function getSizes(data) {
+      for (var i = 0; i < data.length; ++i) {
+        var size = data[i].code_value;
+        sizes.push(size);
+      }
+      
+      for (k = 0; k < sizes.length; k++) {
+        // console.log('here');
+        var checkbox = "<td><input type='checkbox' class='size' id='"+ value + "-" + sizes[k] +"'><label for='"+ value + "-" + sizes[k] +"'></label></td>";
+        $("tr#" + value).append(checkbox);
+      }
+    }
+
+
+    
+
+
+
+
+
+
+    // var checkbox = "<tr id='" + value + "'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a id='value' href='' onclick='removeColor(this)'>Remove</a></td></tr>";
+
+
 
     for (j = 0; j < rows.length; j++) {
       rowColors.push(rows[j].id);
     };
 
-    $("tbody#color_row").append(checkbox);
+    // $("tbody#color_row").append(color_row);
 
     for (i = 0; i < sizes.length; i++) {
       var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
