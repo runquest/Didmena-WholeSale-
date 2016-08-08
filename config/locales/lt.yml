@@ -31,6 +31,8 @@ lt:
     new: "sukurti naują įrašą"
     description: "aprašymas"
     status: "statusas"
+    are_you_sure: "Ar esate tikras?"
+
 
     # product / module specific words
 
