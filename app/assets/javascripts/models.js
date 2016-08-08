@@ -57,54 +57,81 @@ $(function() {
           alert("color is already added");
 
         } else {
-          var selected_color = $("#colors").val();
-          var rows = document.getElementById("colorSize").rows;
-          var str = window.location.href;
-          var n = str.match(/\/(\d+)\//);
-          var model_id = n[1];
-          var products = [];
-          var rowColors = [];
-          var value = $("#colors").val().toUpperCase();
-
-          var sizes = [];
-
-          var color_row = "<tr id='" + value +"'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td></tr>";
-          $("tbody#color_row").append(color_row);
-
-          $.ajax({
-            url: '/'+localization+'/sizes',
-            cache: false,
-            success: function(data){
-              getSizes(data);
-            }
-          });
-
-          function getSizes(data) {
-            for (var i = 0; i < data.length; ++i) {
-              var size = data[i].code_value;
-              sizes.push(size);
-            }
-            
-            for (k = 0; k < sizes.length; k++) {
-              var checkbox = "<td><input type='checkbox' class='size' id='"+ value + "-" + sizes[k] +"'><label for='"+ value + "-" + sizes[k] +"'></label></td>";
-              $("tr#" + value).append(checkbox);
-            }
-          }
-
-          for (j = 0; j < rows.length; j++) {
-            rowColors.push(rows[j].id);
-          };
-
-          for (i = 0; i < sizes.length; i++) {
-            var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
-            products.push(product_data);
-          }
-
-          $("#colors").val('');
+          addProduct();
         }
       }
     });
   });
+
+  function addProduct() {
+
+    var selected_color = $("#colors").val();
+    var rows = document.getElementById("colorSize").rows;
+    var str = window.location.href;
+    var n = str.match(/\/(\d+)\//);
+    var model_id = n[1];
+    var products = [];
+    var rowColors = [];
+    var value = $("#colors").val().toUpperCase();
+
+    var sizes = [];
+
+    var color_row = "<tr id='" + value +"'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td></tr>";
+    $("tbody#color_row").append(color_row);
+
+    $.ajax({
+      url: '/'+localization+'/sizes',
+      cache: false,
+      success: function(data){
+        getSizes(data);
+      }
+    });
+
+    function getSizes(data) {
+      for (var i = 0; i < data.length; ++i) {
+        var size = data[i].code_value;
+        sizes.push(size);
+      }
+      
+      for (var k = 0; k < sizes.length; k++) {
+        var checkbox = "<td><input type='checkbox' class='size' id='"+ value + "-" + sizes[k] +"'><label for='"+ value + "-" + sizes[k] +"'></label></td>";
+        $("tr#" + value).append(checkbox);
+      }
+
+      for (var j = 0; j < rows.length; j++) {
+        rowColors.push(rows[j].id);
+      };
+
+      for (var i = 0; i < sizes.length; i++) {
+        var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
+        console.log(product_data);
+        products.push(product_data);
+      }
+
+      for (var j = 0; j < rows.length; j++) {
+        rowColors.push(rows[j].id);
+      };
+
+      $.ajax({
+        method: 'post',
+        url: '/'+localization+'/products',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(products),
+        success: function (data) {
+          console.log(data);
+        },
+        error: function(err){
+          console.log(err);
+        }
+      });
+    }
+    
+
+    
+
+    $("#colors").val('');
+  }
 
   $("tbody#color_row").on("click", ".size", function() { 
 
@@ -115,6 +142,8 @@ $(function() {
 
     var color = this.id.match(/(\w+)/);
     var size = this.id.match(/\w+$/);
+
+    console.log('here');
 
     if (this.checked) {
       var product_data = {model: model_id, color: color, size: size, in_storage: true};

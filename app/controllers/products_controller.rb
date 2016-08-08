@@ -25,6 +25,8 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+
+    # binding.pry
     @products = params[:_json]
     @products.each do |item|
       # if color doesn't exist we need to add it
@@ -57,6 +59,8 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+
+    binding.pry
     if @product.update(product_params)
       logger.info "product updated"
       redirect_to :back
