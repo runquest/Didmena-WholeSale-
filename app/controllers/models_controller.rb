@@ -4,7 +4,7 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
-    @models = Model.all
+    @models = Model.all.order(:priority)
   end
 
   # GET /models/1
@@ -169,7 +169,7 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note)
+      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :priority, :note)
     end
 
     def purchase_params

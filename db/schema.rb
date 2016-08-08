@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160403164834) do
     t.string   "title",       limit: 100,                          null: false
     t.integer  "gender_id",                                        null: false
     t.integer  "category_id",                                      null: false
+    t.integer  "priority"
     t.decimal  "price",                   precision: 10, scale: 2, null: false
     t.text     "note"
     t.datetime "created_at",                                       null: false

@@ -6,10 +6,10 @@ Domain.create(domain_name: 'GENDER', code_value: 'M', meaning: 'MALE')
 
 # COLOR:  R - Red, G - Green, B - Blue, Y - Yellow, etc.
 
-Domain.create(domain_name: 'COLOR', code_value: 'R', meaning: 'RED')
-Domain.create(domain_name: 'COLOR', code_value: 'G', meaning: 'GREEN')
-Domain.create(domain_name: 'COLOR', code_value: 'B', meaning: 'BLUE')
-Domain.create(domain_name: 'COLOR', code_value: 'Y', meaning: 'YELLOW')
+Domain.create(domain_name: 'COLOR', code_value: '33E', meaning: '33EEAA')
+Domain.create(domain_name: 'COLOR', code_value: 'FFE', meaning: 'FFEE11')
+Domain.create(domain_name: 'COLOR', code_value: 'DDD', meaning: 'DDDAAA')
+Domain.create(domain_name: 'COLOR', code_value: 'ADF', meaning: 'ADF112')
 
 # SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
 

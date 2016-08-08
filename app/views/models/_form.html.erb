@@ -26,6 +26,10 @@
       <%= f.label :price, t('models.price') %>
       <%= f.number_field(:price, :placeholder => "e.g. 10.15",  :class => 'text_field', :step => '0.01') %>
     </div>
+    <div class="col 6">
+      <%= f.label :priority, "priority" %>
+      <%= f.number_field(:priority, :class => 'text_field', :step => '1') %>
+    </div>
   </div>
   
   <div class="row">
