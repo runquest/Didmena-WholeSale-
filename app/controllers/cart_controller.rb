@@ -85,10 +85,17 @@ class CartController < ApplicationController
 
         product_cost = price * quantity
         @cart_total_cost += product_cost
+
       end
     else
       @cart = {}
     end
+
+    if !@cart_total_cost.nil? 
+      @final_cost = @cart_total_cost - @company.discount
+    else 
+      @final_cost = 0
+    end 
 
     all_models = @ordered_items.collect { |x| x["model"].id }
     @diff_models = all_models.uniq

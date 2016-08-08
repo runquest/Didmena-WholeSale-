@@ -33,6 +33,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
+    # binding.pry
     if params[:domain_id].nil?
       params[:company][:domain_id] = 1
     end
@@ -81,6 +82,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:title, :email, :status, :domain_id, :city, :street, :postal_code, :phone, :description)
+      params.require(:company).permit(:title, :email, :discount, :status, :domain_id, :city, :street, :postal_code, :phone, :description)
     end
 end

@@ -4,6 +4,8 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :title, null: false, limit: 200
       t.string :email, null: false, limit: 100
       t.string :status, null: false, limit: 20
+      t.decimal :discount, :precision => 10, :scale => 2, null: false
+
       t.integer :domain_id, null: false # with domain_name='COUNTRY'
       # t.string :city, null: false, limit: 30
       t.string :city, limit: 30

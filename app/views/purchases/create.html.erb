@@ -3,7 +3,8 @@
     <div class="col s8 offset-s2">
       <p class="align-center"><%= t('purchases.thank_you')%></p>
       <p class="align-center"> <%= t('purchases.confirmation_email_message') %> <%= current_user.email %></p>
-      <h6 class="align-center"> <%= link_to t('purchases.your_order_number'), @order_path(@order) %> #<%= @order_number %></h6>
+      <% binding.pry %>
+      <h6 class="align-center"> <%= link_to "Your order number", @order_path(@order) %> #<%= @order_number %></h6>
     </div>
   </div>
   <div class="row">
