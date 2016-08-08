@@ -19,7 +19,7 @@
             </div>
             <% if current_user && current_user.apps_manager %>
               <div class="card-action">
-                <%= link_to t('delete'), p, method: :delete, data: { confirm: t('are_you_sure') }, :class => "center-align" %>
+                <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') }, :class => "center-align" %>
               </div>
             <% end %>
           </div>
@@ -55,7 +55,7 @@
             <% @colors.each do |color| %>
               <tr id='<%= value(color) %>'>
                 <td style="background-color: #<%= value(color) %>; width: 5%;"></td>
-                <td style="padding-left: 10px;"><%= value(color) %></td>
+                <td style="padding-left: 10px; background-color: #<%= value(color) %>;"><%= value(color) %></td>
                 <% @sizes.each do |size| %>
                   <% product = find_models_products(color, size) %>
                   <% if product_exist?(color, size) && product_in_storage?(color, size) %>

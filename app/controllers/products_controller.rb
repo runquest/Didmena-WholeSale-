@@ -25,6 +25,8 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+
+    # binding.pry
     @products = params[:_json]
     @products.each do |item|
       # if color doesn't exist we need to add it

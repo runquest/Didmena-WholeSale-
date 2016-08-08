@@ -7,6 +7,7 @@ class PurchasesController < ApplicationController
       redirect_to :back, alert: t('.alert')
       # redirect_to :back, notice: t('.notice')
     else
+      
       if session[:cart] then
         cart = session[:cart]
       else

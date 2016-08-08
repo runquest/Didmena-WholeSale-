@@ -7,14 +7,14 @@
   <div class="col s4 offset-s2 z-depth-1" id="login"> 
     <%= form_tag sessions_path do %>
       <div>
-        <%= label_tag "email" %><br/>
+        <%= label_tag t('login.email') %><br/>
         <%= text_field_tag "email" %>
       </div>
       <div>
-        <%= label_tag :password, t('password') %><br/>
+        <%= label_tag :password, t('login.password') %><br/>
         <%= password_field_tag :password %>
       </div>
-      <div><%= submit_tag t('log_in'), class: 'btn waves-effect submit' %></div>
+      <div><%= submit_tag t('login.login'), class: 'btn waves-effect submit' %></div>
     <% end %>
   </div>
 </div>

@@ -6,124 +6,133 @@ $(function() {
 
   var localization = $("body").data("locale");
 
-  $('#color_box').keypress(function(event){
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if (null != $("#color_box").val()) {
+  var options = {
+    url: "/cls.json",
 
-      if(keycode == '13'){
-        var value = $("#color_box").val().toUpperCase();
-        var rows = document.getElementById("colorSize").rows;
+      getValue: "meaning",
 
-        var str = window.location.href;
-        var n = str.match(/\/(\d+)\//);
-        var model_id = n[1];
-        var products = [];
-        var rowColors = [];
-
-        var checkbox = "<tr id='" + value + "'><td style='background-color: #" + value + "; width=5px;'></td><td style='padding-left:5px' >" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a id='"+ value +"' href='' onclick='removeColor(this)'>Remove</a></td></tr>";
-        var sizes = ['XL', 'L', 'M', 'S', 'XS'];
-
-        for (j = 0; j < rows.length; j++) {
-            rowColors.push(rows[j].id);
-        };
-
-        if (!rowColors.includes(value)) {
-
-          $("tbody#color_row").append(checkbox);
-
-          for (i = 0; i < sizes.length; i++) {
-            var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
-            products.push(product_data);
+      template: {
+          type: "description",
+          fields: {
+              description: "code_value"
           }
+      },
 
-          $.ajax({
-            method: 'post',
-            url: '/'+localization+'/products',
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            data: JSON.stringify(products),
-            success: function (data) {
-              console.log(data);
-            },
-            error: function(err){
-              console.log(err);
-            }
-          });
+      list: {
+          match: {
+              enabled: true
+          },
+          sort: {
+            enabled: true
+          }
+      },
 
-          $("#color_box").val('');
-        } else {
-          alert('color exist');
-        };
-      }
-    }
-  });
+      theme: "plate-dark"
+  };
+
+  $("#colors").easyAutocomplete(options);
 
   $('#add_color').on("click", function(event){
-    // var keycode = (event.keyCode ? event.keyCode : event.which);
-    if (null != $("#color_box").val()) {
 
-      // if(keycode == '13'){
-        var value = $("#color_box").val().toUpperCase();
-        var rows = document.getElementById("colorSize").rows;
+    $.ajax({
+      url: '/'+localization+'/cls.json',
+      cache: false,
+      success: function(data){
 
-        var str = window.location.href;
-        var n = str.match(/\/(\d+)\//);
-        var model_id = n[1];
-        var products = [];
-        var rowColors = [];
+        var selected_color = $("#colors").val();
+        var colors = [];
 
-        var checkbox = "<tr id='" + value + "'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a id='value' href='' onclick='removeColor(this)'>Remove</a></td></tr>";
-        // var checkbox = "<tr id='" + value + "'><td>" + value + "</td><td><input type='checkbox' class='size' id='"+ value + "-XL" +"'><label for='"+ value + "-XL" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-L" +"'><label for='"+ value + "-L" +"'></label></td><td><input class='size' type='checkbox' id='"+ value + "-M" +"'><label for='"+ value + "-M" +"'></label></td><td><input type='checkbox' class='size' id='"+ value + "-S" +"'><label for='"+ value + "-S" +"'></label></td><td><input type='checkbox' class='size'  id='"+ value + "-XS" +"'><label for='"+ value + "-XS" +"'></label></td><td><a href='' onclick='javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])'>Remove</a></td></tr>";
-        var sizes = ['XL', 'L', 'M', 'S', 'XS'];
+        for (var i = 0; i < data.length; ++i) {
+          var color = data[i].meaning;
+          colors.push(color);
+        }
 
-        for (j = 0; j < rows.length; j++) {
-            rowColors.push(rows[j].id);
-        };
+        if (colors.indexOf(selected_color) < 0) {
+          alert('add color to the db');
 
-        if (!rowColors.includes(value)) {
+        } else if ($("#colors").val().length == 0) {
+          alert("select color");  
 
-          $("tbody#color_row").append(checkbox);
+        } else if (document.getElementById($("#colors").val())) {
+          alert("color is already added");
 
-          for (i = 0; i < sizes.length; i++) {
-            var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
-            products.push(product_data);
-          }
-
-          $.ajax({
-            method: 'post',
-            url: '/'+localization+'/products',
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            data: JSON.stringify(products),
-            success: function (data) {
-              console.log(data);
-            },
-            error: function(err){
-              console.log(err);
-            }
-          });
-
-          $("#color_box").val('');
         } else {
-          alert('color exist');
-        };
-      // }
+          addProduct();
+        }
+      }
+    });
+  });
+
+  function addProduct() {
+
+    var selected_color = $("#colors").val();
+    var rows = document.getElementById("colorSize").rows;
+    var str = window.location.href;
+    var n = str.match(/\/(\d+)\//);
+    var model_id = n[1];
+    var products = [];
+    var rowColors = [];
+    var value = $("#colors").val().toUpperCase();
+
+    var sizes = [];
+
+    var color_row = "<tr id='" + value +"'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td></tr>";
+    $("tbody#color_row").append(color_row);
+
+    $.ajax({
+      url: '/'+localization+'/sizes',
+      cache: false,
+      success: function(data){
+        getSizes(data);
+      }
+    });
+
+    function getSizes(data) {
+      for (var i = 0; i < data.length; ++i) {
+        var size = data[i].code_value;
+        sizes.push(size);
+      }
+      
+      for (var k = 0; k < sizes.length; k++) {
+        var checkbox = "<td><input type='checkbox' class='size' id='"+ value + "-" + sizes[k] +"'><label for='"+ value + "-" + sizes[k] +"'></label></td>";
+        $("tr#" + value).append(checkbox);
+      }
+
+      for (var j = 0; j < rows.length; j++) {
+        rowColors.push(rows[j].id);
+      };
+
+      for (var i = 0; i < sizes.length; i++) {
+        var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
+        console.log(product_data);
+        products.push(product_data);
+      }
+
+      for (var j = 0; j < rows.length; j++) {
+        rowColors.push(rows[j].id);
+      };
+
+      $.ajax({
+        method: 'post',
+        url: '/'+localization+'/products',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(products),
+        success: function (data) {
+          console.log(data);
+        },
+        error: function(err){
+          console.log(err);
+        }
+      });
     }
-  });
+    
 
-  $('td#remove').on('click', function() {
-    console.log(this);
-    // tbody#color_row.removeChild(tbody#color_row.childNodes[0]);
+    
 
-    // var row = document.getElementById(rowid);
-    // row.parentNode.removeChild(row);
+    $("#colors").val('');
+  }
 
-    // javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])
-  });
-
-
-
-  /// creating selectors
   $("tbody#color_row").on("click", ".size", function() { 
 
     var rows = document.getElementById("colorSize").rows;
@@ -133,6 +142,8 @@ $(function() {
 
     var color = this.id.match(/(\w+)/);
     var size = this.id.match(/\w+$/);
+
+    console.log('here');
 
     if (this.checked) {
       var product_data = {model: model_id, color: color, size: size, in_storage: true};
@@ -239,35 +250,27 @@ function readURL() {
 };
 
 function removeColor(some) {
+  var str = window.location.href;
+  var n = str.match(/\/(\d+)\//);
+  var model_id = n[1];
+  var color_name = some.id
 
-      var str = window.location.href;
-      var n = str.match(/\/(\d+)\//);
-      var model_id = n[1];
-      var color_name = some.id
+  var products_data = {color_name: color_name, model_id: model_id}
 
-      var products_data = {color_name: color_name, model_id: model_id}
-
-      $.ajax({
-        method: 'post',
-        url: '/'+localization+'/delete_products',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify(products_data),
-        success: function (data) {
-          console.log('success');
-          window.location = '/'+localization+'/models/' + model_id
-        },
-        error: function(err){
-          console.log(err);
-          // to-do: it is not hitting success function even though it posts well.
-        }
-      });
-
-    // tbody#color_row.removeChild(tbody#color_row.childNodes[0]);
-
-    // var row = document.getElementById(rowid);
-    // row.parentNode.removeChild(row);
-
-    // javascript:tbody#color_row.removeChild(tbody#color_row.childNodes[0])
+  $.ajax({
+    method: 'post',
+    url: '/'+localization+'/delete_products',
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    data: JSON.stringify(products_data),
+    success: function (data) {
+      console.log('success');
+      window.location = '/'+localization+'/models/' + model_id
+    },
+    error: function(err){
+      console.log(err);
+      // to-do: it is not hitting success function even though it posts well.
+    }
+  });
 }
 

@@ -23,37 +23,47 @@
           </div>
         </div>
       <div class="divider"></div>
-      <div class="row section">
-        <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
-        <% end %>
-        <div class="col s8 offset-s2">
-          <table class="striped centered">
-            <thead>
-              <tr>
-                <th data-field="model-title"><%= t('cart.product') %></th>
-                <th data-field="product-color"><%= t('cart.color') %></th>
-                <th data-field="product-size"><%= t('cart.size') %></th>
-                <th data-field="quantity"><%= t('cart.quantity') %></th>
-                <th data-field="quantity"><%= t('cart.cost') %></th>
-                <th colspan="3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if @cart.any? %>
-                <% @cart.each do |id, quantity| %>
-                  <tr><%= render "cart_row", id: id, quantity: quantity %></tr>
+
+      <% @mcs_hash.each do |key, value| %>
+        <div class="row section">
+          <div class="col s8 offset-s2">
+            <h5><%= Model.find(key).title %></h5>
+              
+              <table id="product_table" class="striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                      <% @sizes.each do |size| %>
+                        <th data-field='<%= size.code_value%>' class="center-align"><%= size.code_value%></th>
+                      <% end %>
+                    <th class="center-align">Total</th>
+                  </tr>
+                </thead>
+
+                <% value.each do |color|%>
+                  <tr>
+                    <% color_name = Domain.find(color.first).meaning %>
+                    <td style="background: #<%= color_name %>"><%= color_name %></td>
+                  <% limit = color.length - 1 %>
+                  <% for counter in 1..limit %>
+                    <% if color[counter] == "0" %>
+                      <td></td>
+                    <% else %>
+                      <td class="center"><%= color[counter] %></td>
+                    <% end %>
+                  <% end %>
+                  </tr>
                 <% end %>
-              <% end %>          
-            </tbody>
-          </table>
-        </div>
-      </div>
+              </table>
+            </div>
+          </div>
+        <% end %>
+
       <div class="row">
         <div class="col s8 offset-s2">
           <div class="row">
             <% if !@cart_total_cost.nil? %>
-              <h6 class="right"><b><%= t('cart.total_cost') %></b><%= sprintf "%.2f", @cart_total_cost %></h6>
+              <h6 class="right"><b><%= t('cart.total_cost') %></b>: <%= sprintf "%.2f", @cart_total_cost %></h6>
             <% end %>
           </div>
           <div class="row">

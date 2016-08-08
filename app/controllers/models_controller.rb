@@ -4,7 +4,7 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
-    @models = Model.all
+    @models = Model.all.order(:priority)
   end
 
   # GET /models/1
@@ -15,7 +15,7 @@ class ModelsController < ApplicationController
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
     @colors = Array.new;
-    @sizes = Domain.where(domain_name: 'SIZE')
+    @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
 
     @products.each do |prdct|
       if !@colors.include? prdct.color_id
@@ -24,7 +24,6 @@ class ModelsController < ApplicationController
           p = Product.where(color_id: prdct.color_id).where(size_id: size.id).take
           if p.in_storage
             color_size.push(p)
-            # @colors.push(prdct.color_id)
           end
         end
 
@@ -170,7 +169,7 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note)
+      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :priority, :note)
     end
 
     def purchase_params

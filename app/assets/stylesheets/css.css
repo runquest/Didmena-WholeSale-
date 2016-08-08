@@ -11,6 +11,11 @@ div#header {
     margin-top: 150px;
 }
 
+footer {
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+
 input.btn.waves-effect.submit {
     width: 100%;
 }

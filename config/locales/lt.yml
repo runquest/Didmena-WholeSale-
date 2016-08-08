@@ -20,21 +20,33 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 lt:
-    back: "atgal"
+    # navigation
+
+    back: "atgal" 
     edit: "redaguoti"
     show: "rodyti"
     delete: "ištrinti"
-    are_you_sure: "patvirkinte"
+    confirm: "patvirtinkite"
     save: "išsaugoti"
+    new: "sukurti naują įrašą"
+    description: "aprašymas"
+    status: "statusas"
+    are_you_sure: "Ar esate tikras?"
 
-    form:
-        cannot_save: "Negali iššsaugoti formos:"
-        button_save: "Išsaugoti"
-        choose_country: "Pasirink šalį"
+
+    # product / module specific words
+
+    color: "spalva"
+    size: "dydis"
+    quantity: "kiekis"
+    cost: "kaina"
+    quantity: "kiekis"
+    total_price: "užsakymo kaina"
+    discount: "nuolaida"
+
+    # module specific
 
     purchases:
-        create:
-            alert: "Tuščias krepšelis."
         thank_you: "Ačiū. Jūsų užsakymas buvo gautas."
         confirmation_email_message: "Jūsų užsakymo patvirtinimas išsiųstas el.pašto adresu"
         product_id: "Prekės ID"
@@ -45,6 +57,8 @@ lt:
         cost: "Kaina"
         total_cost: "Galutinė kaina"
         your_order_number: "Užsakymo numeris"
+        create:
+            alert: "Tuščias krepšelis."
 
     users:
         add_representative: "sukurti vartotoją"
@@ -58,14 +72,9 @@ lt:
         password: "Slaptažodis"
         password_confirmation: "Pakartoti slaptažodį"
         user_admin: "Pažymėti jei vartotojas administratorius"
-        new: "Sukurti naują vartotoją"
-        edit: "Redaguoti vartotojo informaciją"
         admin: "administratorius"
-        status: "statusas"
-        edit_user_company: "redaguoti vartotoją"
 
     collections:
-        index:
         title: "Kolekcijos"
         add_new_collection: "Pridėti naują kolekciją"
 
@@ -83,25 +92,25 @@ lt:
         intro: "Atlikti produktų užsakymus turite registruotis."
 
     login:
-        label:
         email: "El. paštas"
         password: "Slaptažodis"
-        login: "Jungtis"
+        login: "Prisijungti"
 
     welcome: 
-        do_title: "Ką mes darome"
-        do_description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
+        title: "Ką mes darome"
+        description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
         contact_title: "Susisiekite su mumis"
-
         add_user: "pridėti vartotoją"
         add_company: "pridėti įmonę"
         users: "vartotojai"
         companies: "įmonės"
-        clients: "klientai"
+        clients: "užsakovai"
         products: "prekės"
         add_model: "pridėti modelį"
-        models: "modeliai / produktai"
+        models: "produktai"
         all_orders: "užsakymai"
+        add_domains: "pridėti atributus"
+        domains: "atributai"
 
     cart:
         cart: "Krepšelis"
@@ -113,15 +122,12 @@ lt:
         quantity: "Kiekis"
         cost: "Kaina"
         total_cost: "Galutinė kaina: "
-        confirm_order: "Patvirtinti užsakymą"
+        confirm_order: "Patvirtinkite užsakymą"
         empty_cart: "Išvalyti krepšelį"
-        remove: "Ištrinti"
-
         destroy:
             notice: "Produktas sėkmingai ištrintas."
 
     company:
-
         company_name: "** Pavadinimas"
         phone: "Telefonas"
         email: "** El. paštas"
@@ -129,43 +135,25 @@ lt:
         city: "Miestas"
         postal_code: "Pašto kodas"
         representatives: "Atstovai"
-
-        edit: "Redaguoti įmonę"
-        show: "Rodyti"
-        back: "Atgal"
-        new: "Nauja įmonė"
         title: "Įmonės"
-        status: "Statusas"
-        delete: "Ištrinti"
-        new_company: "Sukurti naują"
-        description: "Aprašymas"
 
     models:
         title: "* Modelio pavadinimas"
         choose_type: "Pasirink tipą"
         choose_collection: "Pasirink kolekciją"
         price: "Kaina"
-        description: "Aprašymas"
         description_placeholder: "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton."
-        save: "Išsaugoti"
-        new_model: "Kurti naują modelį"
         color_and_size: "Spalvos ir dydžiai"
         add_color: "Pridėti spalvą"
-        color: "Spalva"
         select_sizes: "Pasirinkite turimus dydžius."
-        type_color: "Įrašykite spalvą (hex code): pvz. ef22dd"
-        edit: "Redaguoti"
-        back: "Atgal"
+        type_color: "Spalvos pavadinimas"
         order: "Užsakyti"
         thank_you: "Ačiū už užsakymą." 
         confirmation_email: "Užsakymo patvirtinimo detalės buvo iššiųstos el. adresu "
         your_order_number: "Užsakymo numeris"
         product_id: "Produkto ID"
         model_title: "Pavadinimas"
-        color: "Spalva"
-        size: "Dydis"
-        quantity: "Kiekis"
-        cost: "Kaina"
+        color_code: "pvz. ef22dd"
 
     orders:
         orders: "Užsakymai"
@@ -175,13 +163,25 @@ lt:
         date: "Užsakymo data"
         cost: "Užsakymo kaina"
         representative: "Atstovas"
-        status: "Statusas"
         products: "Prekės"
-        color: "Spalva"
-        size: "Dydis"
-        quantity: "Kiekis"
-        total_price: "Užsakymo kaina"
-        discount: "Nuolaida"
+
+    domains:
+        code_value: "Kodas"
+        meaning: "Reikšmė"
+        meaning_eg: "Žalia"
+        new: "Naujas atributas"
+
+    # warning pop ups
+
+
+    # when creating new or editing
+
+    form:
+        cannot_save: "Negali iššsaugoti formos:"
+        button_save: "Išsaugoti"
+        choose_country: "Pasirink šalį"
+
+    # error messages
 
     activerecord:
         errors:

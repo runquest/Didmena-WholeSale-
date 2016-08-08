@@ -17,47 +17,192 @@
 # This would use the information in config/locales/es.yml.
 #
 # To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  cart:
-    destroy:
-      notice: "Item successfully removed."
+    # navigation
 
-  purchases:
-    create:
-      alert: "No items in the cart."
+    back: "back" 
+    edit: "edit"
+    show: "show"
+    delete: "delete"
+    confirm: "confirm"
+    save: "save"
+    new: "new"
+    description: "description"
+    status: "status"
+    are_you_sure: "Are you sure?"
 
-  collections:
-    index:
-      title: "Collections"
-      add_new_collection: "Add new collection"
+    # product / module specific words
 
-  header:
-    you_logged_in: "You are logged in as"
-    logout: "Log out"
+    color: "color"
+    size: "size"
+    quantity: "quantity"
+    cost: "cost"
+    total_price: "total price"
+    discount: "discount"
 
-  top_menu:
-    register: "Register"
-    home: "Home"
-    collections: "Collections"
-    models: "Products"
+    # module specific
 
-  register:
-    intro: "To be able to place your order please register."
+    purchases:
+        thank_you: "Thank you. Your order has been confirmed."
+        confirmation_email_message: "confirmation email was sent to "
+        product_id: "product ID"
+        model_title: "model"
+        your_order_number: "order number"
+        create:
+            alert: "cart is empty."
 
-  login:
-    label:
-      email: "Email"
-      password: "Password"
-      login: "Log in"
+    users:
+        add_representative: "add usesr"
+        first_name: "first name"
+        last_name: "last name"
+        email: "email"
+        phone: "phone"
+        add_company: "add company"
+        edit_company: "edit company"
+        choose_company: "choose company"
+        password: "password"
+        password_confirmation: "repeate password"
+        user_admin: "check if user is admin"
+        admin: "administratorius"
 
-  aiste:
-    register: "register"
-    home: "home"
-    collections: "collections"
-    models: "models"
+    collections:
+        title: "collections"
+        add_new_collection: "add new collection"
 
-  welcome: 
-    do_title: "What we do"
-    do_description: "We offer wide range of women's wear of different styles: T-shirrts, tanks, racerbacks, dresses, sweartshirts, shorts and pajamas. For production we use fabric of different density and colors with decorating elements."
-    contact_title: "Get in touch"
+    session_menu:
+        home: "home"
+        cart: "cart"
+        my_orders: "orders"
+        models: "products"
+
+    header:
+        logout: "log out"
+        dashboard: "dashboard"
+
+    register:
+        intro: "sign up to place an order."
+
+    login:
+        email: "email"
+        password: "password"
+        login: "log in"
+
+    welcome: 
+        title: "what we do"
+        description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
+        contact_title: "reach us at "
+        add_user: "add user"
+        add_company: "add company"
+        users: "users"
+        companies: "companies"
+        clients: "clients"
+        products: "products"
+        add_model: "add model"
+        models: "products"
+        all_orders: "orders"        
+        add_domains: "add domains"
+        domains: "domains"
+
+    cart:
+        cart: "cart"
+        edit_profile: "edit user"
+        edit_company: "edit company"
+        product: "product"
+        confirm_order: "confirm order"
+        empty_cart: "empty cart"
+        destroy:
+            notice: "product has been successfully removed."
+
+    company:
+        company_name: "** name"
+        phone: "phone"
+        email: "** email"
+        address: "address"
+        city: "city"
+        postal_code: "postal code"
+        representatives: "representatives"
+        title: "companies"
+
+    models:
+        title: "* name"
+        choose_type: "choose type"
+        choose_collection: "choose collection"
+        description_placeholder: "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton."
+        color_and_size: "colors & Sizes"
+        add_color: "add color"
+        select_sizes: "select existing sizes"
+        type_color: "color name"
+        order: "place an order"
+        thank_you: "thank you for your order" 
+        confirmation_email: "order details has been sent to email address "
+        your_order_number: "order number"
+        product_id: "product id"
+        model_title: "name"
+        color_code: "eg. ef22dd"
+
+
+    orders:
+        orders: "orders"
+        contact: "client"
+        my_orders: "my orders"
+        number: "order number"
+        date: "order date"
+        representative: "representative"
+        products: "products"
+
+    domains:
+        code_value: "code value"
+        meaning: "meaning"
+        meaning_eg: "green"
+        new: "New domain"
+
+    # warning pop ups
+
+
+    # when creating new or editing
+
+    form:
+        cannot_save: "cannot save form: "
+        button_save: "save"
+        choose_country: "choose country"
+
+    # error messages
+
+    activerecord:
+        errors:
+          models:
+            company:
+                attributes:
+                    title:
+                        blank: "name cannot be empty"
+                    email:
+                        blank: "email cannot be empty"
+                    domain:
+                        blank: "choose country"
+            model:
+                attributes:
+                    code:
+                        blank: ""
+                    title:
+                        blank: "title cannot be empty"
+                    gender_id:
+                        blank: "choose type"
+                    category_id:
+                        blank: "choose collection"
+                    price:
+                        blank: "price cannot be empty"
+            user:
+                attributes:
+                    password:
+                        blank: "enter password"
+                    email: 
+                        blank: "enter email"
+                        too_short: "email is at least 3 symbols"
+                    fname:
+                        blank: "name cannot be empty"
+                        too_short: "name is too short"
+                    lname: 
+                        blank: "last name cannot be empty"
+                        too_short: "last name is too short"
