@@ -59,8 +59,6 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
-
-    binding.pry
     if @product.update(product_params)
       logger.info "product updated"
       redirect_to :back

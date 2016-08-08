@@ -15,7 +15,7 @@ class ModelsController < ApplicationController
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
     @colors = Array.new;
-    @sizes = Domain.where(domain_name: 'SIZE')
+    @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
 
     @products.each do |prdct|
       if !@colors.include? prdct.color_id
@@ -24,7 +24,6 @@ class ModelsController < ApplicationController
           p = Product.where(color_id: prdct.color_id).where(size_id: size.id).take
           if p.in_storage
             color_size.push(p)
-            # @colors.push(prdct.color_id)
           end
         end
 
