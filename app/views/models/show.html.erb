@@ -78,7 +78,7 @@
       <% if current_user %>
         <button class="btn waves-effect waves-light order_button offset-s2 col s10"><%= t('models.order') %></button>
       <% else %>
-        <button class="btn waves-effect waves-light order_button offset-s2 col s10"><%= link_to t('login'), new_session_path %></button>
+        <button class="btn waves-effect waves-light offset-s2 col s10"><%= link_to t('login_not_user'), new_session_path, {:style => 'color: yellow;'} %></button>
       <% end %>
 
     </div>

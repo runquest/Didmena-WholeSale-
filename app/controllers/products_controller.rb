@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       @model = Model.find(@product.model_id)
-      format.html { redirect_to @model, notice: 'User was successfully created.' }
+      format.html { redirect_to @model, notice: 'Model was successfully created.' }
       format.json { render :show, status: :created, location: @model }
     end
   end

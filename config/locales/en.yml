@@ -36,6 +36,7 @@ en:
     discount: "discount: "
     empty: "Cart is empty."
     total_price: "Total price: "
+    login_not_user: "to order log in"
 
     # product / module specific words
 

@@ -4,4 +4,5 @@
 <td><%= find_color(product) %>
 <td><%= find_size(product) %>
 <td><%= purchases_for_order.quantity %></td>
+<td><%= sprintf "%.2f", find_model(product).price %></td>
 <td><%= sprintf "%.2f", find_model(product).price * purchases_for_order.quantity %></td>
