@@ -12,7 +12,7 @@
         <%= @company.phone %><br>
         <%= @company.full_street_address %><br>
         <%= @company.country_postal %><br>
-        <strong>Discount: </strong><%= @company.discount %><br>
+        <strong<%= t('discount')%></strong><%= @company.discount %><br>
         <%= @company.description %>
       </div>
       <div class="col s6">
@@ -23,7 +23,7 @@
               <tr>
                 <td><%= link_to user.full_name, user %></td>
                 <td><%= link_to t('edit'), edit_user_path(user) %></td>
-                <td><%= link_to t('delete'), user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to t('delete'), user, method: :delete, data: { confirm: t('are_you_sure') } %></td>
               </tr>
             <% end %>
           </tbody>
