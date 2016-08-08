@@ -68,16 +68,14 @@
           </div>
           <div class="row">
             <% if !@company.discount.nil? %>
-              <h6 class="right"><b><%= "discount" %></b>: <%= sprintf "%.2f", @company.discount %></h6>
-            <% else %>
-              <p> no discount </p>
+              <h6 class="right"><b><%= t('discount') %></b>: <%= sprintf "%.2f", @company.discount %></h6>
             <% end%>
           </div>
           <div class="row">
             <% if !@cart_total_cost.nil? %>
-              <h6 class="right"><b>Final cost: </b>: <%= sprintf "%.2f", @final_cost %></h6>
+              <h6 class="right"><b><%= t('final_cost') %></b>: <%= sprintf "%.2f", @final_cost %></h6>
             <% else %>
-              <h6> Nothing ordered. </h6>
+              <h6 class="center"><%= t('empty') %></h6>
             <% end %>
           </div>
           <div class="row">

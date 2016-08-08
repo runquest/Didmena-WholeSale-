@@ -18,7 +18,7 @@
             <th><%= t('company.status')%></th>
             <th><%= t('company.country')%></th>
             <th><%= t('company.phone')%></th>
-            <th>Discount</th>
+            <th><%= t('discount')%></th>
             <th colspan="2"></th>
           </tr>
         </thead>
@@ -32,7 +32,7 @@
               <td><%= company.phone %></td>
               <td><%= company.discount %></td>
               <td><%= link_to t('company.edit'), edit_company_path(company) %></td>
-              <td><%= link_to t('company.delete'), company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to t('company.delete'), company, method: :delete, data: { confirm: t('are_you_sure') } %></td>
             </tr>
           <% end %>
         </tbody>

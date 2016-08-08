@@ -16,6 +16,10 @@ footer {
   margin-bottom: 60px;
 }
 
+a {
+    color: yellow;
+}
+
 input.btn.waves-effect.submit {
     width: 100%;
 }

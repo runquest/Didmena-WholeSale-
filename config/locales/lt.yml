@@ -32,7 +32,10 @@ lt:
     description: "aprašymas"
     status: "statusas"
     are_you_sure: "Ar esate tikras?"
-
+    final_cost: "Galutinė kaina: "
+    discount: "Nuolaida: "
+    empty: "Krepšelis tuščias."
+    total_price: "Galutinė kaina: "
 
     # product / module specific words
 

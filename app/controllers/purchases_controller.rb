@@ -30,9 +30,7 @@ class PurchasesController < ApplicationController
 
         total_purchase_price += total_price
       end
-
       @order = Order.new(order_number: @order_number, order_date: Time.now, total_price: total_purchase_price, contact: current_user.id)
-
       @order.save
 
       cart.each do |product_id, quantity|
