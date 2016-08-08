@@ -67,6 +67,20 @@
             <% end %>
           </div>
           <div class="row">
+            <% if !@company.discount.nil? %>
+              <h6 class="right"><b><%= "discount" %></b>: <%= sprintf "%.2f", @company.discount %></h6>
+            <% else %>
+              <p> no discount </p>
+            <% end%>
+          </div>
+          <div class="row">
+            <% if !@cart_total_cost.nil? %>
+              <h6 class="right"><b>Final cost: </b>: <%= sprintf "%.2f", @final_cost %></h6>
+            <% else %>
+              <h6> Nothing ordered. </h6>
+            <% end %>
+          </div>
+          <div class="row">
             <div class="align-right">
               <%= link_to t('cart.confirm_order'), purchases_path, method: :post, :class => "btn waves-effect waves-light right" %>  
             </div>

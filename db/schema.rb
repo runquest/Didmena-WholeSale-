@@ -17,17 +17,18 @@ ActiveRecord::Schema.define(version: 20160403164834) do
   enable_extension "plpgsql"
 
   create_table "companies", force: :cascade do |t|
-    t.string   "title",       limit: 200, null: false
-    t.string   "email",       limit: 100, null: false
-    t.string   "status",      limit: 20,  null: false
-    t.integer  "domain_id",               null: false
+    t.string   "title",       limit: 200,                          null: false
+    t.string   "email",       limit: 100,                          null: false
+    t.string   "status",      limit: 20,                           null: false
+    t.decimal  "discount",                precision: 10, scale: 2, null: false
+    t.integer  "domain_id",                                        null: false
     t.string   "city",        limit: 30
     t.string   "street",      limit: 30
     t.string   "postal_code", limit: 10
     t.string   "phone",       limit: 100
     t.text     "description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "companies", ["domain_id"], name: "i_companies_on_domain_id", using: :btree
