@@ -38,9 +38,9 @@ class CartController < ApplicationController
 
   def index
 
-    if (!current_user.company_id.nil?) {
+    if (!current_user.company_id.nil?)
       @company = Company.find(current_user.company_id)
-    }
+    end
   
     @ordered_items = Array.new
     @sizes = Domain.where(domain_name: "SIZE").order(:id).reverse
