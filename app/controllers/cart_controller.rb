@@ -36,7 +36,7 @@ class CartController < ApplicationController
     redirect_to :action => :index
   end
 
-  def 
+  def index
     @company = Company.find(current_user.company_id)
 
 # find all the module names
