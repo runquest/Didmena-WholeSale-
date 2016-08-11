@@ -23,40 +23,41 @@
           </div>
         </div>
       <div class="divider"></div>
+      <% if !@mcs_hash.nil? %>
+        <% @mcs_hash.each do |key, value| %>
+          <div class="row section">
+            <div class="col s8 offset-s2">
+              <h5><%= Model.find(key).title %></h5>
+                
+                <table id="product_table" class="striped">
+                  <thead>
+                    <tr>
+                      <th></th>
+                        <% @sizes.each do |size| %>
+                          <th data-field='<%= size.code_value%>' class="center-align"><%= size.code_value%></th>
+                        <% end %>
+                      <th class="center-align">Total</th>
+                    </tr>
+                  </thead>
 
-      <% @mcs_hash.each do |key, value| %>
-        <div class="row section">
-          <div class="col s8 offset-s2">
-            <h5><%= Model.find(key).title %></h5>
-              
-              <table id="product_table" class="striped">
-                <thead>
-                  <tr>
-                    <th></th>
-                      <% @sizes.each do |size| %>
-                        <th data-field='<%= size.code_value%>' class="center-align"><%= size.code_value%></th>
+                  <% value.each do |color|%>
+                    <tr>
+                      <% color_name = Domain.find(color.first).meaning %>
+                      <td style="background: #<%= color_name %>"><%= color_name %></td>
+                    <% limit = color.length - 1 %>
+                    <% for counter in 1..limit %>
+                      <% if color[counter] == "0" %>
+                        <td></td>
+                      <% else %>
+                        <td class="center"><%= color[counter] %></td>
                       <% end %>
-                    <th class="center-align">Total</th>
-                  </tr>
-                </thead>
-
-                <% value.each do |color|%>
-                  <tr>
-                    <% color_name = Domain.find(color.first).meaning %>
-                    <td style="background: #<%= color_name %>"><%= color_name %></td>
-                  <% limit = color.length - 1 %>
-                  <% for counter in 1..limit %>
-                    <% if color[counter] == "0" %>
-                      <td></td>
-                    <% else %>
-                      <td class="center"><%= color[counter] %></td>
                     <% end %>
+                    </tr>
                   <% end %>
-                  </tr>
-                <% end %>
-              </table>
+                </table>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
 
       <div class="row">
@@ -67,9 +68,11 @@
             <% end %>
           </div>
           <div class="row">
+          <%if !@company.nil? %>
             <% if !@company.discount.nil? %>
               <h6 class="right"><b><%= t('discount') %></b>: <%= sprintf "%.2f", @company.discount %></h6>
             <% end%>
+          <% end %>
           </div>
           <div class="row">
             <% if !@cart_total_cost.nil? %>
