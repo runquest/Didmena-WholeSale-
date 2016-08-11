@@ -37,28 +37,14 @@ class CartController < ApplicationController
   end
 
   def index
-    @company = Company.find(current_user.company_id)
 
-# find all the module names
-    # @ordered_models = Array.new;
-    # @ordered_products = Array.new
+    if (!current_user.company_id.nil?) {
+      @company = Company.find(current_user.company_id)
+    }
+  
     @ordered_items = Array.new
     @sizes = Domain.where(domain_name: "SIZE").order(:id).reverse
 
-    # lentele atsikirai kiekvienam modeliui
-
-    # eilute butu spalva
-    # stulpelis butu dydis
-    # lastele butu kiekis
-
-    # parametrai:
-    # {"12" => "100", "34" => "10"}
-    # {"produkto_id" => "kiekis"}
-
-
-# binding.pry
-    
-    # {modelio_id => {product1, productas2, productas3}}
     @model_products = Hash.new
 
 
@@ -75,17 +61,13 @@ class CartController < ApplicationController
         color = Domain.find(product.color_id)
         size = Domain.find(product.size_id)
 
-        # order_item = {"model_id" => product.model_id, "color_id" => product.color_id, "quantity" => quantity, "product" => product}
         order_item = {"model" => model, "color" => color, "size" => size, "quantity" => item[1]}
-        # binding.pry
         @ordered_items.push(order_item)
-        # @ordered_products.push(order_item)
         price = model.price
         quantity = item[1].to_i
 
         product_cost = price * quantity
         @cart_total_cost += product_cost
-
       end
     else
       @cart = {}
