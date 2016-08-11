@@ -37,7 +37,6 @@ class CartController < ApplicationController
   end
 
   def 
-    binding.pry
     @company = Company.find(current_user.company_id)
 
 # find all the module names
