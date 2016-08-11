@@ -193,7 +193,7 @@ $(function() {
           }
       };
     };
-
+    
     if (order_items.length > 0) {
       
       $.ajax({
