@@ -59,7 +59,7 @@ en:
             alert: "cart is empty."
 
     users:
-        add_representative: "add usesr"
+        add_representative: "add users"
         first_name: "first name"
         last_name: "last name"
         email: "email"
