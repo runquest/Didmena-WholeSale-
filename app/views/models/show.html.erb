@@ -58,7 +58,6 @@
                 <td style="padding-left: 10px; background-color: #<%= value(color) %>;"><%= value(color) %></td>
                 <% @sizes.each do |size| %>
                   <% product = find_models_products(color, size) %>
-                  <% binding.pry %>
                   <% if product_exist?(color, size) && product_in_storage?(color, size) %>
                       <td class="product_row center-align" colspan="3" >
                         <%= hidden_field_tag "product_id", product.id %>
