@@ -31,6 +31,7 @@ $(function() {
   };
 
   $("#colors").easyAutocomplete(options);
+            console.log(options);
 
   $('#add_color').on("click", function(event){
 
@@ -57,6 +58,7 @@ $(function() {
           alert("color is already added");
 
         } else {
+          // console.log(selected_color);
           addProduct();
         }
       }
@@ -73,6 +75,9 @@ $(function() {
     var products = [];
     var rowColors = [];
     var value = $("#colors").val().toUpperCase();
+
+    // console.log(value);
+    // console.log(value.color);
 
     var sizes = [];
 
@@ -104,7 +109,7 @@ $(function() {
 
       for (var i = 0; i < sizes.length; i++) {
         var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
-        console.log(product_data);
+        // console.log(product_data);
         products.push(product_data);
       }
 
@@ -119,10 +124,10 @@ $(function() {
         dataType: 'json',
         data: JSON.stringify(products),
         success: function (data) {
-          console.log(data);
+          // console.log(data);
         },
         error: function(err){
-          console.log(err);
+          // console.log(err);
         }
       });
     }

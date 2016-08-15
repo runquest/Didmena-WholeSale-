@@ -5,6 +5,7 @@ class Domain < ActiveRecord::Base
   validates :domain_name, inclusion: { in: %w(GENDER COLOR SIZE CATEGORY AGE_GROUP COUNTRY CURRENCY), message: "%{value} is not a valid domain name" }
 
   validates :code_value, presence: true
+  # code_value uniqueness messes up with Male (M) and Medium (M) values;
   # validates :code_value, uniqueness: true
   validates :meaning, uniqueness: true
   validates :code_value, length: { maximum: 10 }, on: :create
