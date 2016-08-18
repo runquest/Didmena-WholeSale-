@@ -26,6 +26,12 @@ class DomainsController < ApplicationController
     @colors = Domain.where(domain_name: "COLOR")
   end
 
+  # GET /domains/sizes.json
+
+  def sizes
+    @sizes = Domain.where(domain_name: "SIZE");
+  end
+
   # POST /domains
   # POST /domains.json
   def create

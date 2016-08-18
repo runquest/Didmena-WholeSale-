@@ -12,6 +12,12 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    # binding.pry
+    @user = User.find(params[:id])
+    @orders = Order.where(contact: params[:id])
+    if !@user.company_id.nil?
+      @company = Company.find(@user.company_id)
+    end
   end
 
   # GET /users/new
@@ -29,7 +35,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to @user
+      redirect_to users_path
     else
       render :new
     end
@@ -54,7 +60,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
       format.json { head :no_content }
     end
   end

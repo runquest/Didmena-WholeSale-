@@ -2,35 +2,39 @@
 <p id="notice flash-message"><%= notice %></p>
 
 <%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
-  <% if @model.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@model.errors.count, "error") %> prohibited this model from being saved:</h2>
-
-      <ul>
-      <% @model.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_errors_for @model %>
 
   <div class="row">
     <div class="input-field col s12">
-      <%= f.label :title, "Model name" %><br>
-      <%= f.text_field :title %>
-    </div>
-    <div class="input-field col s12">
-      <%= f.label :code, "Model ID" %><br>
-      <%= f.text_field :code %>
+      <%= f.label :title, t('models.title') %><br>
+      <%= f.text_field :title, :placeholder => 'Pima Cotton t-shirt' %>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s12">
-      <%= f.collection_select :gender_id, Domain.where(domain_name: "GENDER"), :id, :meaning, { prompt: "Choose a gender" }, class: "browser-default" %>
+      <%= f.collection_select :gender_id, Domain.where(domain_name: "GENDER"), :id, :meaning, { prompt: t('models.choose_type') }, class: "browser-default" %>
     </div>
+
     <div class="input-field col s12">
-      <%= f.collection_select :category_id, Domain.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: "Choose a collection" }, class: "browser-default" %>
+      <%= f.collection_select :category_id, Domain.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: t('models.choose_collection') }, class: "browser-default" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col 6">
+      <%= f.label :price, t('models.price') %>
+      <%= f.number_field(:price, :placeholder => "e.g. 10.15",  :class => 'text_field', :step => '0.01') %>
+    </div>
+    <div class="col 6">
+      <%= f.label :priority, "priority" %>
+      <%= f.number_field(:priority, :class => 'text_field', :step => '1') %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="input-field col s12">
+       <%= t('models.description') %><%= f.text_area :note, :placeholder => "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton." %>
     </div>
   </div>
 
@@ -54,7 +58,7 @@
       <% @model_attachments.each do |p| %>
         <div><%= image_tag p.avatar_url, :class => "prod_image_small" %>
         <% if current_user && current_user.apps_manager %>
-          <%= link_to 'Destroy', p, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') } %>
         <% end %></div>
       <% end %>
     <% end %>
@@ -62,20 +66,7 @@
   </div>
 
   <div class="row">
-    <div class="col 6">
-      EUR <%= f.number_field(:price, :placeholder => "Price $ (e.g. 10.15)", step: 0.05) %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field materialize-textarea col s12">
-        Description: <%= f.text_area :note, :placeholder => "Notes" %>
-    </div>
-  </div>
-  <hr/>
-  <div class="row">
-    <div class="col 12">
-      <button id="model_button" class="btn waves-effect waves-light" >save</button>
-    </div>
+    <button id="model_button" class="btn waves-effect waves-light btn-large" ><%= t('models.save') %></button>
   </div>
 <% end %>
 </div>

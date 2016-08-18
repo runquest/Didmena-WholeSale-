@@ -1,12 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col s8 offset-s2">
-      <p class="align-center">Thank you for your order.</p>
-      <p class="align-center"> Confirmation email has been sent to <%= current_user.email %>.</p>
-      <h6 class="align-center"> Your order number: <%= @order_number %></h6>
+      <p class="align-center"><%= t('purchases.thank_you')%></p>
+      <p class="align-center"> <%= t('purchases.confirmation_email_message') %> <%= current_user.email %></p>
+      <h6 class="align-center"> <%= link_to "Your order number", order_path(@order) %> #<%= @order_number %></h6>
     </div>
   </div>
-  <hr/>
   <div class="row">
     <div class="col s12">
       <div class="row">
@@ -14,11 +13,13 @@
           <table>
             <thead>
               <tr>
-                <th data-field="model-title">Product ID</th>
-                <th data-field="product-color">Model title</th>
-                <th data-field="product-size">Color</th>
-                <th data-field="product-size">Size</th>
-                <th data-field="quantity">Quantity</th>
+                <th data-field="model-title"><%= t('purchases.product_id')%></th>
+                <th data-field="product-color"><%= t('purchases.model_title')%></th>
+                <th data-field="product-size"><%= t('purchases.color')%></th>
+                <th data-field="product-size"><%= t('purchases.size')%></th>
+                <th data-field="quantity"><%= t('purchases.quantity')%></th>
+                <th data-field="quantity"><%= t('model.attribute.price') %></th>
+                <th data-field="quantity"><%= t('purchases.cost')%></th>
                 <th colspan="2"></th>
               </tr>
             </thead>
@@ -34,9 +35,21 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col s10 offset-s1">
-      <%= link_to t("header.logout"), session_path("current"), method: :delete, :class => "btn waves-effect waves-light left"  %>
+  <div class="row right-align">
+    <div class="col s8 offset-s2">
+      <div class="row">
+        <b><%= t('purchases.total_cost') %>:</b> <%= sprintf "%.2f", @order.total_price %>
+      </div>
+      <div class="row">
+        <b><%= t('discount') %>:</b> <%= sprintf "%.2f", Company.find(current_user.company_id).discount %>
+      </div>
+      <div class="row">
+        <%discount  = @order.total_price - Company.find(current_user.company_id).discount %>
+        <b><%= t('final_cost') %>:</b> <%= sprintf "%.2f", discount %>
+      </div>
+      <div class="row">
+        <%= link_to t("header.logout"), session_path("current"), method: :delete, :class => "btn waves-effect waves-light left"  %>
+      </div>
     </div>
   </div>
 </div>

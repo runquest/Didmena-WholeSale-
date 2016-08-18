@@ -20,32 +20,205 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 lt:
+    # navigation
 
-  collections:
-    index:
-      title: "Kolekcijos"
-      add_new_collection: "Pridėti naują kolekciją"
+    back: "atgal" 
+    edit: "redaguoti"
+    show: "rodyti"
+    delete: "ištrinti"
+    confirm: "patvirtinkite"
+    save: "išsaugoti"
+    new: "sukurti naują įrašą"
+    description: "aprašymas"
+    status: "statusas"
+    are_you_sure: "Ar esate tikras?"
+    final_cost: "Galutinė kaina: "
+    discount: "Nuolaida: "
+    empty: "Krepšelis tuščias."
+    total_price: "Galutinė kaina: "
 
-  top_menu:
-    register: "Užsiregistruokite"
-    home: "Namai"
-    collections: "Kolekcijos"
-    models: "Modeliai"
+    # product / module specific words
 
-  header:
-    you_logged_in: "Sveiki,"
-    logout: "Atsijungti"
+    color: "spalva"
+    size: "dydis"
+    quantity: "kiekis"
+    cost: "kaina"
+    quantity: "kiekis"
+    total_price: "užsakymo kaina"
+    discount: "nuolaida"
 
-  register:
-    intro: "Atlikti produktų užsakymus turite registruotis."
+    # module specific
 
-  login:
-    label:
-      email: "El. paštas"
-      password: "Slaptažodis"
-      login: "Prisijunkite"
+    purchases:
+        thank_you: "Ačiū. Jūsų užsakymas buvo gautas."
+        confirmation_email_message: "Jūsų užsakymo patvirtinimas išsiųstas el.pašto adresu"
+        product_id: "Prekės ID"
+        model_title: "Modelis"
+        color: "Spalva"
+        size: "Dydis"
+        quantity: "Kiekis"
+        cost: "Kaina"
+        total_cost: "Galutinė kaina"
+        your_order_number: "Užsakymo numeris"
+        create:
+            alert: "Tuščias krepšelis."
 
-  welcome: 
-    do_title: "Ką mes darome"
-    do_description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
-    contact_title: "Susisiekite su mumis"
+    users:
+        add_representative: "sukurti vartotoją"
+        first_name: "Vardas"
+        last_name: "Pavardė"
+        email: "El. paštas"
+        phone: "Telefonas"
+        add_company: "sukurti įmonę"
+        edit_company: "redaguoti įmonę"
+        choose_company: "pasrinkti įmonę"
+        password: "Slaptažodis"
+        password_confirmation: "Pakartoti slaptažodį"
+        user_admin: "Pažymėti jei vartotojas administratorius"
+        admin: "administratorius"
+
+    collections:
+        title: "Kolekcijos"
+        add_new_collection: "Pridėti naują kolekciją"
+
+    session_menu:
+        home: "pradžia"
+        cart: "krepšelis"
+        my_orders: "užsakymai"
+        models: "produktai"
+
+    header:
+        logout: "atsijungti"
+        dashboard: "apžvalga"
+
+    register:
+        intro: "Atlikti produktų užsakymus turite registruotis."
+
+    login:
+        email: "El. paštas"
+        password: "Slaptažodis"
+        login: "Prisijungti"
+
+    welcome: 
+        title: "Ką mes darome"
+        description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
+        contact_title: "Susisiekite su mumis"
+        add_user: "pridėti vartotoją"
+        add_company: "pridėti įmonę"
+        users: "vartotojai"
+        companies: "įmonės"
+        clients: "užsakovai"
+        products: "prekės"
+        add_model: "pridėti modelį"
+        models: "produktai"
+        all_orders: "užsakymai"
+        add_domains: "pridėti atributus"
+        domains: "atributai"
+
+    cart:
+        cart: "Krepšelis"
+        edit_profile: "redaguoti užsakovo kontaktus"
+        edit_company: "redaguoti įmonės kontaktus"
+        product: "Produktas"
+        color: "Spalva"
+        size: "Dydis"
+        quantity: "Kiekis"
+        cost: "Kaina"
+        total_cost: "Galutinė kaina: "
+        confirm_order: "Patvirtinkite užsakymą"
+        empty_cart: "Išvalyti krepšelį"
+        destroy:
+            notice: "Produktas sėkmingai ištrintas."
+
+    company:
+        company_name: "** Pavadinimas"
+        phone: "Telefonas"
+        email: "** El. paštas"
+        address: "Adresas"
+        city: "Miestas"
+        postal_code: "Pašto kodas"
+        representatives: "Atstovai"
+        title: "Įmonės"
+
+    models:
+        title: "* Modelio pavadinimas"
+        choose_type: "Pasirink tipą"
+        choose_collection: "Pasirink kolekciją"
+        price: "Kaina"
+        description_placeholder: "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton."
+        color_and_size: "Spalvos ir dydžiai"
+        add_color: "Pridėti spalvą"
+        select_sizes: "Pasirinkite turimus dydžius."
+        type_color: "Spalvos pavadinimas"
+        order: "Užsakyti"
+        thank_you: "Ačiū už užsakymą." 
+        confirmation_email: "Užsakymo patvirtinimo detalės buvo iššiųstos el. adresu "
+        your_order_number: "Užsakymo numeris"
+        product_id: "Produkto ID"
+        model_title: "Pavadinimas"
+        color_code: "pvz. ef22dd"
+
+    orders:
+        orders: "Užsakymai"
+        contact: "Užsakovas"
+        my_orders: "Mano užsakymai"
+        number: "Užsakymo numeris"
+        date: "Užsakymo data"
+        cost: "Užsakymo kaina"
+        representative: "Atstovas"
+        products: "Prekės"
+
+    domains:
+        code_value: "Kodas"
+        meaning: "Reikšmė"
+        meaning_eg: "Žalia"
+        new: "Naujas atributas"
+
+    # warning pop ups
+
+
+    # when creating new or editing
+
+    form:
+        cannot_save: "Negali iššsaugoti formos:"
+        button_save: "Išsaugoti"
+        choose_country: "Pasirink šalį"
+
+    # error messages
+
+    activerecord:
+        errors:
+          models:
+            company:
+                attributes:
+                    title:
+                        blank: "Trūksta pavadinimo."
+                    email:
+                        blank: "Trūksta el.pašto."
+                    domain:
+                        blank: "Pasirink šalį."
+            model:
+                attributes:
+                    code:
+                        blank: ""
+                    title:
+                        blank: "Trūksta pavadinimo."
+                    gender_id:
+                        blank: "Pasirinkite tipą."
+                    category_id:
+                        blank: "Pasirinkite kolekciją."
+                    price:
+                        blank: "Įrašykite kainą."
+            user:
+                attributes:
+                    password:
+                        blank: "Trūksta slaptažodžio."
+                    email: 
+                        blank: "Trūksta el.pašto."
+                        too_short: "El.paštas mažiausia 3 simbolių."
+                    fname:
+                        blank: "Trūksta vardo."
+                        too_short: "Vardas per trumpas."
+                    lname: 
+                        blank: "Trūksta pavardės"
+                        too_short: "Pavardė per trumpa."

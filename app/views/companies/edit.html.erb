@@ -1,9 +1,9 @@
 <div class="container">
-
-  <h4>Editing Company</h4>
-
+  <div class="row">
+    <div class="col s6">
+      <h4><%= t('company.edit') %></h4>
+      <%= link_to t('show'), @company %> | <%= link_to t('back'), companies_path %>
+    </div>
+  </div>
   <%= render 'form' %>
-
-  <%= link_to 'Show', @company %> |
-  <%= link_to 'Back', companies_path %>
 </div>

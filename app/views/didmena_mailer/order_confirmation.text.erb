@@ -1,0 +1,24 @@
+
+ORDER NUMBER: <%= @order.order_number %>
+ORDER DATE: <%= @order.order_date %>
+
+CONTACT: <%= User.find(@order.contact).fname %> <%= User.find(@order.contact).lname %>
+
+--------------------------
+
+Product ID | Model | Color | Size | Quantity | Cost
+
+<% if @order.purchases.any? %>
+  <% @order.purchases.each do |purchase| %>
+    <% product = Product.find(purchase.product_id) %>
+    <% price = Model.find(product.model_id).price %>
+    <%= product.id %> | <%= Model.find(Product.find(product.id).model_id).title %> | <%= Domain.find(product.color_id).meaning %> | <%= Domain.find(product.size_id).code_value %> | <%= purchase.quantity %> | <% cost = purchase.quantity * Model.find(Product.find(product.id).model_id).price %> <%= sprintf "%.2f", cost %>
+  <% end %> 
+<% end %> 
+
+<% if @order.discount.nil? %>
+DISCOUNT: <%= sprintf "%.2f", 0 %>
+<% else %>
+DISCOUNT: <%= sprintf "%.2f", @order.discount %>
+<% end %>
+TOTAL COST: <%= sprintf "%.2f", @order.total_price %>

@@ -10,6 +10,15 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @users = User.where(company_id: params[:id])
+    # @companies_orders
+    # binding.pry
+    @companies_orders = []
+    @users.each do |u|
+      Order.where(contact: u.id).each do |o|
+        @companies_orders << o
+      end
+    end
   end
 
   # GET /companies/new
@@ -24,6 +33,10 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
+    # binding.pry
+    if params[:domain_id].nil?
+      params[:company][:domain_id] = 1
+    end
     @company = Company.new(company_params)
 
     respond_to do |format|
@@ -69,6 +82,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:title, :email, :status, :domain_id, :city, :street, :postal_code, :phone, :description)
+      params.require(:company).permit(:title, :email, :discount, :status, :domain_id, :city, :street, :postal_code, :phone, :description)
     end
 end

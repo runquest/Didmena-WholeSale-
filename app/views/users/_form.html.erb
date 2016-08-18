@@ -1,70 +1,53 @@
-<div class="container"> <div class="row">
-    <div class="col s8">
+<div class="container">
       <%= form_for(@user) do |f| %>
-        <% if @user.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-            <ul>
-            <% @user.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-
+        <%= form_errors_for @user %>
         <div class="row">
           <div class="input-field col s6">
-            <%= f.label :fname, 'First Name' %><br>
+            <%= f.label :fname, t('users.first_name') %><br>
             <%= f.text_field :fname %>
           </div>
           <div class="input-field col s6">
-            <%= f.label :lname, 'Last Name' %><br>
+            <%= f.label :lname, t('users.last_name') %><br>
             <%= f.text_field :lname %>
           </div>
         </div>
-
         <div class="row">
           <div class="input-field col s6">
-            <%= f.label :email, 'Email' %><br>
-            <%= f.text_field :email %>
+            <%= f.label :email, t('email') %><br>
+            <%= f.text_field :email, :placeholder => 'info@example.com' %>
           </div>
           <div class="input-field col s6">
-            <%= f.label :phone %><br>
-            <%= f.text_field :phone %>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-          <%= f.collection_select :company_id, Company.all, :id, :title, { prompt: "Choose company" }, class: "browser-default" %>
-
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s6">
-            <%= f.label :password, 'Password' %><br>
-            <%= f.text_field :password %>
-          </div>
-          <div class="input-field col s6">
-            <%= f.label :password_confirmation, 'Password Confirmation' %><br>
-            <%= f.text_field :password_confirmation %>
+            <%= f.label :phone, t('users.phone') %><br>
+            <%= f.text_field :phone, :placeholder => '+1 (604) 222-2222' %>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <%= f.hidden_field :status, :value => 'active'%>
+          <%= link_to t('users.add_company'), new_company_path %><br>
+          <br>
+          <%= f.collection_select :company_id, Company.all, :id, :title, { prompt: t('users.choose_company') }, class: "browser-default" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <%= f.label :password, t('users.password') %><br>
+            <%= f.password_field :password %>
+          </div>
+          <div class="input-field col s6">
+            <%= f.label :password_confirmation, t('users.password_confirmation') %><br>
+            <%= f.password_field :password_confirmation %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
             <%= f.check_box :apps_manager, class: "browser-default" %>
-            <%= f.label :apps_manager, 'Administrator'  %><br>
+            <%= f.label :apps_manager, t('users.user_admin') %>
+            <%= f.hidden_field :status, :value => 'active'%>
           </div>
         </div>
-        <hr/>
-
-        <div class="actions">
-          <%= f.submit %>
+        <br>
+        <div class="actions waves-effect waves-light btn-large">
+          <%= f.submit t('form.button_save') %>
         </div>
       <% end %>
       </div>
-    </div>
-</div>

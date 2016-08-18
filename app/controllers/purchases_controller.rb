@@ -4,8 +4,10 @@ class PurchasesController < ApplicationController
   def create
    if session[:cart].nil? || session[:cart].empty?
       flash[:alert] = 'no items in the cart'
-      redirect_to :back
+      redirect_to :back, alert: t('.alert')
+      # redirect_to :back, notice: t('.notice')
     else
+      
       if session[:cart] then
         cart = session[:cart]
       else
@@ -28,18 +30,23 @@ class PurchasesController < ApplicationController
 
         total_purchase_price += total_price
       end
-
       @order = Order.new(order_number: @order_number, order_date: Time.now, total_price: total_purchase_price, contact: current_user.id)
-
       @order.save
 
       cart.each do |product_id, quantity|
         @purchase = Purchase.create(order_id: @order.id, product_id: product_id, quantity: quantity)
       end
       @purchases_for_order = Order.find(@order.id).purchases
+      # email_confirm
       session[:cart] = nil
     end
   end
+
+  def email_confirm
+    @user = current_user
+    DidmenaMailer.order_confirmation(@user, @order).deliver_now
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -5,6 +5,7 @@ class CreateModels < ActiveRecord::Migration
       t.string :title, null: false, limit: 100
       t.integer :gender_id, :references => "domain", null: false    # domain_name GENDER
       t.integer :category_id, :references => "domain", null: false    # domain_name CATEGORY
+      t.integer :priority
       t.decimal :price, :precision => 10, :scale => 2, null: false
 
       t.text :note

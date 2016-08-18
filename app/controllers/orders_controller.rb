@@ -4,9 +4,12 @@ class OrdersController < ApplicationController
 def index
   @orders = Order.all
 end
-#   # GET /orders/1
-#   # GET /orders/1.json
+
+  # GET /orders/1
+  # GET /orders/1.json
   def show
+    @user = User.find(@order.contact)
+    @company = Company.find(@user.company_id)
   end
 
   # GET /orders/new
@@ -44,9 +47,15 @@ end
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: 'Order was successfully deleted.' }
       format.json { head :no_content }
     end
+  end
+
+  # Orders that user has made in the past & their status
+  def my_orders
+    @user = current_user
+    @orders = Order.where(contact: @user.id)
   end
 
   private

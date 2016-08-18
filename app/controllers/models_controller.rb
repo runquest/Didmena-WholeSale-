@@ -4,7 +4,7 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
-    @models = Model.all
+    @models = Model.all.order(:priority)
   end
 
   # GET /models/1
@@ -12,9 +12,10 @@ class ModelsController < ApplicationController
   def show
     @products = Product.where(model_id: @model.id)
     @model_attachments = @model.model_attachments.all
-
+    @type = Domain.find(@model.gender_id).meaning
+    @collection = Domain.find(@model.category_id).meaning
     @colors = Array.new;
-    @sizes = Domain.where(domain_name: 'SIZE')
+    @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
 
     @products.each do |prdct|
       if !@colors.include? prdct.color_id
@@ -23,7 +24,6 @@ class ModelsController < ApplicationController
           p = Product.where(color_id: prdct.color_id).where(size_id: size.id).take
           if p.in_storage
             color_size.push(p)
-            # @colors.push(prdct.color_id)
           end
         end
 
@@ -44,7 +44,7 @@ class ModelsController < ApplicationController
   def edit
     @model = Model.find(params[:id])
     @model_attachments = @model.model_attachments
-
+    @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
 
     if @model.products.any?
       @products = @model.products
@@ -77,6 +77,17 @@ class ModelsController < ApplicationController
   # POST /models
   # POST /models.json
   def create
+
+    # to avoid error message on model creation
+    # when clarified if client needs model code
+    if !params[:model][:title].blank?
+      code = params[:model][:title].delete(' ')[0..8]
+      params[:model][:code] = code
+    else
+      code = Time.now.strftime("%Y%d%m%H%M%S")[0..8]
+      params[:model][:code] = code
+    end
+
     @model = Model.new(model_params)
 
     if @model.products.any?
@@ -141,7 +152,7 @@ class ModelsController < ApplicationController
   def destroy
     @model.destroy
     respond_to do |format|
-      format.html { redirect_to models_url, notice: 'Model was successfully destroyed.' }
+      format.html { redirect_to models_url, notice: 'Model was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -158,7 +169,7 @@ class ModelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
-      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :note)
+      params.require(:model).permit(:code, :title, :gender_id, :category_id, :price, :priority, :note)
     end
 
     def purchase_params

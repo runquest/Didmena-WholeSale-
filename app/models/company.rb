@@ -30,5 +30,20 @@ class Company < ActiveRecord::Base
 
   # has_many :representatives, inverse_of: :company, dependent: :destroy
   has_many :users, through: :representatives
+  before_validation :uppercase_fields
+
+  def uppercase_fields
+    title.upcase!
+  end
+
+  def full_street_address
+     "#{street} #{city}"
+  end
+
+  def country_postal
+    country = Domain.find(domain_id).meaning
+    "#{country}, #{postal_code}"
+  end
+
 
 end

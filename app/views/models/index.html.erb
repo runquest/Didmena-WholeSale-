@@ -14,11 +14,15 @@
             </div>
             <% if current_user && current_user.apps_manager %>
               <div class="card-action center">
-                <%= link_to 'Show', model %> | <%= link_to 'Edit', edit_model_path(model) %> | <%= link_to 'Destroy', model, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <ul id='card-menu'>
+                  <li><%= link_to t('show'), model %></li>
+                  <li><%= link_to t('edit'), edit_model_path(model) %></li>
+                  <li><%= link_to t('delete'), model, method: :delete, data: { confirm: t('confirm') } %></li>
+                </ul>
               </div>
             <% else %>
               <div class="card-action center">
-                <%= link_to 'Show', model %>
+                <%= link_to t('show'), model %>
               </div>
             <% end %>
           </div>
