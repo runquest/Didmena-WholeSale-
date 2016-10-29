@@ -49,13 +49,13 @@ $(function() {
         }
 
         if (colors.indexOf(selected_color) < 0) {
-          alert('add color to the db');
+          alert('Add color to database.');
 
         } else if ($("#colors").val().length == 0) {
-          alert("select color");  
+          alert("Select color");  
 
         } else if (document.getElementById($("#colors").val())) {
-          alert("color is already added");
+          alert("Color is already added to product.");
 
         } else {
           // console.log(selected_color);
