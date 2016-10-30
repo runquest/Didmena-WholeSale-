@@ -73,14 +73,11 @@ class CartController < ApplicationController
       @cart = {}
     end
 
-    if !@cart_total_cost.nil? 
-
-      if !@company.discount.nil?
-
-       @final_cost = @cart_total_cost - @company.discount
-
-     end
-
+    if !@company.nil?
+      if !@company.discount.nil? && !@cart_total_cost.nil? 
+        @final_cost = @cart_total_cost - @company.discount
+        @final_cost = @final_cost.to_i
+      end
     else 
       @final_cost = 0
     end 
