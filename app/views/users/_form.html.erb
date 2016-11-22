@@ -30,11 +30,13 @@
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <%= f.label :password, t('users.password') %><br>
+           <b><%= f.label :password, t('users.password') %></b><br>
             <%= f.password_field :password %>
+            <!-- <#% binding.pry %> -->
+            <%#= f.hidden_field :password_confirmation, :value => :password %>
           </div>
           <div class="input-field col s6">
-            <%= f.label :password_confirmation, t('users.password_confirmation') %><br>
+           <b><%= f.label :password_confirmation, t('users.password') %></b><br>
             <%= f.password_field :password_confirmation %>
           </div>
         </div>

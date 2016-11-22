@@ -59,6 +59,7 @@ en:
             alert: "cart is empty."
 
     users:
+        new: "Add new user"
         add_representative: "add users"
         first_name: "first name"
         last_name: "last name"
