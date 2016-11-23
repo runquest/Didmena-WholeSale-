@@ -1,69 +1,70 @@
 <div class="container">
-  <div class="row">
-    <% if !current_user %>
-      <div class="col s6">
-        <div class="section">
-          <h5><%= t "welcome.title" %></h5>
-          <p><%= t "welcome.description" %></p>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="myModalLabel">Log in</h3>
         </div>
-        <div class="section">
-          <h5><%= t "welcome.contact_title" %></h5>
-          <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
-          <i class="tiny material-icons prefix">phone</i> 604-234-1111
-        </div>
-      </div>   
-      <div class="col s4 offset-s2 z-depth-1" id="login"> 
-        <%= form_tag sessions_path do %>
-          <%= label_tag t "login.email" %> <%= text_field_tag "email"%>
-          <%= label_tag t "login.password" %> <%= password_field_tag :password %>
-          <%= submit_tag t "login.login", class: 'btn waves-effect waves-light' %>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="col s12">
-        <div class="section">
-          <h5><%= t "welcome.title" %></h5>
-          <p><%= t "welcome.description" %></p>
-        </div>
-        <div class="section">
-          <h5><%= t "welcome.contact_title" %></h5>
-          <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
-          <i class="tiny material-icons prefix">phone</i> 604-234-1111
-        </div>
-      </div>
-    <% end %>  
-  </div>
-  <div class="divider"></div>
-  <div class="row">
-    <% if @models.any? %>
-      <% @models.each do |model| %>
-        <div class="col s4">
-          <div class="card left">
-            <div class="card-image">
-              <% if model.model_attachments.any? %>
-                <%=link_to( image_tag(model.model_attachments.first.avatar_url), model_path(model), :class=>"work") %>
-
-              <% else %>
-                <img src="http://placehold.it/350x150">
-              <% end %>
-              <span class="card-title"><%= model.title %></span>
-            </div>
-            <% if current_user && current_user.apps_manager %>
-              <div class="card-action center">
-                <ul id='card-menu'>
-                  <li><%= link_to t('show'), model %></li>
-                  <li><%= link_to t('edit'), edit_model_path(model) %></li>
-                  <li><%= link_to t('delete'), model, method: :delete, data: { confirm: t('are_you_sure') } %></li>
-                </ul>
-              </div>
-            <% else %>
-              <div class="card-action center">
-                <%= link_to t('show'), model %>
-              </div>
+        <div class="modal-body">
+          <div class="col s4 offset-s2 z-depth-1" id="login"> 
+            <%= form_tag sessions_path do %>
+              <%= label_tag t "login.email" %> <%= text_field_tag "email"%>
+              <%= label_tag t "login.password" %> <%= password_field_tag :password %>
+              <%= submit_tag t "login.login", class: 'btn waves-effect waves-light' %>
             <% end %>
           </div>
         </div>
-      <% end %>  
-    <% end %>
+        <div class="modal-footer">
+          <p type="button" class="" data-dismiss="modal">Close</p>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="row">
+    <div class="col s6">
+      <div class="section">
+        <h5><%= t "welcome.title" %></h5>
+        <p><%= t "welcome.description" %></p>
+      </div>
+    </div>
+    <div class="col s6">
+      <div class="section right-align">
+        <h5><%= t "welcome.contact_title" %></h5>
+        <i class="tiny material-icons prefix">email</i> informacija@didmena.com<br>
+        <i class="tiny material-icons prefix">phone</i> 604-234-1111
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <% if @models.any? %>
+    <% @models.each do |model| %>
+      <div class="row" style="padding-top:5px">
+        <div class="col s12 m4 l6 center-align">
+          <div style="height: 150px">
+            <% if model.model_attachments.any? %>
+              <%= image_tag model.model_attachments.first.avatar_url, :style=>"max-height: 100%; max-width: 100%" %>
+            <% else %>
+              <img src="http://placehold.it/350x150" style="max-height:100%; max-width:100%">
+            <% end %>
+          </div>
+        </div>
+        <div class="col s12 m4 l6">
+          <h5><%= model.title %></h5>
+          <%= model.note %>
+          <div>Available sizes</div>
+          <div>Available colors</div>
+        </div>
+        <div class="col s12 m4 l6" style="padding-top:15px">
+          <% if current_user && current_user.apps_manager %>
+            <li><%= link_to t('show'), model %></li>
+            <li><%= link_to t('edit'), edit_model_path(model) %></li>
+            <li><%= link_to t('delete'), model, method: :delete, data: { confirm: t('are_you_sure') } %>
+          <% else %>
+            <%= link_to t('show'), model %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
