@@ -1,0 +1,30 @@
+<% if @models.any? %>
+  <% @models.each do |model| %>
+    <div class="row" style="padding-top:5px">
+      <div class="col s12 m4 l6 center-align">
+        <div style="height: 150px">
+          <% if model.model_attachments.any? %>
+            <%= image_tag model.model_attachments.first.avatar_url, :style=>"max-height: 100%; max-width: 100%" %>
+          <% else %>
+            <img src="http://placehold.it/350x150" style="max-height:100%; max-width:100%">
+          <% end %>
+        </div>
+      </div>
+      <div class="col s12 m4 l6">
+        <h5><%= model.title %></h5>
+        <%= model.note %>
+        <div>Available sizes</div>
+        <div>Available colors</div>
+      </div>
+      <div class="col s12 m4 l6" style="padding-top:15px">
+        <% if current_user && current_user.apps_manager %>
+          <li><%= link_to t('show'), model %></li>
+          <li><%= link_to t('edit'), edit_model_path(model) %></li>
+          <li><%= link_to t('delete'), model, method: :delete, data: { confirm: t('are_you_sure') } %></li>
+        <% else %>
+          <%= link_to t('show'), model %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

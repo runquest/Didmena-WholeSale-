@@ -1,33 +1,5 @@
 <div class="container">
   <div class="row">
-    <% if @models.any? %>
-      <% @models.each do |model| %>
-        <div class="col s4">
-          <div class="card left">
-            <div class="card-image">
-              <% if model.model_attachments.any? %>
-                <%= image_tag model.model_attachments.first.avatar_url %>
-              <% else %>
-                <img src="http://placehold.it/350x150">
-              <% end %>
-              <span class="card-title"><%= model.title %></span>
-            </div>
-            <% if current_user && current_user.apps_manager %>
-              <div class="card-action center">
-                <ul id='card-menu'>
-                  <li><%= link_to t('show'), model %></li>
-                  <li><%= link_to t('edit'), edit_model_path(model) %></li>
-                  <li><%= link_to t('delete'), model, method: :delete, data: { confirm: t('confirm') } %></li>
-                </ul>
-              </div>
-            <% else %>
-              <div class="card-action center">
-                <%= link_to t('show'), model %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>  
-    <% end %>
+    <%= render 'welcome/product_catalog' %>
   </div>
 </div>
