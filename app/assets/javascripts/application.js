@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= require models
 //= require welcome
-//= require layouts
