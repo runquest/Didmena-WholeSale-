@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_cart
+  helper_method :find_colors
+  helper_method :find_sizes
+
   private
 
   def set_locale
@@ -33,5 +36,28 @@ class ApplicationController < ActionController::Base
   def current_cart
     @cart = session[:cart]
   end
+
+  def model_products(model_id)
+    Product.where(model_id: model_id)
+  end
+
+  def find_colors(model_id)
+    @model_colors = []
+    model_products(model_id).each do |product|
+      color_meaning = Domain.find(product.color_id).meaning
+      @model_colors.push(color_meaning) unless @model_colors.include?(color_meaning)
+    end
+    return @model_colors
+  end
+
+  def find_sizes(model_id)
+    @model_sizes = []
+    model_products(model_id).each do |product|
+      size_name = Domain.find(product.size_id).code_value
+      @model_sizes.push(size_name) unless @model_sizes.include?(size_name)
+    end
+    return @model_sizes
+  end
+
 
 end

@@ -1,0 +1,30 @@
+<% if @models.any? %>
+  <% @models.each do |model| %>
+    <div class="row" style="padding-top:5px">
+      <div class="col s12 m4 l6 center-align">
+        <div style="height: 150px">
+          <% if model.model_attachments.any? %>
+          <%= link_to (image_tag (model.model_attachments.first.avatar_url), :style=>"max-height: 100%; max-width: 100%"), model %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col s12 m4 l6">
+        <h5><%= link_to model.title, model %></h5>
+        <div><%= model.note %></div>
+        <% find_colors(model.id).each do |c| %>
+          <div style="width: 15px; height: 15px; margin: 0 5px; float: left; background: #<%= c %>"></div>
+        <% end %><br/>
+        <% find_sizes(model.id).each do |s| %>
+          <div style="width: 15px; height: 15px; margin: 0 5px; float: left;"><%= s %></div>
+        <% end %>
+
+      </div>
+      <div class="col s12 m4 l6" style="padding-top:15px">
+        <% if current_user && current_user.apps_manager %>
+          <%= link_to t('edit'), edit_model_path(model) %> | 
+          <%= link_to t('delete'), model, method: :delete, data: { confirm: t('are_you_sure') } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

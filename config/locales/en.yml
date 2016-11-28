@@ -59,6 +59,7 @@ en:
             alert: "cart is empty."
 
     users:
+        new: "Add new user"
         add_representative: "add users"
         first_name: "first name"
         last_name: "last name"
@@ -96,7 +97,7 @@ en:
 
     welcome: 
         title: "what we do"
-        description: "Mes turime didelę pasiūlą moteriškų drabužių. Įvairių stilių: marškinėlių, suknelių ir megztukų."
+        description: "We have a large selection of outfits. Variety of styles: singlets, dresses and jumpers."        
         contact_title: "reach us at "
         add_user: "add user"
         add_company: "add company"

@@ -1,6 +1,5 @@
 class ModelsController < ApplicationController
   before_action :set_model, only: [:show, :edit, :update, :destroy]
-  
   # GET /models
   # GET /models.json
   def index
@@ -33,7 +32,7 @@ class ModelsController < ApplicationController
       end
     end
   end
-
+  
   # GET /models/new
   def new
     @model = Model.new

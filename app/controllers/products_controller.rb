@@ -103,10 +103,6 @@ class ProductsController < ApplicationController
     color_id = Domain.where(domain_name: "COLOR").where(meaning: params[:color_name]).take.id
 
     products = model_products.where(color_id: color_id)
-
-    products.each do |product|
-      product.destroy
-    end
   end
 
   private

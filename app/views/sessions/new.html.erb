@@ -2,7 +2,8 @@
   <% flash.each do |key, value| %>
     <%= content_tag(:div, value, class: 'flash-message') %>
   <% end %>
-  <h5><%= t('try_again') %></h5>
+  <h5><%= t('login.try_again') %></h5>
+  <p><%= t('login.explanation') %>: <a href="mailto:info@didmena.lt">info@didmena.lt</a></p>
   <br>
   <div class="col s4 offset-s2 z-depth-1" id="login"> 
     <%= form_tag sessions_path do %>

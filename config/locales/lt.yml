@@ -36,10 +36,12 @@ lt:
     discount: "Nuolaida: "
     empty: "Krepšelis tuščias."
     total_price: "Galutinė kaina: "
+    hello: "Sveiki"
+    phone_number: "Pvz.: +1 (613) 667-8763"
 
     # product / module specific words
 
-    color: "spalva"
+    color: "Spalva"
     size: "dydis"
     quantity: "kiekis"
     cost: "kaina"
@@ -92,12 +94,14 @@ lt:
         dashboard: "apžvalga"
 
     register:
-        intro: "Atlikti produktų užsakymus turite registruotis."
+        intro: "Atlikti produktų užsakymą turite registruotis."
 
     login:
         email: "El. paštas"
         password: "Slaptažodis"
         login: "Prisijungti"
+        try_again: "Pabandykite dar kartą"
+        explanation: "Registruotis prašome siųsti užklausą el.paštu"
 
     welcome: 
         title: "Ką mes darome"
