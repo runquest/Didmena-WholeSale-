@@ -1,15 +1,25 @@
 $(function() { 
 
-  // $("#btn-login").on("click", function(event){
-  //   popover();
-  // });
+  $('#submit-login').on("click", function(event){
+      var user_email = $("#email").val();
+      var password = $("#password").val();
+      var localization = $("body").data("locale");
+      var login_data = {email: user_email, password: password}
+      var header = document.getElementById("header");
 
-
-// $("#btn-login").on("click", function(event){
-//     var $toastContent = $('<div id="modal1" class="modal"><div class="modal-content"><h4>Modal Header</h4><p>A bunch of text</p></div><div class="modal-footer"><a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a></div></div>');
-//   Materialize.toast($toastContent, 5000);
-//   });
-
-// $('#modal1').openModal();
-// $('#modal1').modalOpen();
+      $.ajax({
+        method: 'post',
+        url: '/'+localization+'/sessions',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify(login_data),
+        success: function (data) {
+          location.reload();
+        },
+        error: function(err){
+          document.getElementById("xButton").click(); 
+          window.location.reload();
+        }
+      });
+  });
 });
