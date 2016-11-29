@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart
   helper_method :find_colors
   helper_method :find_sizes
+  helper_method :all_sizes
 
   private
 
@@ -50,6 +51,15 @@ class ApplicationController < ActionController::Base
     return @model_colors
   end
 
+  def find_colors_general(model_id)
+    @model_colors_objects = []
+    model_products(model_id).each do |product|
+      color_object = Domain.find(product.color_id)
+      @model_colors_objects.push(color_object) unless @model_colors_objects.include?(color_object)
+    end
+    return @model_colors_objects
+  end
+
   def find_sizes(model_id)
     @model_sizes = []
     model_products(model_id).each do |product|
@@ -57,6 +67,10 @@ class ApplicationController < ActionController::Base
       @model_sizes.push(size_name) unless @model_sizes.include?(size_name)
     end
     return @model_sizes
+  end
+
+  def all_sizes
+    return Domain.where(domain_name: 'SIZE').order(:id).reverse
   end
 
 
