@@ -70,26 +70,27 @@
                   <% end %>
                 <% end %>
               </td>
-              <% end %>
-            </tr>
-            <tr>
-              <td colspan=<%= @colors.size + 1%>>
-                <div class='center-align'>Log in or send an email to create an account.</div>
-              </td>
+            <% end %>
+          </tr>
+          <tr>
+            <td colspan=<%= @colors.size + 1%>>
+              <div class='center-align'>Log in or send an email to create an account.</div>
+            </td>
           </tr>
         </tbody>
       </table>
     <% end %>
   </div>
-
-
-
-
-    <div class='row'>
-            <div style="height: 150px">
-          <% if @model.model_attachments.any? %>
-          <%= link_to (image_tag (@model.model_attachments.first.avatar_url), :style=>"max-height: 100%; max-width: 100%"), models_path %>
-          <% end %>
+  <hr/>
+  <% if @model.model_attachments.any? %>
+    <div class="row" style="padding-top:5px; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+      <% @model.model_attachments.each do |img| %>
+        <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
+          <div style="height: 200px;">
+            <%= link_to (image_tag (img.avatar_url), :style=>"max-height: 100%; max-width: 100%", :class=>"center-align") %>
+          </div>
         </div>
+      <% end %>
     </div>
+  <% end %>
 </div>
