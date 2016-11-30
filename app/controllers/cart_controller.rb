@@ -2,24 +2,14 @@ class CartController < ApplicationController
 
   def add
     @items = params[:_json]
-
     @items.each do |item|
-
-      id = item[:product_id]
-      quantity = item[:quantity]
-
       if session[:cart] then
         cart = session[:cart]
       else
         session[:cart] = {}
         cart = session[:cart]
       end
-
-      if cart[id] then
-        cart[id] = cart[id].to_i + quantity.to_i
-      else
-        cart[id] = quantity
-      end
+      cart[item.keys.first] = item.values.first
     end
     redirect_to "/cart"
   end
@@ -51,11 +41,10 @@ class CartController < ApplicationController
     if session[:cart] then
       @cart = session[:cart]
       @cart_total_cost = 0
-      
+
       #per krepseli
       @cart.each do |item|
         product = Product.find(item[0])
-        # quantity = item[1]
 
         model = Model.find(product.model_id)
         color = Domain.find(product.color_id)

@@ -28,7 +28,7 @@
               <td class="center-align"> <%= s.code_value %> </td>
                 <% @colors.each do |c| %>
                   <% find_model_product(c.id, s.id) %>
-                    <td style="padding: 0 5px;" class="center-align">
+                    <td style="padding: 0 5px;" class="center-align order-amount">
                       <%= hidden_field_tag "product_id", @model_product.take.id %>
                         <% if can_order? %>
                           <%= number_field_tag :quantity, params[:quantity], min: 0, style: "border: 2px solid #26a69a; padding: 0 5px;" %>
@@ -41,7 +41,7 @@
           <% end %>
           <tr>
             <td colspan=<%= @colors.size + 1%>>
-              <button style="margin-top: 5px; width: 100%; float: right;" class="btn waves-effect waves-light order_button"><%= t('models.order') %></button>
+              <button style="margin-top: 5px; width: 100%; float: right;" class="btn waves-effect waves-light" id="order-btn"><%= t('models.order') %></button>
             </td>
           </tr>
         </tbody>

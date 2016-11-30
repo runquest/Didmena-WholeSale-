@@ -171,36 +171,25 @@ $(function() {
     });           
   });
 
-  $(".order_button").on('click', function() {
-
+  $("#order-btn").on('click', function() {
     var order_items = [];
+    // var order_items = new Map;
+    var order_amount_class_elements = document.getElementsByClassName("order-amount");
+    for (var i=0; i<order_amount_class_elements.length; i++ ) {
 
-    var rowsNumber = $("#product_table tr").length;
+      var box = order_amount_class_elements[i].getElementsByTagName('input');
+      var product_id = box[0].value
+      var amount = box[1].value;
+        if (amount != null && amount != "") {
+          var item = {};
+          item[product_id] = amount;
+          order_items.push(item);
+        }
+    }
 
-    for (var i = 1; i < rowsNumber; i++) {
-      var row = $("#product_table tr")[i];
-
-      for (var j = 2; j < row.children.length; j++) {
-
-          var quantity = $("#product_table tr")[i].children[j].getElementsByTagName("input")[1].value
-          
-          if (!!quantity) {
-            if (quantity < 0) {
-              alert('You cannot order negative number of products');
-              return false;
-            } else {
-
-              var product_id = $("#product_table tr")[i].children[j].getElementsByTagName("input")[0].value
-
-              var item_data = {product_id: product_id, quantity: quantity}
-              order_items.push(item_data);
-            };
-          }
-      };
-    };
+    console.log(order_items);
     
     if (order_items.length > 0) {
-      
       $.ajax({
         method: 'post',
         url: '/'+localization+'/cart',
@@ -216,12 +205,30 @@ $(function() {
           // to-do: it is not hitting success function even though it posts well.
         }
       });
-
     } else {
-      alert('No product selected');
-    };
+      alert("No products selected.");
+    }
   });
-});
+    
+    
+    // if (order_items.length > 0) {
+      
+    //   $.ajax({
+    //     method: 'post',
+    //     url: '/'+localization+'/cart',
+    //     contentType: 'application/json; charset=utf-8',
+    //     dataType: 'json',
+    //     data: JSON.stringify(order_items),
+    //     success: function (data) {
+    //       console.log('success');
+    //       window.location = '/'+localization+'/cart'
+    //     },
+    //     error: function(err){
+    //       window.location = '/'+localization+'/cart'
+    //       // to-do: it is not hitting success function even though it posts well.
+    //     }
+    //   });
+  });
 
 function readURL() {
 
