@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <%= link_to t('cart.empty_cart'), cart_clear_path %> 
+  </div>
+  <div class="row">
+    <h3>table</h3>
+    <h3><%= current_user.get_company_name %></h3>
+    <% all_sizes.each do |s|%>
+      <div><%= s.code_value%></div>
+    <%end%>
+    <table>
+      <thead>
+        <tr>
+          <th data-field="model_name" colspan="3">Model name</th>
+          <th data-field="color_name">Color name</th>
+          <% all_sizes.each do |s| %>
+            <th data-field="size_code_value"><%= s.code_value %></th>
+          <% end %>
+          <th data-field="total">Total</th>
+        </tr>
+        <% @models_ordered.each do |model| %>
+          <tr><%= model.title %></tr>
+        <% end %>
+      </thead>
+        <% @cart.each do |item| %>
+          <div><%= item %></div>
+        <% end %>
+    </table>
+  </div>
+</div>

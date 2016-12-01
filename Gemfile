@@ -48,5 +48,6 @@ gem 'pry'
 
 gem 'mini_magick'
 
+#heroku
 gem 'figaro'
 
