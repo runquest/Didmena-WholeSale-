@@ -3,28 +3,30 @@
     <%= link_to t('cart.empty_cart'), cart_clear_path %> 
   </div>
   <div class="row">
-    <h3>table</h3>
-    <h3><%= current_user.get_company_name %></h3>
-    <% all_sizes.each do |s|%>
-      <div><%= s.code_value%></div>
-    <%end%>
     <table>
-      <thead>
-        <tr>
-          <th data-field="model_name" colspan="3">Model name</th>
-          <th data-field="color_name">Color name</th>
-          <% all_sizes.each do |s| %>
-            <th data-field="size_code_value"><%= s.code_value %></th>
-          <% end %>
-          <th data-field="total">Total</th>
-        </tr>
-        <% @models_ordered.each do |model| %>
-          <tr><%= model.title %></tr>
+      <tbody>
+        <% @colors_in_model.each do |model, colors| %>
+          <tr>
+            <td colspan="<%= all_sizes.size + 4%>"><h6><%= model.title %></h6></td>
+            <% colors.each do | color | %>
+              <tr>
+                <td></td>
+                <td><div class="color-circle" style="background: #<%= Domain.find(color).meaning %>"></div></td>
+                <td><%= Domain.find(color).meaning %></td>
+                <% all_sizes.each do |s|%>
+                  <td style="padding: 0 5px;" class="center-align order-amount">
+                      <%= hidden_field_tag "product_id" %>
+                      <%= number_field_tag :quantity, params[:quantity], min: 0, style: "border: 1px solid lightgrey; padding: 0 5px;" %>
+                  </td>
+                <%end%>
+                <td>
+                  <div>100</div>
+                </td>
+              </tr>
+            <% end %>
+          </tr>
         <% end %>
-      </thead>
-        <% @cart.each do |item| %>
-          <div><%= item %></div>
-        <% end %>
+      </tbody>
     </table>
   </div>
 </div>

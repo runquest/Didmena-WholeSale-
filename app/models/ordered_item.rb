@@ -18,8 +18,9 @@ class OrderedItem
     return Model.find(model_id)
   end
 
-  def getColorsForModel
-    binding.pry
+  def getUniqueColorsForModel
+    colors = Product.where(model_id: getModel.id).map { |product| product.color_id }
+    return colors.uniq
   end
   
   # attr_accessor :getProductModel

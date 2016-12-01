@@ -53,10 +53,23 @@ class CartController < ApplicationController
   def filterColorsForModels
     @colors_in_model = {}
     @order_item_list.each do |item|
-      # @colors_in_model[item.getModel] = 
-      item.getColorsForModel
+      model = item.getModel
+      @colors_in_model[model] = item.getUniqueColorsForModel
     end
     return @colors_in_model
+  end
+
+  def filterProductsForModelsColor
+    @products_for_models_color = []
+    @colors_in_model.each do |model, colors|
+      colors.each do |color|
+        all_sizes.each do |size|
+          product = Product.where(model_id: model.id).where(color_id: color).where(size_id: size.id)
+          @products_for_models_color.push(product)
+        end
+      end
+    end
+    return @products_for_models_color
   end
 
 
@@ -66,6 +79,7 @@ class CartController < ApplicationController
     convertCartToOrderItemList
     filterModels
     filterColorsForModels
+    filterProductsForModelsColor
     # models [model, model, model]
     # colors in the model {model, [color_id, color_id, color_id]}
     # @colors_in_model = {}
