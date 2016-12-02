@@ -11,13 +11,13 @@ class WelcomeController < ApplicationController
   end
 
   def email_sent
-<<<<<<< HEAD
-    # @user = User.first
-=======
->>>>>>> refs/remotes/origin/master
-    @user = User.find(1)
-    DidmenaMailer.first_email(@user).deliver_now
-    redirect_to user_path(@user)
+# <<<<<<< HEAD
+#     # @user = User.first
+# =======
+# >>>>>>> refs/remotes/origin/master
+#     @user = User.find(1)
+#     DidmenaMailer.first_email(@user).deliver_now
+#     redirect_to user_path(@user)
   end
 
 end
