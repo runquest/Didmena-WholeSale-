@@ -9,20 +9,28 @@
           <tr>
             <td colspan="<%= all_sizes.size + 4%>"><h6><%= model.title %></h6></td>
             <% colors.each do | color | %>
-              <tr>
-                <td></td>
-                <td><div class="color-circle" style="background: #<%= Domain.find(color).meaning %>"></div></td>
-                <td><%= Domain.find(color).meaning %></td>
-                <% all_sizes.each do |s|%>
+              <% if is_product_of_model_color_available(model.id, color) %>
+                <tr>
+                  <td></td>
+                  <td><div class="color-circle" style="background: #<%= Domain.find(color).meaning %>"></div></td>
+                  <td><%= Domain.find(color).meaning %></td>
+                  <% all_sizes.each do |s|%>
+                  <% pid = some_product_id(model.id, color, s.id)%>
+                  <% if available(model.id, color, s.id) %>
+                      <td style="padding: 0 5px;" class="center-align order-amount">
+                          <%= hidden_field_tag "product_id", pid %>
+                          <% hm = how_much(pid) %>
+                          <%= number_field_tag :quantity, hm, min: 0, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
+                      </td>
+                  <% else %>
                   <td style="padding: 0 5px;" class="center-align order-amount">
-                      <%= hidden_field_tag "product_id" %>
-                      <%= number_field_tag :quantity, params[:quantity], min: 0, style: "border: 1px solid lightgrey; padding: 0 5px;" %>
-                  </td>
-                <%end%>
-                <td>
-                  <div>100</div>
-                </td>
-              </tr>
+                        <%= hidden_field_tag "product_id", pid %>
+                         <%= number_field_tag :quantity, params[:quantity], min: 0, disabled: true, style: "border: 1px solid lightgrey; padding: 0 5px;" %>
+                    </td>
+                  <% end %>
+                  <%end%>
+                </tr>
+              <% end %>
             <% end %>
           </tr>
         <% end %>

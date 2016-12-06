@@ -73,7 +73,6 @@ class CartController < ApplicationController
   end
 
 
-
   def show
     initiateCart
     convertCartToOrderItemList
