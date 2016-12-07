@@ -1,40 +1,46 @@
 <div class="container">
-  <div class="row">
+  <div class="row" style="border-bottom: 1px solid darkgrey">
     <%= link_to t('cart.empty_cart'), cart_clear_path %> 
   </div>
   <div class="row">
+    <div>Total cost: <%#= total_cost_function %></div>
+  </div>
+  <% @models_ordered.each do |model, colors|%>
     <table>
+      <thead>
+        <th colspan="3"><h5><%=model.title%></h5></th>
+      </thead>
       <tbody>
-        <% @colors_in_model.each do |model, colors| %>
+        <tr style="background-color: lightgrey">
+          <td colspan="3">Price: <%= model.price %></td>
+        <td colspan="3">Total units: <div id="total-units"></div></td>
+        <td colspan="3">Model cost: <div id="total-model-order-cost"></div></td>
+        </tr>
+        <tr><td colspan="2"></td><%all_sizes.each do |size| %><td class="center"><%= size.code_value %></td><%end%></tr>
+        <% colors.each do | color |%>
           <tr>
-            <td colspan="<%= all_sizes.size + 4%>"><h6><%= model.title %></h6></td>
-            <% colors.each do | color | %>
-              <% if is_product_of_model_color_available(model.id, color) %>
-                <tr>
-                  <td></td>
-                  <td><div class="color-circle" style="background: #<%= Domain.find(color).meaning %>"></div></td>
-                  <td><%= Domain.find(color).meaning %></td>
-                  <% all_sizes.each do |s|%>
-                  <% pid = some_product_id(model.id, color, s.id)%>
-                  <% if available(model.id, color, s.id) %>
-                      <td style="padding: 0 5px;" class="center-align order-amount">
-                          <%= hidden_field_tag "product_id", pid %>
-                          <% hm = how_much(pid) %>
-                          <%= number_field_tag :quantity, hm, min: 0, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
-                      </td>
-                  <% else %>
-                  <td style="padding: 0 5px;" class="center-align order-amount">
-                        <%= hidden_field_tag "product_id", pid %>
-                         <%= number_field_tag :quantity, params[:quantity], min: 0, disabled: true, style: "border: 1px solid lightgrey; padding: 0 5px;" %>
-                    </td>
+            <td><div class="color-circle" style="background: #<%= Domain.find(color).meaning %>"></div></td>
+            <td><%= Domain.find(color).meaning %></td>
+            <% products_for_color(model.id, color).each do |product| %>
+              <td class="center">
+                <%= hidden_field_tag "product_id", product.take.id %>
+                <% if product.take.in_storage %>
+                  <% product_amount = 0 %>
+                  <% if @product_amount_list.keys.include?(product.take) %>
+                    <% product_amount = @product_amount_list[product.take] %>
                   <% end %>
-                  <%end%>
-                </tr>
-              <% end %>
+                    <%= number_field_tag :quantity, product_amount, min: 0, disabled: false, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
+                <% else %>
+                  <%= number_field_tag :quantity, min: 0, disabled: true, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
+                <% end %>
+              </td>
             <% end %>
           </tr>
         <% end %>
+        
       </tbody>
-    </table>
-  </div>
+    <table>
+  <% end %>
+
+  
 </div>

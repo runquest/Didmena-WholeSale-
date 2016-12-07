@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   root "welcome#index"
 
     get '/cart' => 'cart#show'
-    post '/cart' => 'cart#addItemsToCart'
-    delete ':id' => 'cart#deleteSessionCart'
-    get '/cart/clear' => 'cart#emptyCart'
+    post '/cart' => 'cart#add_items_to_cart'
+    delete ':id' => 'cart#delete_session_cart'
+    get '/cart/clear' => 'cart#empty_cart'
     get '/cls' => 'domains#colors'
     get '/sizes' => 'domains#sizes'
     get '/models/size' => 'models#size'

@@ -1,15 +1,15 @@
 class CartController < ApplicationController
 
-  def addItemsToCart
+  def add_items_to_cart
     @items = params[:_json]
     @items.each do |item|
-      initiateCart
+      initiate_cart
       @cart[item.keys.first] = item.values.first
     end
     redirect_to "/cart"
   end
 
-  def initiateCart
+  def initiate_cart
     if session[:cart] then
       @cart = session[:cart]
     else
@@ -18,18 +18,56 @@ class CartController < ApplicationController
     end
   end
 
-  def emptyCart
+  def empty_cart
     session[:cart] = nil
     redirect_to :action => :show
   end
 
   # not really sure what is this meant to do
   # guessing it something that happens when user logs out
-  def deleteSessionCart
+  def delete_session_cart
     id = params[:product_id]
     @cart.delete(id)
     redirect_to :back, notice: t('.notice')
   end
+
+####################### - cart view methods - ##################
+
+  # products and amounts ordered
+  # models ordered
+  # colors in model
+  # products in models in storage
+
+  def products_amounts_ordered
+    @product_amount_list = {}
+    @cart.each do |item|
+      product = Product.find(item[0].to_i)
+      amount = item[1].to_i
+      @product_amount_list[product] = amount
+    end
+  end
+
+  def models_in_order
+    @models_ordered = {}
+    @product_amount_list.each do |product, amount|
+      model = Model.find(product.model_id)
+      colors = Product.where(model_id: product.model_id).map {|product| product.color_id}
+      @models_ordered[model] = colors.uniq!
+    end
+  end
+
+  # def products_for_color model_id,color_id
+  #   list_products = []
+  #   all_sizes.each do |size_id|
+  #     product = Product.where(model_id: model_id, color_id: color_id, size_id: size_id)
+  #     list_products.push(product)
+  #   end
+  #   return list_products
+  # end
+
+
+  ############
+
 
   def convertCartToOrderItemList
     @order_item_list = []
@@ -51,17 +89,17 @@ class CartController < ApplicationController
   end
 
   def filterColorsForModels
-    @colors_in_model = {}
+    @mColors = {}
     @order_item_list.each do |item|
       model = item.getModel
-      @colors_in_model[model] = item.getUniqueColorsForModel
+      @mColors[model] = item.getUniqueColorsForModel
     end
-    return @colors_in_model
+    return @mColors
   end
 
   def filterProductsForModelsColor
     @products_for_models_color = []
-    @colors_in_model.each do |model, colors|
+    @mColors.each do |model, colors|
       colors.each do |color|
         all_sizes.each do |size|
           product = Product.where(model_id: model.id).where(color_id: color).where(size_id: size.id)
@@ -74,11 +112,14 @@ class CartController < ApplicationController
 
 
   def show
-    initiateCart
+    initiate_cart
     convertCartToOrderItemList
     filterModels
     filterColorsForModels
     filterProductsForModelsColor
+
+    products_amounts_ordered
+    models_in_order
     # models [model, model, model]
     # colors in the model {model, [color_id, color_id, color_id]}
     # @colors_in_model = {}
