@@ -1,15 +1,19 @@
 module ModelsHelper
 
-  def find_models_products(color, size)
-    Product.where(size_id: size).where(color_id: color).where(model_id: @model.id).take
+  def find_model_product(color, size)
+    @model_product = Product.where(size_id: size).where(color_id: color).where(model_id: @model.id)
   end
 
-  def product_exist?(color, size)  
-    Product.where(size_id: size).where(color_id: color).where(model_id: @model.id).exists?
+  def can_order?
+    return product_exist && product_in_storage
   end
 
-  def product_in_storage?(color, size)
-    Product.where(size_id: size).where(color_id: color).where(model_id: @model.id).take.in_storage
+  def product_exist
+    return @model_product.exists?
+  end
+
+  def product_in_storage
+    return @model_product.take.in_storage
   end
 
   def value(color)

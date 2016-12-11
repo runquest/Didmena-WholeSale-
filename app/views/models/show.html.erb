@@ -1,87 +1,96 @@
 <div class="container">
   <div class='row'>
-    <div class="col s12">
-      <% if current_user && current_user.apps_manager %>
-        <div class="card-action center", style="text-align: left">
-          <%= link_to t('edit'), edit_model_path(@model) %> |
-          <%= link_to t('back'), models_path %>
-          <h1>hello</h1>
-        </div>
-      <% end %>
+    <h4><%= @model.title %></h4>
+    <div class="col s12 m12 l6">
+      <h6 style="color: lightgrey"><b>for</b> <%= @type %> | <b>collection</b> <%= @collection %></h6>
+      <h6 style="color: orange"> <b>cost</b> $<%= sprintf "%.2f", @model.price %></h6>
+      <p  style="padding-right: 15px;"><%= @model.note %></p>
     </div>
-  </div>
-  <div class="row">
-    <div class="col s12">
-      <% if @model_attachments.any? %>
-        <% @model_attachments.each do |p| %>
-          <div class="card col s3">
-            <div class="card-image">
-              <%= image_tag p.avatar_url, :class => "prod_image_small" %>
-            </div>
-            <% if current_user && current_user.apps_manager %>
-              <div class="card-action">
-                <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') }, :class => "center-align" %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      <% else %>
-        <img src="http://placehold.it/350x150">
-      <% end %>
-    </div>
-  </div>
-  <hr/>
-  <div class="row">
-    <div class="col s6">     
-      <div class="card-content">
-        <h3><%= @model.title %></h3>
-        <h5 style="color: lightgrey"><%= @type %> <%= @collection %></h5>
-        <h5 style="color: orange"><%= t('models.price') %>: <%= sprintf "%.2f", @model.price %></h5>
-        <p><%= @model.note %></p>
-        </div>
-    </div>
-    <div class="col s6">
-      <table id="product_table">
-        <thead>
+    <% if current_user %>
+      <table id="product_table" class="col s12 m12 l6">
+        <thead style="border-bottom: 0px;">
           <tr>
-            <th></th>
-            <th data-field="id"><%= t('color') %></th>
-              <% @sizes.each do |size| %>
-                <th data-field='<%= size.code_value%>' colspan="3" class="center-align"><%= size.code_value%></th>
-              <% end %> 
+            <th>
+              <div class="color-circle" style="background: transparent;"></div>
+              <div class="center-align">SIZES</div>
+            </th>
+            <% @colors.each do |color| %>
+              <th>
+                <div class="color-circle" style="background: #<%= color.meaning %>"></div>
+                <div class="center-align"><%= color.meaning %></div>
+              </th>
+            <% end %>
           </tr>
         </thead>
-        <tbody id="color_row">
-          <% if @products.any? %>
-            <% @colors.each do |color| %>
-              <tr id='<%= value(color) %>'>
-                <td style="background-color: #<%= value(color) %>; width: 5%;"></td>
-                <td style="padding-left: 10px; background-color: #<%= value(color) %>;"><%= value(color) %></td>
-                <% @sizes.each do |size| %>
-                  <% product = find_models_products(color, size) %>
-                  <% if product_exist?(color, size) && product_in_storage?(color, size) %>
-                      <td class="product_row center-align" colspan="3" >
-                        <%= hidden_field_tag "product_id", product.id %>
-                        <%= number_field_tag :quantity, params[:quantity], min: 1, class: 'special_input' %>
-                      </td>
-                    <% else %>
-                      <td class="product_row center-align" colspan="3" >
-                        <%= hidden_field_tag "product_id", product.id %>
-                        <%= number_field_tag :quantity, params[:quantity], min: 1, class: 'special_input', disabled: true %>
-                      </td>
-                    <% end %>
-                  <%end%>
-              </tr>
-            <% end %>
-          <%end%>
+        <tbody>
+          <% all_sizes.each do |s| %>
+            <tr>
+              <td class="center-align"> <%= s.code_value %> </td>
+                <% @colors.each do |c| %>
+                  <% find_model_product(c.id, s.id) %>
+                    <td style="padding: 0 5px;" class="center-align order-amount">
+                      <%= hidden_field_tag "product_id", @model_product.take.id %>
+                        <% if can_order? %>
+                          <%= number_field_tag :quantity, params[:quantity], min: 0, style: "border: 2px solid #26a69a; padding: 0 5px;" %>
+                        <% else %>
+                          <%= number_field_tag :quantity, params[:quantity], min: 0, disabled: true, style: "border: 1px solid lightgrey; padding: 0 5px;" %>
+                        <% end %>
+                    </td>
+                <% end %>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan=<%= @colors.size + 1%>>
+              <button style="margin-top: 5px; width: 100%; float: right;" class="btn waves-effect waves-light" id="order-btn"><%= t('models.order') %></button>
+            </td>
+          </tr>
         </tbody>
       </table>
-      <% if current_user %>
-        <button class="btn waves-effect waves-light order_button offset-s2 col s10"><%= t('models.order') %></button>
-      <% else %>
-        <button class="btn waves-effect waves-light offset-s2 col s10"><%= link_to t('register.intro'), new_session_path, {:style => 'color: yellow;'} %></button>
-      <% end %>
-
-    </div>
+    <% else %>
+      <table id="product_table" class="col s12 m12 l6">
+        <thead style="border-bottom: 0px;">
+          <tr>
+            <% @colors.each do |color| %>
+              <th>
+                <div class="color-circle" style="background: #<%= color.meaning %>"></div>
+                <div class="center-align"><%= color.meaning %></div>
+                <div class="center-align" style="color: lightgrey;">(<%= color.code_value %>)</div>
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @colors.each do |c| %>
+              <td class="center-align">
+                <% all_sizes.each do |s| %>
+                  <% find_model_product(c.id, s.id) %>
+                  <% if can_order? %>
+                    <span > <%= s.code_value %></span>
+                  <% end %>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+          <tr>
+            <td colspan=<%= @colors.size + 1%>>
+              <div class='center-align'>Log in or send an email to create an account.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
   </div>
+  <hr/>
+  <% if @model.model_attachments.any? %>
+    <div class="row" style="padding-top:5px; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+      <% @model.model_attachments.each do |img| %>
+        <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
+          <div style="height: 200px;">
+            <%= link_to (image_tag (img.avatar_url), :style=>"max-height: 100%; max-width: 100%", :class=>"center-align") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>

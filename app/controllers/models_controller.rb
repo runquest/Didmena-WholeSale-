@@ -9,28 +9,31 @@ class ModelsController < ApplicationController
   # GET /models/1
   # GET /models/1.json
   def show
-    @products = Product.where(model_id: @model.id)
+    @products = model_products(@model.id)
+    # @products = Product.where(model_id: @model.id)
+
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
-    @colors = Array.new;
-    @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
+    @colors = find_colors_general(@model.id)
+    # @colors = Array.new;
+    # @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
 
-    @products.each do |prdct|
-      if !@colors.include? prdct.color_id
-        color_size = []
-        @sizes.each do |size|
-          p = Product.where(color_id: prdct.color_id).where(size_id: size.id).take
-          if p.in_storage
-            color_size.push(p)
-          end
-        end
+    # @products.each do |prdct|
+    #   if !@colors.include? prdct.color_id
+    #     color_size = []
+    #     @sizes.each do |size|
+    #       p = Product.where(color_id: prdct.color_id).where(size_id: size.id).take
+    #       if p.in_storage
+    #         color_size.push(p)
+    #       end
+    #     end
 
-        if color_size.any?
-          @colors.push(prdct.color_id)
-        end
-      end
-    end
+    #     if color_size.any?
+    #       @colors.push(prdct.color_id)
+    #     end
+    #   end
+    # end
   end
   
   # GET /models/new
