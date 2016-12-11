@@ -1,5 +1,5 @@
-# source 'https://rubygems.org'
-source 'http://rubygems.org'
+source 'https://rubygems.org'
+# source 'http://rubygems.org'
 # Linas changed for his windows environment 18-JUN-2016
 # ruby '2.2.0'
 # ruby '2.0.0'
@@ -44,10 +44,9 @@ gem 'postgresql-check', '~> 0.1.1'
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 
 # Image Upload
-# gem 'imagemagick'
 
 gem "carrierwave"
-# gem "rmagick" 
+gem "rmagick" 
 
 #pry
 gem 'pry'

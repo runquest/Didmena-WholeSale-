@@ -1,10 +1,7 @@
 class DidmenaMailer < ActionMailer::Base
-<<<<<<< HEAD
-  # default from: "aiste@aiste.ca"
-  default from: "linas.uloza@gmail.com"
-=======
+
+  # default from: "linas.uloza@gmail.com"
   default from: "aiste.ulozaite@gmail.com"
->>>>>>> refs/remotes/origin/master
 
   # def first_email(user)
   #   @user = user

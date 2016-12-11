@@ -48,16 +48,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   # SMTP settings for gmail
-# <<<<<<< HEAD
+
   # config.action_mailer.smtp_settings = {
-  #  :address              => "smtp.gmail.com",
-  #  :port                 => 587,
-  #  :domain               => "gmail.com",
-  #  :user_name            => ENV["GMAIL_USERNAME"],
-  #  :password             => ENV["GMAIL_PASSWORD"],
-  #  :authentication       => "plain",
-  # :enable_starttls_auto => true
-# =======
   # :address              => "smtp.gmail.com",
   # :domain               => "gmail.com",
   # config.action_mailer.smtp_settings = {
@@ -78,7 +70,6 @@ Rails.application.configure do
   #   enable_starttls_auto: true, 
   #   user_name: 'aiste.ulozaite@gmail.com',
   #   password: 'hiwakkmrcgdmbetv'
-# >>>>>>> refs/remotes/origin/master
  # }
 
 end
