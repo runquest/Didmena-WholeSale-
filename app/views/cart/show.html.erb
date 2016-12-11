@@ -1,46 +1,64 @@
 <div class="container">
-  <div class="row" style="border-bottom: 1px solid darkgrey">
-    <%= link_to t('cart.empty_cart'), cart_clear_path %> 
-  </div>
-  <div class="row">
-    <div>Total cost: <%#= total_cost_function %></div>
-  </div>
   <% @models_ordered.each do |model, colors|%>
     <table>
       <thead>
-        <th colspan="3"><h5><%=model.title%></h5></th>
+        <%priceclass = "price_" + model.title.delete(' ').downcase %>
+        <%costclass = "cost_" + model.title.delete(' ').downcase %>
+        <%toggle_id = "toggle_" + model.title.delete(' ').downcase %>
+        <%toggle_table_id = "toggle_table_" + model.title.delete(' ').downcase %>
+        <div style="border-bottom: 1px solid lightgrey; padding: 5px;">
+          <span class="model_title"><b><%=model.title%></b></span>
+          <div style="float: right;">
+            <span>$</span><span class="<%= priceclass %>"><%= model.price %></span>
+            <span> x </span><span class="<%= model.title.delete(' ').downcase %>">0</span>
+            <span>= $</span><span class="<%= costclass %> model_cost">0</span>
+          </span>
+          <div style="float: right;"id='<%= toggle_id %>'>
+            <img src="/assets/ic_keyboard_arrow_down_black_24px.svg" alt="">
+          </div>
       </thead>
-      <tbody>
-        <tr style="background-color: lightgrey">
-          <td colspan="3">Price: <%= model.price %></td>
-        <td colspan="3">Total units: <div id="total-units"></div></td>
-        <td colspan="3">Model cost: <div id="total-model-order-cost"></div></td>
-        </tr>
+      <tbody id='<%= toggle_table_id %>' style="display: none;">
         <tr><td colspan="2"></td><%all_sizes.each do |size| %><td class="center"><%= size.code_value %></td><%end%></tr>
         <% colors.each do | color |%>
           <tr>
             <td><div class="color-circle" style="background: #<%= Domain.find(color).meaning %>"></div></td>
             <td><%= Domain.find(color).meaning %></td>
             <% products_for_color(model.id, color).each do |product| %>
-              <td class="center">
-                <%= hidden_field_tag "product_id", product.take.id %>
+              <td class="center order-amount">
+                <%#= hidden_field_tag "item_id", product.take.id %>
+                <%#= hidden_field_tag "product_id", @model_product.take.id %>
+                <%#= hidden_field_tag "product_id", product.take.id %>
                 <% if product.take.in_storage %>
                   <% product_amount = 0 %>
                   <% if @product_amount_list.keys.include?(product.take) %>
                     <% product_amount = @product_amount_list[product.take] %>
                   <% end %>
-                    <%= number_field_tag :quantity, product_amount, min: 0, disabled: false, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
+                    <%= hidden_field_tag "item_id", product.take.id %>
+                    <%= number_field_tag :quantity, product_amount, class: Model.find(product.take.model_id).title.delete(' ').downcase, min: 0, disabled: false, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
                 <% else %>
-                  <%= number_field_tag :quantity, min: 0, disabled: true, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
+                  <!-- <div style="width: 99px;border: 1px solid lightgrey; padding: 0 5px; text-align: center;"></div> -->
+
+                  <%= hidden_field_tag "item_id", product.take.id %>
+                    <%= number_field_tag :quantity, product_amount, class: Model.find(product.take.model_id).title.delete(' ').downcase, min: 0, disabled: true, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
                 <% end %>
               </td>
             <% end %>
           </tr>
         <% end %>
-        
       </tbody>
     <table>
   <% end %>
+  <div class="row">
+    <div class=" row right-align" style="display: block; margin-right: 24px; padding-right:24px">Sub total: $<span id="total_cart_cost"></span></div>
+    <div class=" row right-align" style="display: block; margin-right: 24px; padding-right:24px">Discount: $<span id="total_cart_cost"></span></div>
+    <div class=" row right-align" style="display: block; margin-right: 24px; padding-right:24px">Tax: $<span id="total_cart_cost"></span></div>
+    <h6 class=" row right-align" style="display: block; margin-right: 24px; padding-right:24px"><b>Total: $<span id="total_cart_cost"></span></b></h6>
+  </div>  
+  <div class="row">  
+    <button id="confirm_order" style="float: right;">                <%= link_to t('cart.confirm_order'), purchases_path, method: :post, :class => "btn waves-effect waves-light right" %>      
 
-  
+    <!-- <%#= link_to t('cart.confirm_order'), purchases_path, method: :post, :class => "btn waves-effect waves-light right" %>       -->
+    </button>
+    <button><%= link_to t('cart.empty_cart'), cart_clear_path %></button>
+  </div>
 </div>

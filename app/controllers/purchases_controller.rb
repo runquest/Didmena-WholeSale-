@@ -2,6 +2,7 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
   def create
+    binding.pry
    if session[:cart].nil? || session[:cart].empty?
       flash[:alert] = 'no items in the cart'
       redirect_to :back, alert: t('.alert')

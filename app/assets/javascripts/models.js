@@ -183,8 +183,6 @@ $(function() {
         }
     }
 
-    console.log(order_items);
-    
     if (order_items.length > 0) {
       $.ajax({
         method: 'post',
@@ -205,6 +203,7 @@ $(function() {
       alert("No products selected.");
     }
   });
+
     
     
     // if (order_items.length > 0) {
