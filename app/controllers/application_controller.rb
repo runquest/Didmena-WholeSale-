@@ -72,6 +72,5 @@ class ApplicationController < ActionController::Base
   def all_sizes
     return Domain.where(domain_name: 'SIZE').order(:id).reverse
   end
-
-
 end
+

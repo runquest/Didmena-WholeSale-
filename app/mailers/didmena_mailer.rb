@@ -1,4 +1,6 @@
 class DidmenaMailer < ActionMailer::Base
+
+  # default from: "linas.uloza@gmail.com"
   default from: "aiste.ulozaite@gmail.com"
 
   # def first_email(user)

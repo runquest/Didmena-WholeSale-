@@ -120,16 +120,15 @@ class ModelsController < ApplicationController
     @model.model_attachments(params[:model])
     
     if @model.products.empty? || !productsInStore(@model.products)
-      flash[:notice] = "no products selected"
-      redirect_to :back
+      if @model.update_attributes(model_params)
+        maintain_model_attachments
+      else
+        flash[:notice] = "no products selected"
+        redirect_to :back
+      end
     else
       if @model.update_attributes(model_params)
-        if !params[:model_attachments].nil?
-          params[:model_attachments]['avatar'].each do |a|
-            @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
-          end
-        end
-        redirect_to action: "show", id: @model.id
+        maintain_model_attachments
       else
         render action: 'edit'
       end
@@ -162,6 +161,15 @@ class ModelsController < ApplicationController
   def size
     render :partial => 'size_to_color'
   end
+
+  def maintain_model_attachments
+      if !params[:model_attachments].nil?
+        params[:model_attachments]['avatar'].each do |a|
+          @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
+        end
+      end
+      redirect_to action: "show", id: @model.id
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
