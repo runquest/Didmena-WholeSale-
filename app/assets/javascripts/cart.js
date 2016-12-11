@@ -9,48 +9,10 @@ $(function() {
     updateTotalCount();
     updateModelCost();
     updateTotalCost();
-    // updateCart();
   });
 
  $("button#confirm_order").click(function() {
     updateCart();
-
- //    var order_items = [];
- //    var order_amount_class_elements = document.getElementsByClassName("order-amount");
-
- //    for (var i=0; i<order_amount_class_elements.length; i++ ) {
- //      var box = order_amount_class_elements[i].getElementsByTagName('input');
- //      var product_id = box[0].value
- //      var amount = box[1].value;
- //      if (amount != null && amount != "" && amount !== "0") {
- //        var item = {};
- //        item[product_id] = amount;
- //        order_items.push(item);
- //      }
- //    }
-
-    // if (order_items.length > 0) {
-    //   $.ajax({
-    //     method: 'post',
-    //     url: '/'+localization+'/purchases',
-    //     contentType: 'application/json; charset=utf-8',
-    //     dataType: 'json',
-    //     data: JSON.stringify(order_items),
-    //     success: function (data) {
-    //       console.log('success');
-    //       console.log(data);
-    //       window.location = '/'+localization+'/orders/4'
-    //     },
-    //     error: function(err){
-    //                 console.log(err);
-
-    //       window.location = '/'+localization+'/orders/4'
-    //       // to-do: it is not hitting success function even though it posts well.
-    //     }
-    //   });
-    // } else {
-    //   alert("No products selected.");
-    // }
   });
 
   $("span.model_title").each(function() {
@@ -74,50 +36,35 @@ function updateTotalCount() {
 
 function updateCart() {
 
-    console.log('updating cart');
-
-    var order_items = [];
-    var order_amount_class_elements = document.getElementsByClassName("order-amount");
-
-    for (var i=0; i<order_amount_class_elements.length; i++ ) {
-      var box = order_amount_class_elements[i].getElementsByTagName('input');
-      var product_id = box[0].value
-      var amount = box[1].value;
-      if (amount != null && amount != "" && amount !== "0") {
-        var item = {};
-        item[product_id] = amount;
-        order_items.push(item);
-      }
-    }
-
+  var order_items = [];
+  var order_amount_class_elements = document.getElementsByClassName("order-amount");
   var localization = $("body").data("locale");
 
-    $.ajax({
-        method: 'post',
-        url: '/'+localization+'/update_cart',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify(order_items),
-        success: function (data) {
-          console.log('success');
-          // console.log(data);
-          // window.location = '/'+localization+'/cart'
-        },
-        error: function(err){
-                    console.log(err);
+  for (var i=0; i<order_amount_class_elements.length; i++ ) {
+    var box = order_amount_class_elements[i].getElementsByTagName('input');
+    var product_id = box[0].value
+    var amount = box[1].value;
+    if (amount != null && amount != "" && amount !== "0") {
+      var item = {};
+      item[product_id] = amount;
+      order_items.push(item);
+    }
+  }
 
-          // window.location = '/'+localization+'/orders/4'
-          // to-do: it is not hitting success function even though it posts well.
-        }
-      });
-
-
-
-// '/update_cart'
-
-
+  $.ajax({
+    method: 'post',
+    url: '/'+localization+'/update_cart',
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    data: JSON.stringify(order_items),
+    success: function (data) {
+      console.log('success');
+    },
+    error: function(err){
+      console.log(err);
+    }
+  });
 }
-
 
 function updateModelCost() {
   $("span.model_title").each(function() {
