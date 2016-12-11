@@ -117,16 +117,15 @@ class ModelsController < ApplicationController
     @model.model_attachments(params[:model])
     
     if @model.products.empty? || !productsInStore(@model.products)
-      flash[:notice] = "no products selected"
-      redirect_to :back
+      if @model.update_attributes(model_params)
+        maintain_model_attachments
+      else
+        flash[:notice] = "no products selected"
+        redirect_to :back
+      end
     else
       if @model.update_attributes(model_params)
-        if !params[:model_attachments].nil?
-          params[:model_attachments]['avatar'].each do |a|
-            @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
-          end
-        end
-        redirect_to action: "show", id: @model.id
+        maintain_model_attachments
       else
         render action: 'edit'
       end
@@ -173,5 +172,14 @@ class ModelsController < ApplicationController
 
     def purchase_params
       params.require(:purchase).permit(:order_id, :product_id, :quantity, :note, model_attachments_attributes: [:id, :model_id, :avatar])
+    end
+
+    def maintain_model_attachments
+      if !params[:model_attachments].nil?
+        params[:model_attachments]['avatar'].each do |a|
+          @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
+        end
+      end
+      redirect_to action: "show", id: @model.id
     end
 end
