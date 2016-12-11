@@ -1,9 +1,5 @@
 source 'https://rubygems.org'
-# source 'http://rubygems.org'
-# Linas changed for his windows environment 18-JUN-2016
-# ruby '2.2.0'
-# ruby '2.0.0'
-ruby '2.2.4'
+ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -44,7 +40,6 @@ gem 'postgresql-check', '~> 0.1.1'
 gem 'bcrypt-ruby', '~> 3.1', '>= 3.1.5'
 
 # Image Upload
-
 gem "carrierwave"
 gem "rmagick" 
 
@@ -53,8 +48,5 @@ gem 'pry'
 
 gem 'mini_magick'
 
-# Linas added for his windows environment 18-JUN-2016
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
-gem 'coffee-script-source', '1.8.0'
+gem 'figaro'
 
-# gem 'figaro'

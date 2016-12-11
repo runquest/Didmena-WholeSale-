@@ -15,8 +15,4 @@
 /log/*
 !/log/.keep
 /tmp
-
-# Linas excluded files
-/config/application.yml
-/.env
 /public/uploads/

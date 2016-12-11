@@ -22,7 +22,7 @@
 ru:
     # navigation
 
-    back: "назад" 		# "back"
+    back: "назад"     # "back"
     edit: "редактировать"    # "edit"
     show: "показывать"       # "show"
     delete: "удалить"        # "delete"
