@@ -21,9 +21,7 @@ class CartController < ApplicationController
   def update_cart
     session[:cart] = {}
     params[:_json].each do |item|
-      pid = item.keys[0];
-      amount = item.values[0];
-      session[:cart][pid] = amount;
+      session[:cart][item.keys[0]] = item.values[0];
     end
     redirect_to :action => :show
   end
