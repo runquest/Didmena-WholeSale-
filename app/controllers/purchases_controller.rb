@@ -5,7 +5,6 @@ class PurchasesController < ApplicationController
    if session[:cart].nil? || session[:cart].empty?
       flash[:alert] = 'no items in the cart'
       redirect_to :back, alert: t('.alert')
-      # redirect_to :back, notice: t('.notice')
     else
       
       if session[:cart] then
