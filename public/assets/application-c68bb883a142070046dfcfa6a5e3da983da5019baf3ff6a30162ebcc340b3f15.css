@@ -1,0 +1,211 @@
+html {
+  background-image: url('/assets/top_bg.jpg');
+  background-repeat: repeat-x;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+div#header {
+    /*margin-top: 15px;*/
+    margin-top: 150px;
+}
+
+footer {
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+
+a {
+    color: yellow;
+}
+
+input.btn.waves-effect.submit {
+    width: 100%;
+}
+
+div#login {
+    padding: 2rem;
+}
+
+div#register {
+    padding: 2rem;
+}
+
+.right-top-menu{
+  text-align: right;
+}
+
+ul#language-menu {
+  list-style-type: none;
+}
+
+ul#language-menu li {
+  display: block;
+  display: inline;
+
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+}
+
+ul#session-menu {
+  list-style-type: none;
+}
+
+ul#session-menu li {
+    display: block;
+    display: inline;
+
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+}
+
+img.model_image {
+  max-height: 350px;
+  max-width: 350px;
+}
+
+img.prod_image {
+  width: 100%;
+}
+img.prod_image_small {
+  width: 30%;
+  padding: 5px;
+}
+
+input#quantity {
+    width: 75px;
+}
+
+.flash-message {
+  color: orange;
+  font-family: 'Lato', sans-serif;
+  font-size: 18px; 
+}
+
+div.model-title {
+  text-align: left;  
+  color: grey;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px; 
+}
+
+div#login {
+  background-color: lightgrey;
+}
+
+.btn-large, button.btn-large {
+  width: 100%;
+}
+
+ul#card-menu {
+  list-style-type: none;
+}
+
+ul#card-menu li {
+  display: block;
+  display: inline;
+
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+}
+
+.color-circle {
+  margin: 0 auto; 
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%;
+}
+/* line 1, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 9, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 21, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #000;
+}
+/* line 24, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+a:visited {
+  color: #666;
+}
+/* line 28, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 35, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 40, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 44, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  background-color: #cc0000;
+  margin-top: 1em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  border-radius: 0.5em;
+}
+
+/* line 52, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+}
+/* line 55, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 0px;
+  font-size: 12px;
+  color: #cc0000;
+}
+/* line 63, /Users/aiste/Documents/didmena/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: none;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ *= css
+ *= landing_page
+ *= forms
+ */
+
