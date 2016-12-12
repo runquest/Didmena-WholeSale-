@@ -5,11 +5,10 @@ Rails.application.routes.draw do
 
   root "welcome#index"
 
-    get '/cart' => 'cart#show'
-    post '/update_cart' => 'cart#update_cart'
-    post '/cart' => 'cart#add_items_to_cart'
-    delete ':id' => 'cart#delete_session_cart'
-    get '/cart/clear' => 'cart#empty_cart'
+    get '/cart' => 'cart#index'
+    post '/cart' => 'cart#add'
+    delete ':id' => 'cart#destroy'
+    get '/cart/clear' => 'cart#clearCart'
     get '/cls' => 'domains#colors'
     get '/sizes' => 'domains#sizes'
     get '/models/size' => 'models#size'

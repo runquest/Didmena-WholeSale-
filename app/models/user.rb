@@ -46,8 +46,4 @@ class User < ActiveRecord::Base
   def full_name
     "#{fname} #{lname}"
   end
-
-  def get_company_name
-    return company.title
-  end
 end

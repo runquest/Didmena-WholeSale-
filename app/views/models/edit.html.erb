@@ -49,15 +49,14 @@
                     <td style="background-color: #<%= value %>; width: 5%;"></td>
                     <td style="padding-left: 10px;"><%= value %></td>
                     <% @sizes.each do |size| %>
-                      <!-- <td>
-                        <#% binding.pry %>
-                        <#% if product_exist?(color, size) && product_in_storage?(color, size) %>
+                      <td>
+                        <% if product_exist?(color, size) && product_in_storage?(color, size) %>
                           <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>' checked >
-                        <#% else %>
+                        <% else %>
                           <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>'>
-                        <#% end %>
+                        <% end %>
                           <label for='<%= value %>-<%=size.code_value %>'></label>
-                      </td> -->
+                      </td>
                     <% end %>
                   </tr>
                 <% end %>
