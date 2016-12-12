@@ -6,6 +6,8 @@
       <h6 style="color: orange"> <b>cost</b> $<%= sprintf "%.2f", @model.price %></h6>
       <p  style="padding-right: 15px;"><%= @model.note %></p>
     </div>
+    <td><%= link_to t('model.edit'), edit_model_path(@model) %></td>
+
     <% if current_user %>
       <table id="product_table" class="col s12 m12 l6">
         <thead style="border-bottom: 0px;">
