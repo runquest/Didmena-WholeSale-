@@ -76,6 +76,9 @@ $(function() {
     var rowColors = [];
     var value = $("#colors").val().toUpperCase();
 
+    // console.log(value);
+    // console.log(value.color);
+
     var sizes = [];
 
     var color_row = "<tr id='" + value +"'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td></tr>";
@@ -170,6 +173,7 @@ $(function() {
 
   $("#order-btn").on('click', function() {
     var order_items = [];
+    // var order_items = new Map;
     var order_amount_class_elements = document.getElementsByClassName("order-amount");
     for (var i=0; i<order_amount_class_elements.length; i++ ) {
 
@@ -183,6 +187,8 @@ $(function() {
         }
     }
 
+    console.log(order_items);
+    
     if (order_items.length > 0) {
       $.ajax({
         method: 'post',
@@ -203,7 +209,6 @@ $(function() {
       alert("No products selected.");
     }
   });
-
     
     
     // if (order_items.length > 0) {
