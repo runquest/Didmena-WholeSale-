@@ -20,3 +20,5 @@
 /config/application.yml
 /.env
 /public/uploads/
+/config/database.yml
+Gemfile.lock
