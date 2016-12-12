@@ -35,21 +35,4 @@
       </div>
     </div>
   </div>
-  <div class="row right-align">
-    <div class="col s8 offset-s2">
-      <div class="row">
-        <b><%= t('purchases.total_cost') %>:</b> <%= sprintf "%.2f", @order.total_price %>
-      </div>
-      <div class="row">
-        <b><%= t('discount') %>:</b> <%= sprintf "%.2f", Company.find(current_user.company_id).discount %>
-      </div>
-      <div class="row">
-        <%discount  = @order.total_price - Company.find(current_user.company_id).discount %>
-        <b><%= t('final_cost') %>:</b> <%= sprintf "%.2f", discount %>
-      </div>
-      <div class="row">
-        <%= link_to t("header.logout"), session_path("current"), method: :delete, :class => "btn waves-effect waves-light left"  %>
-      </div>
-    </div>
-  </div>
 </div>
