@@ -1,8 +1,10 @@
 class Domain < ActiveRecord::Base
 
+  self.inheritance_column = :domain_name
+
   validates :domain_name, presence: true
   validates :domain_name, length: { maximum: 20 }, on: :create
-  validates :domain_name, inclusion: { in: %w(GENDER COLOR SIZE CATEGORY AGE_GROUP COUNTRY CURRENCY), message: "%{value} is not a valid domain name" }
+  validates :domain_name, inclusion: { in: %w(GENDER COLOR SIZE CATEGORY AGE_GROUP COUNTRY CURRENCY Gender), message: "%{value} is not a valid domain name" }
 
   validates :code_value, presence: true
   # code_value uniqueness messes up with Male (M) and Medium (M) values;

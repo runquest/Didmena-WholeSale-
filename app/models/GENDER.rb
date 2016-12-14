@@ -1,0 +1,2 @@
+class GENDER < Domain
+end
