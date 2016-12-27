@@ -11,7 +11,7 @@ $(function() {
     updateTotalCost();
   });
 
- $("button#confirm_order").click(function() {
+ $("div#confirm_order").click(function() {
     updateCart();
   });
 
@@ -72,9 +72,10 @@ function updateModelCost() {
     var price_span_classname = 'price_'.concat(classname);
     var cost_span_classname = 'cost_'.concat(classname);
     var price = $('span.'.concat(price_span_classname)).text();
-    var total_count = $('span.'.concat(classname)).text();
-    var total_model_cost = Math.round(price * total_count * 100) / 100;
+    var units = $('span.'.concat(classname)).text();
+    var total_model_cost =price * units;
     $('span.'.concat(cost_span_classname)).text(total_model_cost);
+    updateAfterDiscount(total_model_cost);
   })
 }
 
@@ -85,4 +86,17 @@ function updateTotalCost() {
   })
   var total_amount = Math.round(cost * 100.00) / 100;
   $('span#total_cart_cost').text(total_amount.toFixed(2));
+}
+
+function updateTax() {
+
+}
+
+function updateAfterDiscount(total_model_cost) {
+  var discount = $("span#discount").text();
+  var afterDiscount = total_model_cost - discount;
+  console.log(afterDiscount);
+  $('span#after_discount').text(afterDiscount.toFixed(2));
+
+
 }
