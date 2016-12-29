@@ -1,2 +1,2 @@
-class SIZE < Domain
+class Size < Domain
 end
