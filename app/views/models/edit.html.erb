@@ -46,15 +46,14 @@
         <button class="valign btn waves-effect waves-light">add new color </button>
       </div>
     </div>
-  </div>
   <div class="row">
     <div class="col s12">
-      <% Domain.where(domain_name: "COLOR").each do |color|%>
+      <% Domain.where(domain_name: "Color").each do |color|%>
         <% if @model.products.any? %>
           <% model_colors = @model.products.map {|p| p.color_id} %>
           <% colors = model_colors.uniq!%>
         <% else %>
-          <% colors = Domain.where(domain_name: "COLOR") %>
+          <% colors = Domain.where(domain_name: "Color") %>
         <% end %>
         <% if !colors.include?(color.id) %>
           <div id="<%= color.id %>" class="color_element center-align" style="float: left; padding: 10px;">
@@ -111,7 +110,6 @@
       </table>
     </div>
   </div> 
-  <hr/>
   <div class="row">
     <div id="img_upload" class="col s12">
       <%= f.fields_for :model_attachments do |p| %>
@@ -125,7 +123,6 @@
       <% end %>
     </div>
   </div>
-  <hr/>
   <div class="row">
     <div id="img_upload_x" class="col s12">
       <% if !@model_attachments.blank? %>

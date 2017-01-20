@@ -27,7 +27,7 @@ class ModelsController < ApplicationController
   def edit
     @model = Model.find(params[:id])
     @model_attachments = @model.model_attachments
-    @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
+    @sizes = Domain.where(domain_name: 'Size').order(:id).reverse
 
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
