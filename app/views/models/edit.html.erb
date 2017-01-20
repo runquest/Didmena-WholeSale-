@@ -1,78 +1,155 @@
 <div class="container">
   <div class="row">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
+    <% end %>
     <h4><%= @model.title %></h4>
-    <%= link_to t('back'), @model %>
+    <h5 style="color: lightgrey"><%= @type.upcase %> <%= @collection.upcase %> COLLECTION</h5>
   </div>
   <div class="row">
-    <div class="col s6">
-      <div class="row">
-        <div class="col s12">
-          <h5><%= t('models.color_and_size')%></h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s7">
-          <%= link_to "add color", new_domain_path %>
-          <!-- <%#= link_to t('cart.edit_profile'), edit_user_path(current_user) %> -->
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s7">
-          <input id="colors" placeholder="start typing color" />
-        </div>
-        <div class="col s5">
-          <button id="add_color" class="btn waves-effect waves-light"><%= t('models.add_color')%></button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <b><%= t('models.select_sizes')%></b>
-        </div>
-      </div>     
-      <div class="row">
-        <div class="col s12">
-          <table id="colorSize">
-            <thead>
-              <tr>
-                <th></th>
-                <th data-field="id"><%= t('model.color')%></th>
-                  <% @sizes.each do |size| %>
-                    <th data-field='<%= size.code_value%>'><%= size.code_value%></th>
-                  <% end %> 
-              </tr>
-            </thead>
-            <tbody id="color_row">
-              <% if @products.any? %>
-                <% @colors.each do |color| %>
-                  <% value = Domain.find(color).meaning%>
-                  <tr id='<%= value %>'>
-                    <td style="background-color: #<%= value %>; width: 5%;"></td>
-                    <td style="padding-left: 10px;"><%= value %></td>
-                    <% @sizes.each do |size| %>
-                      <td>
-                        <% if product_exist?(color, size) && product_in_storage?(color, size) %>
-                          <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>' checked >
-                        <% else %>
-                          <input type='checkbox' class='size' id='<%= value %>-<%=size.code_value %>'>
-                        <% end %>
-                          <label for='<%= value %>-<%=size.code_value %>'></label>
-                      </td>
-                    <% end %>
-                  </tr>
-                <% end %>
-              <% end %>
-            </tbody>
-          </table>
-          <div class="row">
-            <% flash.each do |key, value| %>
-              <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
-            <% end %>
+    <%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
+      <%= form_errors_for @model %>
+      <div  class="col s12 m6 l6">
+        <div class="card">
+          <div class="card-content">
+            <%= f.label :price, t('models.price') %>
+            <div style="font-size: 0.6rem; color: #9e9e9e">Enter prices in <b>euros</b>.</div>
+            <%= f.number_field(:price,  :class => 'text_field', :step => '0.01') %>
+            <div class="radio_buttons">
+              <%= f.label :priority, "Priority" %>
+              <div style="font-size: 0.6rem; color: #9e9e9e">
+                Priority 0 - 4. Default is 0. Model will not be shown on the front page. 4 will place image at the top of the page.
+              </div>
+              <div class="left-align" style="padding: 1rem 0">
+                <%= f.collection_radio_buttons :priority, [["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"] ,], :first, :last, {:item_wrapper_class => 'inline'}, {:class => "radio-inline" } %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col s6">
-      <%= render 'form' %>
+      <div class="col s12 m6 l6">
+        <%= f.label :note, t('models.description') %>
+        <%= f.text_area(:note, :class => 'materialize-textarea', :style => 'overflow-y: scroll; min-height: 180px;') %>
+      </div>
+      <div class="actions waves-effect waves-light btn-large">
+        <%= f.submit "save" %>
+      </div>
+  </div>
+  <div id="model_products" class="row valign-wrapper">  
+    <div class="col s12 m6 l6">
+      <blockquote>
+        <div>Manage products in storage.</div>
+        <div style="font-size: 0.6rem; color: #9e9e9e">Select color (Add new color) >> Checkmark if product is available in storage.</div>
+      </blockquote>
+      </div>
+      <div class="valign col s12 m6 l6">
+        <button class="valign btn waves-effect waves-light">add new color </button>
+      </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col s12">
+      <% Domain.where(domain_name: "COLOR").each do |color|%>
+        <% if @model.products.any? %>
+          <% model_colors = @model.products.map {|p| p.color_id} %>
+          <% colors = model_colors.uniq!%>
+        <% else %>
+          <% colors = Domain.where(domain_name: "COLOR") %>
+        <% end %>
+        <% if !colors.include?(color.id) %>
+          <div id="<%= color.id %>" class="color_element center-align" style="float: left; padding: 10px;">
+            <div class="color-circle" style="background-color: #<%= color.code_value %>; border: 1px solid black;"></div>
+            <div style="color: lightgrey">#<%= color.code_value %></div>
+            <div><%= color.meaning %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <b><%= t('models.select_sizes')%></b>
+    </div>
+  </div>     
+  <div class="row">
+    <div class="col s12">
+      <table id="colorSize">
+        <thead>
+          <tr>
+            <th></th>
+            <th data-field="id"><%= t('model.color')%></th>
+            <% @sizes.each do |size| %>
+              <th id='<%=size.id%>' class="size" data-field='<%= size.code_value%>'><%= size.code_value%></th>
+            <% end %> 
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="color_row">
+          <% if @products.any? %>
+            <% @colors.each do |color| %>
+              <% value = Domain.find(color).meaning%>
+              <% code = Domain.find(color).code_value%>
+              <tr id='<%= color %>'>
+                <td style="background-color: #<%= code %>; width: 5%;"></td>
+                <td style="padding-left: 10px;"><%= value %></td>
+                <% @sizes.each do |size| %>
+                  <% find_model_product(color, size.id) %>
+                  <td>
+                    <% if can_order? %>
+                      <input type='checkbox' class='size' id='<%= color %>-<%=size.id %>' checked >
+                    <% else %>
+                      <input type='checkbox' class='size' id='<%= color %>-<%=size.id %>'>
+                    <% end %>
+                    <label for='<%= color %>-<%=size.id %>'></label>
+                  </td>
+                <% end %>
+                <td class="del" id='delete_<%= color %>' ><a href="">x</a></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div> 
+  <hr/>
+  <div class="row">
+    <div id="img_upload" class="col s12">
+      <%= f.fields_for :model_attachments do |p| %>
+        <% if @model_attachments.present? %>
+          <% if @model_attachments[0].id.equal?(p.object.id) %>
+            <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>  
+          <% end %>
+        <% else %>
+          <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>  
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div id="img_upload_x" class="col s12">
+      <% if !@model_attachments.blank? %>
+        <div class="row" style="padding-top:5px; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+          <% @model_attachments.each do |p| %>
+            <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
+              <span style="height: 200px;">
+                <%= image_tag p.avatar_url, :class => "prod_image_small" %>
+              </span>
+              <% if current_user && current_user.apps_manager %>
+                <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') } %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% end %> <!-- closes form -->
 </div>
+
+
+
+
+
+
+
