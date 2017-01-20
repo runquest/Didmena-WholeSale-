@@ -23,13 +23,13 @@ class DomainsController < ApplicationController
 
   # GET /domains/colors.json
   def colors
-    @colors = Domain.where(domain_name: "COLOR")
+    @colors = Domain.where(domain_name: "Color")
   end
 
   # GET /domains/sizes.json
 
   def sizes
-    @sizes = Domain.where(domain_name: "SIZE");
+    @sizes = Domain.where(domain_name: "Size");
   end
 
   # POST /domains

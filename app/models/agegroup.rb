@@ -1,0 +1,2 @@
+class Agegroup < Domain
+end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403164834) do
+ActiveRecord::Schema.define(version: 20161228004525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20160403164834) do
 
   add_index "domains", ["domain_name", "code_value"], name: "ui_domains_name_value", unique: true, using: :btree
 
-  add_check "domains", "((domain_name)::text = ANY ((ARRAY['GENDER'::character varying, 'COLOR'::character varying, 'SIZE'::character varying, 'CATEGORY'::character varying, 'AGE_GROUP'::character varying, 'COUNTRY'::character varying, 'CURRENCY'::character varying])::text[]))", name: "domain_name_chk"
+  add_check "domains", "((domain_name)::text = ANY ((ARRAY['Gender'::character varying, 'Color'::character varying, 'Size'::character varying, 'Season'::character varying, 'Agegroup'::character varying, 'Country'::character varying, 'Currency'::character varying])::text[]))", name: "domain_name_chk"
 
   create_table "model_attachments", force: :cascade do |t|
     t.integer  "model_id"
