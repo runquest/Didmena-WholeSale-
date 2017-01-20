@@ -16,10 +16,27 @@ module ModelsHelper
     return @model_product.take.in_storage
   end
 
+  def products_in_storage
+    return (@products.map { |p| p.in_storage }).include?(true)
+  end
+
   def value(color)
     Domain.find(color).meaning
   end
 
+  def getUniquePurchaseProducts
+    products = Purchase.all.map { |purchase| purchase.product_id }
+    return products.uniq
+  end
+
+  def canDelete(model_id, color_id)
+    products = Product.where(model_id: model_id, color_id: color_id);
+    products.each do |product|
+      if getUniquePurchaseProducts.include?(product.id)
+        return false
+      end
+    end
+  end
 end
 
 

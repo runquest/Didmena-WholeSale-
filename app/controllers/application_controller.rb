@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "You must log in."
       redirect_to new_session_path
     end
-
   end
 
   def current_user
@@ -70,7 +69,7 @@ class ApplicationController < ActionController::Base
   end
 
   def all_sizes
-    return Domain.where(domain_name: 'SIZE').order(:id).reverse
+    return Domain.where(domain_name: 'Size').order(:id).reverse
   end
 end
 

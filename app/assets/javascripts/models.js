@@ -1,164 +1,96 @@
 $(function() {
+  var localization = $("body").data("locale");
+  var url = window.location.href;
 
-  function isInArray(value, array) {
-    return array.indexOf(value) > -1;
+  function getModelId() {
+    if (url.match(/\/(\d+)\//)) {
+      return (url.match(/\/(\d+)\//))[1];
+    }
+  }
+  // Edit page.
+
+  $('div.color_element').on('click', function(event) {
+    var selected_color_id = this.id;
+    var color_element = document.getElementById(this.id);
+    var selected_color_hex_code = color_element.children[1].innerText;
+    var selected_color_name = color_element.children[2].innerText;
+    createTableRowForSelectedColor(selected_color_id, selected_color_hex_code, selected_color_name);
+  });
+
+  function createTableRowForSelectedColor(color_id, color_hex_code, color_name) {
+    var row = "'<tr id='row_" + color_id + "'></tr> ";
+    var color_indication_circle = "'<td style='background-color: " + color_hex_code + "; width=5%;'></td> ";
+    var color_name_cell = "<td>" + color_name + "</td>";
+    var new_row = ("tr#row_" + color_id).toString();
+    var delete_row_icon = "<td class='del' id='delete_" + color_id + "'>x</td>";
+
+    $('tbody#color_row').prepend(row);
+    $(new_row).append(color_indication_circle);
+    $(new_row).append(color_name_cell);
+    $('th.size').each(function(  ) {
+      var size_id = this.id;
+      var checkbox_id = color_id + "-" + size_id;
+      var checkbox = "<td><input type='checkbox' class='size' id='"+ checkbox_id +"'><label for='"+ checkbox_id +"'></label></td>";
+      $(new_row).append(checkbox);
+      createProduct(getModelId(), color_id, size_id);
+    });
+    $(new_row).append(delete_row_icon);
   }
 
-  var localization = $("body").data("locale");
-
-  var options = {
-    url: "/cls.json",
-
-      getValue: "meaning",
-
-      template: {
-          type: "description",
-          fields: {
-              description: "code_value"
-          }
-      },
-
-      list: {
-          match: {
-              enabled: true
-          },
-          sort: {
-            enabled: true
-          }
-      },
-
-      theme: "plate-dark"
-  };
-
-  $("#colors").easyAutocomplete(options);
-            console.log(options);
-
-  $('#add_color').on("click", function(event){
+  $('tr td.del').on('click', function(event) {
+    var color_id = this.id.split('_')[1];
+    var send_data = {model: getModelId(), color: color_id};
+    var delete_row = ("tr#row_" + color_id).toString();
+    console.log('before ajax delete_row: ' + delete_row);
 
     $.ajax({
-      url: '/'+localization+'/cls.json',
-      cache: false,
-      success: function(data){
-
-        var selected_color = $("#colors").val();
-        var colors = [];
-
-        for (var i = 0; i < data.length; ++i) {
-          var color = data[i].meaning;
-          colors.push(color);
-        }
-
-        if (colors.indexOf(selected_color) < 0) {
-          alert('Add color to database.');
-
-        } else if ($("#colors").val().length == 0) {
-          alert("Select color");  
-
-        } else if (document.getElementById($("#colors").val())) {
-          alert("Color is already added to product.");
-
-        } else {
-          // console.log(selected_color);
-          addProduct();
-        }
+      method: 'post',
+      url: '/'+localization+'/delete_products',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(send_data),
+      success: function (data) {
+        console.log("success");
+        console.log("delete_row: " + delete_row);
+        // remove row from 
+      },
+      error: function(err){
+        console.log("failure");
+        $(delete_row).remove();
       }
     });
   });
 
-  function addProduct() {
-
-    var selected_color = $("#colors").val();
-    var rows = document.getElementById("colorSize").rows;
-    var str = window.location.href;
-    var n = str.match(/\/(\d+)\//);
-    var model_id = n[1];
-    var products = [];
-    var rowColors = [];
-    var value = $("#colors").val().toUpperCase();
-
-    // console.log(value);
-    // console.log(value.color);
-
-    var sizes = [];
-
-    var color_row = "<tr id='" + value +"'><td style='background-color: #" + value + "; width=5px;'><td style='padding-left: 5px;'>" + value + "</td></tr>";
-    $("tbody#color_row").append(color_row);
-
+  function createProduct(model_id, color_id, size_id) {
+    var product_data = {model: model_id, color: color_id, size: size_id, in_storage: false};
     $.ajax({
-      url: '/'+localization+'/sizes',
-      cache: false,
-      success: function(data){
-        getSizes(data);
+      method: 'post',
+      url: '/'+localization+'/products',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(product_data),
+      success: function (data) {
+        console.log("Products created successfully: " + data);
+      },
+      error: function(err){
+        console.log("Products failed to be created: " + err);
       }
     });
-
-    function getSizes(data) {
-      for (var i = 0; i < data.length; ++i) {
-        var size = data[i].code_value;
-        sizes.push(size);
-      }
-      
-      for (var k = 0; k < sizes.length; k++) {
-        var checkbox = "<td><input type='checkbox' class='size' id='"+ value + "-" + sizes[k] +"'><label for='"+ value + "-" + sizes[k] +"'></label></td>";
-        $("tr#" + value).append(checkbox);
-      }
-
-      for (var j = 0; j < rows.length; j++) {
-        rowColors.push(rows[j].id);
-      };
-
-      for (var i = 0; i < sizes.length; i++) {
-        var product_data = {color: value, size: sizes[i], model: model_id, in_storage: false};
-        // console.log(product_data);
-        products.push(product_data);
-      }
-
-      for (var j = 0; j < rows.length; j++) {
-        rowColors.push(rows[j].id);
-      };
-
-      $.ajax({
-        method: 'post',
-        url: '/'+localization+'/products',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify(products),
-        success: function (data) {
-          // console.log(data);
-        },
-        error: function(err){
-          // console.log(err);
-        }
-      });
-    }
-    
-
-    
-
-    $("#colors").val('');
   }
 
   $("tbody#color_row").on("click", ".size", function() { 
-
-    var rows = document.getElementById("colorSize").rows;
-    var str = window.location.href;
-    var n = str.match(/\/(\d+)\//);
-    var model_id = n[1];
-
-    var color = this.id.match(/(\w+)/);
-    var size = this.id.match(/\w+$/);
-
-    console.log('here');
-
+    var color_id = this.id.match(/(\w+)/)[1];
+    var size_id = this.id.split('-')[1];
+    var model_id = getModelId();
     if (this.checked) {
-      var product_data = {model: model_id, color: color, size: size, in_storage: true};
+      var product_data = {model: model_id, color: color_id, size: size_id, in_storage: true};
     } else {
-      var product_data = {model: model_id, color: color, size: size, in_storage: false};
+      var product_data = {model: model_id, color: color_id, size: size_id, in_storage: false};
     }
-
+    
     $.ajax({
       method: 'put',
-      url: '/'+localization+'/products_update',
+      url: '/'+localization+'/update_product',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify(product_data),
@@ -171,9 +103,10 @@ $(function() {
     });           
   });
 
+  // Show page.
+
   $("#order-btn").on('click', function() {
     var order_items = [];
-    // var order_items = new Map;
     var order_amount_class_elements = document.getElementsByClassName("order-amount");
     for (var i=0; i<order_amount_class_elements.length; i++ ) {
 
@@ -186,8 +119,6 @@ $(function() {
           order_items.push(item);
         }
     }
-
-    console.log(order_items);
     
     if (order_items.length > 0) {
       $.ajax({
@@ -209,80 +140,29 @@ $(function() {
       alert("No products selected.");
     }
   });
-    
-    
-    // if (order_items.length > 0) {
-      
-    //   $.ajax({
-    //     method: 'post',
-    //     url: '/'+localization+'/cart',
-    //     contentType: 'application/json; charset=utf-8',
-    //     dataType: 'json',
-    //     data: JSON.stringify(order_items),
-    //     success: function (data) {
-    //       console.log('success');
-    //       window.location = '/'+localization+'/cart'
-    //     },
-    //     error: function(err){
-    //       window.location = '/'+localization+'/cart'
-    //       // to-do: it is not hitting success function even though it posts well.
-    //     }
-    //   });
-  });
+});
+
+// Image attachements.
 
 function readURL() {
-
   var preview = document.querySelector('#img_upload');
   var files   = document.querySelector('input[type=file]').files;
-
   function readAndPreview(file) {
-
     // Make sure `file.name` matches our extensions criteria
     if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
       var reader = new FileReader();
-
       reader.addEventListener("load", function () {
         var image = new Image();
         image.height = 100;
         image.title = file.name;
         image.src = this.result;
         image.onclick = function() { remove(this); }
-
         preview.appendChild( image );
-
       }, false);
-
       reader.readAsDataURL(file);
     }
   }
-
   if (files) {
     [].forEach.call(files, readAndPreview);
   }
 };
-
-function removeColor(some) {
-  var str = window.location.href;
-  var n = str.match(/\/(\d+)\//);
-  var model_id = n[1];
-  var color_name = some.id
-
-  var products_data = {color_name: color_name, model_id: model_id}
-
-  $.ajax({
-    method: 'post',
-    url: '/'+localization+'/delete_products',
-    contentType: 'application/json; charset=utf-8',
-    dataType: 'json',
-    data: JSON.stringify(products_data),
-    success: function (data) {
-      console.log('success');
-      window.location = '/'+localization+'/models/' + model_id
-    },
-    error: function(err){
-      console.log(err);
-      // to-do: it is not hitting success function even though it posts well.
-    }
-  });
-}
-

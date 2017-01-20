@@ -4,11 +4,6 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 
   root "welcome#index"
-
-    # get '/cart' => 'cart#index'
-    # post '/cart' => 'cart#add'
-    # delete ':id' => 'cart#destroy'
-    # get '/cart/clear' => 'cart#clearCart'
     get '/cart' => 'cart#show'
     post '/update_cart' => 'cart#update_cart'
     post '/cart' => 'cart#add_items_to_cart'
@@ -21,7 +16,7 @@ Rails.application.routes.draw do
     post '/products/delete_item' => 'products#delete_item'
     get '/models/:id/add_products' => 'models#add_products'
     get '/admin' => 'welcome#admin'
-    put '/products_update' => 'products#update_product'
+    put '/update_product' => 'products#update_product'
     post '/delete_products' => 'products#delete_products'
     post '/email_sent' => 'welcome#email_sent'
     get '/my_orders/' => 'orders#my_orders'

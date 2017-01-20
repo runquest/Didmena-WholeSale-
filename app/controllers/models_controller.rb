@@ -1,5 +1,6 @@
 class ModelsController < ApplicationController
   before_action :set_model, only: [:show, :edit, :update, :destroy]
+  
   # GET /models
   # GET /models.json
   def index
@@ -10,30 +11,10 @@ class ModelsController < ApplicationController
   # GET /models/1.json
   def show
     @products = model_products(@model.id)
-    # @products = Product.where(model_id: @model.id)
-
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
     @colors = find_colors_general(@model.id)
-    # @colors = Array.new;
-    # @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
-
-    # @products.each do |prdct|
-    #   if !@colors.include? prdct.color_id
-    #     color_size = []
-    #     @sizes.each do |size|
-    #       p = Product.where(color_id: prdct.color_id).where(size_id: size.id).take
-    #       if p.in_storage
-    #         color_size.push(p)
-    #       end
-    #     end
-
-    #     if color_size.any?
-    #       @colors.push(prdct.color_id)
-    #     end
-    #   end
-    # end
   end
   
   # GET /models/new
@@ -46,14 +27,16 @@ class ModelsController < ApplicationController
   def edit
     @model = Model.find(params[:id])
     @model_attachments = @model.model_attachments
-    @sizes = Domain.where(domain_name: 'SIZE').order(:id).reverse
+    @sizes = Domain.where(domain_name: 'Size').order(:id).reverse
 
+    @model_attachments = @model.model_attachments.all
+    @type = Domain.find(@model.gender_id).meaning
+    @collection = Domain.find(@model.category_id).meaning
+    @colors = find_colors_general(@model.id)
     if @model.products.any?
       @products = @model.products
-      # @model_attachments = @model.model_attachments
     else
       @products = []
-      # @model_attachments = []
     end
 
     if @model.model_attachments.any?
@@ -79,9 +62,6 @@ class ModelsController < ApplicationController
   # POST /models
   # POST /models.json
   def create
-
-    # to avoid error message on model creation
-    # when clarified if client needs model code
     if !params[:model][:title].blank?
       code = params[:model][:title].delete(' ')[0..8]
       params[:model][:code] = code
@@ -89,17 +69,13 @@ class ModelsController < ApplicationController
       code = Time.now.strftime("%Y%d%m%H%M%S")[0..8]
       params[:model][:code] = code
     end
-
     @model = Model.new(model_params)
-
     if @model.products.any?
       @products = @model.products
     else
       @products = []
     end
-
     if @model.save
-
       if !params[:model_attachments].nil?
         params[:model_attachments]['avatar'].each do |a|
           @model_attachment = @model.model_attachments.create(:avatar => a)
@@ -118,7 +94,6 @@ class ModelsController < ApplicationController
   def update
     @model = Model.find(params[:id])
     @model.model_attachments(params[:model])
-    
     if @model.products.empty? || !productsInStore(@model.products)
       if @model.update_attributes(model_params)
         maintain_model_attachments
@@ -136,7 +111,6 @@ class ModelsController < ApplicationController
   end
 
   def productsInStore(products)
-    
     inStorage = false
     products.each do |product|
       if product.in_storage === true
@@ -144,7 +118,6 @@ class ModelsController < ApplicationController
         break
       end
     end
-
     return inStorage
   end
 

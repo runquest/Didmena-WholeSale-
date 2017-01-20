@@ -25,30 +25,13 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-
-    # binding.pry
-    @products = params[:_json]
-    @products.each do |item|
-      # if color doesn't exist we need to add it
-      if Domain.where(meaning: item[:color]).empty?
-        color_value = item[:color][0..2]
-        Domain.create(domain_name: 'COLOR', code_value: color_value, meaning: item[:color])
-      end
-      color_id = Domain.where(meaning: item[:color]).first.id
-      size_id = Domain.where(domain_name: 'SIZE').where(code_value: item[:size].upcase).first.id
-      model_id = item[:model]
-      in_storage = item[:in_storage]
-      product_params = {'model_id' => item[:model], 'color_id' => color_id, 'size_id' => size_id, 'in_storage' => in_storage}
-
-      @product = Product.new(product_params)
-
-      if @product.save
-        logger.info "product saved"
-      else
-        logger.info "failed to save product"
-      end
+    product_params = {'model_id' => params[:model], 'color_id' => params[:color], 'size_id' => params[:size], 'in_storage' => params[:in_storage]}
+    @product = Product.new(product_params)
+    if @product.save
+      logger.info "product saved"
+    else
+      logger.info "failed to save product"
     end
-
     respond_to do |format|
       @model = Model.find(@product.model_id)
       format.html { redirect_to @model, notice: 'Model was successfully created.' }
@@ -58,8 +41,8 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
-  def update
-    if @product.update(product_params)
+  def update(product)
+    if product.update(product_params)
       logger.info "product updated"
       redirect_to :back
     else
@@ -68,13 +51,8 @@ class ProductsController < ApplicationController
   end
 
   def update_product
-    @color_id = Domain.where(meaning: params[:color]).take.id
-    @size_id = Domain.where(domain_name: 'SIZE').where(code_value: params[:size]).take.id
-    @model_id = params[:model]
-    @in_storage = params[:in_storage]
-    @product_id = Product.where(model_id: @model_id).where(color_id: @color_id).where(size_id: @size_id).take.id
-    @product = Product.find(@product_id)
-    update()
+    product = Product.where(model_id: params[:model]).where(color_id: params[:color]).where(size_id: params[:size]).take
+    update(product)
   end
 
   # DELETE /products/1
@@ -96,13 +74,19 @@ class ProductsController < ApplicationController
   end
 
   def delete_products
-
-    color_name = params[:color_name]
-    model_id = params[:model_id]
-    model_products = Product.where(model_id: model_id)
-    color_id = Domain.where(domain_name: "COLOR").where(meaning: params[:color_name]).take.id
-
-    products = model_products.where(color_id: color_id)
+    products_array = Product.where(model_id: params[:model], color_id: params[:color])
+    ordered_products_ids = (Purchase.all.map { |purchase| purchase.product_id }).uniq
+    can_delete = false
+    products_array.each do |p|
+      if !ordered_products_ids.include?(p.id)
+        can_delete = true
+      end
+    end
+    if can_delete
+      products_array.each do |p|
+        p.destroy
+      end
+    end
   end
 
   private
