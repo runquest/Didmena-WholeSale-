@@ -76,7 +76,7 @@
               <% code = Domain.find(color).code_value%>
               <tr id='<%= color %>'>
                 <td style="background-color: #<%= code %>; width: 5%;"></td>
-                <td style="padding-left: 10px;"><%= value %></td>
+                <td class="color_name" style="padding-left: 10px;"><%= value %></td>
                 <% @sizes.each do |size| %>
                   <% find_model_product(color, size.id) %>
                   <td>

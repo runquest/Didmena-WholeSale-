@@ -17,7 +17,6 @@ $(function() {
       },
       onClickEvent: function() {
         var selected_item_date = $("#basics").getSelectedItemData();
-        console.log(selected_item_date.code_value);
         createTableRowForSelectedColor(selected_item_date.id, selected_item_date.code_value, selected_item_date.meaning);
       },
       maxNumberOfElements: 8
@@ -33,8 +32,6 @@ $(function() {
 
   $("#basics").easyAutocomplete(options);
 
-
-
   // Edit page.
 
   $('div.color_element').on('click', function(event) {
@@ -49,10 +46,23 @@ $(function() {
     $(this).closest('tr').remove();
   })
 
+  function isColorInTheTable(color_name) {
+    var color_names_list = [];
+    $('td.color_name').each(function() {
+      color_names_list.push(this.innerText);
+    });
+    return (color_names_list).includes(color_name);
+  }
+
   function createTableRowForSelectedColor(color_id, color_hex_code, color_name) {
+    if (isColorInTheTable(color_name)) {
+      alert('exist');
+      return;
+    }
+
     var row = "'<tr id='row_" + color_id + "'></tr> ";
     var color_indication_circle = "'<td style='background-color: #" + color_hex_code + "; width=5%;'></td> ";
-    var color_name_cell = "<td>" + color_name + "</td>";
+    var color_name_cell = "<td class='color_name'>" + color_name + "</td>";
     var new_row = ("tr#row_" + color_id).toString();
     var delete_row_icon = "<td class='del x' id='delete_" + color_id + "'><input type='button' value='Delete' /></td>";
 
