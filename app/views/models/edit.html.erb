@@ -48,21 +48,7 @@
     </div>
   <div class="row">
     <div class="col s12">
-      <% Domain.where(domain_name: "Color").each do |color|%>
-        <% if @model.products.any? %>
-          <% model_colors = @model.products.map {|p| p.color_id} %>
-          <% colors = model_colors.uniq!%>
-        <% else %>
-          <% colors = Domain.where(domain_name: "Color") %>
-        <% end %>
-        <% if !colors.include?(color.id) %>
-          <div id="<%= color.id %>" class="color_element center-align" style="float: left; padding: 10px;">
-            <div class="color-circle" style="background-color: #<%= color.code_value %>; border: 1px solid black;"></div>
-            <div style="color: lightgrey">#<%= color.code_value %></div>
-            <div><%= color.meaning %></div>
-          </div>
-        <% end %>
-      <% end %>
+      <input id="basics" />
     </div>
   </div>
   <div class="row">
