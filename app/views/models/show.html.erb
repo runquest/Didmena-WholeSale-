@@ -7,22 +7,19 @@
       <p  style="padding-right: 15px;"><%= @model.note %></p>
     </div>
     <% if current_user && current_user.apps_manager %>
-    <td><%= link_to t('model.edit'), edit_model_path(@model) %></td>
+      <td><%= link_to t('model.edit'), edit_model_path(@model) %></td>
     <% end %>
-
     <% if products_in_storage %>
-
       <% if current_user %>
         <table id="product_table" class="col s12 m12 l6">
           <thead style="border-bottom: 0px;">
             <tr>
               <th>
-                <div class="color-circle" style="background: transparent;"></div>
                 <div class="center-align">SIZES</div>
               </th>
               <% @colors.each do |color| %>
                 <th>
-                  <div class="color-circle" style="background: #<%= color.meaning %>"></div>
+                  <div class="color-circle" style="background: #<%= color.code_value %>"></div>
                   <div class="center-align"><%= color.meaning %></div>
                 </th>
               <% end %>

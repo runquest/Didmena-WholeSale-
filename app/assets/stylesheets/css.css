@@ -17,8 +17,12 @@ footer {
   margin-bottom: 60px;
 }
 
-a {
-    color: yellow;
+a:visited {
+  color: #026A9D;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 input.btn.waves-effect.submit {
