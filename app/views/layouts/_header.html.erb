@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col s12 m4">
+      <div class="col s12 m6">
         <ul id='language-menu'>
           <li><%= link_to "LT", locale: "lt"%> |</li>
           <li><%= link_to "EN", locale: "en"%> |</li>
@@ -30,25 +30,25 @@
           <div class="col s12 right-top-menu right-align">
             <ul id='session-menu'>
               <li><%= link_to t('session_menu.home'), root_path %></li>
-              <li> | <%= link_to t('session_menu.cart'), cart_path %></li>
-              <li> | <%= link_to t('session_menu.my_orders'), my_orders_path %></li>
+              <li><%= link_to t('session_menu.cart'), cart_path %></li>
+              <li><%= link_to t('session_menu.my_orders'), my_orders_path %></li>
               <% if Model.all.any? %>
-                <li> | <%= link_to t('session_menu.models'), models_path %></li>
+                <li> <%= link_to t('session_menu.models'), models_path %></li>
               <% end %>
-              <li> | <%= link_to t("header.logout"), session_path("current"), method: :delete %></li>
+              <li><%= link_to t("header.logout"), session_path("current"), method: :delete %></li>
             </ul>
           </div>
           <div id="login-menu" class="col s12 right-top-menu">
             <%= t('hello')%>, <%= link_to current_user.fname, user_path(current_user) %><br>
               <% if current_user.apps_manager %>
-                <%= link_to t('header.dashboard'), admin_path %> | 
+                <%= link_to t('header.dashboard'), admin_path %>
               <% end %>
           </div>
         <% else %>
-        <div class="ol s12 m6 right-top-menu">
+        <div class="col s12 m6 right-top-menu">
           <ul id='session-menu'>
-             <li type="button" id="header-login" class="" data-toggle="modal" data-target="#myModal"> login | </li>
-            <li><%= link_to t("session_menu.home"), root_path %> | </li>
+             <li type="button" id="header-login" class="" data-toggle="modal" data-target="#myModal"> login </li>
+            <li><%= link_to t("session_menu.home"), root_path %></li>
             <% if Model.all.any? %>
               <li> <%= link_to t("session_menu.models"), models_path %></li>
             <% end %>
@@ -56,5 +56,6 @@
           </div>
         <% end %>
       </div>
+      <div class="divider"></div>
     </div>
   </div>
