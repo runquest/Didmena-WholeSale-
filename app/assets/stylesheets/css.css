@@ -7,8 +7,12 @@ min-height: 100%;
   position: relative;
 }
 
-header {
-  background: lightgrey;
+div.admin_block_header {
+  font-size: large;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightblue;
+  margin-bottom: 5px;
 }
 
 body {
@@ -29,6 +33,19 @@ ul#session-menu li {
   cursor: pointer;
 }
 
+div#myModal{
+  width: 50%;
+  margin-top: 100px;
+}
+
+div[type="button"] {
+  cursor: pointer;
+}
+
+div[type="button"]:hover {
+  text-decoration: underline;
+}
+
 a:visited {
   color: #026A9D;
 }
@@ -38,12 +55,16 @@ a:hover {
   cursor: pointer;
 }
 
+a:active {
+  color: green;
+}
+
 input.btn.waves-effect.submit {
     width: 100%;
 }
 
 div#login {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 div#register {

@@ -7,16 +7,16 @@
   </div>
   <div class="row">
     <div class="col s8 offset-s2">
-      <div class="col s6">
+      <div class="col s12 m6 l6">
         <%= @company.email %><br>
         <%= @company.phone %><br>
         <%= @company.full_street_address %><br>
         <%= @company.country_postal %><br>
-        <strong<%= t('discount')%></strong><%= @company.discount %><br>
+        <strong><%= t('discount')%></strong>: <%= @company.discount %> euros<br>
         <%= @company.description %>
       </div>
-      <div class="col s6">
-        <b><%= t('company.representatives') %></b>
+      <div class="col s12 m6 l6">
+        <b><%= t('company.representatives') %></b> <span class="right"><%= link_to t('users.add_representative'), new_user_path %></span>
         <table>
           <tbody>
             <% @users.each do |user| %>
@@ -28,9 +28,6 @@
             <% end %>
           </tbody>
         </table>
-        <div class="right">
-          <%= link_to t('users.add_representative'), new_user_path %>
-        </div>
       </div>
     </div>
   </div>

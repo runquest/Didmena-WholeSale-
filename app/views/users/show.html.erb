@@ -8,11 +8,10 @@
   <div class="row">
     <div class="col s8 offset-s2">
       <div class="col s6">
-        <%= @user.email %>
+        <%= @user.email %><br>
         <% if @user.phone %>
           <%= @user.phone %><br>
         <% end %>
-        <%= @user.status %> | 
         <% if @user.apps_manager %>
           <%= t('users.admin') %>
         <%end%>

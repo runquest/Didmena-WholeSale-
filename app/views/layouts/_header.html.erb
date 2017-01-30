@@ -1,25 +1,8 @@
   <div class="container" id="header">
   <!-- Modal -->
-    <div class="modal" data-backdrop="true" keyboard="true" fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="col s4 offset-s2 z-depth-1" id="login"> 
-              <div type="button" id="xButton" class="right-align" data-dismiss="modal">X</div>
-              <div class="container">
-                <label><b>Username</b></label>
-                <input style="padding: 0 5px" id="email" type="text" placeholder="Enter Username" name="uname" required> 
-                <label><b>Password</b></label>
-                <input style="padding: 0 5px" id="password" type="password" placeholder="Enter Password" name="psw" required>
-                <button class="waves-effect waves-light btn" style="width: 100%" id="submit-login" type="submit">Login</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'layouts/login_modal' %>
     <div class="row">
-      <div class="col s12 m6">
+      <div class="col s12 m4">
         <ul id='language-menu'>
           <li><%= link_to "LT", locale: "lt"%> |</li>
           <li><%= link_to "EN", locale: "en"%> |</li>
@@ -27,25 +10,9 @@
         </ul>
       </div>
         <% if current_user %> 
-          <div class="col s12 right-top-menu right-align">
-            <ul id='session-menu'>
-              <li><%= link_to t('session_menu.home'), root_path %></li>
-              <li><%= link_to t('session_menu.cart'), cart_path %></li>
-              <li><%= link_to t('session_menu.my_orders'), my_orders_path %></li>
-              <% if Model.all.any? %>
-                <li> <%= link_to t('session_menu.models'), models_path %></li>
-              <% end %>
-              <li><%= link_to t("header.logout"), session_path("current"), method: :delete %></li>
-            </ul>
-          </div>
-          <div id="login-menu" class="col s12 right-top-menu">
-            <%= t('hello')%>, <%= link_to current_user.fname, user_path(current_user) %><br>
-              <% if current_user.apps_manager %>
-                <%= link_to t('header.dashboard'), admin_path %>
-              <% end %>
-          </div>
+          <%= render 'layouts/current_user_menu' %>
         <% else %>
-        <div class="col s12 m6 right-top-menu">
+        <div class="col s12 m8 right-top-menu">
           <ul id='session-menu'>
              <li type="button" id="header-login" class="" data-toggle="modal" data-target="#myModal"> login </li>
             <li><%= link_to t("session_menu.home"), root_path %></li>
