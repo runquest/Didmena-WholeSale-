@@ -22,7 +22,7 @@
           <tr><td colspan="2"></td><%all_sizes.each do |size| %><td class="center"><%= size.code_value %></td><%end%></tr>
           <% colors.each do | color |%>
             <tr>
-              <td><div class="color-circle" style="background: #<%= Domain.find(color).meaning %>"></div></td>
+              <td><div class="color-circle" style="background: #<%= Domain.find(color).code_value %>"></div></td>
               <td><%= Domain.find(color).meaning %></td>
               <% products_for_color(model.id, color).each do |product| %>
                 <td class="center order-amount">

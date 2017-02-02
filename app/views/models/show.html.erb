@@ -57,7 +57,7 @@
             <tr>
               <% @colors.each do |color| %>
                 <th>
-                  <div class="color-circle" style="background: #<%= color.meaning %>"></div>
+                  <div class="color-circle" style="background: #<%= color.code_value %>"></div>
                   <div class="center-align"><%= color.meaning %></div>
                   <div class="center-align" style="color: lightgrey;">(<%= color.code_value %>)</div>
                 </th>
