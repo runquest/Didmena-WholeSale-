@@ -1,8 +1,8 @@
 ## DOMAIN:
 # GENDER: F - Female, M - Male
 
-Domain.create(domain_name: 'Gender', code_value: 'W', meaning: 'WOMEN')
-Domain.create(domain_name: 'Gender', code_value: 'M', meaning: 'MEN')
+# Domain.create(domain_name: 'Gender', code_value: 'W', meaning: 'WOMEN')
+# Domain.create(domain_name: 'Gender', code_value: 'M', meaning: 'MEN')
 
 # COLOR:  R - Red, G - Green, B - Blue, Y - Yellow, etc.
 
