@@ -1,8 +1,8 @@
 ## DOMAIN:
 # GENDER: F - Female, M - Male
 
-Domain.create(domain_name: 'GENDER', code_value: 'F', meaning: 'FEMALE')
-Domain.create(domain_name: 'GENDER', code_value: 'M', meaning: 'MALE')
+Gender.create(code_value: 'F', meaning: 'FEMALE')
+Gender.create(code_value: 'M', meaning: 'MALE')
 
 # COLOR:  R - Red, G - Green, B - Blue, Y - Yellow, etc.
 
@@ -10,42 +10,52 @@ Domain.create(domain_name: 'COLOR', code_value: '33E', meaning: '33EEAA')
 Domain.create(domain_name: 'COLOR', code_value: 'FFE', meaning: 'FFEE11')
 Domain.create(domain_name: 'COLOR', code_value: 'DDD', meaning: 'DDDAAA')
 Domain.create(domain_name: 'COLOR', code_value: 'ADF', meaning: 'ADF112')
+Color.create(code_value: 'DDEEFF', meaning: 'DDEEFF')
 
 # SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
 
-Domain.create(domain_name: 'SIZE', code_value: 'XS', meaning: 'Extra small')
-Domain.create(domain_name: 'SIZE', code_value: 'S', meaning: 'Small')
-Domain.create(domain_name: 'SIZE', code_value: 'M', meaning: 'Medium')
-Domain.create(domain_name: 'SIZE', code_value: 'L', meaning: 'Large')
-Domain.create(domain_name: 'SIZE', code_value: 'XL', meaning: 'Extra Large')
+Size.create(code_value: 'XS', meaning: 'Extra small')
+Size.create(code_value: 'S', meaning: 'Small')
+Size.create(code_value: 'M', meaning: 'Medium')
+Size.create(code_value: 'L', meaning: 'Large')
+Size.create(ode_value: 'XL', meaning: 'Extra Large')
+# Size.create(code_value: 'XXL', meaning: 'Extra Extra Large')
 
 # CATEGORY: JACKET - Jacket, COAT - Coat, etc.
 
-Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'SPRING')
-Domain.create(domain_name: 'CATEGORY', code_value: 'SUMMER', meaning: 'SUMMER')
-Domain.create(domain_name: 'CATEGORY', code_value: 'WINTER', meaning: 'WINTER')
+# Domain.create(domain_name: 'CATEGORY', code_value: 'SPRING', meaning: 'SPRING')
+Season.create(code_value: 'SPRING', meaning: 'SPRING')
+# Domain.create(domain_name: 'CATEGORY', code_value: 'SUMMER', meaning: 'SUMMER')
+Season.create(code_value: 'SUMMER', meaning: 'SUMMER')
+# Domain.create(domain_name: 'CATEGORY', code_value: 'WINTER', meaning: 'WINTER')
+Season.create(code_value: 'WINTER', meaning: 'WINTER')
+Season.create(code_value: 'FALL', meaning: 'FALL')
 
 # AGE_GROUP: ADULT - Adult, CHILD - Child, JUVENILE - Juvenile, etc.
 
-Domain.create(domain_name: 'AGE_GROUP', code_value: 'ADULT', meaning: 'Adult')
-Domain.create(domain_name: 'AGE_GROUP', code_value: 'CHILD', meaning: 'Child')
+Agegroup.create(code_value: 'ADULT', meaning: 'Adult')
+Agegroup.create(code_value: 'CHILD', meaning: 'Child')
+Agegroup.create(code_value: 'TEENAGER', meaning: 'Teenager')
 
 # COUNTRY: CA - Canada, US - USA, LT - Lithuania, PL - Poland, RU - Russia, etc.
 
-Domain.create(domain_name: 'COUNTRY', code_value: 'CA', meaning: 'Canada')
-Domain.create(domain_name: 'COUNTRY', code_value: 'LT', meaning: 'Lithuania')
-Domain.create(domain_name: 'COUNTRY', code_value: 'PL', meaning: 'Poland')
-Domain.create(domain_name: 'COUNTRY', code_value: 'RU', meaning: 'Russia')
+Country.create(code_value: 'CA', meaning: 'Canada')
+Country.create(code_value: 'LT', meaning: 'Lithuania')
+Country.create(code_value: 'PL', meaning: 'Poland')
+Country.create(code_value: 'RU', meaning: 'Russia')
+Country.create(code_value: 'LV', meaning: 'Latvia')
 
 # CURRENCY:  # EUR, USD, CAD, PLZ, RUR, etc.
 
-Domain.create(domain_name: 'CURRENCY', code_value: 'EUR', meaning: 'Euro')
-Domain.create(domain_name: 'CURRENCY', code_value: 'USD', meaning: 'US Dollar')
-Domain.create(domain_name: 'CURRENCY', code_value: 'PLZ', meaning: 'Zlot')
-Domain.create(domain_name: 'CURRENCY', code_value: 'RUR', meaning: 'Ruble')
+Currency.create(code_value: 'EUR', meaning: 'Euro')
+Currency.create(code_value: 'USD', meaning: 'US Dollar')
+Currency.create(code_value: 'PLZ', meaning: 'Zlot')
+Currency.create(code_value: 'RUR', meaning: 'Ruble')
+Currency.create(code_value: 'CAD', meaning: 'Canadian Dollar')
 
 
 ## USERS:
+User.create(email: 'admin@didmena.lt', fname: 'ADMIN', lname: 'ADMIN', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: true)
 User.create(email: 'aiste.ulozaite@gmail.com', fname: 'AISTE', lname: 'ULO', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: true)
 User.create(email: 'edvinas@didmena.lt', fname: 'EDVINAS', lname: 'ULOZA', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: true)
 User.create(email: 'uzsakovas@didmena.lt', fname: 'UZSAKOVAS', lname: 'KASNORS', password: 'didmena', password_confirmation: 'didmena', status: 'active',  apps_manager: false)
