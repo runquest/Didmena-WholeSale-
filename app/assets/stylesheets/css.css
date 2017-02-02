@@ -15,6 +15,11 @@ div.admin_block_header {
   margin-bottom: 5px;
 }
 
+.eac-item {
+  cursor: pointer;
+  height: 2rem;
+}
+
 body {
   padding-bottom:125px;
 }

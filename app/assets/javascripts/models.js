@@ -24,7 +24,7 @@ $(function() {
     template: {
       type: "custom",
       method: function(value, item) {
-        return "<span style='padding: 2px; background-color: #"+ item.code_value+"'>" + item.code_value + "</span> " + value;
+        return "<span style='padding: 5px; background-color: #"+ item.code_value+"'>" + item.code_value + "</span> " + value;
       }
     },
     theme: "round"

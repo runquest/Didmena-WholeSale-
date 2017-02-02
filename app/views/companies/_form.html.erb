@@ -43,6 +43,11 @@
         <%= f.text_field :discount, :placeholder => "0.00" %>
       </div>
     </div>
+     <div class="row">
+          <div class="input-field col s12">
+             <%= 'Notes' %><%= f.text_area :description, :placeholder => "Very good company." %>
+          </div>
+        </div>
     <div class="actions waves-effect waves-light btn-large">
       <%= f.submit t('form.button_save') %>
     </div>
