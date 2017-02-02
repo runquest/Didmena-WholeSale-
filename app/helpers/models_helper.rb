@@ -16,6 +16,11 @@ module ModelsHelper
     return @model_product.take.in_storage
   end
 
+  def model_has_product_in_storage(model)
+    in_storage = model.products.map { |product| product.in_storage }
+    return in_storage.include?(true)
+  end
+
   def products_in_storage
     return (@products.map { |p| p.in_storage }).include?(true)
   end

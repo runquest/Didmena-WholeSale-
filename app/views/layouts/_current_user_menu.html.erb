@@ -1,0 +1,15 @@
+<div class="col s12 m8 right-top-menu">
+  <ul id='session-menu'>
+    <li><%= link_to t('session_menu.home'), root_path %></li>
+    <li><%= link_to t('session_menu.cart'), cart_path %></li>
+    <li><%= link_to t('session_menu.my_orders'), my_orders_path %></li>
+    <% if Model.all.any? %>
+      <li> <%= link_to t('session_menu.models'), models_path %></li>
+    <% end %>
+    <li><%= link_to 'profile', user_path(current_user) %></li>
+    <% if current_user.apps_manager %>
+      <li><%= link_to t('header.dashboard'), admin_path %></li>
+    <% end %>
+    <li><%= link_to t("header.logout"), session_path("current"), method: :delete %></li>
+  </ul>
+</div>

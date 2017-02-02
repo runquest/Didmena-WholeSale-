@@ -15,7 +15,6 @@
           <tr>
             <th><%= t('company.name')%></th>
             <th><%= t('company.email')%></th>
-            <th><%= t('company.status')%></th>
             <th><%= t('company.country')%></th>
             <th><%= t('company.phone')%></th>
             <th><%= t('discount')%></th>
@@ -27,7 +26,6 @@
             <tr>
               <td><%= link_to company.title, company_path(company) %></td>
               <td><%= company.email %></td>
-              <td><%= company.status %></td>
               <td><%= Domain.find(company.domain_id).meaning %></td>
               <td><%= company.phone %></td>
               <td><%= company.discount %></td>

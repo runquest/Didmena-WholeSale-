@@ -17,7 +17,7 @@ class Model < ActiveRecord::Base
   validates :gender_id, presence: true
 
   # domain CATEGORY !!! Second time ???
-  belongs_to :domain, class_name: "Category", foreign_key: "category_id", inverse_of: :models
+  belongs_to :domain, class_name: "Season", foreign_key: "category_id", inverse_of: :models
   validates :category_id, presence: true
 
   # has_many :modelpictures, inverse_of: :model, dependent: :destroy

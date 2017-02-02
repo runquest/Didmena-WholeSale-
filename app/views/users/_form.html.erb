@@ -32,12 +32,15 @@
           <div class="input-field col s6">
            <b><%= f.label :password, t('users.password') %></b><br>
             <%= f.password_field :password %>
-            <!-- <#% binding.pry %> -->
-            <%#= f.hidden_field :password_confirmation, :value => :password %>
           </div>
           <div class="input-field col s6">
            <b><%= f.label :password_confirmation, t('users.password') %></b><br>
             <%= f.password_field :password_confirmation %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+             <%= 'Notes' %><%= f.text_area :description, :placeholder => "Very good customer." %>
           </div>
         </div>
         <div class="row">

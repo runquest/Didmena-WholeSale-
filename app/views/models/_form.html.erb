@@ -10,10 +10,11 @@
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <%= f.collection_select :gender_id, Domain.where(domain_name: "GENDER"), :id, :meaning, { prompt: t('models.choose_type') }, class: "browser-default" %>
+        <%= f.collection_select :gender_id, Domain.where(domain_name: "Gender"), :id, :meaning, { prompt: t('models.choose_type') }, class: "browser-default" %>
       </div>
       <div class="input-field col s12">
-        <%= f.collection_select :category_id, Domain.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: t('models.choose_collection') }, class: "browser-default" %>
+        <% binding.pry %>
+        <%= f.collection_select :category_id, Domain.where(domain_name: "Season"), :id, :meaning, { prompt: t('models.choose_collection') }, class: "browser-default" %>
       </div>
     </div>
     <div class="row">
