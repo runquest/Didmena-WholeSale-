@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20161228004525) do
     t.string   "title",       limit: 200,                          null: false
     t.string   "email",       limit: 100,                          null: false
     t.string   "status",      limit: 20,                           null: false
-    t.decimal  "discount",                precision: 10, scale: 2, null: false
+    t.decimal  "discount",                precision: 10, scale: 2
     t.integer  "domain_id",                                        null: false
     t.string   "city",        limit: 30
     t.string   "street",      limit: 30
