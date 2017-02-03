@@ -1,6 +1,7 @@
 class Domain < ActiveRecord::Base
 
-  self.inheritance_column = :domain_name
+  # self.inheritance_column = :domain_name
+  self.inheritance_column = nil
 
   validates :domain_name, presence: true
   validates :domain_name, length: { maximum: 20 }, on: :create

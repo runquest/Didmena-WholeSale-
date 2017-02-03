@@ -1,20 +1,54 @@
-html {
-  background-image: url('/assets/top_bg.jpg');
-  background-repeat: repeat-x;
-}
-
 .container {
   margin: 0 auto;
 }
 
-div#header {
-    /*margin-top: 15px;*/
-    margin-top: 150px;
+html {
+min-height: 100%;
+  position: relative;
+}
+
+div.admin_block_header {
+  font-size: large;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightblue;
+  margin-bottom: 5px;
+}
+
+.eac-item {
+  cursor: pointer;
+  height: 2rem;
+}
+
+body {
+  padding-bottom:125px;
 }
 
 footer {
   margin-top: 30px;
-  margin-bottom: 60px;
+  background: lightgrey;
+  position: absolute;
+  bottom: 0;
+  width: 100%
+}
+
+ul#session-menu li {
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+div#myModal{
+  width: 50%;
+  margin-top: 100px;
+}
+
+div[type="button"] {
+  cursor: pointer;
+}
+
+div[type="button"]:hover {
+  text-decoration: underline;
 }
 
 a:visited {
@@ -23,6 +57,11 @@ a:visited {
 
 a:hover {
   text-decoration: underline;
+  cursor: pointer;
+}
+
+a:active {
+  color: green;
 }
 
 input.btn.waves-effect.submit {
@@ -30,7 +69,7 @@ input.btn.waves-effect.submit {
 }
 
 div#login {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 div#register {
