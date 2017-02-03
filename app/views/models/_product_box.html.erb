@@ -1,0 +1,5 @@
+<% product = find_row_product(@model.id, color.id, product_box.id) %>
+<td style="padding: 0 5px;" class="center-align order-amount">
+  <%= hidden_field_tag "product_id", product.id %>
+  <%= number_field_tag 'quantity', nil, min: 1, class: 'product_box' %>
+</td>

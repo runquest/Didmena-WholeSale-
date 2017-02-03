@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def current_product(model_id, color_id, size_id)
+    Product.where(model_id: @model.id, color_id: color.id, size_id: product_box.id)
+  end
+
   def current_cart
     @cart = session[:cart]
   end

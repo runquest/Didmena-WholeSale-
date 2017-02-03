@@ -1,17 +1,5 @@
 <div class="container">
   <div class="row model-index-row">
-    <% for model in @models %>
-      <div class="col s12 m3 l4 model-card"> 
-        <%= link_to (image_tag (thumbnail(model)), :class=>"model-card-image"), model %>
-        <h5><%= link_to model.title, model %></h5>
-        <div class="model-card-content"><%= model.note %></div>
-        <% if !products_available(model) %>
-          <p>No available products.</p>
-        <% end %>
-        <% for color in model_colors(model.id) %>
-          <div class="color-circle small" style="background: #<%= color %>"></div>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render :partial => @models %>
   </div>
 </div>
