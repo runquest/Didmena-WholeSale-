@@ -12,12 +12,12 @@
               <div class="radio_buttons">
                 <%= f.label :gender_id, "Select type (*)" %>
                 <div class="left-align" style="padding: 1rem 0">
-                  <%= f.collection_radio_buttons :gender_id, [[2, "male"] ,[1, "female"]], :first, :last, {:item_wrapper_class => 'foo-bar'}, {:class => "with-gap" } %>
+                  <%= f.collection_radio_buttons :gender_id, [[2, "men"] ,[1, "women"]], :first, :last, {:item_wrapper_class => 'foo-bar'}, {:class => "with-gap" } %>
                 </div>
               </div>
               <div  style="padding: 1rem 0;">
                 <%= f.label :category_id, "Select collection (*)" %>
-                <%= f.collection_select :category_id, Domain.where(domain_name: "CATEGORY"), :id, :meaning, { prompt: t('models.choose_collection') }, class: "browser-default" %>
+                <%= f.collection_select :category_id, Domain.where(domain_name: "Season"), :id, :meaning, { prompt: t('models.choose_collection') }, class: "browser-default" %>
               </div>
               <%= f.label :price, t('models.price') %>
               <div style="font-size: 0.6rem; color: #9e9e9e">Enter prices in <b>euros</b>.</div>

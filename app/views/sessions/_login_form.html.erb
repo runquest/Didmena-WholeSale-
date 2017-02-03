@@ -1,0 +1,17 @@
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: 'flash-message') %>
+<% end %>
+
+<div class="col s6" id="login"> 
+  <%= form_tag sessions_path do %>
+    <div>
+      <%= label_tag t('login.email') %><br/>
+      <%= text_field_tag "email" %>
+    </div>
+    <div>
+      <%= label_tag :password, t('login.password') %><br/>
+      <%= password_field_tag :password %>
+    </div>
+    <div><%= submit_tag t('login.login'), remote: true, class: 'btn waves-effect submit' %></div>
+  <% end %>
+</div>
