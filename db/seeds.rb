@@ -1,4 +1,4 @@
-## DOMAIN:
+# DOMAIN:
 # GENDER: F - Female, M - Male
 
 Gender.create(code_value: 'F', meaning: 'FEMALE')
@@ -6,11 +6,11 @@ Gender.create(code_value: 'M', meaning: 'MALE')
 
 # COLOR:  R - Red, G - Green, B - Blue, Y - Yellow, etc.
 
-Domain.create(domain_name: 'COLOR', code_value: '33E', meaning: '33EEAA')
-Domain.create(domain_name: 'COLOR', code_value: 'FFE', meaning: 'FFEE11')
-Domain.create(domain_name: 'COLOR', code_value: 'DDD', meaning: 'DDDAAA')
-Domain.create(domain_name: 'COLOR', code_value: 'ADF', meaning: 'ADF112')
-Color.create(code_value: 'DDEEFF', meaning: 'DDEEFF')
+# Domain.create(domain_name: 'COLOR', code_value: '33E', meaning: '33EEAA')
+# Domain.create(domain_name: 'COLOR', code_value: 'FFE', meaning: 'FFEE11')
+# Domain.create(domain_name: 'COLOR', code_value: 'DDD', meaning: 'DDDAAA')
+# Domain.create(domain_name: 'COLOR', code_value: 'ADF', meaning: 'ADF112')
+Color.create(code_value: 'DDEEFF', meaning: 'Light blue')
 
 # SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
 
@@ -47,8 +47,7 @@ Country.create(code_value: 'LV', meaning: 'Latvia')
 
 # CURRENCY:  # EUR, USD, CAD, PLZ, RUR, etc.
 
-Currency.create(code_value: 'EUR', meaning: 'Euro')
-Currency.create(code_value: 'USD', meaning: 'US Dollar')
+Currency.create(code_value: 'EUR', meaning: 'Euro')urrency.create(code_value: 'USD', meaning: 'US Dollar')
 Currency.create(code_value: 'PLZ', meaning: 'Zlot')
 Currency.create(code_value: 'RUR', meaning: 'Ruble')
 Currency.create(code_value: 'CAD', meaning: 'Canadian Dollar')
@@ -121,8 +120,7 @@ User.create(email: 'uzsakovas2@didmena.lt', fname: 'ANTRAS', lname: 'UZSAKOVAS',
 # Price.create(model_id: 10, from_date: "2012-04-25", price: 45.00, domain_id: 22)
 # Price.create(model_id: 11, from_date: "2012-04-25", price: 25.00, domain_id: 22)
 # Price.create(model_id: 12, from_date: "2012-04-25", price: 25.00, domain_id: 22)
-
-## ORDER
+# ORDER
 
 # Order.create(order_number: "123HOW", order_date: "2016-03-01", representative_id: 3, domain_id: 22)
 # Order.create(order_number: "113HOW", order_date: Time.now, representative_id: 3, domain_id: 22)
@@ -130,3 +128,14 @@ User.create(email: 'uzsakovas2@didmena.lt', fname: 'ANTRAS', lname: 'UZSAKOVAS',
 
 
 ## ORDER PRODUCT
+
+
+
+
+
+
+
+
+
+
+
