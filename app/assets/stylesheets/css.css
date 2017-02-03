@@ -7,6 +7,22 @@ min-height: 100%;
   position: relative;
 }
 
+.model-index-row {
+  padding-top:5px; flex-direction: row; flex-wrap: wrap; justify-content: center;
+}
+
+.model-card {
+  padding: 15px; margin-bottom: 1rem;
+}
+.model-card-content {
+  height: 75px; padding: 5px; overflow: hidden; text-overflow: ellipsis; margin: 1rem 0 1rem 0;
+  }
+
+.model-card-image {
+  max-height: 100%; max-width: 100%; height: 150px;
+
+}
+
 div.admin_block_header {
   font-size: large;
   padding-top: 15px;
@@ -152,6 +168,13 @@ ul#card-menu li {
 
   font-family: 'Lato', sans-serif;
   font-size: 12px;
+}
+
+.small.color-circle {
+  width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    float: left;
 }
 
 .color-circle {

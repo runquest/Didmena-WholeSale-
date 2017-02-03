@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_cart
-  helper_method :find_colors
+  helper_method :model_colors
   helper_method :find_sizes
   helper_method :all_sizes
 
@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     Product.where(model_id: model_id)
   end
 
-  def find_colors(model_id)
+  def model_colors(model_id)
     @model_colors = []
     model_products(model_id).each do |product|
       color_meaning = Domain.find(product.color_id).code_value

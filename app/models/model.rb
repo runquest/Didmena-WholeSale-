@@ -34,5 +34,4 @@ class Model < ActiveRecord::Base
     code.upcase!
     title.upcase!
   end
-
 end
