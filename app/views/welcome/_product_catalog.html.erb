@@ -12,19 +12,17 @@
           <%= model.note %>
         </div>
         <br/>
+        <% if !model_has_product_in_storage(model) %>
+          <div>
+            No available products.
+          </div>
+        <% end %>
         <div>
           <% find_colors(model.id).each do |c| %>
-            <div style="width: 15px; height: 15px; margin: 0 5px; float: left; background: #<%= c %>">
+            <div class="color-circle" style="width: 15px; height: 15px; margin: 0 5px; float: left; background: #<%= c %>">
             </div>
           <% end %>
         </div><br/>
-        <div>
-          <% find_sizes(model.id).each do |s| %>
-            <div style="width: 15px; height: 15px; padding: 0 5px; margin: 0 5px; float: left;">
-              <%= s %>
-            </div>
-          <% end %>
-        </div>
       </div>
     <% end %>
   </div>

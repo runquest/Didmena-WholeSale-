@@ -33,10 +33,11 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    # binding.pry
     if params[:domain_id].nil?
       params[:company][:domain_id] = 1
     end
+
+
     @company = Company.new(company_params)
 
     respond_to do |format|

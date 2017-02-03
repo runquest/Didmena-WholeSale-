@@ -130,14 +130,3 @@ User.create(email: 'uzsakovas2@didmena.lt', fname: 'ANTRAS', lname: 'UZSAKOVAS',
 
 
 ## ORDER PRODUCT
-
-
-
-
-
-
-
-
-
-
-

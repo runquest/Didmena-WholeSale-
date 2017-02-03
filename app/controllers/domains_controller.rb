@@ -36,10 +36,9 @@ class DomainsController < ApplicationController
   # POST /domains.json
   def create
     @domain = Domain.new(domain_params)
-
     respond_to do |format|
       if @domain.save
-        format.html { redirect_to @domain, notice: 'Domain was successfully created.' }
+        format.html { redirect_to domains_path, notice: 'Domain was successfully created.' }
         format.json { render :show, status: :created, location: @domain }
       else
         format.html { render :new }

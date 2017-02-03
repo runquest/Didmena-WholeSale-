@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   def find_colors(model_id)
     @model_colors = []
     model_products(model_id).each do |product|
-      color_meaning = Domain.find(product.color_id).meaning
+      color_meaning = Domain.find(product.color_id).code_value
       @model_colors.push(color_meaning) unless @model_colors.include?(color_meaning)
     end
     return @model_colors
