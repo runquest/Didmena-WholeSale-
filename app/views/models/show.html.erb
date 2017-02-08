@@ -1,15 +1,32 @@
 <div class="container">
   <div class='row'>
+  </div>
+  <div class='row'>
     <div class="col s12 m12 l12">
       <h4><%= @model.title %></h4>
       <% if current_user && current_user.apps_manager %>
         <%= link_to t('model.edit'), edit_model_path(@model) %>
       <% end %>
     </div>
+  </div>
+  <div class="row">
     <div class="col s12 m12 l6">
       <div class="subheader-1"><%= collection_type %></div>
       <div class="subheader-2"><%= model_price %></div>
       <div class="model-content"><%= @model.note %></div>
+    </div>
+    <div class="col s12 m12 l6">
+        <% if @model.model_attachments.any? %>
+        <div class="row img-row">
+          <% @model.model_attachments.each do |img| %>
+            <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
+              <div style="height: 200px;">
+                <%= link_to (image_tag (img.avatar_url), :style=>"max-height: 100%; max-width: 100%", :class=>"center-align") %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="divider"></div>
@@ -20,7 +37,7 @@
           <th></th>
           <th></th>
           <% for size in all_sizes %>
-            <th><%= size.code_value %></th>
+            <th class=""><%= size.code_value %></th>
           <% end %>
         </tr>
       </thead>
@@ -28,6 +45,6 @@
         <%= render :partial => 'color_row', :collection => @colors %>
       </tbody>
     </table>
-    <a id="order-btn">Place to cart</a>
+    <a id="order-btn" class="right">Place to cart</a>
   </div>
 </div>

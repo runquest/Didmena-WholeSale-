@@ -1,5 +1,19 @@
 <% product = find_row_product(@model.id, color.id, product_box.id) %>
-<td style="padding: 0 5px;" class="center-align order-amount">
-  <%= hidden_field_tag "product_id", product.id %>
-  <%= number_field_tag 'quantity', nil, min: 1, class: 'product_box' %>
-</td>
+<%= hidden_field_tag "product_id", product.id %>
+<% if current_user && current_user.apps_manager %>
+  <td style="padding: 0 5px;" class="center-align order-amount">
+    <% if product.in_storage %>
+      <%= number_field_tag 'quantity', nil, min: 1, class: 'product_box' %>
+    <% else %>
+      <%= number_field_tag :quantity, params[:quantity], min: 0, disabled: true %>
+    <% end %>
+  </td>
+<% else %>
+  <td style="padding: 0 5px;" class="order-amount" style="margin: 0 auto;">
+    <% if product.in_storage %>
+      <div class="color-circle small" style="background: black;"></div>
+    <% else %>
+      <div class="color-circle small"></div>
+    <% end %>
+  </td>
+<% end %>
