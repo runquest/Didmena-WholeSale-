@@ -10,15 +10,29 @@ Gender.create(code_value: 'M', meaning: 'MALE')
 # Domain.create(domain_name: 'COLOR', code_value: 'FFE', meaning: 'FFEE11')
 # Domain.create(domain_name: 'COLOR', code_value: 'DDD', meaning: 'DDDAAA')
 # Domain.create(domain_name: 'COLOR', code_value: 'ADF', meaning: 'ADF112')
-Color.create(code_value: 'DDEEFF', meaning: 'Light blue')
+
+# Color.create(code_value: 'DDEEFF', meaning: 'Light blue')
+
+# Color names taken from http://www.w3schools.com/colors/colors_names.asp
+Color.create(code_value: '000000', meaning: 'black')
+Color.create(code_value: '000080', meaning: 'navy')
+Color.create(code_value: '0000FF', meaning: 'blue')
+Color.create(code_value: '008000', meaning: 'green')
+Color.create(code_value: '00FF00', meaning: 'lime')
+Color.create(code_value: '800000', meaning: 'maroon')
+Color.create(code_value: '808000', meaning: 'olive')
+Color.create(code_value: '808080', meaning: 'grey')
+Color.create(code_value: 'FF0000', meaning: 'red')
+Color.create(code_value: 'FFFF00', meaning: 'yellow')
+Color.create(code_value: 'FFFFFF', meaning: 'white')
 
 # SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
 
-Size.create(code_value: 'XS', meaning: 'Extra small')
-Size.create(code_value: 'S', meaning: 'Small')
-Size.create(code_value: 'M', meaning: 'Medium')
-Size.create(code_value: 'L', meaning: 'Large')
-Size.create(ode_value: 'XL', meaning: 'Extra Large')
+Size.create(code_value: 'XS', meaning: 'EXTRA SMALL')
+Size.create(code_value: 'S', meaning: 'SMALL')
+Size.create(code_value: 'M', meaning: 'MEDIUM')
+Size.create(code_value: 'L', meaning: 'LARGE')
+Size.create(ode_value: 'XL', meaning: 'EXTRA LARGE')
 # Size.create(code_value: 'XXL', meaning: 'Extra Extra Large')
 
 # CATEGORY: JACKET - Jacket, COAT - Coat, etc.
@@ -47,7 +61,8 @@ Country.create(code_value: 'LV', meaning: 'Latvia')
 
 # CURRENCY:  # EUR, USD, CAD, PLZ, RUR, etc.
 
-Currency.create(code_value: 'EUR', meaning: 'Euro')urrency.create(code_value: 'USD', meaning: 'US Dollar')
+Currency.create(code_value: 'EUR', meaning: 'Euro')
+Currency.create(code_value: 'USD', meaning: 'US Dollar')
 Currency.create(code_value: 'PLZ', meaning: 'Zlot')
 Currency.create(code_value: 'RUR', meaning: 'Ruble')
 Currency.create(code_value: 'CAD', meaning: 'Canadian Dollar')
