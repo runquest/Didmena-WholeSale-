@@ -1,0 +1,8 @@
+<td class="center order-amount">
+  <%= hidden_field_tag "item_id", product.id %>
+  <% if product.in_storage? %>
+    <%= number_field_tag :quantity, quantity, min: 0, disabled: false, class: Model.find(product.model_id).title.delete(' ').downcase + " product_box" %>
+  <% else %>
+    <%= number_field_tag :quantity, nil, min: 0, disabled: true, class: "product_box" %>
+  <% end %>
+</td>

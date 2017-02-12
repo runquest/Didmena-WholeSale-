@@ -1,0 +1,9 @@
+<tr>
+  <td><div class="color-circle" style="background: #<%= color.code_value %>"></div>
+  </td></td>
+  <td><span class="center-align"><%= color.meaning %></span></td>
+  <% for size in all_sizes %>
+    <% product = product_object(model.id, color.id, size.id) %>
+    <%= render :partial => 'products_table/product_item', :locals => { product: product, quantity: get_quantity(product.id) } %>
+  <% end %>
+</tr>

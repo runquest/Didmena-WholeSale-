@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # match '/:locale' => 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
 
-  root "welcome#index"
+  root "models#index"
     get '/cart' => 'cart#show'
     post '/update_cart' => 'cart#update_cart'
     post '/cart' => 'cart#add_items_to_cart'

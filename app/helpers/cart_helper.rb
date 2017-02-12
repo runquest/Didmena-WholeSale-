@@ -10,6 +10,38 @@ module CartHelper
     return total_cost
   end
 
+  def get_model_class(model)
+    return model.title.delete(' ').downcase; 
+  end
+
+  def get_price_class(model)
+    return "price_" + get_model_class(model)
+  end
+
+  def cart_models 
+    models = []
+    @cart.keys.each do |product_id|
+      product = Product.find(product_id.to_i)
+      model = Model.find(product.model_id)
+      if !models.include?(model)
+        models.push(model)
+      end
+    end
+    return models
+  end
+
+  def get_cost_class(model)
+    return "cost_" + get_model_class(model)
+  end
+
+  def get_toggle_id(model)
+    return "toggle_" + get_model_class(model)
+  end
+
+  def get_toggle_table_id(model)
+    return "toggle_table_" + get_model_class(model)
+  end
+
   def products_for_color model_id,color_id
     list_products = []
     all_sizes.each do |size_id|

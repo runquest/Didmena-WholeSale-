@@ -16,7 +16,7 @@ class ModelsController < ApplicationController
     @collection = Domain.find(@model.category_id).meaning
     @colors = find_colors_general(@model.id)
   end
-  
+    
   # GET /models/new
   def new
     @model = Model.new

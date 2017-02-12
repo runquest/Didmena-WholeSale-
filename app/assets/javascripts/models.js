@@ -148,21 +148,21 @@ $(function() {
 
   // Show page.
 
-  $("#order-btn").on('click', function() {
+  $("#place-to-cart-btn").on('click', function() {
     var order_items = [];
     var order_amount_class_elements = document.getElementsByClassName("order-amount");
     for (var i=0; i<order_amount_class_elements.length; i++ ) {
 
       var box = order_amount_class_elements[i].getElementsByTagName('input');
-      var product_id = box[0].value
+      var product_id = box[0].value;
       var amount = box[1].value;
-        if (amount != null && amount != "") {
-          var item = {};
-          item[product_id] = amount;
-          order_items.push(item);
-        }
+      if (amount != null && amount != "") {
+        var item = {};
+        item[product_id] = amount;
+        order_items.push(item);
+      }
     }
-    
+
     if (order_items.length > 0) {
       $.ajax({
         method: 'post',

@@ -2,6 +2,7 @@ $(function() {
   updateTotalCount();
   updateModelCost();
   updateTotalCost();
+  updateAfterDiscount();
 
   var localization = $("body").data("locale");
 
@@ -15,7 +16,7 @@ $(function() {
     updateCart();
   });
 
-  $("span.model_title").each(function() {
+  $("td.model_title").each(function() {
     var model_name_code = $(this).text().replace(/ /g,'').toLowerCase();
     $('div#'.concat('toggle_', model_name_code)).click(function(){
       $('tbody#'.concat('toggle_table_', model_name_code)).toggle();
@@ -24,13 +25,13 @@ $(function() {
 });
 
 function updateTotalCount() {
-  $("span.model_title").each(function() {
+  $("td.model_title").each(function() {
     var classname = $(this).text().replace(/ /g,'').toLowerCase();
     var sum = 0;
     $('input.'.concat(classname)).each(function() {
       sum += Number($(this).val());
     })
-    $('span.'.concat(classname)).text(sum);
+    $('td#'.concat(classname)).text(sum);
   })
 }
 
@@ -67,25 +68,24 @@ function updateCart() {
 }
 
 function updateModelCost() {
-  $("span.model_title").each(function() {
+  $("td.model_title").each(function() {
     var classname = $(this).text().replace(/ /g,'').toLowerCase();
     var price_span_classname = 'price_'.concat(classname);
     var cost_span_classname = 'cost_'.concat(classname);
-    var price = $('span.'.concat(price_span_classname)).text();
-    var units = $('span.'.concat(classname)).text();
+    var price = $('td.'.concat(price_span_classname)).text();
+    var units = $('td#'.concat(classname)).text();
     var total_model_cost =price * units;
-    $('span.'.concat(cost_span_classname)).text(total_model_cost);
-    updateAfterDiscount(total_model_cost);
+    $('td.'.concat(cost_span_classname)).text(total_model_cost.toFixed(2));
   })
 }
 
 function updateTotalCost() {
   var cost = 0
-  $('span.model_cost').each(function() {
+  $('td.model_cost').each(function() {
     cost += Number($(this).text());
   })
   var total_amount = Math.round(cost * 100.00) / 100;
-  $('span#total_cart_cost').text(total_amount.toFixed(2));
+  $('div#total_cart_cost').text(total_amount.toFixed(2));
 }
 
 function updateTax() {
@@ -93,10 +93,10 @@ function updateTax() {
 }
 
 function updateAfterDiscount(total_model_cost) {
-  var discount = $("span#discount").text();
-  var afterDiscount = total_model_cost - discount;
-  console.log(afterDiscount);
-  $('span#after_discount').text(afterDiscount.toFixed(2));
+  var total_cost = $("div#total_cart_cost").text();
+  var discount = $("div#discount").text();
+  var afterDiscount = total_cost - discount;
 
+  $('div#after_discount').text(afterDiscount.toFixed(2));
 
 }

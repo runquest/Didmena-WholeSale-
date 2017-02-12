@@ -1,105 +1,56 @@
 <div class="container">
   <div class='row'>
-    <h4><%= @model.title %></h4>
-    <div class="col s12 m12 l6">
-      <h6 style="color: lightgrey"><b>for</b> <%= @type %> | <b>collection</b> <%= @collection %></h6>
-      <h6 style="color: orange"> <b>cost</b> $<%= sprintf "%.2f", @model.price %></h6>
-      <p  style="padding-right: 15px;"><%= @model.note %></p>
+    <div class="col s12 m12 l12">
+      <h4><%= @model.title %></h4>
     </div>
-    <% if current_user && current_user.apps_manager %>
-      <td><%= link_to t('model.edit'), edit_model_path(@model) %></td>
-    <% end %>
-    <% if products_in_storage %>
-      <% if current_user %>
-        <table id="product_table" class="col s12 m12 l6">
-          <thead style="border-bottom: 0px;">
-            <tr>
-              <th>
-                <div class="center-align">SIZES</div>
-              </th>
-              <% @colors.each do |color| %>
-                <th>
-                  <div class="color-circle" style="background: #<%= color.code_value %>"></div>
-                  <div class="center-align"><%= color.meaning %></div>
-                </th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <% all_sizes.each do |s| %>
-              <tr>
-                <td class="center-align"> <%= s.code_value %> </td>
-                  <% @colors.each do |c| %>
-                    <% find_model_product(c.id, s.id) %>
-                      <td style="padding: 0 5px;" class="center-align order-amount">
-                        <% if !@model_product.empty? %>
-                     <%= hidden_field_tag "product_id", @model_product.take.id %>
-                          <% if can_order? %>
-                            <%= number_field_tag :quantity, params[:quantity], min: 0, style: "border: 2px solid #26a69a; padding: 0 5px;" %>
-                          <% else %>
-                            <%= number_field_tag :quantity, params[:quantity], min: 0, disabled: true, style: "border: 1px solid lightgrey; padding: 0 5px;" %>
-                          <% end %>
-                          <%end %>
-                      </td>
-                  <% end %>
-              </tr>
-            <% end %>
-            <tr>
-              <td colspan=<%= @colors.size + 1%>>
-                <button style="margin-top: 5px; width: 100%; float: right;" class="btn waves-effect waves-light" id="order-btn"><%= t('models.order') %></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      <% else %>
-        <table id="product_table" class="col s12 m12 l6">
-          <thead style="border-bottom: 0px;">
-            <tr>
-              <% @colors.each do |color| %>
-                <th>
-                  <div class="color-circle" style="background: #<%= color.code_value %>"></div>
-                  <div class="center-align"><%= color.meaning %></div>
-                  <div class="center-align" style="color: lightgrey;">(<%= color.code_value %>)</div>
-                </th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <% @colors.each do |c| %>
-                <td class="center-align">
-                  <% all_sizes.each do |s| %>
-                    <% find_model_product(c.id, s.id) %>
-                    <% if can_order? %>
-                      <span > <%= s.code_value %></span>
-                    <% end %>
-                  <% end %>
-                </td>
-              <% end %>
-            </tr>
-            <tr>
-              <td colspan=<%= @colors.size + 1%>>
-                <div class='center-align'><%= link_to "Log in", new_session_path %> or send an email to create an account.</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      <% end %>
-    <% else %>
-      <p>No products of this model are available for order.</p>
-    <% end %>
-
   </div>
-  <hr/>
-  <% if @model.model_attachments.any? %>
-    <div class="row" style="padding-top:5px; flex-direction: row; flex-wrap: wrap; justify-content: center;">
-      <% @model.model_attachments.each do |img| %>
-        <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
-          <div style="height: 200px;">
-            <%= link_to (image_tag (img.avatar_url), :style=>"max-height: 100%; max-width: 100%", :class=>"center-align") %>
-          </div>
+  <div class='row'>
+    <div class="col s12 m12 l12">
+      <% if current_user && current_user.apps_manager %>
+        <%= link_to t('model.edit'), edit_model_path(@model) %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m12 l6">
+      <div class="subheader-1"><%= collection_type %></div>
+      <div class="subheader-2"><%= model_price %></div>
+      <div class="model-content"><%= @model.note %></div>
+    </div>
+    <div class="col s12 m12 l6">
+        <% if @model.model_attachments.any? %>
+        <div class="row img-row">
+          <% @model.model_attachments.each do |img| %>
+            <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
+              <div style="height: 200px;">
+                <%= link_to (image_tag (img.avatar_url), :style=>"max-height: 100%; max-width: 100%", :class=>"center-align") %>
+              </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
-  <% end %>
+  </div>
+  <div class="divider"></div>
+  <div class="row">
+    <table id="product_table" class="col s12 m12 l12">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <% for size in all_sizes %>
+            <th class="center"><%= size.code_value %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for color in model_color_objects(@model.id) %>
+          <%= render :partial => 'products_table/product_row', :locals => { model: @model, color: color } %>
+        <% end %>
+      </tbody>
+    </table>
+      <% if current_user %>
+        <a id="place-to-cart-btn" class="right">Place to cart</a>
+      <% end %>
+  </div>
 </div>
