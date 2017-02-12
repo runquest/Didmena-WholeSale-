@@ -1,0 +1,30 @@
+<tbody id='<%= get_toggle_table_id(model) %>' style="display: none;">
+  <tr>
+    <td colspan="2"></td>
+    <% for size in all_sizes %>
+      <td class="center"><%= size.code_value %></td>
+    <%end%>
+  </tr>
+  <% model_color_objects(model.id).each do | color |%>
+  <tr>
+    <td><div class="color-circle" style="background: #<%= Domain.find(color).code_value %>"></div></td>
+    <td><%= Domain.find(color).meaning %></td>
+    <% products_for_color(model.id, color).each do |product| %>
+      <td class="center order-amount">
+        <% if product.take.in_storage %>
+          <% product_amount = 0 %>
+          <% if @product_amount_list.keys.include?(product.take) %>
+            <% product_amount = @product_amount_list[product.take] %>
+          <% end %>
+            <%= hidden_field_tag "item_id", product.take.id %>
+            <%= number_field_tag :quantity, product_amount, class: Model.find(product.take.model_id).title.delete(' ').downcase, min: 0, disabled: false, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
+        <% else %>
+          <%= hidden_field_tag "item_id", product.take.id %>
+            <%= number_field_tag :quantity, product_amount, class: Model.find(product.take.model_id).title.delete(' ').downcase, min: 0, disabled: true, style: "border: 2px solid ligthgrey; padding: 0 5px; text-align: center;" %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+  <% end %>
+    <!-- <%#= render :partial => 'shared/color_row', :collection => model_color_objects(model.id) %> -->
+</tbody>

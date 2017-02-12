@@ -5,5 +5,5 @@
   <td>
     <span class="center-align"><%= color_row.meaning %></span>
   </td>
-  <%= render :partial => 'product_box', :collection => all_sizes, :locals => { color: color_row} %>
+  <%= render :partial => 'shared/product_box', :collection => all_sizes, :locals => { color: color_row } %>
 <% end %>

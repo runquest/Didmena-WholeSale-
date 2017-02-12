@@ -154,6 +154,7 @@ $(function() {
     for (var i=0; i<order_amount_class_elements.length; i++ ) {
 
       var box = order_amount_class_elements[i].getElementsByTagName('input');
+      console.log(box.value);
       var product_id = box[0].value
       var amount = box[1].value;
         if (amount != null && amount != "") {

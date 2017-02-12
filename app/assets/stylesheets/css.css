@@ -7,6 +7,10 @@ min-height: 100%;
   position: relative;
 }
 
+.cart-product-header-row {
+  border-bottom: 1px solid lightgrey; padding: 5px;
+}
+
 .model-index-row {
   padding-top:5px; flex-direction: row; flex-wrap: wrap; justify-content: center;
 }

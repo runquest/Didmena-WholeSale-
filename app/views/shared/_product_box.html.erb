@@ -1,10 +1,11 @@
 <% product = find_row_product(@model.id, color.id, product_box.id) %>
-<%= hidden_field_tag "product_id", product.id %>
-<% if current_user && current_user.apps_manager %>
+<% if current_user %>
   <td style="padding: 0 5px;" class="center-align order-amount">
     <% if product.in_storage %>
+      <%= hidden_field_tag "product_id", product.id %>
       <%= number_field_tag 'quantity', nil, min: 1, class: 'product_box' %>
     <% else %>
+      <%= hidden_field_tag "product_id", product.id %>
       <%= number_field_tag :quantity, params[:quantity], min: 0, disabled: true %>
     <% end %>
   </td>

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_cart
   helper_method :model_colors
+  helper_method :model_color_objects
   helper_method :find_sizes
   helper_method :all_sizes
 
@@ -52,6 +53,15 @@ class ApplicationController < ActionController::Base
       @model_colors.push(color_meaning) unless @model_colors.include?(color_meaning)
     end
     return @model_colors
+  end
+
+  def model_color_objects(model_id)
+    array_model_color_ids = (Product.where(model_id: model_id).map {|p| p.color_id}).uniq
+    @color = []
+    for id in array_model_color_ids
+      @color.push(Color.find(id))
+    end
+    return  @color
   end
 
   def find_colors_general(model_id)

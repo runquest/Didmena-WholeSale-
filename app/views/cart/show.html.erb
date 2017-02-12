@@ -1,47 +1,11 @@
 <div class="container">
   <% if @models_ordered.any? %>
-    <% @models_ordered.each do |model, colors|%>
+    <% for model_ordered in @models_ordered %>
       <table>
-        <thead>
-          <%priceclass = "price_" + model.title.delete(' ').downcase %>
-          <%costclass = "cost_" + model.title.delete(' ').downcase %>
-          <%toggle_id = "toggle_" + model.title.delete(' ').downcase %>
-          <%toggle_table_id = "toggle_table_" + model.title.delete(' ').downcase %>
-          <div style="border-bottom: 1px solid lightgrey; padding: 5px;">
-            <span class="model_title"><b><%=model.title%></b></span>
-            <div style="float: right;">
-              <span>$</span><span class="<%= priceclass %>"><%= model.price %></span>
-              <span> x </span><span class="<%= model.title.delete(' ').downcase %>">0</span>
-              <span>= $</span><span class="<%= costclass %> model_cost">0</span>
-            </span>
-            <div style="float: right;"id='<%= toggle_id %>'>
-              <img src="/assets/ic_arrow_down_24px.svg" alt="">
-            </div>
-        </thead>
-        <tbody id='<%= toggle_table_id %>' style="display: none;">
-          <tr><td colspan="2"></td><%all_sizes.each do |size| %><td class="center"><%= size.code_value %></td><%end%></tr>
-          <% colors.each do | color |%>
-            <tr>
-              <td><div class="color-circle" style="background: #<%= Domain.find(color).code_value %>"></div></td>
-              <td><%= Domain.find(color).meaning %></td>
-              <% products_for_color(model.id, color).each do |product| %>
-                <td class="center order-amount">
-                  <% if product.take.in_storage %>
-                    <% product_amount = 0 %>
-                    <% if @product_amount_list.keys.include?(product.take) %>
-                      <% product_amount = @product_amount_list[product.take] %>
-                    <% end %>
-                      <%= hidden_field_tag "item_id", product.take.id %>
-                      <%= number_field_tag :quantity, product_amount, class: Model.find(product.take.model_id).title.delete(' ').downcase, min: 0, disabled: false, style: "border: 2px solid #26a69a; padding: 0 5px; text-align: center;" %>
-                  <% else %>
-                    <%= hidden_field_tag "item_id", product.take.id %>
-                      <%= number_field_tag :quantity, product_amount, class: Model.find(product.take.model_id).title.delete(' ').downcase, min: 0, disabled: true, style: "border: 2px solid ligthgrey; padding: 0 5px; text-align: center;" %>
-                  <% end %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
+        <%= render :partial => 'table_header', :locals => { model: model_ordered.first } %>
+        <%= render :partial => 'table_body', :locals => { model: model_ordered.first } %>
+
+      
       <table>
     <% end %>
     <div class="row">
