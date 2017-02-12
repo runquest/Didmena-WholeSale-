@@ -18,6 +18,18 @@ module CartHelper
     return "price_" + get_model_class(model)
   end
 
+  def cart_models 
+    models = []
+    @cart.keys.each do |product_id|
+      product = Product.find(product_id.to_i)
+      model = Model.find(product.model_id)
+      if !models.include?(model)
+        models.push(model)
+      end
+    end
+    return models
+  end
+
   def get_cost_class(model)
     return "cost_" + get_model_class(model)
   end

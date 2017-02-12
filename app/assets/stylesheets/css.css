@@ -8,7 +8,7 @@ min-height: 100%;
 }
 
 .cart-product-header-row {
-  border-bottom: 1px solid lightgrey; padding: 5px;
+  border-bottom: 1px solid lightgrey; padding: 5px; background: lightgrey;
 }
 
 .model-index-row {
@@ -16,7 +16,11 @@ min-height: 100%;
 }
 
 .product_box {
-  border: 1px solid lightgrey; padding: 0 5px;
+  border: 1px solid #26a69a; padding: 0 5px; text-align: center;
+}
+
+.model_title {
+  font-style: bold;
 }
 
 .subheader-1 {

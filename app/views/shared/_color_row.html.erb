@@ -1,9 +1,0 @@
-<%= content_tag_for(:tr, color_row) do %>
-  <td>
-    <div class="color-circle" style="background: #<%= color_row.code_value %>"></div>
-  </td>
-  <td>
-    <span class="center-align"><%= color_row.meaning %></span>
-  </td>
-  <%= render :partial => 'shared/product_box', :collection => all_sizes, :locals => { color: color_row } %>
-<% end %>

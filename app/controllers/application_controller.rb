@@ -8,8 +8,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart
   helper_method :model_colors
   helper_method :model_color_objects
+  helper_method :product_object
   helper_method :find_sizes
   helper_method :all_sizes
+  helper_method :get_quantity
 
   private
 
@@ -62,6 +64,22 @@ class ApplicationController < ActionController::Base
       @color.push(Color.find(id))
     end
     return  @color
+  end
+
+  def product_object(model_id, color_id, size_id)
+    return Product.where(model_id: model_id, color_id: color_id, size_id: size_id).take
+  end
+
+  def get_quantity(product_id)
+    if @cart.blank?
+      return nil
+    end
+
+    if @cart.keys.include?(product_id.to_s)
+      return @cart[product_id.to_s].to_i
+    else
+      return nil
+    end
   end
 
   def find_colors_general(model_id)

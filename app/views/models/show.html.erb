@@ -44,11 +44,13 @@
         </tr>
       </thead>
       <tbody>
-        <%= render :partial => 'shared/color_row', :collection => @colors %>
+        <% for color in model_color_objects(@model.id) %>
+          <%= render :partial => 'products_table/product_row', :locals => { model: @model, color: color } %>
+        <% end %>
       </tbody>
     </table>
       <% if current_user %>
-        <a id="order-btn" class="right">Place to cart</a>
+        <a id="place-to-cart-btn" class="right">Place to cart</a>
       <% end %>
   </div>
 </div>

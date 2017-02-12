@@ -1,28 +1,23 @@
 <div class="container">
-  <% if @models_ordered.any? %>
-    <% for model_ordered in @models_ordered %>
-      <table>
-        <%= render :partial => 'table_header', :locals => { model: model_ordered.first } %>
-        <%= render :partial => 'table_body', :locals => { model: model_ordered.first } %>
-
-      
-      <table>
-    <% end %>
-    <div class="row">
-      <div class=" row right-align" style="display: block; margin-right: 24px; padding-right:24px">Subtotal: $<span id="total_cart_cost"></span></div>
-      <% if !current_user.company.nil? %>
-        <% if !current_user.company.discount.nil? %>
-          <div class=" row right-align" style="display: block; margin-right: 24px; padding-right:24px">Discount: $<span id="discount"><%= sprintf('%.2f', current_user.company.discount) %></span></div>
-        <% end %>
-      <% end %>
-      <h6 class=" row right-align" style="display: block; margin-right: 24px; padding-right:24px"><b>Total: $<span id="after_discount"></span></b></h6>
-    </div>  
-    <div class="row">  
+  <div class="row">  
       <div id="confirm_order" style="float: right;"><%= link_to t('cart.confirm_order'), purchases_path, method: :post, :class => "btn waves-effect waves-light right" %>      
       </div>
-      <button><%= link_to t('cart.empty_cart'), cart_clear_path %></button>
+      <%= link_to t('cart.empty_cart'), cart_clear_path %>
     </div>
-  <%else%>
-    <h3 class="center-align">Cart is empty.</h3>
+  <% for model in cart_models %>
+    <table>
+      <%= render :partial => 'table_header', :locals => { model: model } %>
+      <tbody id='<%= get_toggle_table_id(model) %>' style="display: none;">
+        <tr>
+          <td colspan="2"></td>
+          <% for size in all_sizes %>
+            <td class="center"><%= size.code_value %></td>
+          <% end %>
+        </tr>
+        <% for color in model_color_objects(model.id) %>
+          <%= render :partial => 'products_table/product_row', :locals => { model: model, color: color } %>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
 </div>

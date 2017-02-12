@@ -1,12 +1,15 @@
 <thead>
-  <div style="cart-product-header-row">
-    <span class="model_title"><b><%=model.title%></b></span>
-    <div style="float: right;">
-      <span>$</span><span class="<%= get_price_class(model) %>"><%= model.price %></span>
-      <span> x </span><span class="<%= get_model_class(model) %>">0</span>
-      <span>= $</span><span class="<%= get_cost_class(model) %> model_cost">0</span>
-    </span>
-    <div class="right" id='<%= get_toggle_id(model) %>'>
+  <tr class="cart-product-header-row">
+    <td class="model_title"><%=model.title%></td>
+    <td colspan="4"></td>
+    <td class="<%= get_price_class(model) %>"><%= sprintf("%.2f", model.price) %></td>
+    <td> * </td>
+    <td id='<%= get_model_class(model) %>'>0.00</td>
+    <td> = </td>
+    <td class="<%= get_cost_class(model) %> model_cost">0.00</td>
+    <td></td>
+    <td><div class="right" id='<%= get_toggle_id(model) %>'>
       <img src="/assets/ic_arrow_down_24px.svg" alt="">
-    </div>
+    </div></td>
+  </tr>
 </thead>
