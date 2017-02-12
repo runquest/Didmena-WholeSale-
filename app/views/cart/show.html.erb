@@ -1,9 +1,13 @@
 <div class="container">
-  <div class="row">  
-      <div id="confirm_order" style="float: right;"><%= link_to t('cart.confirm_order'), purchases_path, method: :post, :class => "btn waves-effect waves-light right" %>      
-      </div>
-      <%= link_to t('cart.empty_cart'), cart_clear_path %>
+  <div class="row first-row">  
+    <%= link_to t('cart.empty_cart'), cart_clear_path, :class => "left-align col l6 m6" %>
+    <%= link_to t('cart.confirm_order'), purchases_path, method: :post, :class => "right-align col l6 m6" %>      
+  </div>
+  <div class="row first-row">
+    <div class="col s6 offset-s6">
+      <%= render :partial => 'cart_order_cost' %>
     </div>
+  </div>
   <% for model in cart_models %>
     <table>
       <%= render :partial => 'table_header', :locals => { model: model } %>

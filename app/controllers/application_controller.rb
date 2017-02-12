@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 
   helper_method :current_user
+  helper_method :current_user_discount
   helper_method :current_cart
   helper_method :model_colors
   helper_method :model_color_objects
@@ -34,6 +35,13 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def current_user_discount
+    if current_user.company_id.nil?
+      return 
+    end
+    return Company.find(current_user.company_id).discount
   end
 
   def current_product(model_id, color_id, size_id)
