@@ -30,7 +30,7 @@ Gender.create(code_value: 'M', meaning: 'MAN')
     #    Color.create(code_value: 'DDEEFF', meaning: 'Light blue')
     # end
 
-Color names taken from http://www.w3schools.com/colors/colors_names.asp
+# Color names taken from http://www.w3schools.com/colors/colors_names.asp
 
 # 000000 black
     if Color.find_by(code_value: '000000').nil? && Color.find_by(meaning: 'black').nil?
