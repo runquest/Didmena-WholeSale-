@@ -1,4 +1,4 @@
-class AddInitialColor < ActiveRecord::Migration
+class AddInitialColors < ActiveRecord::Migration
   def change
   	# if Color.find_by(code_value: 'DDEEFF').nil? && Color.find_by(meaning: 'DDEEFF').nil?
   	#    Color.create(code_value: 'DDEEFF', meaning: 'Light blue')
