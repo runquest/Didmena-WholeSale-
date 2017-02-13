@@ -1,4 +1,4 @@
-class AddInitialDomainsValues < ActiveRecord::Migration
+class AddInitialDomainsValue < ActiveRecord::Migration
   def change
 
 	# SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
