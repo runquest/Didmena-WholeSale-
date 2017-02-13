@@ -19,7 +19,7 @@ class AddInitialDomainsValues < ActiveRecord::Migration
  	end
 
   	if Size.find_by(code_value: 'XL').nil? && Size.find_by(meaning: 'EXTRA LARGE').nil?
-		Size.create(ode_value: 'XL', meaning: 'EXTRA LARGE')
+		Size.create(code_value: 'XL', meaning: 'EXTRA LARGE')
  	end
 
 	# Season
