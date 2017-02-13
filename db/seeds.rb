@@ -1,8 +1,8 @@
 # DOMAIN:
 # GENDER: F - Female, M - Male
 
-Gender.create(code_value: 'F', meaning: 'FEMALE')
-Gender.create(code_value: 'M', meaning: 'MALE')
+Gender.create(code_value: 'W', meaning: 'WOMAN')
+Gender.create(code_value: 'M', meaning: 'MAN')
 
 # COLOR:  R - Red, G - Green, B - Blue, Y - Yellow, etc.
 
