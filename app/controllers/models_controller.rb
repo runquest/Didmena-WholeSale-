@@ -14,7 +14,7 @@ class ModelsController < ApplicationController
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
-    @colors = find_colors_general(@model.id)
+    @colors = model_colors(@model.id)
   end
     
   # GET /models/new
@@ -32,7 +32,7 @@ class ModelsController < ApplicationController
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
-    @colors = find_colors_general(@model.id)
+    @colors = model_color_objects(@model.id)
     if @model.products.any?
       @products = @model.products
     else
@@ -45,13 +45,13 @@ class ModelsController < ApplicationController
       @model_attachment = @model.model_attachments.build
     end
     
-    @colors = Array.new;
+    # @colors = Array.new;
 
-    @products.each do |prdct|
-      if !@colors.include? prdct.color_id
-        @colors.push(prdct.color_id)
-      end
-    end
+    # @products.each do |prdct|
+    #   if !@colors.include? prdct.color_id
+    #     @colors.push(prdct.color_id)
+    #   end
+    # end
   end
 
   # GET /models/1/add_products

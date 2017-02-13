@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %> center flash-message"><%= value %></div>
+    <% end %>
+    <h4><%= @model.title %></h4>
+    <h5 style="color: lightgrey"><%= @type.upcase %> <%= @collection.upcase %></h5>
+  </div>
+  <%= render :partial => 'add_products', :locals => { model: @model } %>
+
+  <div class="row">
+    <%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
+      <%= form_errors_for @model %>
+      <div  class="col s12 m6 l6">
+
+        <%= f.label :price, t('models.price') %>
+        <div class="hint-text">Enter price</div>
+        <%= f.number_field(:price,  :class => 'price-field text_field', :step => '0.01') %>
+
+        <div class="radio_buttons">
+          <%= f.label :priority, "Priority" %>
+          <div class="hint-text">
+            Priority 0 - 4. Default is 0. Model will not be shown on the front page. 4 will place image at the top of the page.
+          </div>
+          <div class="left-align" style="padding: 1rem 0">
+            <%= f.collection_radio_buttons :priority, [["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"] ,], :first, :last, {:item_wrapper_class => 'inline'}, {:class => "radio-inline" } %>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l6">
+        <%= f.label :note, t('models.description') %>
+        <%= f.text_area(:note, :class => 'materialize-textarea', :style => 'overflow-y: scroll; min-height: 180px;') %>
+      </div>
+      
+        
+     
+  </div>
+
+
+
+
+  <div class="row">
+    <div id="img_upload" class="col s12">
+      <%= f.fields_for :model_attachments do |p| %>
+        <% if @model_attachments.present? %>
+          <% if @model_attachments[0].id.equal?(p.object.id) %>
+            <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>  
+          <% end %>
+        <% else %>
+          <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>  
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div id="img_upload_x" class="col s12">
+      <% if !@model_attachments.blank? %>
+        <div class="row" style="padding-top:5px; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+          <% @model_attachments.each do |p| %>
+            <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
+              <span style="height: 200px;">
+                <%= image_tag p.avatar_url, :class => "prod_image_small" %>
+              </span>
+              <% if current_user && current_user.apps_manager %>
+                <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') } %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <%= f.submit "save" %>
+  </div>
+  <% end %> <!-- closes form -->
+</div>
+
+
+
+
+
+
+
+    <thead>
+          <tr>
+            <th></th>
+            <th data-field="id"><%= t('model.color')%></th>
+            <% @sizes.each do |size| %>
+              <th id='<%=size.id%>' class="size" data-field='<%= size.code_value%>'><%= size.code_value%></th>
+            <% end %> 
+            <th></th>
+          </tr>
+        </thead>

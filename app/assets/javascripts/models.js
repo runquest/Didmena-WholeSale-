@@ -61,7 +61,7 @@ $(function() {
     }
 
     var row = "'<tr id='row_" + color_id + "'></tr> ";
-    var color_indication_circle = "'<td style='background-color: #" + color_hex_code + "; width=5%;'></td> ";
+    var color_indication_circle = "<td><div class='color-circle' style='background: #" + color_hex_code + ";'></div></td>";
     var color_name_cell = "<td class='color_name'>" + color_name + "</td>";
     var new_row = ("tr#row_" + color_id).toString();
     var delete_row_icon = "<td class='del x' id='delete_" + color_id + "'><input type='button' value='Delete' /></td>";

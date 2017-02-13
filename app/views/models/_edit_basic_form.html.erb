@@ -1,0 +1,35 @@
+<%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
+  <%= form_errors_for @model %>
+  <div class="row">
+    <div class="col s4 left">
+      <%= f.label :price, t('models.price') %>
+      <div class="hint-text">Enter price</div>
+    </div>
+    <div class="col s8 left">
+      <%= f.number_field(:price,  :class => 'text_field', :step => '0.01') %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <div class="radio_buttons">
+        <%= f.label :priority, "Priority" %>
+        <div class="hint-text">
+          Priority 0 - 4. Default is 0. Model will not be shown on the front page. 4 will place image at the top of the page.
+        </div>
+        <div class="left-align" style="padding: 1rem 0">
+          <%= f.collection_radio_buttons :priority, [["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"] ,], :first, :last, {:item_wrapper_class => 'inline'}, {:class => "radio-inline" } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">  <%= f.label :note, t('models.description') %>
+      <%= f.text_area(:note, :class => 'materialize-textarea', :style => 'overflow-y: scroll; min-height: 180px;') %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 actions">
+      <%= f.submit 'update model', :class => 'save-button' %>
+    </div>
+  </div>
+<% end %>
