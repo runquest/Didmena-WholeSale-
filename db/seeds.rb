@@ -1,8 +1,8 @@
 # DOMAIN:
 # GENDER: F - Female, M - Male
 
-Gender.create(code_value: 'W', meaning: 'WOMAN')
-Gender.create(code_value: 'M', meaning: 'MAN')
+# Gender.create(code_value: 'W', meaning: 'WOMAN')
+# Gender.create(code_value: 'M', meaning: 'MAN')
 
 # COLOR:  R - Red, G - Green, B - Blue, Y - Yellow, etc.
 
@@ -32,72 +32,72 @@ Gender.create(code_value: 'M', meaning: 'MAN')
 
 # Color names taken from http://www.w3schools.com/colors/colors_names.asp
 
-# 000000 black
-    if Color.find_by(code_value: '000000').nil? && Color.find_by(meaning: 'black').nil?
-       Color.create(code_value: '000000', meaning: 'black')
-  end
-# 000080 navy
-    if Color.find_by(code_value: '000080').nil? && Color.find_by(meaning: 'navy').nil?
-       Color.create(code_value: '000080', meaning: 'navy')
-  end
-# 0000FF blue
-    if Color.find_by(code_value: '0000FF').nil? && Color.find_by(meaning: 'blue').nil?
-       Color.create(code_value: '0000FF', meaning: 'blue')
-  end
-# 008000 green
-    if Color.find_by(code_value: '008000').nil? && Color.find_by(meaning: 'green').nil?
-       Color.create(code_value: '008000', meaning: 'green')
-  end
-# 00FF00 lime
-    if Color.find_by(code_value: '00FF00').nil? && Color.find_by(meaning: 'lime').nil?
-       Color.create(code_value: '00FF00', meaning: 'lime')
-  end
-# 800000 maroon
-    if Color.find_by(code_value: '800000').nil? && Color.find_by(meaning: 'maroon').nil?
-       Color.create(code_value: '800000', meaning: 'maroon')
-  end
-# 808000 olive
-    if Color.find_by(code_value: '808000').nil? && Color.find_by(meaning: 'olive').nil?
-       Color.create(code_value: '808000', meaning: 'olive')
-  end
-# 808080 grey
-    if Color.find_by(code_value: '808080').nil? && Color.find_by(meaning: 'grey').nil?
-       Color.create(code_value: '808080', meaning: 'grey')
-  end
-# FF0000 red
-    if Color.find_by(code_value: 'FF0000').nil? && Color.find_by(meaning: 'red').nil?
-       Color.create(code_value: 'FF0000', meaning: 'red')
-  end
-# FFFF00 yellow
-    if Color.find_by(code_value: 'FFFF00').nil? && Color.find_by(meaning: 'yellow').nil?
-       Color.create(code_value: 'FFFF00', meaning: 'yellow')
-  end
-# FFFFFFF white
-    if Color.find_by(code_value: 'FFFFFF').nil? && Color.find_by(meaning: 'white').nil?
-       Color.create(code_value: 'FFFFFF', meaning: 'white')
-  end
+# # 000000 black
+#     if Color.find_by(code_value: '000000').nil? && Color.find_by(meaning: 'black').nil?
+#        Color.create(code_value: '000000', meaning: 'black')
+#   end
+# # 000080 navy
+#     if Color.find_by(code_value: '000080').nil? && Color.find_by(meaning: 'navy').nil?
+#        Color.create(code_value: '000080', meaning: 'navy')
+#   end
+# # 0000FF blue
+#     if Color.find_by(code_value: '0000FF').nil? && Color.find_by(meaning: 'blue').nil?
+#        Color.create(code_value: '0000FF', meaning: 'blue')
+#   end
+# # 008000 green
+#     if Color.find_by(code_value: '008000').nil? && Color.find_by(meaning: 'green').nil?
+#        Color.create(code_value: '008000', meaning: 'green')
+#   end
+# # 00FF00 lime
+#     if Color.find_by(code_value: '00FF00').nil? && Color.find_by(meaning: 'lime').nil?
+#        Color.create(code_value: '00FF00', meaning: 'lime')
+#   end
+# # 800000 maroon
+#     if Color.find_by(code_value: '800000').nil? && Color.find_by(meaning: 'maroon').nil?
+#        Color.create(code_value: '800000', meaning: 'maroon')
+#   end
+# # 808000 olive
+#     if Color.find_by(code_value: '808000').nil? && Color.find_by(meaning: 'olive').nil?
+#        Color.create(code_value: '808000', meaning: 'olive')
+#   end
+# # 808080 grey
+#     if Color.find_by(code_value: '808080').nil? && Color.find_by(meaning: 'grey').nil?
+#        Color.create(code_value: '808080', meaning: 'grey')
+#   end
+# # FF0000 red
+#     if Color.find_by(code_value: 'FF0000').nil? && Color.find_by(meaning: 'red').nil?
+#        Color.create(code_value: 'FF0000', meaning: 'red')
+#   end
+# # FFFF00 yellow
+#     if Color.find_by(code_value: 'FFFF00').nil? && Color.find_by(meaning: 'yellow').nil?
+#        Color.create(code_value: 'FFFF00', meaning: 'yellow')
+#   end
+# # FFFFFFF white
+#     if Color.find_by(code_value: 'FFFFFF').nil? && Color.find_by(meaning: 'white').nil?
+#        Color.create(code_value: 'FFFFFF', meaning: 'white')
+#   end
 
 
-  # SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
-    if Size.find_by(code_value: 'XS').nil? && Size.find_by(meaning: 'EXTRA SMALL').nil?
-    Size.create(code_value: 'XS', meaning: 'EXTRA SMALL')
-  end
+#   # SIZE:   S - Small, M - Medium, L - Large, XL - Extra Large, XXL - Super Extra Large, etc.
+#     if Size.find_by(code_value: 'XS').nil? && Size.find_by(meaning: 'EXTRA SMALL').nil?
+#     Size.create(code_value: 'XS', meaning: 'EXTRA SMALL')
+#   end
 
-    if Size.find_by(code_value: 'S').nil? && Size.find_by(meaning: 'SMALL').nil?
-    Size.create(code_value: 'S', meaning: 'SMALL')
-  end
+#     if Size.find_by(code_value: 'S').nil? && Size.find_by(meaning: 'SMALL').nil?
+#     Size.create(code_value: 'S', meaning: 'SMALL')
+#   end
 
-    if Size.find_by(code_value: 'M').nil? && Size.find_by(meaning: 'MEDIUM').nil?
-    Size.create(code_value: 'M', meaning: 'MEDIUM')
-  end
+#     if Size.find_by(code_value: 'M').nil? && Size.find_by(meaning: 'MEDIUM').nil?
+#     Size.create(code_value: 'M', meaning: 'MEDIUM')
+#   end
 
-    if Size.find_by(code_value: 'L').nil? && Size.find_by(meaning: 'LARGE').nil?
-    Size.create(code_value: 'L', meaning: 'LARGE')
-  end
+#     if Size.find_by(code_value: 'L').nil? && Size.find_by(meaning: 'LARGE').nil?
+#     Size.create(code_value: 'L', meaning: 'LARGE')
+#   end
 
-    if Size.find_by(code_value: 'XL').nil? && Size.find_by(meaning: 'EXTRA LARGE').nil?
-    Size.create(code_value: 'XL', meaning: 'EXTRA LARGE')
-  end
+#     if Size.find_by(code_value: 'XL').nil? && Size.find_by(meaning: 'EXTRA LARGE').nil?
+#     Size.create(code_value: 'XL', meaning: 'EXTRA LARGE')
+#   end
 
   # Season
     if Season.find_by(code_value: 'SPRING').nil? && Season.find_by(meaning: 'SPRING').nil?
