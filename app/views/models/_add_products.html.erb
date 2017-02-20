@@ -32,7 +32,7 @@
             <tr id='<%= color %>'>
               <td><div class="color-circle" style="background: #<%= color.code_value %>"></div></td>
               <td><span class="center-align"><%= color.meaning %></span></td>
-              <% for size in @sizes %>
+              <% for size in Size.all.order(:id).reverse %>
                 <% find_model_product(color.id, size.id) %>
                 <td>
                   <% if can_order? %>

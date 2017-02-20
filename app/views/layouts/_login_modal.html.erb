@@ -1,14 +1,23 @@
-<div class="modal" data-backdrop="true" keyboard="true" fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+  <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: 'flash-message') %>
+  <% end %>
+  <%= form_tag sessions_path do %>
     <div class="modal-content">
-      <div class="modal-body">
-        <div class="col s12" id="login"> 
-          <div type="button" id="xButton" class="right-align" data-dismiss="modal">close</div>
-          <div class="container">
-            <%= render 'sessions/login_form' %>
-          </div>
-        </div>
-      </div>
+      <!-- <h4>Modal Header</h4> -->
+      <div>
+      <%= label_tag t('login.email') %><br/>
+      <%= text_field_tag "email" %>
     </div>
-  </div>
+    <div>
+      <%= label_tag :password, t('login.password') %><br/>
+      <%= password_field_tag :password %>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <div type="button" id="xButton" class=" modal-action modal-close waves-effect waves-green btn-flat" data-dismiss="modal">close</div>
+      <div><%= submit_tag t('login.login'), remote: true, class: 'modal-action modal-close waves-effect waves-green btn-flat submit' %></div>
+    </div>
+  <% end %>
 </div>

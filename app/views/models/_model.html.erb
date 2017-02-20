@@ -1,11 +1,16 @@
-<div class="col s12 m3 l4 model-card"> 
-  <%= link_to (image_tag (thumbnail(model)), :class=>"model-card-image"), model %>
-  <h5><%= link_to model.title, model %></h5>
-  <div class="model-card-content"><%= model.note %></div>
-  <% if !products_available(model) %>
-    <p>No available products.</p>
-  <% end %>
-  <% for color in model_colors(model.id) %>
-    <div class="color-circle small" style="background: #<%= color %>"></div>
-  <% end %>
+<div class="col s12 m4">
+  <div class="card hoverable">
+    <div class="card-image">
+      <%= link_to (image_tag (thumbnail(model)), :class=>""), model %>
+    </div>
+    <div class="card-content">
+      <span class="card-title truncate"><%= link_to model.title, model %></span>
+      <p class="truncate"><%= model.note %></p>
+    </div>
+    <div class="card-action valign-wrapper">
+      <% for color in model_colors(model.id) %>
+        <div class="color-circle small valign" style="background: #<%= color %>"></div>
+      <% end %>
+    </div>
+  </div>
 </div>

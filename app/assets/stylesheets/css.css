@@ -11,6 +11,9 @@ min-height: 100%;
   border-bottom: 1px solid lightgrey; padding: 5px; background: lightgrey;
 }
 
+.card-action {
+  height: 56.11px;
+}
 .hint-text {
   font-size: 0.6rem; color: #9e9e9e;
 }
@@ -158,6 +161,10 @@ ul#session-menu li {
 div#myModal{
   width: 50%;
   margin-top: 100px;
+  position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
 div[type="button"] {

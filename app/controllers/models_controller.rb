@@ -4,7 +4,22 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
+    @models_have_products = []
+    @models_no_products = []
+    Model.all.each do |model|
+      if products_available(model)
+        @models_have_products << model
+      else
+        @models_no_products << model
+      end
+    end 
     @models = Model.all.order(:priority)
+  end
+
+  def products_available(model)
+  # def model_has_product_in_storage(model)
+    in_storage = model.products.map { |product| product.in_storage }
+    return in_storage.include?(true)
   end
 
   # GET /models/1
@@ -14,7 +29,7 @@ class ModelsController < ApplicationController
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
-    @colors = model_colors(@model.id)
+    @colors = find_colors_general(@model.id)
   end
     
   # GET /models/new
