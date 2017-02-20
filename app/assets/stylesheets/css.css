@@ -15,15 +15,33 @@ min-height: 100%;
   font-size: 0.6rem; color: #9e9e9e;
 }
 
+.img-preview-row{
+  margin: 25px 0;
+}
+
+.img-thumbnail {
+  height: 200px;
+}
+
+.img-row {
+  padding-top:5px; flex-direction: row; flex-wrap: wrap; justify-content: center;
+}
+
+.form-block {
+  margin-bottom: 25px;
+  padding: 5px;
+  border: 1px solid grey;
+}
+
 .first-row {
   margin-top: 1rem;
 }
 
-.text_field {
+/*.text_field {
   width: 80%;
 }
-
-.save-button {
+*/
+.save-button, input#upload{
   background: none;
   border: none;
   color: #039be5;

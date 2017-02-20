@@ -8,6 +8,8 @@ $(function() {
     }
   }
 
+  // Edit page.
+
   var options = {
     url: "/cls.json",
     getValue: "meaning",
@@ -31,8 +33,6 @@ $(function() {
   };
 
   $("#basics").easyAutocomplete(options);
-
-  // Edit page.
 
   $('div.color_element').on('click', function(event) {
     var selected_color_id = this.id;

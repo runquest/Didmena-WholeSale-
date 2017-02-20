@@ -1,13 +1,15 @@
 <div id="model_products" class="row valign-wrapper">  
     <div class="col s12 m12 l12">
-      <div>Manage products in storage.</div>
+      <h5>Manage products in storage.</h5>
       <div class="text-hint">Select color (Add new color) >> Checkmark if product is available in storage.</div>
     </div>
   </div>
-  <div class="row">
-    <div class="input-field col s12">
+  <div class="row form-block">
+    <div class="input-field col s6">
       <i class="material-icons prefix">search</i>
-      <input style="margin-left: 3rem; width: 80%;" id="basics">
+      <input style="margin-left: 3rem; width: 90%;" id="basics">
+    </div>
+    <div class="input-field col s6">
       <%= link_to 'Cannot find color you are looking? Add it.', new_domain_path %>
     </div>
   </div>    
