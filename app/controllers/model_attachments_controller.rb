@@ -14,7 +14,6 @@ class ModelAttachmentsController < ApplicationController
 
   # GET /model_attachments/new
   def new
-    binding.pry
     @model_attachment = ModelAttachment.new
   end
 
@@ -25,7 +24,6 @@ class ModelAttachmentsController < ApplicationController
   # POST /model_attachments
   # POST /model_attachments.json
   def create
-    binding.pry
     @model_attachment = ModelAttachment.new(model_attachment_params)
     respond_to do |format|
       if @model_attachment.save
