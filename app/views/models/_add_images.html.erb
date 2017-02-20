@@ -1,34 +1,42 @@
 <div class="col s12 m12 l12">
   <h5>Manage images</h5>
   <div class="text-hint">Add and remove new images to the model.</div>
-</div>
-<%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %> 
+  </div>
   <div id="img_upload" class="col s12 img-preview-row">
   </div>
-  <div>
+  <%= form_for(@model) do |f| %>
     <%= f.fields_for :model_attachments do |p| %>
       <% if @model_attachments.present? %>
-          <% if @model_attachments[0].id.equal?(p.object.id) %>
-            <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()", :class=>'save-button'%>  
-          <% end %>
-        <% else %>
-          <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()", :class=>'save-button'%>  
-        <% end %>
-    <% end %>  
-  </div>
-  <div id="img_upload_x" class="col s12">
-    <% if !@model_attachments.blank? %>
-      <div class="row" class="img-row">
-        <% @model_attachments.each do |p| %>
-          <div class="col s12 m4 l4 center-align">
-            <%= image_tag p.avatar_url, :class => "prod_image_small" %>
-            <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') } %>
+        <% if @model_attachments[0].id.equal?(p.object.id) %>
+          <div class="col s6">
+            <div class=" form-block">
+              <i class="material-icons prefix">perm_media</i>
+              <label style="margin-left: 3rem; width: 90%;" for="file-input">Select files</label>
+              <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()", :id=>'file-input'%>  
+            </div>
           </div>
         <% end %>
-      </div>
-    <% end %>
-  </div>
-  <div>
-    <%= f.submit "save", :class => 'save-button right'  %>
-  </div>
-<% end %>
+      <% else %>
+        <div class="col s6">
+          <div class=" form-block">
+            <i class="material-icons prefix">perm_media</i>
+            <label style="margin-left: 3rem; width: 90%;" for="file-input">Select files</label>
+            <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()", :id=>'file-input'%>  
+          </div>
+        </div>
+      <% end %>
+    <% end %> 
+    <div id="img_upload_x" class="col s12">
+      <% if !@model_attachments.blank? %>
+        <div class="row" class="img-row">
+          <% @model_attachments.each do |p| %>
+            <div class="col s12 m4 l4 center-align">
+              <%= image_tag p.avatar_url, :class => "prod_image_small" %>
+              <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') } %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <%= submit_tag "save", :class => 'save-button right' %> 
+  <% end %>
+</div>

@@ -10,7 +10,6 @@ class ModelsController < ApplicationController
   # GET /models/1
   # GET /models/1.json
   def show
-   
     @products = model_products(@model.id)
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
@@ -21,17 +20,13 @@ class ModelsController < ApplicationController
   # GET /models/new
   def new
     @model = Model.new
-   
-    # @model_attachment = @model.model_attachments.build
   end
 
   # GET /models/1/edit
   def edit
-    
     @model = Model.find(params[:id])
     @model_attachments = @model.model_attachments
-    @sizes = Domain.where(domain_name: 'Size').order(:id).reverse
-
+    @sizes = Size.all.order(:id).reverse
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
@@ -76,77 +71,24 @@ class ModelsController < ApplicationController
 
     @model = Model.new(model_params)
     if @model.save
-     
       redirect_to edit_model_path(@model)
     else
-     
       render :new
     end
-
-   
-
-    # if params[:model][:price].blank?
-    #   params[:model][:price] = 0
-    # end
-    
-    # @model = Model.new(model_params)
-    # if @model.products.any?
-    #   @products = @model.products
-    # else
-    #   @products = []
-    # end
-    # if @model.save
-    #   if !params[:model_attachments].nil?
-    #     params[:model_attachments]['avatar'].each do |a|
-    #       @model_attachment = @model.model_attachments.create(:avatar => a)
-    #     end
-    #   else
-    #     @model_attachments = []
-    #   end
-
-    #   redirect_to action: "edit", id: @model.id
-
-    # else
-    #   render action: 'new'
-    # end
   end
 
   # PATCH/PUT /models/1
   # PATCH/PUT /models/1.json
   def update
-    binding.pry
-    # @model = Model.find(params[:id])
-    # if !model_params.nil?
-    #   if @model.update_attributes(model_params)
-    #     redirect_to model_path(@model)
-    #   else
-    #     flash[:notice] = "changes has not been saved"
-    #     redirect_to :back
-    #   end
-    # end
+    if !params[:model].nil?
+      @model.update_attributes(model_params)
+    end
+
     if !params[:model_attachments].nil?
       maintain_model_attachments
     end
 
-
-    # @model.model_attachments(params[:model])
-
-    # if @model.products.empty? || !productsInStore(@model.products)
-    #   if @model.update_attributes(model_params)
-    #     maintain_model_attachments
-    #   else
-    #     flash[:notice] = "no products selected"
-    #     redirect_to :back
-    #   end
-    # else
-     
-    #   # if @model.update_attributes(model_params)
-    #   #
-    #     maintain_model_attachments
-    #   # else
-    #   #   render action: 'edit'
-    #   # end
-    # end
+    redirect_to model_path(@model)
   end
 
   def productsInStore(products)
@@ -175,14 +117,10 @@ class ModelsController < ApplicationController
   end
 
   def maintain_model_attachments
- 
-      
-        params[:model_attachments]['avatar'].each do |a|
-          @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
-        end
-      
-      redirect_to action: "show", id: @model.id
+    params[:model_attachments]['avatar'].each do |a|
+      @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
     end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
