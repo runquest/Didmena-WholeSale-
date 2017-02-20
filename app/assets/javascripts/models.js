@@ -26,11 +26,14 @@ $(function() {
     template: {
       type: "custom",
       method: function(value, item) {
-        return "<span style='padding: 5px; background-color: #"+ item.code_value+"'>" + item.code_value + "</span> " + value;
+        return "<span class='small color-circle' style='background-color: #"+ item.code_value+"'></span>" + item.code_value + " " + value;
+        // return "<span class='small color-circle' style='background-color: #"+ item.code_value+"'>" + item.code_value + "</span> " + value;
       }
     },
     theme: "round"
   };
+
+    $("#basics").easyAutocomplete(options);
 
   $("span#btn-basic-info").on('click', function(event) {
     $('div#basic-info').css({ 'display': "block" });
@@ -51,15 +54,10 @@ $(function() {
   });
 
   $('img.img-style').on('click', function(event) {
-    console.log(this.src);
-
     $('div#display-image').empty();
     var image = "<img class='center-align img-style' src='" + this.src + "'>";
     $('div#display-image').append(image);
-
   });
-
-  $("#basics").easyAutocomplete(options);
 
   $('div.color_element').on('click', function(event) {
     var selected_color_id = this.id;
