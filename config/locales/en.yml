@@ -132,7 +132,7 @@ en:
         title: "companies"
 
     models:
-        title: "* name"
+        title: "Model name"
         choose_type: "choose type"
         choose_collection: "choose collection"
         description_placeholder: "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton."

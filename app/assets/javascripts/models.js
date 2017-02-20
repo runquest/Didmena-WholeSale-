@@ -8,6 +8,8 @@ $(function() {
     }
   }
 
+  // Edit page.
+
   var options = {
     url: "/cls.json",
     getValue: "meaning",
@@ -24,7 +26,7 @@ $(function() {
     template: {
       type: "custom",
       method: function(value, item) {
-        return "<span style='padding: 5px; background-color: #"+ item.code_value+"'>" + item.code_value + "</span> " + value;
+        return "<span class='small color-circle' style='background-color: #"+ item.code_value+"'></span>" + item.code_value + " " + value;
       }
     },
     theme: "round"
@@ -32,7 +34,40 @@ $(function() {
 
   $("#basics").easyAutocomplete(options);
 
-  // Edit page.
+  // $("a#color-create").on('click', function(event) {
+  //   var domain_name = "color";
+  //   var code_value = document.getElementById("code_value").value.toUpperCase();
+  //   var meaning = document.getElementById("meaning").value;
+  //   createColor(code_value, meaning)
+  // });
+
+  $("span#btn-basic-info").on('click', function(event) {
+    $('div#basic-info').css({ 'display': "block" });
+    $('div#model-products').css({ 'display': "none" });
+    $('div#model-images').css({ 'display': "none" });
+  });  
+
+  $("a#toggle-add-color").on('click', function(event) {
+    $('div#add-color-block').toggle();
+  });
+
+  $("span#btn-product-info").on('click', function(event) {
+    $('div#basic-info').css({ 'display': "none" });
+    $('div#model-products').css({ 'display': "block" });
+    $('div#model-images').css({ 'display': "none" });
+  });
+
+  $("span#btn-image-info").on('click', function(event) {
+    $('div#basic-info').css({ 'display': "none" });
+    $('div#model-products').css({ 'display': "none" });
+    $('div#model-images').css({ 'display': "block" });
+  });
+
+  $('img.img-style').on('click', function(event) {
+    $('div#display-image').empty();
+    var image = "<img class='center-align img-style' src='" + this.src + "'>";
+    $('div#display-image').append(image);
+  });
 
   $('div.color_element').on('click', function(event) {
     var selected_color_id = this.id;
@@ -61,7 +96,7 @@ $(function() {
     }
 
     var row = "'<tr id='row_" + color_id + "'></tr> ";
-    var color_indication_circle = "'<td style='background-color: #" + color_hex_code + "; width=5%;'></td> ";
+    var color_indication_circle = "<td><div class='color-circle' style='background: #" + color_hex_code + ";'></div></td>";
     var color_name_cell = "<td class='color_name'>" + color_name + "</td>";
     var new_row = ("tr#row_" + color_id).toString();
     var delete_row_icon = "<td class='del x' id='delete_" + color_id + "'><input type='button' value='Delete' /></td>";
@@ -103,6 +138,23 @@ $(function() {
       }
     });
   });
+
+  function createColor(code_value, meaning) {
+    var domain_data = {domain_name: "Color", code_value: code_value, meaning: meaning};
+    $.ajax({
+      method: 'post',
+      url: '/'+localization+'/domains',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(domain_data),
+      success: function (data) {
+        console.log("Domain created successfully: " + data);
+      },
+      error: function(err){
+        console.log("Domain failed to be created: " + err);
+      }
+    });
+  }
 
   function createProduct(model_id, color_id, size_id) {
     var product_data = {model: model_id, color: color_id, size: size_id, in_storage: false};

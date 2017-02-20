@@ -39,9 +39,9 @@ class ApplicationController < ActionController::Base
 
   def current_user_discount
     if current_user.company_id.nil?
-      return 
+      return
     end
-    return Company.find(current_user.company_id).discount
+    return Company.find(current_user.company_id).discount.to_f
   end
 
   def current_product(model_id, color_id, size_id)

@@ -19,9 +19,8 @@
   </header>
   <body data-locale='<%=I18n.locale%>'>
     <div class="container">
-      <%= yield :form_errors %>
+      <%= yield %>
     </div>
-    <%= yield %>
   </body>
   <footer>
     <%= render 'layouts/footer' %>

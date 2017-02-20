@@ -1,5 +1,8 @@
-<div class="container">
-  <div class="row model-index-row">
-    <%= render :partial => @models %>
-  </div>
+<div class="row model-index-row">
+  <div class="row"><%= render :partial => @models_have_products %></div>
+  <% if current_user && current_user.apps_manager %>
+    <div class="divider"></div>
+    <h5>No products in storage</h5>
+    <div class="row"><%= render :partial => @models_no_products %></div>
+  <% end %>
 </div>

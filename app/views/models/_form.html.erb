@@ -1,63 +1,30 @@
-<div class="container">
-  <p id="notice flash-message"><%= notice %></p>
-  <%= form_for(@model, :html => { :multipart => true, :id => "model_form" } ) do |f| %>
-    <%= form_errors_for @model %>
-    <div class="row">
-      <div class="input-field col s12">
-        <%= f.label :title, t('models.title') %><br>
-        <%= f.text_field :title, :placeholder => 'Pima Cotton t-shirt' %>
-      </div>
+<!-- 
+  Basic details for the model:
+  name, type (what the hell is type), collection, price, 
+  priority (what the hell is priority), description
+ -->
+
+<%= form_for(@model) do |f| %>
+  <%= form_errors_for @model %>
+  <% if @model.id.nil? %>
+    <div class="form-block">
+      <%= f.label :title, t('models.title') %><br>
+      <%= f.text_field :title %>
     </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <%= f.collection_select :gender_id, Domain.where(domain_name: "Gender"), :id, :meaning, { prompt: t('models.choose_type') }, class: "browser-default" %>
-      </div>
-      <div class="input-field col s12">
-        <%= f.collection_select :category_id, Domain.where(domain_name: "Season"), :id, :meaning, { prompt: t('models.choose_collection') }, class: "browser-default" %>
-      </div>
+    <div class="form-block">
+     <%= f.collection_select :gender_id, Gender.all, :id, :meaning, { prompt: 'choose type' }, class: "browser-default" %>
     </div>
-    <div class="row">
-      <div class="col 6">
-        <%= f.label :price, t('models.price') %>
-        <%= f.number_field(:price, :placeholder => "e.g. 10.15",  :class => 'text_field', :step => '0.01') %>
-      </div>
-      <div class="col 6">
-        <%= f.label :priority, "priority" %>
-        <%= f.number_field(:priority, :class => 'text_field', :step => '1') %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-         <%= t('models.description') %><%= f.text_area :note, :placeholder => "e.g. An everyday essential, this basic t-shirt is made from soft pima cotton." %>
-      </div>
-    </div>
-    <div class="row">
-      <div id="img_upload" class="col s12">
-        <%= f.fields_for :model_attachments do |p| %>
-          <% if !@model_attachments.nil? %>
-            <% if @model_attachments[0].id.equal?(p.object.id) %>
-              <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>  
-            <% end %>
-          <% else %>
-            <%= p.file_field :avatar, :multiple => true, name: "model_attachments[avatar][]", :id => "upload", :onchange => "readURL()"%>  
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="row">
-      <div id="img_upload_x" class="col s12">
-      <% if !@model_attachments.blank? %>
-        <% @model_attachments.each do |p| %>
-          <div><%= image_tag p.avatar_url, :class => "prod_image_small" %>
-          <% if current_user && current_user.apps_manager %>
-            <%= link_to t('delete'), p, method: :delete, data: { confirm: t('confirm') } %>
-          <% end %></div>
-        <% end %>
-      <% end %>
-      </div>
-    </div>
-    <div class="row">
-      <button id="model_button" class="btn waves-effect waves-light btn-large" ><%= t('models.save') %></button>
+    <div class="form-block">
+      <%= f.collection_select :category_id, Season.all, :id, :meaning, { prompt: t('models.choose_collection') }, class: "browser-default" %>
     </div>
   <% end %>
-</div>
+  <div class="form-block">
+    <%= f.label :price, t('models.price') %><br>
+    <%= f.number_field(:price, :step => '0.01') %>
+  </div>
+  <div class="form-block">
+    <%= f.label :note, t('models.description') %>
+    <%= f.text_area(:note, :class => 'materialize-textarea', :style => 'overflow-y: scroll; min-height: 45px;') %>
+  </div>
+  <%= submit_tag "save", :class => 'save-button right' %>
+<% end %>

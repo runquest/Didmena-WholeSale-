@@ -1,0 +1,53 @@
+<div id="model_products" class="row valign-wrapper">  
+    <div class="col s12 m12 l12">
+      <h5>Manage products in storage.</h5>
+      <div class="text-hint">Select color (Add new color) >> Checkmark if product is available in storage.</div>
+    </div>
+  </div>
+  <div class="row form-block">
+    <div class="input-field col s6">
+      <input id="basics"/><i class="material-icons">search</i>
+    </div>
+    <div class="input-field col s6">
+      <%= link_to "Cannot find color? Add it.", new_domain_path  %>
+    </div>
+  </div>    
+  <div class="row">
+    <div class="col s12">
+      <table id="colorSize">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <% for size in all_sizes %>
+              <th id='<%= size.id %>' class="center size" data-field='<%= size.code_value %>'>
+                <%= size.code_value %>
+              </th>
+            <% end %>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="color_row">
+          <% for color in @colors %>
+            <tr id='<%= color %>'>
+              <td><div class="color-circle" style="background: #<%= color.code_value %>"></div></td>
+              <td><span class="center-align"><%= color.meaning %></span></td>
+              <% for size in Size.all.order(:id).reverse %>
+                <% find_model_product(color.id, size.id) %>
+                <td>
+                  <% if can_order? %>
+                    <input type='checkbox' class='size' id='<%= color.id %>-<%=size.id %>' checked >
+                  <% else %>
+                    <input type='checkbox' class='size' id='<%= color.id %>-<%=size.id %>'>
+                  <% end %>
+                  <label for='<%= color.id %>-<%=size.id %>'></label>
+                </td>
+              <% end %>
+              <td class="del" id='delete_<%= color.id %>' ><a href="">x</a></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= link_to 'save', model_path(@model), :class => 'save-button right' %>
+  </div> 

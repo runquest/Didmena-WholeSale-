@@ -4,7 +4,22 @@ class ModelsController < ApplicationController
   # GET /models
   # GET /models.json
   def index
+    @models_have_products = []
+    @models_no_products = []
+    Model.all.each do |model|
+      if products_available(model)
+        @models_have_products << model
+      else
+        @models_no_products << model
+      end
+    end 
     @models = Model.all.order(:priority)
+  end
+
+  def products_available(model)
+  # def model_has_product_in_storage(model)
+    in_storage = model.products.map { |product| product.in_storage }
+    return in_storage.include?(true)
   end
 
   # GET /models/1
@@ -20,37 +35,28 @@ class ModelsController < ApplicationController
   # GET /models/new
   def new
     @model = Model.new
-    @model_attachment = @model.model_attachments.build
   end
 
   # GET /models/1/edit
   def edit
     @model = Model.find(params[:id])
     @model_attachments = @model.model_attachments
-    @sizes = Domain.where(domain_name: 'Size').order(:id).reverse
-
+    @sizes = Size.all.order(:id).reverse
     @model_attachments = @model.model_attachments.all
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
-    @colors = find_colors_general(@model.id)
+    @colors = model_color_objects(@model.id)
+    @domain = Domain.new
+ 
     if @model.products.any?
       @products = @model.products
     else
       @products = []
     end
-
     if @model.model_attachments.any?
       @model_attachments = @model.model_attachments
     else
       @model_attachment = @model.model_attachments.build
-    end
-    
-    @colors = Array.new;
-
-    @products.each do |prdct|
-      if !@colors.include? prdct.color_id
-        @colors.push(prdct.color_id)
-      end
     end
   end
 
@@ -63,51 +69,35 @@ class ModelsController < ApplicationController
   # POST /models.json
   def create
     if !params[:model][:title].blank?
+      params[:model][:title] = params[:model][:title].upcase
       code = params[:model][:title].delete(' ')[0..8]
       params[:model][:code] = code
     else
       code = Time.now.strftime("%Y%d%m%H%M%S")[0..8]
       params[:model][:code] = code
     end
+
     @model = Model.new(model_params)
-    if @model.products.any?
-      @products = @model.products
-    else
-      @products = []
-    end
     if @model.save
-      if !params[:model_attachments].nil?
-        params[:model_attachments]['avatar'].each do |a|
-          @model_attachment = @model.model_attachments.create(:avatar => a)
-        end
-      else
-        @model_attachments = []
-      end
-      redirect_to action: "edit", id: @model.id
+      redirect_to edit_model_path(@model)
     else
-      render action: 'new'
+      render :new
     end
   end
 
   # PATCH/PUT /models/1
   # PATCH/PUT /models/1.json
   def update
-    @model = Model.find(params[:id])
-    @model.model_attachments(params[:model])
-    if @model.products.empty? || !productsInStore(@model.products)
-      if @model.update_attributes(model_params)
-        maintain_model_attachments
-      else
-        flash[:notice] = "no products selected"
-        redirect_to :back
-      end
-    else
-      if @model.update_attributes(model_params)
-        maintain_model_attachments
-      else
-        render action: 'edit'
-      end
+    if !params[:model].nil?
+      @model.update_attributes(model_params)
     end
+
+    if !params[:model_attachments].nil?
+      maintain_model_attachments
+    end
+
+    flash[:notice] = "Saved!"
+    redirect_to edit_model_path(@model)
   end
 
   def productsInStore(products)
@@ -136,13 +126,10 @@ class ModelsController < ApplicationController
   end
 
   def maintain_model_attachments
-      if !params[:model_attachments].nil?
-        params[:model_attachments]['avatar'].each do |a|
-          @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
-        end
-      end
-      redirect_to action: "show", id: @model.id
+    params[:model_attachments]['avatar'].each do |a|
+      @model_attachment = @model.model_attachments(params[:model]).create(:avatar => a)
     end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
