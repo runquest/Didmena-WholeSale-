@@ -14,7 +14,9 @@ min-height: 100%;
 .hint-text {
   font-size: 0.6rem; color: #9e9e9e;
 }
-
+label.no-position {
+  position: relative;
+}
 .img-style {
   max-height: 100%; max-width: 100%;
 }

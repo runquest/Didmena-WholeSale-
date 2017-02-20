@@ -35,12 +35,15 @@ class DomainsController < ApplicationController
   # POST /domains
   # POST /domains.json
   def create
+    binding.pry
     @domain = Domain.new(domain_params)
     respond_to do |format|
       if @domain.save
+        binding.pry
         format.html { redirect_to domains_path, notice: 'Domain was successfully created.' }
         format.json { render :show, status: :created, location: @domain }
       else
+        binding.pry
         format.html { render :new }
         format.json { render json: @domain.errors, status: :unprocessable_entity }
       end

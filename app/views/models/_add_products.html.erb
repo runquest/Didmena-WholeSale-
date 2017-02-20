@@ -11,7 +11,8 @@
       <input id="basics"/><i class="material-icons">search</i>
     </div>
     <div class="input-field col s6">
-      <%= link_to 'Cannot find color you are looking? Add it.', new_domain_path %>
+      <!-- <%#= link_to 'Cannot find color you are looking? Add it.', new_domain_path %> -->
+      <%= render :partial => 'domains/color_form' %>
     </div>
   </div>    
   <div class="row">

@@ -27,13 +27,20 @@ $(function() {
       type: "custom",
       method: function(value, item) {
         return "<span class='small color-circle' style='background-color: #"+ item.code_value+"'></span>" + item.code_value + " " + value;
-        // return "<span class='small color-circle' style='background-color: #"+ item.code_value+"'>" + item.code_value + "</span> " + value;
       }
     },
     theme: "round"
   };
 
-    $("#basics").easyAutocomplete(options);
+  $("#basics").easyAutocomplete(options);
+
+  $("a#color-create").on('click', function(event) {
+    console.log("helow");
+    var domain_name = "color";
+    var code_value = document.getElementById("code_value").value.toUpperCase();
+    var meaning = document.getElementById("meaning").value;
+    createColor(code_value, meaning)
+  });
 
   $("span#btn-basic-info").on('click', function(event) {
     $('div#basic-info').css({ 'display': "block" });
@@ -128,6 +135,23 @@ $(function() {
       }
     });
   });
+
+  function createColor(code_value, meaning) {
+    var domain_data = {domain_name: "Color", code_value: code_value, meaning: meaning};
+    $.ajax({
+      method: 'post',
+      url: '/'+localization+'/domains',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(domain_data),
+      success: function (data) {
+        console.log("Domain created successfully: " + data);
+      },
+      error: function(err){
+        console.log("Domain failed to be created: " + err);
+      }
+    });
+  }
 
   function createProduct(model_id, color_id, size_id) {
     var product_data = {model: model_id, color: color_id, size: size_id, in_storage: false};
