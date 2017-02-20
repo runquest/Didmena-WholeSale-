@@ -15,19 +15,28 @@
       <div class="subheader-2"><%= model_price %></div>
       <div class="model-content"><%= @model.note %></div>
     </div>
+
     <div class="col s12 m12 l6">
-        <% if @model.model_attachments.any? %>
-        <div class="row img-row">
+      <% if @model.model_attachments.any? %>
+        <div id="display-image" class="row img-show">
+          <%= image_tag(@model.model_attachments.first.avatar_url, class: "center-align img-style") %>
+        </div>
+        <div class="row img-rest">
           <% @model.model_attachments.each do |img| %>
-            <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
-              <div style="height: 200px;">
-                <%= link_to (image_tag (img.avatar_url), :class=>"center-align img-style") %>
+            <div class="col s12 m4 l4 center-align"> 
+              <div style="height: 50px;">
+                <%= image_tag(img.avatar_url, class: "center-align img-style", id: img.id) %>
               </div>
             </div>
           <% end %>
+
+
+
+
         </div>
       <% end %>
     </div>
+
   </div>
   <div class="divider"></div>
   <div class="row">

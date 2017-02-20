@@ -50,6 +50,15 @@ $(function() {
     $('div#model-images').css({ 'display': "block" });
   });
 
+  $('img.img-style').on('click', function(event) {
+    console.log(this.src);
+
+    $('div#display-image').empty();
+    var image = "<img class='center-align img-style' src='" + this.src + "'>";
+    $('div#display-image').append(image);
+
+  });
+
   $("#basics").easyAutocomplete(options);
 
   $('div.color_element').on('click', function(event) {

@@ -42,14 +42,6 @@ class ModelsController < ApplicationController
     else
       @model_attachment = @model.model_attachments.build
     end
-    
-    # @colors = Array.new;
-
-    # @products.each do |prdct|
-    #   if !@colors.include? prdct.color_id
-    #     @colors.push(prdct.color_id)
-    #   end
-    # end
   end
 
   # GET /models/1/add_products
