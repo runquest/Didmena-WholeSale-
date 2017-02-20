@@ -6,7 +6,7 @@
 
 <%= form_for(@model) do |f| %>
   <%= form_errors_for @model %>
-  <% if @model.blank? %>
+  <% if @model.id.nil? %>
     <div class="form-block">
       <%= f.label :title, t('models.title') %><br>
       <%= f.text_field :title %>

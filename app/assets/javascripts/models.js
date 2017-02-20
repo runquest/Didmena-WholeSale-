@@ -32,6 +32,24 @@ $(function() {
     theme: "round"
   };
 
+  $("span#btn-basic-info").on('click', function(event) {
+    $('div#basic-info').css({ 'display': "block" });
+    $('div#model-products').css({ 'display': "none" });
+    $('div#model-images').css({ 'display': "none" });
+  });  
+
+  $("span#btn-product-info").on('click', function(event) {
+    $('div#basic-info').css({ 'display': "none" });
+    $('div#model-products').css({ 'display': "block" });
+    $('div#model-images').css({ 'display': "none" });
+  });
+
+  $("span#btn-image-info").on('click', function(event) {
+    $('div#basic-info').css({ 'display': "none" });
+    $('div#model-products').css({ 'display': "none" });
+    $('div#model-images').css({ 'display': "block" });
+  });
+
   $("#basics").easyAutocomplete(options);
 
   $('div.color_element').on('click', function(event) {

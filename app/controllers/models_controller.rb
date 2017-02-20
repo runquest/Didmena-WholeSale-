@@ -88,7 +88,8 @@ class ModelsController < ApplicationController
       maintain_model_attachments
     end
 
-    redirect_to model_path(@model)
+    flash[:notice] = "Saved!"
+    redirect_to edit_model_path(@model)
   end
 
   def productsInStore(products)

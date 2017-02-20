@@ -1,14 +1,12 @@
 <div class="container">
   <div class='row'>
     <div class="col s12 m12 l12">
-      <h4><%= @model.title %></h4>
-    </div>
-  </div>
-  <div class='row'>
-    <div class="col s12 m12 l12">
-      <% if current_user && current_user.apps_manager %>
-        <%= link_to t('model.edit'), edit_model_path(@model) %>
-      <% end %>
+      <h4>
+        <%= @model.title %>
+        <% if current_user && current_user.apps_manager %>
+          <%= link_to t('model.edit'), edit_model_path(@model), :style=>"font-size: 13px;" %>
+        <% end %>
+      </h4>
     </div>
   </div>
   <div class="row">
@@ -23,7 +21,7 @@
           <% @model.model_attachments.each do |img| %>
             <div class="col s12 m4 l4 center-align" style="padding: 15px;"> 
               <div style="height: 200px;">
-                <%= link_to (image_tag (img.avatar_url), :style=>"max-height: 100%; max-width: 100%", :class=>"center-align") %>
+                <%= link_to (image_tag (img.avatar_url), :class=>"center-align img-style") %>
               </div>
             </div>
           <% end %>

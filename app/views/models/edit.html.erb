@@ -1,19 +1,24 @@
 <div class="container">
   <div class='row'>
     <p id="notice flash-message"><%= notice %></p>
-    <h5>Edit <%= @model.title %></h5>
-    <span><a>add images</a></span> | <span><a>add products</a></span>
+    <h5><%= link_to @model.title, model_path(@model) %></h5>
+
+    <span id="btn-basic-info"><a>edit basic info</a></span> | 
+    <span id="btn-product-info"><a>edit products</a></span> | 
+    <span id="btn-image-info"><a>edit images</a></span>
     <p style="color: lightgrey"><%= @type.upcase %> <%= @collection.upcase %></p>
-    <%= render :partial => 'form' %>
   </div>
-  <div class='divider'></div>
-  <div id='model-products' class='row'>
+  <div id="basic-info" style="display: block;">
+    <div class="col s12 m12 l12">
+      <%= render :partial => 'form' %>
+    </div>
+  </div>
+  <div id='model-products'  style="display: none;" class='row'>
     <div class="col s12 m12 l12">
       <%= render :partial => 'add_products', :locals => { model: @model } %>
     </div>
   </div>
-  <div class='divider'></div>
-  <div id='model-images' class='row'>
+  <div id='model-images' class='row'  style="display: none;">
     <%= render :partial => 'add_images', :locals => { model: @model } %>
   </div>
 </div>
