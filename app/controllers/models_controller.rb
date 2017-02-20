@@ -31,6 +31,7 @@ class ModelsController < ApplicationController
     @type = Domain.find(@model.gender_id).meaning
     @collection = Domain.find(@model.category_id).meaning
     @colors = model_color_objects(@model.id)
+    @domain = Domain.new
  
     if @model.products.any?
       @products = @model.products

@@ -1,17 +1,30 @@
-<div class="form-block">
+<div class="container">
+<%= form_for(@domain) do |f| %>
+  <% if @domain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
+      <ul>
+      <% @domain.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :domain_name, :value => "Color" %>
   <div class="row">
-    <div class="input-field col s12">
-      <%= label_tag :code_value, "code value" %><br>
-      <%= text_field_tag :code_value, nil, :id => "code_value" %>
+     <div class="input-field col s12">
+    <%= f.label :code_value, t('domains.code_value') %><br>
+    <%= f.text_field :code_value, :placeholder => "e.g. ee22ff" %>
     </div>
   </div>
-</div>
-<div class="form-block">
   <div class="row">
     <div class="input-field col s12">
-      <%= label_tag :meaning, "Meaning" %><br>
-      <%= text_field_tag :meaning, nil, :id => "meaning" %>
+      <%= f.label :meaning, t('domains.meaning') %><br>
+      <%= f.text_field :meaning, :placeholder => t('domains.meaning_eg') %>
     </div>
   </div>
+  <div class="row">
+     <div><%= submit_tag 'create color', remote: true, class: 'btn waves-effect submit' %></div>
+  </div>
+<% end %>
 </div>
-<a id="color-create"> save</a>

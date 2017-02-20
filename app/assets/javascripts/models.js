@@ -34,19 +34,22 @@ $(function() {
 
   $("#basics").easyAutocomplete(options);
 
-  $("a#color-create").on('click', function(event) {
-    console.log("helow");
-    var domain_name = "color";
-    var code_value = document.getElementById("code_value").value.toUpperCase();
-    var meaning = document.getElementById("meaning").value;
-    createColor(code_value, meaning)
-  });
+  // $("a#color-create").on('click', function(event) {
+  //   var domain_name = "color";
+  //   var code_value = document.getElementById("code_value").value.toUpperCase();
+  //   var meaning = document.getElementById("meaning").value;
+  //   createColor(code_value, meaning)
+  // });
 
   $("span#btn-basic-info").on('click', function(event) {
     $('div#basic-info').css({ 'display': "block" });
     $('div#model-products').css({ 'display': "none" });
     $('div#model-images').css({ 'display': "none" });
   });  
+
+  $("a#toggle-add-color").on('click', function(event) {
+    $('div#add-color-block').toggle();
+  });
 
   $("span#btn-product-info").on('click', function(event) {
     $('div#basic-info').css({ 'display': "none" });

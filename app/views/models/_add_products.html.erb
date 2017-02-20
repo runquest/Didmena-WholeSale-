@@ -1,5 +1,3 @@
-
-
 <div id="model_products" class="row valign-wrapper">  
     <div class="col s12 m12 l12">
       <h5>Manage products in storage.</h5>
@@ -11,8 +9,7 @@
       <input id="basics"/><i class="material-icons">search</i>
     </div>
     <div class="input-field col s6">
-      <!-- <%#= link_to 'Cannot find color you are looking? Add it.', new_domain_path %> -->
-      <%= render :partial => 'domains/color_form' %>
+      <%= link_to "Cannot find color? Add it.", new_domain_path  %>
     </div>
   </div>    
   <div class="row">
